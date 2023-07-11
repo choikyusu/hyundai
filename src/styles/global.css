@@ -1,0 +1,93 @@
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'HyundaiSansTextKR', 'Magul Gothic';
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+input {
+  overflow: visible;
+}
+
+button,
+input,
+select {
+  margin: 0;
+}
+
+button {
+  overflow: visible;
+  text-transform: none;
+  border: 0;
+  background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+a,
+article,
+button,
+div,
+input,
+li,
+nav,
+p,
+section,
+textarea,
+ul {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+form {
+  display: block;
+  margin-top: 0em;
+}
+
+fieldset {
+  border: 0;
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  white-space: normal;
+}
+
+dl,
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+}

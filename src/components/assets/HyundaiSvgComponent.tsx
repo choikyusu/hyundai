@@ -1,4 +1,8 @@
-export const HyundaiSvgComponent = () => {
+interface HyundaiSvgComponentProps {
+  width: string;
+}
+
+export const HyundaiSvgComponent = ({ width }: HyundaiSvgComponentProps) => {
   return (
     <svg
       version="1.1"
@@ -8,6 +12,7 @@ export const HyundaiSvgComponent = () => {
       y="0px"
       viewBox="0 0 166 23"
       xmlSpace="preserve"
+      width={width}
     >
       <g>
         <g>

@@ -1,0 +1,27 @@
+@font-face {
+  font-family: HyundaiSansTextKR;
+  src: url(/assets/font/HyundaiSansTextKRMedium.woff2);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: HyundaiSansHeadKR;
+  src: url(/assets/font/HyundaiSansHeadKRMedium.woff2);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: HyundaiSansTextKR;
+  src: url(/assets/font/HyundaiSansHeadKRRegular.woff2);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: HyundaiSansHeadKR;
+  src: url(/assets/font/HyundaiSansHeadKRRegular.woff2);
+  font-weight: 400;
+  font-style: normal;
+}
