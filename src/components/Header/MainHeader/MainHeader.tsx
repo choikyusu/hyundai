@@ -2,6 +2,7 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import { CSSProp, css, styled } from 'styled-components';
 import { MobileSearch } from './Search/MobileSearch/MobileSearch';
 import { TopMobileArea } from './TopMobileArea/TopMobileArea';
+import { Gnb } from './Gnb/Gnb';
 
 interface MainHeaderProps {
   headerType: 'None' | 'Search' | 'Menu';
@@ -16,6 +17,7 @@ export const MainHeader = ({ headerType, onClickType }: MainHeaderProps) => {
       <Styled.InnerWrap>
         <TopMobileArea headerType={headerType} onClickType={onClickType} />
         <MobileSearch headerType={headerType} />
+        <Gnb headerType={headerType} />
       </Styled.InnerWrap>
     </Styled.Header>
   );
@@ -23,11 +25,11 @@ export const MainHeader = ({ headerType, onClickType }: MainHeaderProps) => {
 
 const Styled = {
   Header: styled(CommonStyled.Header)<{ $headerStyles: CSSProp }>`
-    ${props => props.$headerStyles}
     position: fixed;
     top: 0;
     background: transparent;
     border-bottom: none;
+    ${props => props.$headerStyles}
   `,
   InnerWrap: styled.div``,
 };
