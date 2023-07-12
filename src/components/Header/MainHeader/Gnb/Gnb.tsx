@@ -2,6 +2,7 @@ import { css, styled } from 'styled-components';
 import { LnbList } from './LnbList/LnbList';
 import { Login } from './Login/Login';
 import { GnbEvent } from './GnbEvent/GnbEvent';
+import { LnbBottomList } from './LnbBottomList/LnbBottomList';
 
 interface MobileSearchProps {
   headerType: 'None' | 'Search' | 'Menu';
@@ -14,6 +15,7 @@ export const Gnb = ({ headerType }: MobileSearchProps) => {
         <Login />
         <LnbList />
         <GnbEvent />
+        <LnbBottomList />
       </Styled.LnbMenu>
     </Styled.GnbWrapper>
   );
