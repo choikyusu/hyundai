@@ -15,7 +15,13 @@ export const GnbEvent = () => {
                     <Styled.EventList>
                       <Styled.Event href="/asdf">
                         <Styled.ImageWrapper>
-                          <Image src="/asdf" width={200} height={200} alt="" />
+                          <Styled.Thumbnail
+                            layout="responsive"
+                            width={200}
+                            height={200}
+                            src="/asdf"
+                            alt="아반떼, 코나 7월 특별 금융 프로그램"
+                          />
                         </Styled.ImageWrapper>
                         <Styled.InnerContent>
                           <Styled.Title>
@@ -87,7 +93,36 @@ const Styled = {
     height: 23.64vw;
     border: 1px solid #ddd;
   `,
-  InnerContent: styled.div``,
-  Title: styled.strong``,
-  Date: styled.span``,
+  Thumbnail: styled(Image)`
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  `,
+  InnerContent: styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2px 0 2px 20px;
+    width: 55%;
+    box-sizing: border-box;
+    background-color: #fff;
+  `,
+  Title: styled.strong`
+    font-family: 'HyundaiSansTextKR';
+    font-size: 15px;
+    line-height: 23px;
+    letter-spacing: -0.4px;
+    text-align: left;
+    color: #000;
+  `,
+  Date: styled.span`
+    font-family: 'HyundaiSansTextKRR';
+    font-size: 13px;
+    line-height: 21px;
+    letter-spacing: -0.4px;
+    color: #666;
+    text-align: left;
+    max-width: 280px;
+  `,
 };
