@@ -71,5 +71,3 @@ const Styled = {
     color: #666;
   `,
 };
-
-const FORM_STYLE = {};
