@@ -5,15 +5,12 @@ import { useHeader } from './useHeader';
 import { MainHeader } from './MainHeader/MainHeader';
 
 export const Header = () => {
-  const { isSearchClicked, onSearchClick } = useHeader();
+  const { headerType, onClickType } = useHeader();
 
   return (
     <TabArea>
-      <Dim isShow={isSearchClicked} />
-      <MainHeader
-        isSearchClicked={isSearchClicked}
-        onSearchClick={onSearchClick}
-      />
+      <Dim isShow={headerType !== 'None'} />
+      <MainHeader headerType={headerType} onClickType={onClickType} />
     </TabArea>
   );
 };

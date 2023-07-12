@@ -1,11 +1,16 @@
 import { useState } from 'react';
 
 export const useHeader = () => {
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [headerType, setHeaderType] = useState<'None' | 'Search' | 'Menu'>(
+    'None',
+  );
 
-  const onSearchClick = () => {
-    setIsSearchClicked(prev => !prev);
+  const onClickType = (type: 'None' | 'Search' | 'Menu') => {
+    setHeaderType(prev => {
+      if (prev === type) return 'None';
+      return type;
+    });
   };
 
-  return { isSearchClicked, onSearchClick };
+  return { headerType, onClickType };
 };
