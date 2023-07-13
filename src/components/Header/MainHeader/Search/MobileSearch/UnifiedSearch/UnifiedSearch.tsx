@@ -3,13 +3,23 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { RiSearchLine } from 'react-icons/ri';
 import { styled } from 'styled-components';
 
-export const UnifiedSearch = () => {
+interface UnifiedSearchProps {
+  searchKeyword: string;
+  onChangeKeyword: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const UnifiedSearch = ({
+  searchKeyword,
+  onChangeKeyword,
+}: UnifiedSearchProps) => {
   return (
     <Styled.InputWrapper>
       <Styled.Input
         type="text"
         title="통합 검색어 입력"
         placeholder="검색어를 입력해주세요"
+        value={searchKeyword}
+        onChange={onChangeKeyword}
       />
       <Styled.DeleteButton type="button">
         <MdOutlineCancel />

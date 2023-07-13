@@ -2,11 +2,11 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import { styled } from 'styled-components';
 
 interface TabMenuProps {
-  keyword: 'recent' | 'top';
+  keywordType: 'recent' | 'top';
   onClickKeyword: (selectedKeyword: 'recent' | 'top') => void;
 }
 
-export const TabMenu = ({ keyword, onClickKeyword }: TabMenuProps) => {
+export const TabMenu = ({ keywordType, onClickKeyword }: TabMenuProps) => {
   return (
     <Styled.TabMenu>
       <Styled.TabMenuIconWrapper>
@@ -14,7 +14,7 @@ export const TabMenu = ({ keyword, onClickKeyword }: TabMenuProps) => {
           <Styled.KeywordButton
             type="button"
             title="선택됨"
-            $isActive={keyword === 'recent'}
+            $isActive={keywordType === 'recent'}
             onClick={() => onClickKeyword('recent')}
           >
             <span>최근 검색어</span>
@@ -24,7 +24,7 @@ export const TabMenu = ({ keyword, onClickKeyword }: TabMenuProps) => {
           <Styled.KeywordButton
             type="button"
             title=""
-            $isActive={keyword === 'top'}
+            $isActive={keywordType === 'top'}
             onClick={() => onClickKeyword('top')}
           >
             <span>인기 검색어 TOP 10</span>
