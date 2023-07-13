@@ -10,22 +10,32 @@ interface MobileSearchProps {
 }
 
 export const MobileSearch = ({ headerType }: MobileSearchProps) => {
-  const { keyword, onClickKeyword, onClickDeleteKeyword, recentList, topList } =
-    useMobileSearch();
+  const {
+    keywordType,
+    searchKeyword,
+    onChangeKeyword,
+    onClickKeyword,
+    onClickDeleteKeyword,
+    recentList,
+    topList,
+  } = useMobileSearch();
   return (
     <Styled.Form $isShow={headerType === 'Search'}>
       <Styled.Fieldset>
         <Styled.Legend>통합검색</Styled.Legend>
-        <UnifiedSearch />
+        <UnifiedSearch
+          searchKeyword={searchKeyword}
+          onChangeKeyword={onChangeKeyword}
+        />
         <div>
-          <TabMenu keyword={keyword} onClickKeyword={onClickKeyword} />
+          <TabMenu keywordType={keywordType} onClickKeyword={onClickKeyword} />
           <div>
             <MobileTabList
-              list={keyword === 'recent' ? recentList : topList}
-              keyword={keyword}
+              list={keywordType === 'recent' ? recentList : topList}
+              keywordType={keywordType}
             />
             <Styled.TabFooterButton
-              $isShow={keyword === 'recent' && !!recentList.length}
+              $isShow={keywordType === 'recent' && !!recentList.length}
               type="button"
               onClick={onClickDeleteKeyword}
             >

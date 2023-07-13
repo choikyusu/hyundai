@@ -2,19 +2,19 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import { styled } from 'styled-components';
 
 interface MobileTabListProps {
-  keyword: 'recent' | 'top';
+  keywordType: 'recent' | 'top';
   list: string[];
 }
 
-export const MobileTabList = ({ keyword, list }: MobileTabListProps) => {
-  if (keyword === 'recent' && !list.length) return <NoSearchMessage />;
+export const MobileTabList = ({ keywordType, list }: MobileTabListProps) => {
+  if (keywordType === 'recent' && !list.length) return <NoSearchMessage />;
   return (
     <Styled.MobileTabList>
       {list.map((item, index) => (
         <Styled.MobileTabItem key={index}>
           <Styled.ItemLink type="button">
             <span>
-              {keyword === 'recent' ? item : `${index + 1}위. ${item}`}
+              {keywordType === 'recent' ? item : `${index + 1}위. ${item}`}
             </span>
           </Styled.ItemLink>
         </Styled.MobileTabItem>

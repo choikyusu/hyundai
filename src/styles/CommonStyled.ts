@@ -17,6 +17,7 @@ export const CommonStyled = {
       -webkit-transform 0.3s ease-in-out;
   `,
   Input: styled.input`
+    outline: none;
     height: 40px;
     padding: 0 20px;
     border: 1px solid #e4dcd3;

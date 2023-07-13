@@ -15,21 +15,30 @@ export const useMobileSearch = () => {
     '가격표',
   ]);
 
-  const [keyword, setKeyword] = useState<'recent' | 'top'>('recent');
+  const [keywordType, setKeywordType] = useState<'recent' | 'top'>('recent');
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
 
   const onClickKeyword = (selectedKeyword: 'recent' | 'top') => {
-    setKeyword(selectedKeyword);
+    setKeywordType(selectedKeyword);
   };
 
   const onClickDeleteKeyword = () => {
     setRecentList([]);
   };
 
+  const onChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const { value } = event.target;
+    setSearchKeyword(value);
+  };
+
   return {
-    keyword,
+    keywordType,
     recentList,
     topList,
-    setKeyword,
+    searchKeyword,
+    onChangeKeyword,
+    setKeywordType,
     onClickKeyword,
     onClickDeleteKeyword,
   };
