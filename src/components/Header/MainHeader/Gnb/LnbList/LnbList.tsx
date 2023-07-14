@@ -1,43 +1,77 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { styled } from 'styled-components';
 import { BUTTON_STYLE } from './styles/buttonStyle';
-import Image from 'next/image';
+import { BsPlusCircle, BsDashCircle } from 'react-icons/bs';
+import { SubList } from './SubList/SubList';
+import { lnbMenuTreeList } from './data/data';
+import { useLnbList } from './hook/useLnbList';
+import { Shop } from './Additional/Shop';
 
 export const LnbList = () => {
+  const { onLevel1Click, onLevel2Click, isLv1Selected, isLv2Selected } =
+    useLnbList();
+
   return (
     <Styled.LnbList>
-      <Styled.LnbItem>
-        <Styled.LnbMainButton>모델</Styled.LnbMainButton>
-        <Styled.LnbMainButton>구매/이벤트</Styled.LnbMainButton>
-        <Styled.LnbMainButton>서비스/멤버십</Styled.LnbMainButton>
-        <Styled.LnbMainButton>디지털/고객지원</Styled.LnbMainButton>
-        <Styled.LnbMainButton>브랜드</Styled.LnbMainButton>
-        <Styled.LnbMainButton>
-          <Image
-            width={49}
-            height={20}
-            src="/images/hyundai_shop_logo.png"
-            alt="현대샵"
+      {lnbMenuTreeList.map((lnb, index) => (
+        <Styled.LnbItem key={index}>
+          <Styled.LnbMainButton
+            $isSelected={isLv1Selected(index)}
+            onClick={() => onLevel1Click(index)}
+          >
+            {lnb.name}
+            <Styled.IconWrapper>
+              <Icon isSelected={isLv1Selected(index)} />
+            </Styled.IconWrapper>
+          </Styled.LnbMainButton>
+          <SubList
+            subList={lnb.level2List}
+            isShow={isLv1Selected(index)}
+            onLevel2Click={onLevel2Click}
+            isLv2Selected={isLv2Selected}
           />
-        </Styled.LnbMainButton>
-      </Styled.LnbItem>
+        </Styled.LnbItem>
+      ))}
+      <Shop />
     </Styled.LnbList>
   );
 };
 
-const Styled = {
+interface IconProps {
+  isSelected: boolean;
+}
+
+const Icon = ({ isSelected }: IconProps) => {
+  return isSelected ? <BsDashCircle /> : <BsPlusCircle />;
+};
+
+export const Styled = {
   LnbList: styled.ul``,
   LnbItem: styled.li`
     padding: 0;
   `,
-  LnbMainButton: styled(CommonStyled.Button)`
+  LnbMainButton: styled(CommonStyled.Button)<{ $isSelected: boolean }>`
     ${BUTTON_STYLE}
     position: relative;
     text-align: left;
-    color: #000;
+    color: ${props => (props.$isSelected ? '#007fa8' : '#000')};
 
     img {
       color: #fff !important;
+    }
+  `,
+  IconWrapper: styled.span`
+    width: 23px;
+    height: 100%;
+    display: block;
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 0;
+
+    svg {
+      width: 23px;
+      height: 23px;
     }
   `,
 };
