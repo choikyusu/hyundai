@@ -25,7 +25,7 @@ export const LnbBottomList = () => {
             <Styled.Link
               href="/kr/ko/e/vehicles/estimation"
               title="내 차 만들기(견적)"
-              backgroundImage={BACKGROUND_IMAGE_STYLE.Estimation}
+              $backgroundImage={BACKGROUND_IMAGE_STYLE.Estimation}
             >
               내 차 만들기(견적)
             </Styled.Link>
@@ -36,7 +36,7 @@ export const LnbBottomList = () => {
             <Styled.Link
               href="/kr/ko/e/vehicles/purchase-consult?from=gnb"
               title="구매상담신청"
-              backgroundImage={BACKGROUND_IMAGE_STYLE.Purchase}
+              $backgroundImage={BACKGROUND_IMAGE_STYLE.Purchase}
             >
               구매상담신청
             </Styled.Link>
@@ -47,7 +47,7 @@ export const LnbBottomList = () => {
             <Styled.Link
               href="/kr/ko/e/vehicles/test-driving"
               title="시승신청"
-              backgroundImage={BACKGROUND_IMAGE_STYLE.TestDriving}
+              $backgroundImage={BACKGROUND_IMAGE_STYLE.TestDriving}
             >
               시승신청
             </Styled.Link>
@@ -58,7 +58,7 @@ export const LnbBottomList = () => {
             <Styled.Link
               href="/kr/ko/e/vehicles/monthly-benefit"
               title="이달의 구매혜택"
-              backgroundImage={BACKGROUND_IMAGE_STYLE.Benefit}
+              $backgroundImage={BACKGROUND_IMAGE_STYLE.Benefit}
             >
               이달의 구매혜택
             </Styled.Link>
@@ -84,8 +84,8 @@ const Styled = {
     text-align: center;
     border-top: 1px solid #cac6c4;
   `,
-  Link: styled(Link)<{ backgroundImage: CSSProp }>`
-    ${props => props.backgroundImage}
+  Link: styled(Link)<{ $backgroundImage: CSSProp }>`
+    ${props => props.$backgroundImage}
     display: inline-flex;
     flex-direction: column;
     align-items: center;
