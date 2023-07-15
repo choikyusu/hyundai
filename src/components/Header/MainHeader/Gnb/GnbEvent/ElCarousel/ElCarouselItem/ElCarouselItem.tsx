@@ -1,39 +1,26 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
-import { RefObject, useEffect, useState } from 'react';
+import { MutableRefObject, RefObject, useEffect, useState } from 'react';
 
 interface ElCarouselProps {
   index: number;
   selectedIndex: number;
   event: EventType;
-  carouselContainerRef: RefObject<HTMLDivElement>;
+  width: number;
+  itemList: HTMLDivElement[];
 }
 
 export const ElCarouselItem = ({
   index,
   selectedIndex,
   event,
-  carouselContainerRef,
+  width,
+  itemList,
 }: ElCarouselProps) => {
   const [x, setX] = useState(0);
-
-  useEffect(() => {
-    console.log('??');
-    if (carouselContainerRef.current) {
-      console.log(
-        index,
-        selectedIndex,
-        carouselContainerRef.current.offsetWidth,
-      );
-      setX((index - selectedIndex) * carouselContainerRef.current.offsetWidth);
-    }
-  }, [selectedIndex, index]);
-
   return (
-    <Styled.ElCarouselItem
-      style={{ transform: `translateX(${x}px) scale(1);` }}
-    >
+    <Styled.ElCarouselItem ref={(el: HTMLDivElement) => itemList.push(el)}>
       <Styled.ElCarouselGroupList>
         <Styled.ElCarouselUnit>
           <Styled.EventList>
