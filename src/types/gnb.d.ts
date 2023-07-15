@@ -27,3 +27,10 @@ type MenuType = {
   name: string;
   pageUrl: string;
 };
+
+type EventType = {
+  imageUrl: string;
+  pageUrl: string;
+  title: string;
+  date: string;
+};
