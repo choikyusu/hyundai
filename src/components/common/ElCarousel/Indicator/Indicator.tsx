@@ -1,11 +1,14 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { CSSProp, css, styled } from 'styled-components';
+import { Control } from './Control/Contron';
 
 interface IndicatorProps {
   type: ElCarouselType;
   childrenCount: number;
   selectedIndex: number;
   onClickDot: (index: number) => void;
+  onClickPlay: () => void;
+  isPlay: boolean;
 }
 
 export const Indicator = ({
@@ -13,6 +16,8 @@ export const Indicator = ({
   childrenCount,
   selectedIndex,
   onClickDot,
+  isPlay,
+  onClickPlay,
 }: IndicatorProps) => {
   return (
     <Styled.ElCarouselIndicatorList
@@ -20,11 +25,15 @@ export const Indicator = ({
     >
       {Array.from({ length: childrenCount }).map((_, index) => (
         <Styled.ElCarouselIndicator onClick={() => onClickDot(index)}>
-          <Styled.ElCarouselButton $isSelected={selectedIndex === index}>
+          <Styled.ElCarouselButton
+            $variant={VARIANT_STYLE.ElCarouselButton[type]}
+            $isSelected={selectedIndex === index}
+          >
             ${index + 1}번째 슬라이드
           </Styled.ElCarouselButton>
         </Styled.ElCarouselIndicator>
       ))}
+      <Control type={type} isPlay={isPlay} onClickPlay={onClickPlay} />
     </Styled.ElCarouselIndicatorList>
   );
 };
@@ -36,6 +45,13 @@ const VARIANT_STYLE = {
     `,
     GnbEvent: css`
       bottom: 4px;
+    `,
+  },
+  ElCarouselButton: {
+    Main: css``,
+    GnbEvent: css`
+      width: 8px;
+      height: 8px;
     `,
   },
 };
@@ -53,6 +69,9 @@ const Styled = {
 
     margin: 0;
 
+    display: flex;
+    align-items: center;
+
     ${props => props.$variant}
   `,
   ElCarouselIndicator: styled.li`
@@ -63,7 +82,10 @@ const Styled = {
 
     margin-right: 4px;
   `,
-  ElCarouselButton: styled(CommonStyled.Button)<{ $isSelected: boolean }>`
+  ElCarouselButton: styled(CommonStyled.Button)<{
+    $isSelected: boolean;
+    $variant: CSSProp;
+  }>`
     display: block;
     opacity: 0.48;
     width: 30px;
@@ -89,7 +111,6 @@ const Styled = {
 
     opacity: 1;
 
-    width: 8px;
-    height: 8px;
+    ${props => props.$variant}
   `,
 };
