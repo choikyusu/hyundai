@@ -1,8 +1,9 @@
 type FluidType = {
-  imageUrl: string;
+  imageUrl?: string;
+  backgroundUrl: string;
   pageUrl: string;
-  title: string;
-  subText: string;
+  title: { text: string; color: string };
+  subText: { text: string; color: string };
 };
 
 type ElCarouselType = 'Main' | 'GnbEvent';

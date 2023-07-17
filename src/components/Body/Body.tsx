@@ -153,6 +153,9 @@ const Styled = {
     height: 177px;
     z-index: 99;
 
+    background: rgba(246, 243, 242, 0.5);
+    z-index: 5;
+
     &:before {
       display: block;
       content: '';

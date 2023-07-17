@@ -9,6 +9,7 @@ interface IndicatorProps {
   onClickDot: (index: number) => void;
   onClickPlay: () => void;
   isPlay: boolean;
+  showControl: boolean;
 }
 
 export const Indicator = ({
@@ -18,6 +19,7 @@ export const Indicator = ({
   onClickDot,
   isPlay,
   onClickPlay,
+  showControl,
 }: IndicatorProps) => {
   return (
     <Styled.ElCarouselIndicatorList
@@ -33,7 +35,11 @@ export const Indicator = ({
           </Styled.ElCarouselButton>
         </Styled.ElCarouselIndicator>
       ))}
-      <Control type={type} isPlay={isPlay} onClickPlay={onClickPlay} />
+      <Control
+        isPlay={isPlay}
+        onClickPlay={onClickPlay}
+        showControl={showControl}
+      />
     </Styled.ElCarouselIndicatorList>
   );
 };

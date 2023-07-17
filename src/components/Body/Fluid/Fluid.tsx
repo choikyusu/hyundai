@@ -1,32 +1,47 @@
 import Link from 'next/link';
+import React from 'react';
 import { styled } from 'styled-components';
+import { useFluid } from './useFluid';
 
 interface FluidProps {
   fluid: FluidType;
+  selected?: boolean;
 }
 
-export const Fluid = ({ fluid }: FluidProps) => {
+export const Fluid = React.memo(({ fluid, selected }: FluidProps) => {
+  const { imageMoveAnimation } = useFluid({ selected });
+
   return (
-    <Styled.FluidContainer>
+    <Styled.FluidContainer $backgroundImage={fluid.backgroundUrl}>
       <Styled.TextWrap>
         <Styled.LinkText href={fluid.pageUrl}>
           <Styled.TextInner>
-            <Styled.CarName>{fluid.title}</Styled.CarName>
-            <Styled.SubText>{fluid.subText}</Styled.SubText>
+            <Styled.CarName $fontColor={fluid.title.color}>
+              {fluid.title.text}
+            </Styled.CarName>
+            <Styled.SubText $fontColor={fluid.title.color}>
+              {fluid.subText.text}
+            </Styled.SubText>
           </Styled.TextInner>
         </Styled.LinkText>
       </Styled.TextWrap>
-      <Styled.TextButton href={fluid.pageUrl}>
-        <Styled.Span>
-          <Styled.Image src={fluid.imageUrl} />
-        </Styled.Span>
-      </Styled.TextButton>
+      {fluid.imageUrl && (
+        <Styled.TextButton href={fluid.pageUrl}>
+          <Styled.Span>
+            <Styled.Image
+              ref={imageMoveAnimation}
+              src={fluid.imageUrl}
+              alt="차량 이미지"
+            />
+          </Styled.Span>
+        </Styled.TextButton>
+      )}
     </Styled.FluidContainer>
   );
-};
+});
 
 const Styled = {
-  FluidContainer: styled.div`
+  FluidContainer: styled.div<{ $backgroundImage: string }>`
     height: 100%;
     justify-content: center;
     display: flex;
@@ -34,7 +49,7 @@ const Styled = {
     max-width: 2560px;
     margin: 0 auto;
     background-size: cover !important;
-    background: url(/contents/mainbanner/car-bg-m.jpg) center top / auto 100%
+    background: url(${props => props.$backgroundImage}) center top / auto 100%
       no-repeat;
   `,
   TextWrap: styled.div`
@@ -79,11 +94,11 @@ const Styled = {
     vertical-align: middle;
   `,
   TextInner: styled.div``,
-  CarName: styled.p`
+  CarName: styled.p<{ $fontColor: string }>`
     font-family: 'HyundaiSansHeadKR';
     font-size: 86px;
     letter-spacing: 0;
-    color: #000;
+    color: ${props => props.$fontColor};
     line-height: 82px;
     letter-spacing: -0.25px;
     text-align: left;
@@ -94,12 +109,12 @@ const Styled = {
     font-size: 8.35vw;
     line-height: 1.27em;
   `,
-  SubText: styled.p`
+  SubText: styled.p<{ $fontColor: string }>`
     margin-top: 14px;
     font-family: 'HyundaiSansHeadKR';
     font-size: 26px;
     letter-spacing: 0;
-    color: #000;
+    color: ${props => props.$fontColor};
     line-height: 38px;
     letter-spacing: -0.25px;
     text-align: left;
@@ -131,10 +146,20 @@ const Styled = {
   `,
 
   Image: styled.img`
+    position: relative;
     width: 100%;
     margin: 0;
     object-fit: cover;
     height: auto !important;
     margin-top: -19px;
+
+    @keyframes car_animation {
+      0% {
+        left: calc(100% - 50px);
+      }
+      100% {
+        left: 0;
+      }
+    }
   `,
 };

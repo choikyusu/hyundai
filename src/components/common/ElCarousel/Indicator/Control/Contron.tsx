@@ -2,13 +2,13 @@ import { styled } from 'styled-components';
 import { MdPlayCircle, MdPauseCircle } from 'react-icons/md';
 
 interface ControlProps {
-  type: ElCarouselType;
   onClickPlay: () => void;
   isPlay: boolean;
+  showControl: boolean;
 }
 
-export const Control = ({ type, onClickPlay, isPlay }: ControlProps) => {
-  if (type !== 'Main') return null;
+export const Control = ({ onClickPlay, isPlay, showControl }: ControlProps) => {
+  if (!showControl) return null;
   return (
     <Styled.ControlWrap onClick={onClickPlay}>
       {isPlay ? <MdPauseCircle /> : <MdPlayCircle />}
