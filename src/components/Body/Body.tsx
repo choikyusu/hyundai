@@ -10,7 +10,7 @@ export const Body = () => {
     <Styled.ContantArea>
       <Styled.Container>
         <Styled.KeyVisualWrapper>
-          <ElCarousel type="Main">
+          <ElCarousel type="Main" isAutoSlide>
             {fluidList.map(fluid => (
               <Fluid fluid={fluid} />
             ))}
