@@ -1,39 +1,20 @@
 import Link from 'next/link';
 import { CSSProp, css, styled } from 'styled-components';
 import { ContentWrap } from './Content/ContentWrap';
+import { ElCarousel } from '../common/ElCarousel/ElCarousel';
+import { Fluid } from './Fluid/Fluid';
+import { fluidList } from './data/data';
 
 export const Body = () => {
   return (
     <Styled.ContantArea>
       <Styled.Container>
         <Styled.KeyVisualWrapper>
-          <Styled.ElCarousel>
-            <Styled.ElCarouselContainer>
-              <Styled.ElCarouselLayer>
-                <Styled.ElCarouselItem>
-                  <Styled.ElCarouselGroupList>
-                    <Styled.ElCarouselUnit>
-                      <Styled.FluidContainer>
-                        <Styled.TextWrap>
-                          <Styled.LinkText href="/kr/ko/e/vehicles/palisade/intro">
-                            <Styled.TextInner>
-                              <Styled.CarName>PALISADE</Styled.CarName>
-                              <Styled.SubText>당신의 모든 세상</Styled.SubText>
-                            </Styled.TextInner>
-                          </Styled.LinkText>
-                        </Styled.TextWrap>
-                        <Styled.TextButton href="/kr/ko/e/vehicles/palisade/intro">
-                          <Styled.Span>
-                            <Styled.Image src="/contents/mainbanner/palisade-24my-m.png" />
-                          </Styled.Span>
-                        </Styled.TextButton>
-                      </Styled.FluidContainer>
-                    </Styled.ElCarouselUnit>
-                  </Styled.ElCarouselGroupList>
-                </Styled.ElCarouselItem>
-              </Styled.ElCarouselLayer>
-            </Styled.ElCarouselContainer>
-          </Styled.ElCarousel>
+          <ElCarousel type="Main">
+            {fluidList.map(fluid => (
+              <Fluid fluid={fluid} />
+            ))}
+          </ElCarousel>
           <Styled.QuickMenu>
             <Styled.ElCarouselItem $quickStyle={QUICK_MENU.ElCarouselItem}>
               <Styled.ItemsWrap>
@@ -115,22 +96,7 @@ const Styled = {
     overflow: visible;
     background-color: rgb(246, 243, 242);
   `,
-  ElCarousel: styled.div`
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-    height: 162.5vw;
-  `,
-  ElCarouselContainer: styled.div`
-    position: relative;
-    overflow: visible;
-    height: 162.5vw !important;
-  `,
-  ElCarouselLayer: styled.div`
-    width: 100%;
-    height: 100%;
-  `,
+
   ElCarouselItem: styled.div<{ $quickStyle?: CSSProp }>`
     position: absolute;
     top: 0;
@@ -144,99 +110,7 @@ const Styled = {
 
     ${props => props.$quickStyle}
   `,
-  ElCarouselGroupList: styled.ul`
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100%;
-    justify-content: center;
-  `,
-  ElCarouselUnit: styled.li`
-    position: relative;
-    width: 100%;
-    flex: 1 1 1;
-  `,
-  FluidContainer: styled.div`
-    height: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    max-width: 2560px;
-    margin: 0 auto;
-    background-size: cover !important;
-    background: url(/contents/mainbanner/car-bg-m.jpg) center top / auto 100%
-      no-repeat;
-  `,
-  TextWrap: styled.div`
-    position: absolute;
-    left: 7vw;
-    top: 152px;
-    right: 0;
-    z-index: 1;
-    width: 1260px;
-    height: auto;
-    margin: 0 auto;
-    text-align: left;
 
-    left: 5vw;
-    top: 26vw;
-    width: auto;
-  `,
-  LinkText: styled(Link)`
-    display: inline-block;
-    vertical-align: middle;
-
-    width: 280px;
-    height: 40px;
-    border: 0;
-    background: #002c5f;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.4px;
-    color: #fff;
-    cursor: pointer;
-
-    width: auto;
-    height: auto;
-    background: transparent;
-
-    width: 100%;
-    text-align: left;
-  `,
-  Span: styled.span`
-    display: inline-block;
-    vertical-align: middle;
-  `,
-  TextInner: styled.div``,
-  CarName: styled.p`
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 86px;
-    letter-spacing: 0;
-    color: #000;
-    line-height: 82px;
-    letter-spacing: -0.25px;
-    text-align: left;
-
-    letter-spacing: -0.25px;
-    word-break: keep-all;
-
-    font-size: 8.35vw;
-    line-height: 1.27em;
-  `,
-  SubText: styled.p`
-    margin-top: 14px;
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 26px;
-    letter-spacing: 0;
-    color: #000;
-    line-height: 38px;
-    letter-spacing: -0.25px;
-    text-align: left;
-
-    margin-top: 2.5vw;
-    font-size: 5vw;
-    letter-spacing: -0.25px;
-  `,
   TextButton: styled(Link)<{ $quickStyle?: CSSProp }>`
     display: inline-block;
     vertical-align: middle;

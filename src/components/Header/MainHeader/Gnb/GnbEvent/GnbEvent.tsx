@@ -1,11 +1,17 @@
 import { styled } from 'styled-components';
-import { ElCarousel } from './ElCarousel/ElCarousel';
+import { ElCarousel } from '../../../../common/ElCarousel/ElCarousel';
+import { eventList } from './data/data';
+import { Event } from './Event/Event';
 
 export const GnbEvent = () => {
   return (
     <Styled.GnbEvent>
       <Styled.EventContent>
-        <ElCarousel />
+        <ElCarousel type="GnbEvent">
+          {eventList.map(event => (
+            <Event event={event} />
+          ))}
+        </ElCarousel>
       </Styled.EventContent>
     </Styled.GnbEvent>
   );
