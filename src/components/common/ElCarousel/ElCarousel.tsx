@@ -1,10 +1,14 @@
-import { styled } from 'styled-components';
+import { CSSProp, css, styled } from 'styled-components';
 import { ElCarouselItem } from './ElCarouselItem/ElCarouselItem';
-import { useEffect, useState } from 'react';
-import { eventList } from '../data/data';
+import React, { useEffect, useState } from 'react';
 import { Indicator } from './Indicator/Indicator';
 
-export const ElCarousel = () => {
+interface ElCarouselProps {
+  type: ElCarouselType;
+  children: React.ReactNode;
+}
+
+export const ElCarousel = ({ type, children }: ElCarouselProps) => {
   const [width, setWidth] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const itemList: HTMLDivElement[] = [];
@@ -33,9 +37,17 @@ export const ElCarousel = () => {
 
   useEffect(() => {
     itemList.forEach((item, itemIndex) => {
-      if (itemIndex === 0 && selectedIndex === itemList.length - 1)
+      if (
+        itemList.length > 1 &&
+        itemIndex === 0 &&
+        selectedIndex === itemList.length - 1
+      )
         item.style.transform = `translateX(${width}px) scale(1)`;
-      else if (itemIndex === itemList.length - 1 && selectedIndex === 0)
+      else if (
+        itemList.length > 1 &&
+        itemIndex === itemList.length - 1 &&
+        selectedIndex === 0
+      )
         item.style.transform = `translateX(${-width}px) scale(1)`;
       else {
         item.style.transform = `translateX(${
@@ -45,25 +57,23 @@ export const ElCarousel = () => {
     });
   }, [width]);
 
+  const childComponent = React.Children.map(children, child => (
+    <ElCarouselItem type={type} itemList={itemList}>
+      {child}
+    </ElCarouselItem>
+  ));
+
   return (
-    <Styled.ElCarousel>
+    <Styled.ElCarousel $variant={VARIANT_STYLE.ElCarousel[type]}>
       <Styled.ElCarouselContainer
+        $variant={VARIANT_STYLE.ElCarouselContainer[type]}
         ref={(el: any) => setWidth(el?.offsetWidth || 0)}
       >
-        <Styled.ElCarouselLayer>
-          {eventList.map((event, index) => (
-            <ElCarouselItem
-              event={event}
-              index={index}
-              selectedIndex={selectedIndex}
-              width={width}
-              itemList={itemList}
-            />
-          ))}
-        </Styled.ElCarouselLayer>
+        <Styled.ElCarouselLayer>{childComponent}</Styled.ElCarouselLayer>
       </Styled.ElCarouselContainer>
       <Indicator
-        eventList={eventList}
+        type={type}
+        childrenCount={React.Children.count(children)}
         onClickDot={onClickDot}
         selectedIndex={selectedIndex}
       />
@@ -71,15 +81,38 @@ export const ElCarousel = () => {
   );
 };
 
+const VARIANT_STYLE = {
+  ElCarousel: {
+    Main: css`
+      width: 100%;
+      margin: 0 auto;
+      height: 162.5vw;
+    `,
+    GnbEvent: css``,
+  },
+  ElCarouselContainer: {
+    Main: css`
+      overflow: visible;
+      height: 162.5vw !important;
+    `,
+    GnbEvent: css`
+      height: calc(23.64vw + 40px) !important;
+      padding-bottom: 40px;
+    `,
+  },
+};
+
 const Styled = {
-  ElCarousel: styled.div`
+  ElCarousel: styled.div<{ $variant: CSSProp }>`
     overflow-x: hidden;
     position: relative;
+
+    ${props => props.$variant}
   `,
-  ElCarouselContainer: styled.div`
-    height: calc(23.64vw + 40px) !important;
-    padding-bottom: 40px;
+  ElCarouselContainer: styled.div<{ $variant: CSSProp }>`
     position: relative;
+
+    ${props => props.$variant}
   `,
   ElCarouselLayer: styled.div`
     width: 100%;

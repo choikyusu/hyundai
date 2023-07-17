@@ -1,20 +1,24 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
-import { styled } from 'styled-components';
+import { CSSProp, css, styled } from 'styled-components';
 
 interface IndicatorProps {
-  eventList: EventType[];
+  type: ElCarouselType;
+  childrenCount: number;
   selectedIndex: number;
   onClickDot: (index: number) => void;
 }
 
 export const Indicator = ({
-  eventList,
+  type,
+  childrenCount,
   selectedIndex,
   onClickDot,
 }: IndicatorProps) => {
   return (
-    <Styled.ElCarouselIndicatorList>
-      {eventList.map((_, index) => (
+    <Styled.ElCarouselIndicatorList
+      $variant={VARIANT_STYLE.ElCarouselIndicatorList[type]}
+    >
+      {Array.from({ length: childrenCount }).map((_, index) => (
         <Styled.ElCarouselIndicator onClick={() => onClickDot(index)}>
           <Styled.ElCarouselButton $isSelected={selectedIndex === index}>
             ${index + 1}번째 슬라이드
@@ -25,11 +29,21 @@ export const Indicator = ({
   );
 };
 
+const VARIANT_STYLE = {
+  ElCarouselIndicatorList: {
+    Main: css`
+      bottom: 203px !important;
+    `,
+    GnbEvent: css`
+      bottom: 4px;
+    `,
+  },
+};
+
 const Styled = {
-  ElCarouselIndicatorList: styled.ul`
+  ElCarouselIndicatorList: styled.ul<{ $variant: CSSProp }>`
     position: absolute;
     list-style: none;
-    bottom: 0;
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -38,7 +52,8 @@ const Styled = {
     z-index: 2;
 
     margin: 0;
-    bottom: 4px;
+
+    ${props => props.$variant}
   `,
   ElCarouselIndicator: styled.li`
     display: inline-block;
