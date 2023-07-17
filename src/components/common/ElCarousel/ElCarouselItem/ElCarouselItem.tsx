@@ -33,6 +33,9 @@ const VARIANT_STYLE = {
       text-align: center;
     `,
     GnbEvent: css``,
+    ModelSection: css`
+      text-align: center;
+    `,
   },
   ElCarouselGroupList: {
     Main: css`
@@ -40,12 +43,19 @@ const VARIANT_STYLE = {
       justify-content: center;
     `,
     GnbEvent: css``,
+    ModelSection: css`
+      height: 100%;
+      justify-content: center;
+    `,
   },
   ElCarouselUnit: {
     Main: css`
       position: relative;
     `,
     GnbEvent: css``,
+    ModelSection: css`
+      position: relative;
+    `,
   },
 };
 

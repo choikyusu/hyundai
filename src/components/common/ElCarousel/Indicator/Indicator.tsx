@@ -52,6 +52,10 @@ const VARIANT_STYLE = {
     GnbEvent: css`
       bottom: 4px;
     `,
+    ModelSection: css`
+      bottom: 0px !important;
+      position: relative;
+    `,
   },
   ElCarouselButton: {
     Main: css``,
@@ -59,6 +63,7 @@ const VARIANT_STYLE = {
       width: 8px;
       height: 8px;
     `,
+    ModelSection: css``,
   },
 };
 

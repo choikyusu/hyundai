@@ -73,6 +73,10 @@ const VARIANT_STYLE = {
       height: 162.5vw;
     `,
     GnbEvent: css``,
+    ModelSection: css`
+      width: 100%;
+      margin: 0 auto;
+    `,
   },
   ElCarouselContainer: {
     Main: css`
@@ -81,7 +85,9 @@ const VARIANT_STYLE = {
     `,
     GnbEvent: css`
       height: calc(23.64vw + 40px) !important;
-      padding-bottom: 40px;
+    `,
+    ModelSection: css`
+      height: calc(80vw + 44px) !important;
     `,
   },
 };

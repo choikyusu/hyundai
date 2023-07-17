@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
-export const Section = () => {
+export const EVSection = () => {
   return (
     <Styled.SectionWrapper>
       <Styled.Title>전기차</Styled.Title>
@@ -68,7 +68,7 @@ const Styled = {
     color: #666;
 
     margin: 12px 0 0;
-    font-family: 'HyundaiSansTextKRR';
+    font-family: 'HyundaiSansTextKR';
     font-size: 14px;
     line-height: 22px;
     letter-spacing: -0.4px;
