@@ -1,6 +1,10 @@
 import { CSSProp, css, styled } from 'styled-components';
 import { ElCarouselItem } from './ElCarouselItem/ElCarouselItem';
-import React from 'react';
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  cloneElement,
+} from 'react';
 import { Indicator } from './Indicator/Indicator';
 
 import { useElCarousel } from './useElCarousel';
@@ -8,7 +12,9 @@ import { useElCarousel } from './useElCarousel';
 interface ElCarouselProps {
   type: ElCarouselType;
   isAutoSlide: boolean;
-  children: React.ReactNode;
+  children:
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | readonly ReactElement<any, string | JSXElementConstructor<any>>[];
 }
 
 export const ElCarousel = ({
@@ -17,6 +23,7 @@ export const ElCarousel = ({
   children,
 }: ElCarouselProps) => {
   const {
+    showControl,
     selectedIndex,
     itemList,
     onClickDot,
@@ -24,13 +31,16 @@ export const ElCarousel = ({
     isPlay,
     onClickPlay,
   } = useElCarousel({
+    type,
     isAutoSlide,
     children,
   });
 
-  const childrenWithWrap = React.Children.map(children, child => (
+  const childrenWithWrap = React.Children.map(children, (child, index) => (
     <ElCarouselItem type={type} itemList={itemList}>
-      {child}
+      {cloneElement(child, {
+        selected: index === selectedIndex,
+      })}
     </ElCarouselItem>
   ));
 
@@ -49,6 +59,7 @@ export const ElCarousel = ({
         selectedIndex={selectedIndex}
         isPlay={isPlay}
         onClickPlay={onClickPlay}
+        showControl={showControl}
       />
     </Styled.ElCarousel>
   );

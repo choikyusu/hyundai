@@ -2,17 +2,27 @@ import {
   addCaroselAnimation,
   calcCaroselTransform,
 } from '@/src/services/carousel.service';
-import React, { useEffect, useState } from 'react';
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 
 interface useElCarouselProps {
+  type: ElCarouselType;
   isAutoSlide: boolean;
-  children: React.ReactNode;
+  children:
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | readonly ReactElement<any, string | JSXElementConstructor<any>>[];
 }
 
 export const useElCarousel = ({
+  type,
   isAutoSlide,
   children,
 }: useElCarouselProps) => {
+  const showControl = type === 'Main';
   const [width, setWidth] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isPlay, setIsPlay] = useState(() => isAutoSlide);
@@ -37,14 +47,11 @@ export const useElCarousel = ({
   const getRefWidth = (el: HTMLDivElement) => setWidth(el?.offsetWidth || 0);
 
   useEffect(() => {
-    if (!isAutoSlide || !isPlay)
-      return () => {
-        //
-      };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    if (!isAutoSlide || !isPlay) return () => {};
 
     const interval = setInterval(() => {
-      const nextIndex = getNextIndex();
-      onClickDot(nextIndex);
+      autoSlide();
     }, 3000);
 
     return () => {
@@ -65,6 +72,7 @@ export const useElCarousel = ({
   }, [width]);
 
   return {
+    showControl,
     itemList,
     isPlay,
     selectedIndex,
@@ -77,5 +85,10 @@ export const useElCarousel = ({
     return selectedIndex >= React.Children.count(children) - 1
       ? 0
       : selectedIndex + 1;
+  }
+
+  function autoSlide() {
+    const nextIndex = getNextIndex();
+    onClickDot(nextIndex);
   }
 };
