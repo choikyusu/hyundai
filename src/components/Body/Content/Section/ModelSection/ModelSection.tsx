@@ -12,14 +12,16 @@ export const ModelSection = () => {
   return (
     <CommonSection
       title="Model"
-      titleTail={['최근 한 달 동안 고객들이 가장 많이 구매하신 모델입니다.']}
+      titleTailList={[
+        '최근 한 달 동안 고객들이 가장 많이 구매하신 모델입니다.',
+      ]}
     >
       <Styled.ModelWrap>
         <div>
           <Styled.TabMenu>
             <Styled.IconWrapper>
               {ageBaseModelList.map((ageBasedModel, index) => (
-                <Styled.Icon onClick={() => onClickAge(index)}>
+                <Styled.Icon key={index} onClick={() => onClickAge(index)}>
                   <Styled.Button $isActive={isActive(index)}>
                     <span>{ageBasedModel.text}</span>
                   </Styled.Button>
@@ -29,8 +31,8 @@ export const ModelSection = () => {
           </Styled.TabMenu>
         </div>
         <ElCarousel type="ModelSection" isAutoSlide={false}>
-          {modelList.map(model => (
-            <Model model={model} />
+          {modelList.map((model, index) => (
+            <Model key={index} model={model} />
           ))}
         </ElCarousel>
       </Styled.ModelWrap>

@@ -1,20 +1,28 @@
+import React from 'react';
 import { styled } from 'styled-components';
 
 interface CommonSectionProps {
   children: React.ReactNode;
   title: string;
-  titleTail: string[];
+  titleTailList: string[];
 }
 
 export const CommonSection = ({
   children,
   title,
-  titleTail,
+  titleTailList,
 }: CommonSectionProps) => {
   return (
     <Styled.SectionWrapper>
       <Styled.Title>{title}</Styled.Title>
-      <Styled.TitleTail>{titleTail}</Styled.TitleTail>
+      <Styled.TitleTail>
+        {titleTailList.map((titleTail, index) => (
+          <React.Fragment key={index}>
+            {titleTail}
+            {index !== 0 && <br />}
+          </React.Fragment>
+        ))}
+      </Styled.TitleTail>
       {children}
     </Styled.SectionWrapper>
   );
@@ -46,8 +54,5 @@ const Styled = {
     font-size: 14px;
     line-height: 22px;
     letter-spacing: -0.4px;
-  `,
-  Br: styled.br`
-    display: block;
   `,
 };

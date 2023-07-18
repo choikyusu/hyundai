@@ -8,8 +8,8 @@ export const GnbEvent = () => {
     <Styled.GnbEvent>
       <Styled.EventContent>
         <ElCarousel type="GnbEvent" isAutoSlide={false}>
-          {eventList.map(event => (
-            <Event event={event} />
+          {eventList.map((event, index) => (
+            <Event key={index} event={event} />
           ))}
         </ElCarousel>
       </Styled.EventContent>
