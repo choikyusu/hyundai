@@ -4,16 +4,16 @@ import { styled } from 'styled-components';
 import { Model } from './Model/Model';
 import { ageBaseModelList } from './data/data';
 import { useModelSection } from './useModelSection';
+import { CommonSection } from '../CommonSection';
 
 export const ModelSection = () => {
   const { onClickAge, isActive, modelList } = useModelSection();
 
   return (
-    <Styled.SectionWrapper>
-      <Styled.Title>Model</Styled.Title>
-      <Styled.TitleTail>
-        최근 한 달 동안 고객들이 가장 많이 구매하신 모델입니다.
-      </Styled.TitleTail>
+    <CommonSection
+      title="Model"
+      titleTail={['최근 한 달 동안 고객들이 가장 많이 구매하신 모델입니다.']}
+    >
       <Styled.ModelWrap>
         <div>
           <Styled.TabMenu>
@@ -34,37 +34,11 @@ export const ModelSection = () => {
           ))}
         </ElCarousel>
       </Styled.ModelWrap>
-    </Styled.SectionWrapper>
+    </CommonSection>
   );
 };
 
 const Styled = {
-  SectionWrapper: styled.div`
-    max-width: 1640px;
-    margin: 0 auto;
-    padding: 140px 0 0 !important;
-    text-align: center;
-
-    padding: 70px 0 0 !important;
-
-    text-align: center;
-  `,
-  Title: styled.h2`
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 27px;
-    font-weight: 400;
-    line-height: 35px;
-    letter-spacing: -0.4px;
-  `,
-  TitleTail: styled.p`
-    color: #666;
-
-    margin: 12px 0 0;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 14px;
-    line-height: 22px;
-    letter-spacing: -0.4px;
-  `,
   ModelWrap: styled.div`
     position: relative;
     min-width: 1120px;

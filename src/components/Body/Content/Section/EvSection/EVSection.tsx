@@ -1,48 +1,57 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
+import { CommonSection } from '../CommonSection';
 
 export const EVSection = () => {
   return (
-    <Styled.SectionWrapper>
-      <Styled.Title>전기차</Styled.Title>
-      <Styled.TitleTail>
-        지구 환경을 품은 현대자동차의
-        <Styled.Br /> 미래형 모빌리티를 경험해보세요.
-      </Styled.TitleTail>
-      <Styled.ElectricCar>
-        <Styled.ElectricCarImgWrap>
-          <Styled.ElctricCarImage
-            src="/images/ev_ioniq6.jpg"
-            alt="아이오닉6 차량 이미지"
-          />
-        </Styled.ElectricCarImgWrap>
-        <Styled.ElectricCarInfo>
-          <Styled.ElectricCarInner>
-            <Styled.BadgeRect>NEW</Styled.BadgeRect>
-            <Styled.CarName>아이오닉 6</Styled.CarName>
-            <Styled.SubText>내가 만드는 세상</Styled.SubText>
-            <Styled.ModelDetailButton href="/kr/ko/e/vehicles/ioniq6/intro">
-              자세히 보기
-            </Styled.ModelDetailButton>
-          </Styled.ElectricCarInner>
-          <Styled.Network>
-            <Styled.NetworkTitle>충전소&서비스 네트워크</Styled.NetworkTitle>
-            <Styled.NetworkSubText>
-              고객님의 계신 곳 근처의 충전소 및 <Styled.Br />
-              서비스 네트워크를 안내해드립니다.
-            </Styled.NetworkSubText>
-            <Styled.ButtonWrap>
-              <Styled.MoreBlueButton href="/kr/ko/customer-support/service-network/ev-service-network">
-                전기차
-              </Styled.MoreBlueButton>
-              <Styled.MoreBlueButton href="/kr/ko/customer-support/service-network/fcev-service-network">
-                수소전기차
-              </Styled.MoreBlueButton>
-            </Styled.ButtonWrap>
-          </Styled.Network>
-        </Styled.ElectricCarInfo>
-      </Styled.ElectricCar>
-    </Styled.SectionWrapper>
+    <CommonSection
+      title="전기차"
+      titleTail={[
+        '지구 환경을 품은 현대자동차의',
+        '미래형 모빌리티를 경험해보세요.',
+      ]}
+    >
+      <Styled.SectionWrapper>
+        <Styled.Title>전기차</Styled.Title>
+        <Styled.TitleTail>
+          지구 환경을 품은 현대자동차의
+          <Styled.Br /> 미래형 모빌리티를 경험해보세요.
+        </Styled.TitleTail>
+        <Styled.ElectricCar>
+          <Styled.ElectricCarImgWrap>
+            <Styled.ElctricCarImage
+              src="/images/ev_ioniq6.jpg"
+              alt="아이오닉6 차량 이미지"
+            />
+          </Styled.ElectricCarImgWrap>
+          <Styled.ElectricCarInfo>
+            <Styled.ElectricCarInner>
+              <Styled.BadgeRect>NEW</Styled.BadgeRect>
+              <Styled.CarName>아이오닉 6</Styled.CarName>
+              <Styled.SubText>내가 만드는 세상</Styled.SubText>
+              <Styled.ModelDetailButton href="/kr/ko/e/vehicles/ioniq6/intro">
+                자세히 보기
+              </Styled.ModelDetailButton>
+            </Styled.ElectricCarInner>
+            <Styled.Network>
+              <Styled.NetworkTitle>충전소&서비스 네트워크</Styled.NetworkTitle>
+              <Styled.NetworkSubText>
+                고객님의 계신 곳 근처의 충전소 및 <Styled.Br />
+                서비스 네트워크를 안내해드립니다.
+              </Styled.NetworkSubText>
+              <Styled.ButtonWrap>
+                <Styled.MoreBlueButton href="/kr/ko/customer-support/service-network/ev-service-network">
+                  전기차
+                </Styled.MoreBlueButton>
+                <Styled.MoreBlueButton href="/kr/ko/customer-support/service-network/fcev-service-network">
+                  수소전기차
+                </Styled.MoreBlueButton>
+              </Styled.ButtonWrap>
+            </Styled.Network>
+          </Styled.ElectricCarInfo>
+        </Styled.ElectricCar>
+      </Styled.SectionWrapper>
+    </CommonSection>
   );
 };
 
@@ -73,9 +82,7 @@ const Styled = {
     line-height: 22px;
     letter-spacing: -0.4px;
   `,
-  Br: styled.br`
-    display: block;
-  `,
+
   ElectricCar: styled.div`
     display: flex;
     justify-content: space-between;
