@@ -19,7 +19,7 @@ export const CommonSection = ({
         {titleTailList.map((titleTail, index) => (
           <React.Fragment key={index}>
             {titleTail}
-            {index !== 0 && <br />}
+            {index !== titleTailList.length - 1 && <br />}
           </React.Fragment>
         ))}
       </Styled.TitleTail>
@@ -32,12 +32,8 @@ const Styled = {
   SectionWrapper: styled.div`
     max-width: 1640px;
     margin: 0 auto;
-    padding: 140px 0 0 !important;
     text-align: center;
-
-    padding: 70px 0 0 !important;
-
-    text-align: center;
+    width: 100%;
   `,
   Title: styled.h2`
     font-family: 'HyundaiSansHeadKR';

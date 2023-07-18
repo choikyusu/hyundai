@@ -18,3 +18,10 @@ type ModelType = {
   carName: string;
   imageUrl: string;
 };
+
+type CardType = {
+  title: string;
+  description: string[];
+  imageUrl: string;
+  pageUrl: string;
+};
