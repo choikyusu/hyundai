@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import { CommonSection } from '../CommonSection';
-import Link from 'next/link';
+import { Card } from './Card/Card';
+import { cardList } from './data/data';
 
 export const MyHyundaiSection = () => {
   return (
@@ -15,17 +16,23 @@ export const MyHyundaiSection = () => {
         <Styled.MyHyundaiInner>
           <Styled.ListWrapper>
             <Styled.List>
-              <Styled.Item>
-                <Styled.TextWrapper>
-                  <Styled.Title>홈</Styled.Title>
-                  <Styled.Text>
-                    보유 차량 정보에 따른 맞춤 정보형 UI 통해 제공
-                  </Styled.Text>
-                  <Styled.MoreLink>자세히 보기</Styled.MoreLink>
-                </Styled.TextWrapper>
-              </Styled.Item>
+              {cardList.map(card => (
+                <Card card={card} />
+              ))}
             </Styled.List>
           </Styled.ListWrapper>
+          <Card
+            card={{
+              title: '마이현대 APP',
+              description: [
+                '당신의 카라이프를 책임질',
+                '현대자동차 대표 앱 myHyundai를',
+                '만나보세요.',
+              ],
+              imageUrl: '',
+              pageUrl: '',
+            }}
+          />
         </Styled.MyHyundaiInner>
       </Styled.SectionBody>
     </CommonSection>
@@ -57,47 +64,5 @@ const Styled = {
     flex-wrap: nowrap;
     justify-content: normal;
     overflow-x: scroll;
-  `,
-  Item: styled.li`
-    flex: none;
-    width: calc(100% - 21vw);
-    border: 1px solid #ccc;
-    margin: 0 0 0 32px;
-    padding: 32px 40px 36vw;
-    background-size: auto 56% !important;
-
-    margin-left: 16px;
-    padding: 33px 2px 33vw 20px;
-
-    margin-left: 15px;
-  `,
-  TextWrapper: styled.div`
-    text-align: left;
-  `,
-  Title: styled.h3`
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 44px;
-    letter-spacing: -0.4px;
-
-    font-size: 21px;
-    line-height: 15px;
-  `,
-  Text: styled.div`
-    margin-top: 2px;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 16px;
-    line-height: 30px;
-    letter-spacing: -0.4px;
-    line-height: 26px;
-    color: #666;
-
-    margin: 12px 0 0;
-    font-size: 14px;
-    line-height: 22px;
-  `,
-  MoreLink: styled.a`
-    margin: 30px;
   `,
 };

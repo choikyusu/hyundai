@@ -8,7 +8,7 @@ interface ModelProps {
 export const Model = ({ model }: ModelProps) => {
   return (
     <Styled.Button>
-      <Styled.Image src={model.imageUrl} alt="헤헤" />
+      <Styled.Image src={model.imageUrl} alt={model.carName} />
       <Styled.TextWrap>
         <Styled.Text>
           <span>{model.text}</span>
