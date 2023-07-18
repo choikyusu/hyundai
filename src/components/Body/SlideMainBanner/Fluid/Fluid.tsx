@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { styled } from 'styled-components';
-import { useFluid } from './useFluid';
+import { CarImage } from './CarImage/CarImage';
 
 interface FluidProps {
   fluid: FluidType;
@@ -9,8 +9,6 @@ interface FluidProps {
 }
 
 export const Fluid = React.memo(({ fluid, selected }: FluidProps) => {
-  const { imageMoveAnimation } = useFluid({ selected });
-
   return (
     <Styled.FluidContainer $backgroundImage={fluid.backgroundUrl}>
       <Styled.TextWrap>
@@ -25,17 +23,11 @@ export const Fluid = React.memo(({ fluid, selected }: FluidProps) => {
           </Styled.TextInner>
         </Styled.LinkText>
       </Styled.TextWrap>
-      {fluid.imageUrl && (
-        <Styled.TextButton href={fluid.pageUrl}>
-          <Styled.Span>
-            <Styled.Image
-              ref={imageMoveAnimation}
-              src={fluid.imageUrl}
-              alt="차량 이미지"
-            />
-          </Styled.Span>
-        </Styled.TextButton>
-      )}
+      <CarImage
+        imageUrl={fluid.imageUrl}
+        pageUrl={fluid.pageUrl}
+        selected={selected}
+      />
     </Styled.FluidContainer>
   );
 });
@@ -89,10 +81,7 @@ const Styled = {
     width: 100%;
     text-align: left;
   `,
-  Span: styled.span`
-    display: inline-block;
-    vertical-align: middle;
-  `,
+
   TextInner: styled.div``,
   CarName: styled.p<{ $fontColor: string }>`
     font-family: 'HyundaiSansHeadKR';
@@ -122,44 +111,5 @@ const Styled = {
     margin-top: 2.5vw;
     font-size: 5vw;
     letter-spacing: -0.25px;
-  `,
-  TextButton: styled(Link)`
-    display: inline-block;
-    vertical-align: middle;
-
-    width: 280px;
-    height: 40px;
-    border: 0;
-    background: #002c5f;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.4px;
-    color: #fff;
-    cursor: pointer;
-
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    color: #002c5f;
-    background-color: transparent;
-  `,
-
-  Image: styled.img`
-    position: relative;
-    width: 100%;
-    margin: 0;
-    object-fit: cover;
-    height: auto !important;
-    margin-top: -19px;
-
-    @keyframes car_animation {
-      0% {
-        left: calc(100% - 50px);
-      }
-      100% {
-        left: 0;
-      }
-    }
   `,
 };

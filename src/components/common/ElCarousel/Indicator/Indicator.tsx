@@ -52,6 +52,9 @@ const VARIANT_STYLE = {
     GnbEvent: css`
       bottom: 4px;
     `,
+    ModelSection: css`
+      bottom: 0px !important;
+    `,
   },
   ElCarouselButton: {
     Main: css``,
@@ -59,6 +62,7 @@ const VARIANT_STYLE = {
       width: 8px;
       height: 8px;
     `,
+    ModelSection: css``,
   },
 };
 
@@ -67,7 +71,6 @@ const Styled = {
     position: absolute;
     list-style: none;
     left: 50%;
-    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     margin: 0;
     padding: 0;

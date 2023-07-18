@@ -1,10 +1,12 @@
 import { styled } from 'styled-components';
-import { Section } from './Section/Section';
+import { EVSection } from './Section/EvSection/EVSection';
+import { ModelSection } from './Section/ModelSection/ModelSection';
 
 export const ContentWrap = () => {
   return (
     <Styled.Content>
-      <Section />
+      <ModelSection />
+      <EVSection />
     </Styled.Content>
   );
 };
