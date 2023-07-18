@@ -8,8 +8,8 @@ export const SlideMainBanner = () => {
   return (
     <Styled.KeyVisualWrapper>
       <ElCarousel type="Main" isAutoSlide>
-        {fluidList.map(fluid => (
-          <Fluid fluid={fluid} />
+        {fluidList.map((fluid, index) => (
+          <Fluid key={index} fluid={fluid} />
         ))}
       </ElCarousel>
       <Styled.QuickMenu>

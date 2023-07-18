@@ -37,7 +37,7 @@ export const ElCarousel = ({
   });
 
   const childrenWithWrap = React.Children.map(children, (child, index) => (
-    <ElCarouselItem type={type} itemList={itemList}>
+    <ElCarouselItem key={index} type={type} itemList={itemList}>
       {cloneElement(child, {
         selected: index === selectedIndex,
       })}

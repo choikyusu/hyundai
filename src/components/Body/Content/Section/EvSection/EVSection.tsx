@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
+import { CommonSection } from '../CommonSection';
 
 export const EVSection = () => {
   return (
-    <Styled.SectionWrapper>
-      <Styled.Title>전기차</Styled.Title>
-      <Styled.TitleTail>
-        지구 환경을 품은 현대자동차의
-        <Styled.Br /> 미래형 모빌리티를 경험해보세요.
-      </Styled.TitleTail>
+    <CommonSection
+      title="전기차"
+      titleTailList={[
+        '지구 환경을 품은 현대자동차의',
+        '미래형 모빌리티를 경험해보세요.',
+      ]}
+    >
       <Styled.ElectricCar>
         <Styled.ElectricCarImgWrap>
           <Styled.ElctricCarImage
@@ -42,11 +44,14 @@ export const EVSection = () => {
           </Styled.Network>
         </Styled.ElectricCarInfo>
       </Styled.ElectricCar>
-    </Styled.SectionWrapper>
+    </CommonSection>
   );
 };
 
 const Styled = {
+  Br: styled.br`
+    display: block;
+  `,
   SectionWrapper: styled.div`
     max-width: 1640px;
     margin: 0 auto;
@@ -73,9 +78,7 @@ const Styled = {
     line-height: 22px;
     letter-spacing: -0.4px;
   `,
-  Br: styled.br`
-    display: block;
-  `,
+
   ElectricCar: styled.div`
     display: flex;
     justify-content: space-between;

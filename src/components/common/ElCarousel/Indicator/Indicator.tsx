@@ -26,7 +26,10 @@ export const Indicator = ({
       $variant={VARIANT_STYLE.ElCarouselIndicatorList[type]}
     >
       {Array.from({ length: childrenCount }).map((_, index) => (
-        <Styled.ElCarouselIndicator onClick={() => onClickDot(index)}>
+        <Styled.ElCarouselIndicator
+          key={index}
+          onClick={() => onClickDot(index)}
+        >
           <Styled.ElCarouselButton
             $variant={VARIANT_STYLE.ElCarouselButton[type]}
             $isSelected={selectedIndex === index}
