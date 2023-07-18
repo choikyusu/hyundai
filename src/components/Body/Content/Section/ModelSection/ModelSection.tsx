@@ -1,18 +1,12 @@
 import { ElCarousel } from '@/src/components/common/ElCarousel/ElCarousel';
 import { CommonStyled } from '@/src/styles/CommonStyled';
-import { CSSProp, css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 import { Model } from './Model/Model';
 import { ageBaseModelList } from './data/data';
-import { useState } from 'react';
+import { useModelSection } from './useModelSection';
 
 export const ModelSection = () => {
-  const [modelList, setModelList] = useState<ModelType[]>(
-    ageBaseModelList[0].modelList,
-  );
-
-  const onClickAge = (modelList: ModelType[]) => {
-    setModelList(modelList);
-  };
+  const { onClickAge, isActive, modelList } = useModelSection();
 
   return (
     <Styled.SectionWrapper>
@@ -24,11 +18,9 @@ export const ModelSection = () => {
         <div>
           <Styled.TabMenu>
             <Styled.IconWrapper>
-              {ageBaseModelList.map(ageBasedModel => (
-                <Styled.Icon
-                  onClick={() => onClickAge(ageBasedModel.modelList)}
-                >
-                  <Styled.Button $active={VARIANT_STYLE.Active}>
+              {ageBaseModelList.map((ageBasedModel, index) => (
+                <Styled.Icon onClick={() => onClickAge(index)}>
+                  <Styled.Button $isActive={isActive(index)}>
                     <span>{ageBasedModel.text}</span>
                   </Styled.Button>
                 </Styled.Icon>
@@ -44,15 +36,6 @@ export const ModelSection = () => {
       </Styled.ModelWrap>
     </Styled.SectionWrapper>
   );
-};
-
-const VARIANT_STYLE = {
-  Active: css`
-    font-family: 'HyundaiSansTextKR';
-    font-size: 16px;
-    letter-spacing: 0.016px;
-    color: #007fa8;
-  `,
 };
 
 const Styled = {
@@ -88,6 +71,10 @@ const Styled = {
 
     min-width: auto;
     margin: 35px 0 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   `,
   TabMenu: styled.div`
     display: flex;
@@ -104,15 +91,27 @@ const Styled = {
 
     flex-wrap: nowrap;
     justify-content: space-between;
-    gap: 16px;
+    gap: 22px;
   `,
   Icon: styled.li`
     position: relative;
     padding: 0;
-  `,
-  Button: styled(CommonStyled.Button)<{ $active?: CSSProp }>`
-    display: flex;
 
+    &:nth-child(n + 2) {
+      &:before {
+        position: absolute;
+        left: -11px;
+        top: 2px;
+        display: block;
+        content: '';
+        width: 1px;
+        height: 18px;
+        background: #999;
+      }
+    }
+  `,
+  Button: styled(CommonStyled.Button)<{ $isActive?: boolean }>`
+    display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -121,11 +120,8 @@ const Styled = {
     font-family: 'HyundaiSansTextKR';
     font-size: 16px;
     letter-spacing: 0;
-    color: #666;
+    color: ${props => (props.$isActive ? '#007fa8' : '#666')};
     line-height: 22px;
     font-weight: 500;
-    background: #444;
-
-    ${props => props.$active}
   `,
 };

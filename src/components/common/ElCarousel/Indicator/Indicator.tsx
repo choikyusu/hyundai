@@ -54,7 +54,6 @@ const VARIANT_STYLE = {
     `,
     ModelSection: css`
       bottom: 0px !important;
-      position: relative;
     `,
   },
   ElCarouselButton: {
@@ -72,7 +71,6 @@ const Styled = {
     position: absolute;
     list-style: none;
     left: 50%;
-    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     margin: 0;
     padding: 0;

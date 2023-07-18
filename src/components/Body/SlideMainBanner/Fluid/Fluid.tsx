@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { styled } from 'styled-components';
-import { CarImage } from '../../Fluid/CarImage/CarImage';
+import { CarImage } from './CarImage/CarImage';
 
 interface FluidProps {
   fluid: FluidType;

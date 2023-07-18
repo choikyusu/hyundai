@@ -21,7 +21,11 @@ export const Model = ({ model }: ModelProps) => {
 
 const Styled = {
   Button: styled(CommonStyled.Button)`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+    padding: 0 20px;
   `,
   Image: styled.img`
     width: 100% !important;
