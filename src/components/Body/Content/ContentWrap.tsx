@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import { EVSection } from './Section/EvSection/EVSection';
 import { ModelSection } from './Section/ModelSection/ModelSection';
 import { MyHyundaiSection } from './Section/MyHyundaiSection/MyHyundaiSection';
+import { HyundaiShop } from './Section/HyundaiShop/HyundaiShop';
 
 export const ContentWrap = () => {
   return (
@@ -9,6 +10,7 @@ export const ContentWrap = () => {
       <ModelSection />
       <EVSection />
       <MyHyundaiSection />
+      <HyundaiShop />
     </Styled.Content>
   );
 };
