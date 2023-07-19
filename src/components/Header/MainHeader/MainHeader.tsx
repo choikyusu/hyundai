@@ -36,7 +36,7 @@ const Styled = {
     position: fixed;
     top: 0;
     background: ${props =>
-      props.$isMovedScroll ? 'background: hsla(0,0%,100%,.9)' : 'transparent'};
+      props.$isMovedScroll ? 'hsla(0,0%,100%,.9)' : 'transparent'};
     border-bottom: ${props =>
       props.$isMovedScroll ? '1px solid #e5e5e5' : 'none'};
     ${props => props.$headerStyles}

@@ -8,7 +8,7 @@ interface CardProps {
 
 export const Card = ({ card }: CardProps) => {
   return (
-    <Styled.Item>
+    <Styled.Item $imageUrl={card.imageUrl}>
       <Styled.TextWrapper>
         <Styled.Title>{card.title}</Styled.Title>
         <Styled.Text>
@@ -26,7 +26,7 @@ export const Card = ({ card }: CardProps) => {
 };
 
 const Styled = {
-  Item: styled.li`
+  Item: styled.li<{ $imageUrl: string }>`
     flex: none;
     width: calc(100% - 21vw);
     border: 1px solid #ccc;
@@ -39,7 +39,7 @@ const Styled = {
 
     margin-left: 15px;
 
-    background: url(/images/main_myhyundai_home_m.jpg) no-repeat right bottom;
+    background: url(${props => props.$imageUrl}) no-repeat right bottom;
 }
   `,
   TextWrapper: styled.div`
