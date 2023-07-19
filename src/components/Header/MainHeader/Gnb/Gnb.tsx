@@ -5,7 +5,7 @@ import { GnbEvent } from './GnbEvent/GnbEvent';
 import { LnbBottomList } from './LnbBottomList/LnbBottomList';
 
 interface MobileSearchProps {
-  headerType: 'None' | 'Search' | 'Menu';
+  headerType: HeaderMenuType;
 }
 
 export const Gnb = ({ headerType }: MobileSearchProps) => {

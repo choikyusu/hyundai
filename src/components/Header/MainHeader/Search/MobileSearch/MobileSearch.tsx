@@ -6,7 +6,7 @@ import { TabMenu } from './TabMenu/TabMenu';
 import { UnifiedSearch } from './UnifiedSearch/UnifiedSearch';
 
 interface MobileSearchProps {
-  headerType: 'None' | 'Search' | 'Menu';
+  headerType: HeaderMenuType;
 }
 
 export const MobileSearch = ({ headerType }: MobileSearchProps) => {

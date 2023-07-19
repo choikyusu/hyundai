@@ -5,8 +5,8 @@ import { TopMobileArea } from './TopMobileArea/TopMobileArea';
 import { Gnb } from './Gnb/Gnb';
 
 interface MainHeaderProps {
-  headerType: 'None' | 'Search' | 'Menu';
-  onClickType: (type: 'None' | 'Search' | 'Menu') => void;
+  headerType: HeaderMenuType;
+  onClickType: (type: HeaderMenuType) => void;
   isMovedScroll: boolean;
 }
 

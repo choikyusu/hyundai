@@ -3,8 +3,8 @@ import { Logo } from './Logo/Logo';
 import { MobileController } from './MobileController/MobileController';
 
 export interface TopMobileAreaProps {
-  headerType: 'None' | 'Search' | 'Menu';
-  onClickType: (type: 'None' | 'Search' | 'Menu') => void;
+  headerType: HeaderMenuType;
+  onClickType: (type: HeaderMenuType) => void;
 }
 
 export const TopMobileArea = ({

@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 
 export const useHeader = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
-  const [headerType, setHeaderType] = useState<'None' | 'Search' | 'Menu'>(
-    'None',
-  );
+  const [headerType, setHeaderType] = useState<HeaderMenuType>('None');
 
-  const onClickType = (type: 'None' | 'Search' | 'Menu') => {
+  const onClickType = (type: HeaderMenuType) => {
     setHeaderType(prev => {
       if (prev === type) return 'None';
       return type;

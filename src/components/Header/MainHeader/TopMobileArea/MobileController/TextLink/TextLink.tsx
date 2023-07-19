@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { styled } from 'styled-components';
 
 interface TextLinkProps {
-  headerType: 'None' | 'Search' | 'Menu';
+  headerType: HeaderMenuType;
 }
 
 export const TextLink = ({ headerType }: TextLinkProps) => {
