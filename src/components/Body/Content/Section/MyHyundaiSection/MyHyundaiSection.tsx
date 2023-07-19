@@ -16,8 +16,8 @@ export const MyHyundaiSection = () => {
         <Styled.MyHyundaiInner>
           <Styled.ListWrapper>
             <Styled.List>
-              {cardList.map(card => (
-                <Card card={card} />
+              {cardList.map((card, index) => (
+                <Card key={index} card={card} />
               ))}
             </Styled.List>
           </Styled.ListWrapper>
