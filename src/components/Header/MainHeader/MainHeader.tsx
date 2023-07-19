@@ -7,13 +7,18 @@ import { Gnb } from './Gnb/Gnb';
 interface MainHeaderProps {
   headerType: 'None' | 'Search' | 'Menu';
   onClickType: (type: 'None' | 'Search' | 'Menu') => void;
+  isMovedScroll: boolean;
 }
 
-export const MainHeader = ({ headerType, onClickType }: MainHeaderProps) => {
+export const MainHeader = ({
+  isMovedScroll,
+  headerType,
+  onClickType,
+}: MainHeaderProps) => {
   const headerStyles = HEADER_STYLE[headerType];
 
   return (
-    <Styled.Header $headerStyles={headerStyles}>
+    <Styled.Header $headerStyles={headerStyles} $isMovedScroll={isMovedScroll}>
       <Styled.InnerWrap>
         <TopMobileArea headerType={headerType} onClickType={onClickType} />
         <MobileSearch headerType={headerType} />
@@ -24,11 +29,16 @@ export const MainHeader = ({ headerType, onClickType }: MainHeaderProps) => {
 };
 
 const Styled = {
-  Header: styled(CommonStyled.Header)<{ $headerStyles: CSSProp }>`
+  Header: styled(CommonStyled.Header)<{
+    $headerStyles: CSSProp;
+    $isMovedScroll: boolean;
+  }>`
     position: fixed;
     top: 0;
-    background: transparent;
-    border-bottom: none;
+    background: ${props =>
+      props.$isMovedScroll ? 'background: hsla(0,0%,100%,.9)' : 'transparent'};
+    border-bottom: ${props =>
+      props.$isMovedScroll ? '1px solid #e5e5e5' : 'none'};
     ${props => props.$headerStyles}
   `,
   InnerWrap: styled.div``,
