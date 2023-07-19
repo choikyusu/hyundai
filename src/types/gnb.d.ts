@@ -1,3 +1,5 @@
+type HeaderMenuType = 'None' | 'Search' | 'Menu';
+
 type LnbMenuTreeType = {
   name: string;
   level2List: Level2Type[];
