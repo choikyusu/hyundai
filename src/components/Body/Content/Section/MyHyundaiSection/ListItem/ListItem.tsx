@@ -1,25 +1,38 @@
+import { isLastIndex } from '@/src/utils/array.utils';
 import Link from 'next/link';
 import React from 'react';
 import { styled } from 'styled-components';
 
-interface CardProps {
-  card: CardType;
+interface ListItemProps {
+  title?: string;
+  description?: string[];
+  imageUrl: string;
+  textInImage?: string;
+  pageUrl: string;
 }
 
-export const Card = ({ card }: CardProps) => {
+export const ListItem = ({
+  title,
+  description,
+  imageUrl,
+  textInImage,
+  pageUrl,
+}: ListItemProps) => {
   return (
-    <Styled.Item $imageUrl={card.imageUrl}>
+    <Styled.Item $imageUrl={imageUrl}>
       <Styled.TextWrapper>
-        <Styled.Title>{card.title}</Styled.Title>
-        <Styled.Text>
-          {card.description.map((desc, index) => (
-            <React.Fragment key={index}>
-              {desc}
-              {index !== card.description.length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </Styled.Text>
-        <Styled.MoreLink href={card.pageUrl}>자세히 보기</Styled.MoreLink>
+        {title && <Styled.Title>{title}</Styled.Title>}
+        {description && (
+          <Styled.Text>
+            {description.map((desc, index) => (
+              <React.Fragment key={index}>
+                {desc}
+                {!isLastIndex(index).at(description) && <br />}
+              </React.Fragment>
+            ))}
+          </Styled.Text>
+        )}
+        <Styled.MoreLink href={pageUrl}>자세히 보기</Styled.MoreLink>
       </Styled.TextWrapper>
     </Styled.Item>
   );

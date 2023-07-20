@@ -19,9 +19,10 @@ type ModelType = {
   imageUrl: string;
 };
 
-type CardType = {
-  title: string;
-  description: string[];
+type ListItemType = {
+  title?: string;
+  description?: string[];
   imageUrl: string;
+  textInImage?: string;
   pageUrl: string;
 };

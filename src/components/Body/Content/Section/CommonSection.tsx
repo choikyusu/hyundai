@@ -1,3 +1,4 @@
+import { isLastIndex } from '@/src/utils/array.utils';
 import React from 'react';
 import { styled } from 'styled-components';
 
@@ -19,7 +20,7 @@ export const CommonSection = ({
         {titleTailList.map((titleTail, index) => (
           <React.Fragment key={index}>
             {titleTail}
-            {index !== titleTailList.length - 1 && <br />}
+            {isLastIndex(index).at(titleTailList) && <br />}
           </React.Fragment>
         ))}
       </Styled.TitleTail>

@@ -1,4 +1,4 @@
-export const cardList: CardType[] = [
+export const list: ListItemType[] = [
   {
     title: '홈',
     description: ['보유 차량 정보에 따른 맞춤 정보형 UI 통해 제공'],
