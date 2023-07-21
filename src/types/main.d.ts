@@ -41,3 +41,5 @@ type BrandType = {
   title: { text: string; color: string };
   subText: { text: string; color: string };
 };
+
+type DirectionType = 'Right' | 'Left';

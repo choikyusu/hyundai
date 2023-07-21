@@ -14,7 +14,7 @@ export const BrandSection = () => {
       ]}
     >
       <Styled.SectionBody>
-        <ElCarousel type="Brand" isAutoSlide={false}>
+        <ElCarousel type="Brand" isAutoSlide={false} isArrowShow>
           {brandList.map((barnd, index) => (
             <Brand key={index} barnd={barnd} />
           ))}
