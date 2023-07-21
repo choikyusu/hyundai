@@ -17,7 +17,7 @@ export const ShopCard = ({ bestList }: ShopCardProps) => {
       />
       <Styled.BestList>
         {bestList.map((best, index) => (
-          <Styled.BestItem>
+          <Styled.BestItem key={index}>
             <Styled.Link href={best.pageUrl}>
               <Styled.Ranking>
                 {index + 1}

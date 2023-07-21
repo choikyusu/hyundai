@@ -14,7 +14,7 @@ export const ElCarouselItem = ({
   return (
     <Styled.ElCarouselItem
       $variant={VARIANT_STYLE.ElCarouselItem[type]}
-      ref={(el: HTMLDivElement) => itemList.push(el)}
+      ref={(el: HTMLDivElement) => el && itemList.push(el)}
     >
       <Styled.ElCarouselGroupList
         $variant={VARIANT_STYLE.ElCarouselGroupList[type]}

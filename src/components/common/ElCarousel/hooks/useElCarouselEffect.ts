@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 interface useElCarouselEffectProps {
-  interval: NodeJS.Timer;
   isPlay: boolean;
   isAutoSlide: boolean;
   onResize(): void;
@@ -10,11 +9,11 @@ interface useElCarouselEffectProps {
   selectedIndex: number;
   itemList: HTMLDivElement[];
   width: number;
+  autoSlide(): void;
 }
 
 export const useElCarouselEffect = ({
   el,
-  interval,
   isPlay,
   isAutoSlide,
   onResize,
@@ -22,10 +21,13 @@ export const useElCarouselEffect = ({
   selectedIndex,
   itemList,
   width,
+  autoSlide,
 }: useElCarouselEffectProps) => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     if (!isAutoSlide || !isPlay) return () => {};
+
+    const interval = setInterval(() => autoSlide(), 3000);
 
     return () => {
       clearInterval(interval);
