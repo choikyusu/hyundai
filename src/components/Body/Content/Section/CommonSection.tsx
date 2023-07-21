@@ -20,7 +20,7 @@ export const CommonSection = ({
         {titleTailList.map((titleTail, index) => (
           <React.Fragment key={index}>
             {titleTail}
-            {isLastIndex(index).at(titleTailList) && <br />}
+            {!isLastIndex(index).at(titleTailList) && <br />}
           </React.Fragment>
         ))}
       </Styled.TitleTail>

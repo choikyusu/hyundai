@@ -3,6 +3,7 @@ import { EVSection } from './Section/EvSection/EVSection';
 import { ModelSection } from './Section/ModelSection/ModelSection';
 import { MyHyundaiSection } from './Section/MyHyundaiSection/MyHyundaiSection';
 import { HyundaiShop } from './Section/HyundaiShop/HyundaiShop';
+import { BrandSection } from './Section/BrandSection/BrandSection';
 
 export const ContentWrap = () => {
   return (
@@ -11,6 +12,7 @@ export const ContentWrap = () => {
       <EVSection />
       <MyHyundaiSection />
       <HyundaiShop />
+      <BrandSection />
     </Styled.Content>
   );
 };

@@ -2,8 +2,8 @@ import { ShopCard } from '@/src/components/common/Card/ShopCard/ShopCard';
 import { CommonSection } from '../CommonSection';
 import { HorizontalSlide } from '@/src/components/common/HorizontalSlide/HorizontalSlide';
 import { styled } from 'styled-components';
-import { list } from './data/data';
-import { ListItem } from '../MyHyundaiSection/ListItem/ListItem';
+import { bestList, list } from './data/data';
+import { ListItem } from './ListItem/ListItem';
 
 export const HyundaiShop = () => {
   return (
@@ -19,7 +19,7 @@ export const HyundaiShop = () => {
             <ListItem key={index} {...item} />
           ))}
         </HorizontalSlide>
-        <ShopCard />
+        <ShopCard bestList={bestList} />
       </Styled.SectionBody>
     </CommonSection>
   );

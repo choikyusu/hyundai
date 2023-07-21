@@ -32,7 +32,7 @@ export const ListItem = ({
             ))}
           </Styled.Text>
         )}
-        <Styled.MoreLink href={pageUrl}>자세히 보기</Styled.MoreLink>
+        {title && <Styled.MoreLink href={pageUrl}>자세히 보기</Styled.MoreLink>}
       </Styled.TextWrapper>
     </Styled.Item>
   );
@@ -53,7 +53,6 @@ const Styled = {
     margin-left: 15px;
 
     background: url(${props => props.$imageUrl}) no-repeat right bottom;
-}
   `,
   TextWrapper: styled.div`
     text-align: left;
