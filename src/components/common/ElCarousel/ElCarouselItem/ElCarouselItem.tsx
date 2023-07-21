@@ -36,6 +36,7 @@ const VARIANT_STYLE = {
     ModelSection: css`
       text-align: center;
     `,
+    Brand: css``,
   },
   ElCarouselGroupList: {
     Main: css`
@@ -47,6 +48,7 @@ const VARIANT_STYLE = {
       height: 100%;
       justify-content: center;
     `,
+    Brand: css``,
   },
   ElCarouselUnit: {
     Main: css`
@@ -56,6 +58,7 @@ const VARIANT_STYLE = {
     ModelSection: css`
       position: relative;
     `,
+    Brand: css``,
   },
 };
 

@@ -58,6 +58,9 @@ const VARIANT_STYLE = {
     ModelSection: css`
       bottom: 0px !important;
     `,
+    Brand: css`
+      bottom: 0px !important;
+    `,
   },
   ElCarouselButton: {
     Main: css``,
@@ -66,6 +69,7 @@ const VARIANT_STYLE = {
       height: 8px;
     `,
     ModelSection: css``,
+    Brand: css``,
   },
 };
 
