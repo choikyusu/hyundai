@@ -37,6 +37,7 @@ const VARIANT_STYLE = {
       text-align: center;
     `,
     Brand: css``,
+    Events: css``,
   },
   ElCarouselGroupList: {
     Main: css`
@@ -49,6 +50,7 @@ const VARIANT_STYLE = {
       justify-content: center;
     `,
     Brand: css``,
+    Events: css``,
   },
   ElCarouselUnit: {
     Main: css`
@@ -59,6 +61,7 @@ const VARIANT_STYLE = {
       position: relative;
     `,
     Brand: css``,
+    Events: css``,
   },
 };
 

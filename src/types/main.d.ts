@@ -6,7 +6,7 @@ type FluidType = {
   subText: { text: string; color: string };
 };
 
-type ElCarouselType = 'Main' | 'GnbEvent' | 'ModelSection' | 'Brand';
+type ElCarouselType = 'Main' | 'GnbEvent' | 'ModelSection' | 'Brand' | 'Events';
 
 type AgeBaseModelType = {
   text: string;
@@ -43,3 +43,11 @@ type BrandType = {
 };
 
 type DirectionType = 'Right' | 'Left';
+
+type EventType = {
+  pageUrl: string;
+  imaageUrl: string;
+  title: string;
+  subTitle: string;
+  date: string;
+};
