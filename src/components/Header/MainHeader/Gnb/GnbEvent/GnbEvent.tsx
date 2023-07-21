@@ -7,7 +7,7 @@ export const GnbEvent = () => {
   return (
     <Styled.GnbEvent>
       <Styled.EventContent>
-        <ElCarousel type="GnbEvent" isAutoSlide={false}>
+        <ElCarousel type="GnbEvent" isAutoSlide={false} isArrowShow={false}>
           {eventList.map((event, index) => (
             <Event key={index} event={event} />
           ))}

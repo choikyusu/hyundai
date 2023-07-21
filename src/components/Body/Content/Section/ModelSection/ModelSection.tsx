@@ -30,7 +30,7 @@ export const ModelSection = () => {
             </Styled.IconWrapper>
           </Styled.TabMenu>
         </div>
-        <ElCarousel type="ModelSection" isAutoSlide={false}>
+        <ElCarousel type="ModelSection" isAutoSlide={false} isArrowShow={false}>
           {modelList.map((model, index) => (
             <Model key={index} model={model} />
           ))}

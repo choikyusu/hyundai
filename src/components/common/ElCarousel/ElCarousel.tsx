@@ -6,11 +6,12 @@ import React, {
   cloneElement,
 } from 'react';
 import { Indicator } from './Indicator/Indicator';
-
-import { useElCarousel } from './useElCarousel';
+import { useElCarousel } from './hooks/useElCarousel';
+import { ElArrow } from './ElArrow/ElArrow';
 
 interface ElCarouselProps {
   type: ElCarouselType;
+  isArrowShow: boolean;
   isAutoSlide: boolean;
   children:
     | ReactElement<any, string | JSXElementConstructor<any>>
@@ -20,6 +21,7 @@ interface ElCarouselProps {
 export const ElCarousel = ({
   type,
   isAutoSlide,
+  isArrowShow,
   children,
 }: ElCarouselProps) => {
   const {
@@ -30,6 +32,7 @@ export const ElCarousel = ({
     getRefWidth,
     isPlay,
     onClickPlay,
+    onClickArrow,
   } = useElCarousel({
     type,
     isAutoSlide,
@@ -50,7 +53,10 @@ export const ElCarousel = ({
         $variant={VARIANT_STYLE.ElCarouselContainer[type]}
         ref={getRefWidth}
       >
-        <Styled.ElCarouselLayer>{childrenWithWrap}</Styled.ElCarouselLayer>
+        <Styled.ElCarouselLayer>
+          {childrenWithWrap}
+          <ElArrow isShow={isArrowShow} onClickArrow={onClickArrow} />
+        </Styled.ElCarouselLayer>
       </Styled.ElCarouselContainer>
       <Indicator
         type={type}
@@ -112,6 +118,7 @@ const Styled = {
     ${props => props.$variant}
   `,
   ElCarouselLayer: styled.div`
+    position: relative;
     width: 100%;
     height: 100%;
   `,
