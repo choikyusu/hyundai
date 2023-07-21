@@ -26,6 +26,7 @@ export const useElCarousel = ({
   const [width, setWidth] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isPlay, setIsPlay] = useState(() => isAutoSlide);
+  const [el, setEl] = useState<HTMLDivElement | null>(null);
   const itemList: HTMLDivElement[] = [];
 
   const onClickDot = (index: number) => {
@@ -44,7 +45,10 @@ export const useElCarousel = ({
   };
 
   const onClickPlay = () => setIsPlay(prev => !prev);
-  const getRefWidth = (el: HTMLDivElement) => setWidth(el?.offsetWidth || 0);
+  const getRefWidth = (el: HTMLDivElement) => {
+    setWidth(el?.offsetWidth || 0);
+    setEl(el);
+  };
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -70,6 +74,16 @@ export const useElCarousel = ({
       );
     });
   }, [width]);
+
+  useEffect(() => {
+    function onResize() {
+      setWidth(el?.offsetWidth || 0);
+    }
+
+    window.addEventListener('resize', onResize);
+
+    return () => window.removeEventListener('resize', onResize);
+  }, [el]);
 
   return {
     showControl,
