@@ -87,6 +87,10 @@ const VARIANT_STYLE = {
       width: 100%;
       margin: 0 auto;
     `,
+    Events: css`
+      width: 100%;
+      margin: 0 auto;
+    `,
   },
   ElCarouselContainer: {
     Main: css`
@@ -101,6 +105,9 @@ const VARIANT_STYLE = {
     `,
     Brand: css`
       height: calc(110vw + 44px) !important;
+    `,
+    Events: css`
+      height: calc(90vw + 44px) !important;
     `,
   },
 };

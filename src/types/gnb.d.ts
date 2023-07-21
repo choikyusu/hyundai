@@ -31,8 +31,9 @@ type MenuType = {
 };
 
 type EventType = {
-  imageUrl: string;
   pageUrl: string;
+  imageUrl: string;
   title: string;
+  subTitle: string;
   date: string;
 };
