@@ -11,10 +11,10 @@ export const ElArrow = ({ isShow, onClickArrow }: ElArrowProps) => {
   if (!isShow) return null;
   return (
     <>
-      <Styled.ElArrow isLeft onClick={() => onClickArrow('Left')}>
+      <Styled.ElArrow $isLeft onClick={() => onClickArrow('Left')}>
         <AiOutlineLeft />
       </Styled.ElArrow>
-      <Styled.ElArrow isLeft={false} onClick={() => onClickArrow('Right')}>
+      <Styled.ElArrow $isLeft={false} onClick={() => onClickArrow('Right')}>
         <AiOutlineRight />
       </Styled.ElArrow>
     </>
@@ -22,7 +22,7 @@ export const ElArrow = ({ isShow, onClickArrow }: ElArrowProps) => {
 };
 
 const Styled = {
-  ElArrow: styled(CommonStyled.Button)<{ isLeft: boolean }>`
+  ElArrow: styled(CommonStyled.Button)<{ $isLeft: boolean }>`
     border: none;
     padding: 0;
     margin: 0;
@@ -47,7 +47,7 @@ const Styled = {
     align-items: center;
     justify-content: center;
 
-    ${props => (props.isLeft ? 'left : 0' : 'right : 0')};
+    ${props => (props.$isLeft ? 'left : 0' : 'right : 0')};
 
     svg {
       width: 18px;

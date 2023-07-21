@@ -25,7 +25,6 @@ export const useElCarousel = ({
   const [isPlay, setIsPlay] = useState(() => isAutoSlide);
   const [el, setEl] = useState<HTMLDivElement | null>(null);
   const itemList: HTMLDivElement[] = [];
-  const interval = setInterval(() => autoSlide(), 3000);
 
   const getRefWidth = (el: HTMLDivElement) => {
     setWidth(el?.offsetWidth || 0);
@@ -101,7 +100,6 @@ export const useElCarousel = ({
 
   function getUseElCarouselEffectProps() {
     return {
-      interval,
       isPlay,
       isAutoSlide,
       onResize,
@@ -110,6 +108,7 @@ export const useElCarousel = ({
       selectedIndex,
       itemList,
       width,
+      autoSlide,
     };
   }
 };
