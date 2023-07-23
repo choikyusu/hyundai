@@ -13,7 +13,7 @@ export const TopMobileArea = ({
 }: TopMobileAreaProps) => {
   return (
     <Styled.TopMobileArea $areaStyle={AREA_STYLE[headerType]}>
-      <Logo />
+      <Logo isClicked={headerType !== 'None'} />
       <MobileController headerType={headerType} onClickType={onClickType} />
     </Styled.TopMobileArea>
   );

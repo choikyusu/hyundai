@@ -17,14 +17,14 @@ export const MobileController = ({
           data-link-name="검색"
           onClick={() => onClickType('Search')}
         >
-          <RiSearchLine />
+          <RiSearchLine fill={headerType !== 'None' ? '#fff' : '#002c5f'} />
         </Styled.SearchButton>
         <Styled.MenuButton
           data-link-area="gnb"
           data-link-name="전체메뉴"
           onClick={() => onClickType('Menu')}
         >
-          <RiMenu3Fill />
+          <RiMenu3Fill fill={headerType !== 'None' ? '#fff' : '#002c5f'} />
         </Styled.MenuButton>
       </Styled.ButtonWrapper>
     </Styled.MobileController>

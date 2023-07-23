@@ -1,8 +1,12 @@
 interface HyundaiSvgComponentProps {
   width: string;
+  fill: string;
 }
 
-export const HyundaiSvgComponent = ({ width }: HyundaiSvgComponentProps) => {
+export const HyundaiSvgComponent = ({
+  width,
+  fill,
+}: HyundaiSvgComponentProps) => {
   return (
     <svg
       version="1.1"
@@ -13,6 +17,8 @@ export const HyundaiSvgComponent = ({ width }: HyundaiSvgComponentProps) => {
       viewBox="0 0 166 23"
       xmlSpace="preserve"
       width={width}
+      style={{ transition: 'fill 0.3s' }}
+      fill={fill}
     >
       <g>
         <g>
