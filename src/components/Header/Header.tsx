@@ -31,12 +31,27 @@ const Styled = {
       width: `${props.$scrollPercentage}%`,
     },
   }))`
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    height: 5px;
-    background-color: #007fa8;
-    z-index: 99999;
+    @media screen and (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 0;
+      height: 5px;
+      background-color: #007fa8;
+      z-index: 99999;
+    }
+
+    @media screen and (min-width: 768px) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      display: block;
+      width: 0;
+      height: 5px;
+      background-color: #007fa8;
+      transition: 0.2s linear;
+    }
   `,
 };

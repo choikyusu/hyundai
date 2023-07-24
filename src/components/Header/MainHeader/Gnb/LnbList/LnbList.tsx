@@ -46,32 +46,57 @@ const Icon = ({ isSelected }: IconProps) => {
 };
 
 export const Styled = {
-  LnbList: styled.ul``,
+  LnbList: styled.ul`
+    @media screen and (max-width: 767px) {
+      order: 2;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 55%;
+      min-width: 500px;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      min-width: 380px;
+    }
+  `,
   LnbItem: styled.li`
-    padding: 0;
+    @media screen and (max-width: 767px) {
+      padding: 0;
+    }
   `,
   LnbMainButton: styled(CommonStyled.Button)<{ $isSelected: boolean }>`
     ${BUTTON_STYLE}
-    position: relative;
-    text-align: left;
-    color: ${props => (props.$isSelected ? '#007fa8' : '#000')};
+
+    @media screen and (max-width: 767px) {
+      position: relative;
+      color: ${props => (props.$isSelected ? '#007fa8' : '#000')};
+    }
 
     img {
       color: #fff !important;
     }
   `,
   IconWrapper: styled.span`
-    width: 23px;
-    height: 100%;
-    display: block;
-    position: absolute;
-    right: 12px;
-    top: 0;
-    bottom: 0;
-
-    svg {
+    @media screen and (max-width: 767px) {
       width: 23px;
-      height: 23px;
+      height: 100%;
+      display: block;
+      position: absolute;
+      right: 12px;
+      top: 0;
+      bottom: 0;
+
+      svg {
+        width: 23px;
+        height: 23px;
+      }
+    }
+    @media screen and (min-width: 768px) {
+      display: none;
     }
   `,
 };

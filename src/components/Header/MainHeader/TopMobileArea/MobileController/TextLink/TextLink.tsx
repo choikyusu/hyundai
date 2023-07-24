@@ -6,12 +6,13 @@ interface TextLinkProps {
 }
 
 export const TextLink = ({ headerType }: TextLinkProps) => {
-  if (headerType !== 'Menu') return null;
+  if (!['Menu', 'Web'].includes(headerType)) return null;
   return (
     <Styled.TextLink
       href="/kr/ko/e/vehicles/eco-incentive?utm_source=hyundaicom&amp;utm_medium=display&amp;utm_campaign=2023_quickwin&amp;utm_content=gnb_util"
       title="전기 · 수소차 보조금 조회"
       target="_blank"
+      $headerType={headerType}
     >
       전기 · 수소차 <b>보조금 조회</b>
     </Styled.TextLink>
@@ -19,9 +20,9 @@ export const TextLink = ({ headerType }: TextLinkProps) => {
 };
 
 const Styled = {
-  TextLink: styled(Link)`
+  TextLink: styled(Link)<{ $headerType: HeaderMenuType }>`
     position: relative;
-    color: #fff;
+    color: ${props => (props.$headerType === 'Menu' ? '#fff' : '#000')};
 
     &:after {
       content: '';
