@@ -21,13 +21,20 @@ export const Header = () => {
   );
 };
 
+interface NavigationBarProps {
+  $scrollPercentage: number;
+}
+
 const Styled = {
-  NavigationBar: styled.div<{ $scrollPercentage: number }>`
+  NavigationBar: styled.div.attrs<NavigationBarProps>(props => ({
+    style: {
+      width: `${props.$scrollPercentage}%`,
+    },
+  }))`
     position: fixed;
     top: 0;
     left: 0;
     display: block;
-    width: ${props => `${props.$scrollPercentage}%`};
     height: 5px;
     background-color: #007fa8;
     z-index: 99999;

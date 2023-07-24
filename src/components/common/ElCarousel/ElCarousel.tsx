@@ -18,58 +18,55 @@ interface ElCarouselProps {
     | readonly ReactElement<any, string | JSXElementConstructor<any>>[];
 }
 
-export const ElCarousel = ({
-  type,
-  isAutoSlide,
-  isArrowShow,
-  children,
-}: ElCarouselProps) => {
-  const {
-    showControl,
-    selectedIndex,
-    itemList,
-    onClickDot,
-    getRefWidth,
-    isPlay,
-    onClickPlay,
-    onClickArrow,
-  } = useElCarousel({
-    type,
-    isAutoSlide,
-    children,
-  });
+export const ElCarousel = React.memo(
+  ({ type, isAutoSlide, isArrowShow, children }: ElCarouselProps) => {
+    const {
+      showControl,
+      selectedIndex,
+      itemList,
+      onClickDot,
+      getRefWidth,
+      isPlay,
+      onClickPlay,
+      onClickArrow,
+    } = useElCarousel({
+      type,
+      isAutoSlide,
+      children,
+    });
 
-  const childrenWithWrap = React.Children.map(children, (child, index) => (
-    <ElCarouselItem key={index} type={type} itemList={itemList}>
-      {cloneElement(child, {
-        selected: index === selectedIndex,
-      })}
-    </ElCarouselItem>
-  ));
+    const childrenWithWrap = React.Children.map(children, (child, index) => (
+      <ElCarouselItem key={index} type={type} itemList={itemList}>
+        {cloneElement(child, {
+          selected: index === selectedIndex,
+        })}
+      </ElCarouselItem>
+    ));
 
-  return (
-    <Styled.ElCarousel $variant={VARIANT_STYLE.ElCarousel[type]}>
-      <Styled.ElCarouselContainer
-        $variant={VARIANT_STYLE.ElCarouselContainer[type]}
-        ref={getRefWidth}
-      >
-        <Styled.ElCarouselLayer>
-          {childrenWithWrap}
-          <ElArrow isShow={isArrowShow} onClickArrow={onClickArrow} />
-        </Styled.ElCarouselLayer>
-      </Styled.ElCarouselContainer>
-      <Indicator
-        type={type}
-        childrenCount={React.Children.count(children)}
-        onClickDot={onClickDot}
-        selectedIndex={selectedIndex}
-        isPlay={isPlay}
-        onClickPlay={onClickPlay}
-        showControl={showControl}
-      />
-    </Styled.ElCarousel>
-  );
-};
+    return (
+      <Styled.ElCarousel $variant={VARIANT_STYLE.ElCarousel[type]}>
+        <Styled.ElCarouselContainer
+          $variant={VARIANT_STYLE.ElCarouselContainer[type]}
+          ref={getRefWidth}
+        >
+          <Styled.ElCarouselLayer>
+            {childrenWithWrap}
+            <ElArrow isShow={isArrowShow} onClickArrow={onClickArrow} />
+          </Styled.ElCarouselLayer>
+        </Styled.ElCarouselContainer>
+        <Indicator
+          type={type}
+          childrenCount={React.Children.count(children)}
+          onClickDot={onClickDot}
+          selectedIndex={selectedIndex}
+          isPlay={isPlay}
+          onClickPlay={onClickPlay}
+          showControl={showControl}
+        />
+      </Styled.ElCarousel>
+    );
+  },
+);
 
 const VARIANT_STYLE = {
   ElCarousel: {

@@ -3,6 +3,7 @@ import { CSSProp, css, styled } from 'styled-components';
 import { MobileSearch } from './Search/MobileSearch/MobileSearch';
 import { TopMobileArea } from './TopMobileArea/TopMobileArea';
 import { Gnb } from './Gnb/Gnb';
+import React from 'react';
 
 interface MainHeaderProps {
   headerType: HeaderMenuType;
@@ -10,23 +11,24 @@ interface MainHeaderProps {
   isMovedScroll: boolean;
 }
 
-export const MainHeader = ({
-  isMovedScroll,
-  headerType,
-  onClickType,
-}: MainHeaderProps) => {
-  const headerStyles = HEADER_STYLE[headerType];
+export const MainHeader = React.memo(
+  ({ isMovedScroll, headerType, onClickType }: MainHeaderProps) => {
+    const headerStyles = HEADER_STYLE[headerType];
 
-  return (
-    <Styled.Header $headerStyles={headerStyles} $isMovedScroll={isMovedScroll}>
-      <Styled.InnerWrap>
-        <TopMobileArea headerType={headerType} onClickType={onClickType} />
-        <MobileSearch headerType={headerType} />
-        <Gnb headerType={headerType} />
-      </Styled.InnerWrap>
-    </Styled.Header>
-  );
-};
+    return (
+      <Styled.Header
+        $headerStyles={headerStyles}
+        $isMovedScroll={isMovedScroll}
+      >
+        <Styled.InnerWrap>
+          <TopMobileArea headerType={headerType} onClickType={onClickType} />
+          <MobileSearch headerType={headerType} />
+          <Gnb headerType={headerType} />
+        </Styled.InnerWrap>
+      </Styled.Header>
+    );
+  },
+);
 
 const Styled = {
   Header: styled(CommonStyled.Header)<{
