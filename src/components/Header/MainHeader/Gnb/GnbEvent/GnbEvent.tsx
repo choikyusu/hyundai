@@ -19,9 +19,15 @@ export const GnbEvent = () => {
 
 const Styled = {
   GnbEvent: styled.div`
-    position: relative;
-    padding: 25px 15px 10px;
-    background: #fff;
+    @media screen and (max-width: 767px) {
+      position: relative;
+      padding: 25px 15px 10px;
+      background: #fff;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   `,
   EventContent: styled.div``,
 };

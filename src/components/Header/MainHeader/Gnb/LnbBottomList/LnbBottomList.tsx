@@ -71,7 +71,13 @@ export const LnbBottomList = () => {
 
 const Styled = {
   LnbBottomList: styled.div`
-    margin-top: auto;
+    @media screen and (max-width: 767px) {
+      margin-top: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   `,
   List: styled.ul`
     display: flex;

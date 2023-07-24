@@ -1,4 +1,4 @@
-type HeaderMenuType = 'None' | 'Search' | 'Menu';
+type HeaderMenuType = 'None' | 'Search' | 'Menu' | 'Web';
 
 type LnbMenuTreeType = {
   name: string;

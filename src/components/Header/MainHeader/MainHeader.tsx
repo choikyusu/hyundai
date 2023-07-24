@@ -42,8 +42,27 @@ const Styled = {
     border-bottom: ${props =>
       props.$isMovedScroll ? '1px solid #e5e5e5' : 'none'};
     ${props => props.$headerStyles}
+
+    @media screen and (min-width: 768px) {
+      backdrop-filter: blur(5px);
+    }
   `,
-  InnerWrap: styled.div``,
+  InnerWrap: styled.div`
+    @media screen and (min-width: 768px) {
+      max-width: 1400px;
+      margin: 0 auto;
+
+      display: flex;
+      height: 80px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      max-width: 100%;
+      height: 64px;
+    }
+  `,
 };
 
 const HEADER_STYLE = {
@@ -52,4 +71,5 @@ const HEADER_STYLE = {
     background-color: #fff;
   `,
   Menu: css``,
+  Web: css``,
 };

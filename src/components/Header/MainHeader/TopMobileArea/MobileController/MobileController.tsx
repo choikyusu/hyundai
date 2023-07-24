@@ -36,6 +36,10 @@ const Styled = {
     display: flex;
     align-items: center;
     gap: 34px;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   `,
 
   ButtonWrapper: styled.div`
