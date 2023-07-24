@@ -21,17 +21,20 @@ export const TopMobileArea = ({
 
 const Styled = {
   TopMobileArea: styled.div<{ $areaStyle: CSSProp }>`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 99;
-    padding: 0 15px;
-    box-sizing: border-box;
-    width: 100%;
-    height: 55px;
-    border-bottom: 1px solid #ccc;
-    ${props => props.$areaStyle}
+    @media screen and (max-width: 767px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 99;
+      padding: 0 15px;
+      box-sizing: border-box;
+      width: 100%;
+      height: 55px;
+      background-color: #fff;
+      border-bottom: 1px solid #ccc;
+      ${props => props.$areaStyle}
+    }
   `,
 };
 
@@ -47,4 +50,5 @@ const AREA_STYLE = {
   Menu: css`
     background-color: #002c5f;
   `,
+  Web: css``,
 };

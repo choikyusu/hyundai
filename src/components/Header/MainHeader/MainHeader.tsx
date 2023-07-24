@@ -35,6 +35,18 @@ const Styled = {
     $headerStyles: CSSProp;
     $isMovedScroll: boolean;
   }>`
+    @media screen and (max-width: 767px) .header {
+      height: 55px;
+    }
+
+    @media screen and (min-width: 768px) {
+      position: relative;
+      top: 0;
+      width: 100%;
+      padding: 0 30px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
     position: fixed;
     top: 0;
     background: ${props =>
