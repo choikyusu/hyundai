@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useHeader = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [headerType, setHeaderType] = useState<HeaderMenuType>('None');
 
-  const onClickType = (type: HeaderMenuType) => {
+  const onClickType = useCallback((type: HeaderMenuType) => {
     setHeaderType(prev => {
       if (prev === type) return 'None';
       return type;
     });
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);
