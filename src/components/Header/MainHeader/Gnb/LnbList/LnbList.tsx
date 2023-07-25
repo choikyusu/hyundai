@@ -76,6 +76,10 @@ export const Styled = {
       color: ${props => (props.$isSelected ? '#007fa8' : '#000')};
     }
 
+    @media screen and (min-width: 768px) {
+      display: flex;
+    }
+
     img {
       color: #fff !important;
     }
