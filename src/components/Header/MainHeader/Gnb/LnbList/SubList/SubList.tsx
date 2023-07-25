@@ -170,7 +170,7 @@ const Styled = {
       width: 18.29%;
       padding: 8px 0;
       display: block;
-      color: #000;
+      color: ${props => (props.$isSelected ? '#007fa8;' : '#000')};
       font-family: 'HyundaiSansHeadKR';
       font-size: 16px;
       line-height: 30px;
