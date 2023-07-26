@@ -30,14 +30,15 @@ export const CarList = ({ isShow, subList }: CarListProps) => {
       ))}
     </Styled.CarList>
   ) : (
-    <ElCarousel type="Events" isAutoSlide={false} isArrowShow>
-      <div>aaaa</div>
-      <div>aaaa</div>
-      <div>aaaa</div>
-      <div>aaaa</div>
-      <div>aaaa</div>
-      <div>aaaa</div>
-    </ElCarousel>
+    <Styled.ElCarouselWrapper>
+      <ElCarousel type="CarList" isAutoSlide={false} isArrowShow>
+        <Styled.CarList $isShow={isShow}>
+          {subList.map((item, index) => (
+            <Car key={index} {...item} />
+          ))}
+        </Styled.CarList>
+      </ElCarousel>
+    </Styled.ElCarouselWrapper>
   );
 };
 
@@ -47,5 +48,21 @@ const Styled = {
     padding: 0 15px;
     background-color: #fff !important;
     flex-wrap: wrap;
+  `,
+  ElCarouselWrapper: styled.div`
+    overflow-y: hidden;
+    height: 0;
+
+    position: absolute;
+    top: 0;
+    left: 18.29%;
+    margin: 18px 0 0;
+    padding: 0 4% 0 6.43%;
+    width: 80%;
+    height: 100%;
+
+    left: 165px;
+    padding: 0 2% 0 4%;
+    width: calc(100% - 152px);
   `,
 };
