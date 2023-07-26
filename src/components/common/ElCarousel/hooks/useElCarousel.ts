@@ -20,6 +20,7 @@ export const useElCarousel = ({
   children,
 }: useElCarouselProps) => {
   const showControl = type === 'Main';
+  const [windowSize, setWindowSize] = useState<WindowSizeType>('Small');
   const [width, setWidth] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isPlay, setIsPlay] = useState(() => isAutoSlide);
@@ -42,12 +43,14 @@ export const useElCarousel = ({
     itemList,
     isPlay,
     selectedIndex,
+    windowSize,
     getRefWidth,
     onClickDot,
     onClickPlay,
     onClickArrow,
   };
 
+  // inner function
   function getNextIndex() {
     return selectedIndex >= React.Children.count(children) - 1
       ? 0
@@ -66,6 +69,13 @@ export const useElCarousel = ({
   }
 
   function onResize() {
+    setWindowSize(
+      (() => {
+        if (window.innerWidth <= 767) return 'Small';
+        if (window.innerWidth <= 1024) return 'Medium';
+        return 'Large';
+      })(),
+    );
     setWidth(el?.offsetWidth || 0);
   }
 

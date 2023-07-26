@@ -6,7 +6,13 @@ type FluidType = {
   subText: { text: string; color: string };
 };
 
-type ElCarouselType = 'Main' | 'GnbEvent' | 'ModelSection' | 'Brand' | 'Events';
+type ElCarouselType =
+  | 'Main'
+  | 'GnbEvent'
+  | 'ModelSection'
+  | 'Brand'
+  | 'Events'
+  | 'CarList';
 
 type AgeBaseModelType = {
   text: string;
@@ -51,3 +57,5 @@ type EventType = {
   subTitle: string;
   date: string;
 };
+
+type WindowSizeType = 'Small' | 'Medium' | 'Large';

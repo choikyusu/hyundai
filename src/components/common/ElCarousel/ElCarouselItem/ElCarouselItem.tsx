@@ -38,6 +38,9 @@ const VARIANT_STYLE = {
     `,
     Brand: css``,
     Events: css``,
+    CarList: css`
+      height: 100%;
+    `,
   },
   ElCarouselGroupList: {
     Main: css`
@@ -51,6 +54,9 @@ const VARIANT_STYLE = {
     `,
     Brand: css``,
     Events: css``,
+    CarList: css`
+      height: 100%;
+    `,
   },
   ElCarouselUnit: {
     Main: css`
@@ -62,6 +68,9 @@ const VARIANT_STYLE = {
     `,
     Brand: css``,
     Events: css``,
+    CarList: css`
+      height: 100%;
+    `,
   },
 };
 
