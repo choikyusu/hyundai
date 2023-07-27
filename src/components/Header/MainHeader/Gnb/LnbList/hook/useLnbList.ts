@@ -21,7 +21,10 @@ export const useLnbList = () => {
   };
 
   const isLv1Selected = (index: number) => level1 === index;
-  const isLv2Selected = (index: number) => level2 === index;
+  const isLv2Selected = (index: number, type?: 'Car' | 'Menu') => {
+    if (isMobile()) return level2 === index;
+    return type === 'Menu' ? false : level2 === index;
+  };
 
   return {
     level1,

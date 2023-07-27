@@ -7,7 +7,7 @@ import { MobileButtonDetail } from './MobileButtonDetail/MobileButtonDetail';
 interface SubListProps {
   isShow: boolean;
   subList: LnbMenuTreeType['level2List'];
-  isLv2Selected: (index: number) => boolean;
+  isLv2Selected: (index: number, type?: 'Car' | 'Menu') => boolean;
   onLevel2Click: (index: number) => void;
 }
 
@@ -25,7 +25,10 @@ export const SubList = ({
         );
       case 'Menu':
         return (
-          <MenuList subList={item.level3List} isShow={isLv2Selected(index)} />
+          <MenuList
+            subList={item.level3List}
+            isShow={isLv2Selected(index, item.type)}
+          />
         );
       default:
         return null;
@@ -41,12 +44,17 @@ export const SubList = ({
               {subList.map((item, index) => (
                 <Styled.SubMenuItem
                   key={index}
+                  $type={item.type}
                   onClick={() => onLevel2Click(index)}
                 >
-                  <Styled.ModelButton $isSelected={isLv2Selected(index)}>
+                  <Styled.ModelButton
+                    $isSelected={isLv2Selected(index, item.type)}
+                  >
                     {item.name}
                   </Styled.ModelButton>
-                  <MobileButtonDetail isShow={isLv2Selected(index)} />
+                  <MobileButtonDetail
+                    isShow={isLv2Selected(index, item.type)}
+                  />
                   {childrenList(item, index)}
                 </Styled.SubMenuItem>
               ))}
@@ -117,9 +125,11 @@ const Styled = {
       padding-left: 0;
     }
   `,
-  SubMenuItem: styled.li`
+  SubMenuItem: styled.li<{ $type: 'Car' | 'Menu' }>`
     @media screen and (min-width: 768px) {
       list-style: none;
+
+      ${props => props.$type === 'Menu' && 'display: flex'};
     }
 
     @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -130,7 +140,7 @@ const Styled = {
     }
 
     @media screen and (min-width: 768px) and (max-width: 1024px) {
-      width: 165px;
+      width: ${props => (props.$type === 'Car' ? '165px' : '100%')};
     }
 
     @media screen and (max-width: 767px) {
