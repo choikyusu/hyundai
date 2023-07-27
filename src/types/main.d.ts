@@ -58,4 +58,4 @@ type EventType = {
   date: string;
 };
 
-type WindowSizeType = 'Small' | 'Medium' | 'Large';
+type ViewportSizeType = 'Small' | 'Medium' | 'Large';

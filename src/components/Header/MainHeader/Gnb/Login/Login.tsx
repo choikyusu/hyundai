@@ -2,29 +2,17 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { BUTTON_STYLE } from './styles/buttonStyle';
-import { useEffect, useState } from 'react';
 import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
 import { TextLink } from '../../TopMobileArea/MobileController/TextLink/TextLink';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 export const Login = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 767);
-  };
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 767);
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const { isMobile } = useViewportSize();
 
   return (
     <Styled.UtilWrapper>
       <Styled.Util>
-        {isMobile && (
+        {isMobile() && (
           <>
             <Styled.ItemUtil>
               <Styled.MobileLoginButton href="/kr/ko/login" title="개인 로그인">
@@ -43,7 +31,7 @@ export const Login = () => {
             </Styled.ItemUtil>
           </>
         )}
-        {!isMobile && (
+        {!isMobile() && (
           <>
             <TextLink headerType="Web" />
             <Styled.ItemUtil>
