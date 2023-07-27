@@ -86,5 +86,9 @@ const Styled = {
         transform: rotate(45deg);
       }
     }
+
+    @media screen and (min-width: 1024px) {
+      display: none;
+    }
   `,
 };

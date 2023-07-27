@@ -177,12 +177,16 @@ const Styled = {
       letter-spacing: -0.4px;
     }
 
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
+
     @media screen and (min-width: 768px) and (max-width: 1024px) {
       width: 165px;
       font-size: 15px;
     }
 
-    @media screen and (min-width: 768px) and (max-width: 1024px) {
+    @media screen and (min-width: 768px) {
       text-align: left;
     }
   `,
