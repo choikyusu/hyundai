@@ -3,16 +3,20 @@ import { LnbList } from './LnbList/LnbList';
 import { Login } from './Login/Login';
 import { GnbEvent } from './GnbEvent/GnbEvent';
 import { LnbBottomList } from './LnbBottomList/LnbBottomList';
+import { useState } from 'react';
 
 interface MobileSearchProps {
   headerType: HeaderMenuType;
 }
 
 export const Gnb = ({ headerType }: MobileSearchProps) => {
+  const [el, setEl] = useState<HTMLDivElement | null>(null);
+
   return (
     <Styled.GnbWrapper $isShow={headerType === 'Menu'}>
+      <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
-        <LnbList />
+        <LnbList el={el} />
         <Login />
         <GnbEvent />
         <LnbBottomList />
@@ -22,6 +26,23 @@ export const Gnb = ({ headerType }: MobileSearchProps) => {
 };
 
 const Styled = {
+  MenuBar: styled.span`
+    @media screen and (min-width: 768px) {
+      position: absolute;
+      bottom: 0;
+      height: 4px;
+      background-color: #002c5f;
+      opacity: 0;
+      transition:
+        left 0.4s ease,
+        width 0.4s ease,
+        opacity 0.4s ease;
+    }
+
+    opacity: 1;
+    width: 23px;
+    left: 191px;
+  `,
   GnbWrapper: styled.div<{ $isShow: boolean }>`
     @media screen and (max-width: 767px) {
       position: fixed;

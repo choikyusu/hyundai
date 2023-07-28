@@ -7,9 +7,19 @@ import { lnbMenuTreeList } from './data/data';
 import { useLnbList } from './hook/useLnbList';
 import { Shop } from './Additional/Shop';
 
-export const LnbList = () => {
-  const { onLevel1Click, onLevel2Click, isLv1Selected, isLv2Selected } =
-    useLnbList();
+export interface LnbListProps {
+  el: HTMLDivElement | null;
+}
+
+export const LnbList = ({ el }: LnbListProps) => {
+  const {
+    itemList,
+    onLevel1Click,
+    onLevel2Click,
+    onClickCloseButton,
+    isLv1Selected,
+    isLv2Selected,
+  } = useLnbList({ el });
 
   return (
     <Styled.LnbList>
@@ -18,6 +28,7 @@ export const LnbList = () => {
           <Styled.LnbMainButton
             $isSelected={isLv1Selected(index)}
             onClick={() => onLevel1Click(index)}
+            ref={(el: HTMLButtonElement) => el && itemList.push(el)}
           >
             {lnb.name}
             <Styled.IconWrapper>
@@ -29,6 +40,7 @@ export const LnbList = () => {
             isShow={isLv1Selected(index)}
             onLevel2Click={onLevel2Click}
             isLv2Selected={isLv2Selected}
+            onClickCloseButton={onClickCloseButton}
           />
         </Styled.LnbItem>
       ))}
