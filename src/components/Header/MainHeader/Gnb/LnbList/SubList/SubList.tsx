@@ -9,6 +9,7 @@ interface SubListProps {
   subList: LnbMenuTreeType['level2List'];
   isLv2Selected: (index: number, type?: 'Car' | 'Menu') => boolean;
   onLevel2Click: (index: number) => void;
+  onClickCloseButton: () => void;
 }
 
 export const SubList = ({
@@ -16,6 +17,7 @@ export const SubList = ({
   subList,
   isLv2Selected,
   onLevel2Click,
+  onClickCloseButton,
 }: SubListProps) => {
   const childrenList = (item: Level2Type, index: number) => {
     switch (item.type) {
@@ -61,6 +63,7 @@ export const SubList = ({
             </Styled.SubMenuList>
           </Styled.ModelInfo>
         </Styled.SubList>
+        <Styled.CloseButton onClick={onClickCloseButton} />
       </Styled.SubContents>
     </Styled.SubWrapper>
   );
@@ -103,6 +106,61 @@ const Styled = {
 
     @media screen and (max-width: 767px) {
       display: ${props => (props.$isShow ? 'block' : 'none')};
+    }
+  `,
+  CloseButton: styled(CommonStyled.Button)`
+    @media screen and (min-width: 768px) {
+      outline: none;
+      border: none;
+    }
+
+    @media screen and (min-width: 768px) {
+      position: relative;
+      display: block;
+      width: 50px;
+      height: 50px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    @media screen and (min-width: 768px) {
+      position: absolute;
+      top: 3px;
+      right: 15px;
+    }
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+
+    &:before {
+      transform: rotate(-45deg);
+
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 1px;
+      margin: -0.5px 0 0 -12px;
+      background-color: #000;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 1px;
+      margin: -0.5px 0 0 -12px;
+      background-color: #000;
+
+      transform: rotate(45deg);
     }
   `,
   SubList: styled.div``,
