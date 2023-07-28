@@ -3,6 +3,8 @@ import { styled } from 'styled-components';
 import { CarList } from './CarList/CarList';
 import { MenuList } from './MenuList/MenuList';
 import { MobileButtonDetail } from './MobileButtonDetail/MobileButtonDetail';
+import { GnbEvent } from '../../GnbEvent/GnbEvent';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 interface SubListProps {
   isShow: boolean;
@@ -19,6 +21,8 @@ export const SubList = ({
   onLevel2Click,
   onClickCloseButton,
 }: SubListProps) => {
+  const { isMobile } = useViewportSize();
+
   const childrenList = (item: Level2Type, index: number) => {
     switch (item.type) {
       case 'Car':
@@ -65,6 +69,7 @@ export const SubList = ({
         </Styled.SubList>
         <Styled.CloseButton onClick={onClickCloseButton} />
       </Styled.SubContents>
+      <GnbEvent isShow={!isMobile()} />
     </Styled.SubWrapper>
   );
 };

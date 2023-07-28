@@ -73,6 +73,7 @@ const Styled = {
   LnbBottomList: styled.div`
     @media screen and (max-width: 767px) {
       margin-top: auto;
+      order: 4;
     }
 
     @media screen and (min-width: 768px) {
@@ -80,34 +81,40 @@ const Styled = {
     }
   `,
   List: styled.ul`
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: auto;
+    @media screen and (max-width: 767px) {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: auto;
+    }
   `,
   Item: styled.li`
-    width: 50%;
-    text-align: center;
-    border-top: 1px solid #cac6c4;
+    @media screen and (max-width: 767px) {
+      width: 50%;
+      text-align: center;
+      border-top: 1px solid #cac6c4;
+    }
   `,
   Link: styled(Link)<{ $backgroundImage: CSSProp }>`
-    ${props => props.$backgroundImage}
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 60px;
-    padding-left: 33px;
-    border-top: 1px solid #fff;
-    background-color: #f6f3f2;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 13px;
-    line-height: 21px;
-    letter-spacing: -0.4px;
-    color: #444;
-    background-repeat: no-repeat;
-    background-position: calc(50% - 53px) 50%;
-    background-size: 22px;
+    @media screen and (max-width: 767px) {
+      ${props => props.$backgroundImage}
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 60px;
+      padding-left: 33px;
+      border-top: 1px solid #fff;
+      background-color: #f6f3f2;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 13px;
+      line-height: 21px;
+      letter-spacing: -0.4px;
+      color: #444;
+      background-repeat: no-repeat;
+      background-position: calc(50% - 53px) 50%;
+      background-size: 22px;
+    }
   `,
 };

@@ -3,9 +3,13 @@ import { ElCarousel } from '../../../../common/ElCarousel/ElCarousel';
 import { eventList } from './data/data';
 import { Event } from './Event/Event';
 
-export const GnbEvent = () => {
+interface GnbEventProps {
+  isShow: boolean;
+}
+
+export const GnbEvent = ({ isShow }: GnbEventProps) => {
   return (
-    <Styled.GnbEvent>
+    <Styled.GnbEvent $isShow={isShow}>
       <Styled.EventContent>
         <ElCarousel type="GnbEvent" isAutoSlide={false} isArrowShow={false}>
           {eventList.map((event, index) => (
@@ -18,15 +22,15 @@ export const GnbEvent = () => {
 };
 
 const Styled = {
-  GnbEvent: styled.div`
+  GnbEvent: styled.div<{ $isShow: boolean }>`
+    display: ${props => (props.$isShow ? 'block' : 'none')};
+
     @media screen and (max-width: 767px) {
       position: relative;
+      flex: 1;
+      order: 3;
       padding: 25px 15px 10px;
       background: #fff;
-    }
-
-    @media screen and (min-width: 768px) {
-      display: none;
     }
   `,
   EventContent: styled.div``,
