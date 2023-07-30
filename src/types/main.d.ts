@@ -59,3 +59,10 @@ type EventType = {
 };
 
 type ViewportSizeType = 'Small' | 'Medium' | 'Large';
+
+type LanguageType = {
+  name: string;
+  pageUrl: string;
+};
+
+type DropdownListType = LanguageType[];

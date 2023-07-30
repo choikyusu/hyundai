@@ -5,9 +5,18 @@ import { BUTTON_STYLE } from './styles/buttonStyle';
 import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
 import { TextLink } from '../../TopMobileArea/MobileController/TextLink/TextLink';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
+import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
+import { useState } from 'react';
+import { languageList } from '@/src/datas/language.data';
 
 export const Login = () => {
   const { isMobile } = useViewportSize();
+
+  const [language, setLanguage] = useState('KR');
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickLanguage = () => {
+    setIsOpen(prev => !prev);
+  };
 
   return (
     <Styled.UtilWrapper>
@@ -25,9 +34,12 @@ export const Login = () => {
               </Styled.MobileLoginButton>
             </Styled.ItemUtil>
             <Styled.ItemUtil>
-              <Styled.LanguageButton title="언어 선택">
-                KR
-              </Styled.LanguageButton>
+              <SelectButton
+                selectedItem={language}
+                list={languageList}
+                isOpen={isOpen}
+                onClick={onClickLanguage}
+              />
             </Styled.ItemUtil>
           </>
         )}
@@ -35,9 +47,12 @@ export const Login = () => {
           <>
             <TextLink headerType="Web" />
             <Styled.ItemUtil>
-              <Styled.LanguageButton title="언어 선택">
-                KR
-              </Styled.LanguageButton>
+              <SelectButton
+                selectedItem={language}
+                list={languageList}
+                isOpen={isOpen}
+                onClick={onClickLanguage}
+              />
             </Styled.ItemUtil>
             <Styled.Divide />
             <Styled.LoginButton />
@@ -106,9 +121,6 @@ const Styled = {
     }
   `,
   MobileLoginButton: styled(Link)`
-    ${BUTTON_STYLE}
-  `,
-  LanguageButton: styled(CommonStyled.Button)`
     ${BUTTON_STYLE}
   `,
   Divide: styled.div`
