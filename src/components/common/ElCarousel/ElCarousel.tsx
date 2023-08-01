@@ -24,9 +24,10 @@ export const ElCarousel = React.memo(
       showControl,
       selectedIndex,
       itemList,
-      onClickDot,
-      getRefWidth,
       isPlay,
+      isSelected,
+      getRefWidth,
+      onClickDot,
       onClickPlay,
       onClickArrow,
     } = useElCarousel({
@@ -38,7 +39,7 @@ export const ElCarousel = React.memo(
     const childrenWithWrap = React.Children.map(children, (child, index) => (
       <ElCarouselItem key={index} type={type} itemList={itemList}>
         {cloneElement(child, {
-          selected: index === selectedIndex,
+          selected: isSelected(index),
         })}
       </ElCarouselItem>
     ));
