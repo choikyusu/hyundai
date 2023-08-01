@@ -38,12 +38,17 @@ export const useElCarousel = ({
     getUseElCarouselEventProps(),
   );
 
+  const isSelected = (index: number) => {
+    return index === selectedIndex;
+  };
+
   return {
     showControl,
     itemList,
     isPlay,
     selectedIndex,
     getRefWidth,
+    isSelected,
     onClickDot,
     onClickPlay,
     onClickArrow,
