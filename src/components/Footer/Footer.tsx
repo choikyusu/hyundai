@@ -24,8 +24,8 @@ export const Footer = () => {
             </Styled.Title>
             {isShow && (
               <Styled.MenuListCompany>
-                {footerDataList.map(footerData => (
-                  <Styled.WrapCategory>
+                {footerDataList.map((footerData, index) => (
+                  <Styled.WrapCategory key={index}>
                     <Styled.MenuCategory>
                       {footerData.Title}
                     </Styled.MenuCategory>
@@ -52,8 +52,8 @@ export const Footer = () => {
               </Styled.FooterLogo>
               <Styled.Menu>
                 <Styled.SubMenuList>
-                  {FooterMenuList.map(menu => (
-                    <Styled.SubMenuItem>
+                  {FooterMenuList.map((menu, index) => (
+                    <Styled.SubMenuItem key={index}>
                       <Styled.Link href="" $color={menu.title.color}>
                         {menu.title.text}
                       </Styled.Link>
