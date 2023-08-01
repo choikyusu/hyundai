@@ -22,8 +22,8 @@ export const SelectButton = ({
       </Styled.SelectButton>
       <Styled.ListWrap $isOpen={isOpen}>
         <Styled.DropdownList>
-          {list.map(item => (
-            <Styled.DropdownItem>
+          {list.map((item, index) => (
+            <Styled.DropdownItem key={index}>
               <Styled.Link href={item.pageUrl}>{item.name}</Styled.Link>
             </Styled.DropdownItem>
           ))}
