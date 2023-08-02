@@ -63,13 +63,6 @@ export const useElCarousel = ({
   };
 
   const getPageCount = () => {
-    console.log(
-      type,
-      config?.contentCountBySlide,
-      Math.floor(
-        React.Children.count(children) / (config?.contentCountBySlide || 1),
-      ),
-    );
     return Math.floor(
       React.Children.count(children) / (config?.contentCountBySlide || 1),
     );
