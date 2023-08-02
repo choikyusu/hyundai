@@ -1,48 +1,48 @@
 import { CSSProp, css, styled } from 'styled-components';
 import { ElCarouselItem } from './ElCarouselItem/ElCarouselItem';
-import React, {
-  JSXElementConstructor,
-  ReactElement,
-  cloneElement,
-} from 'react';
+import React from 'react';
 import { Indicator } from './Indicator/Indicator';
 import { useElCarousel } from './hooks/useElCarousel';
 import { ElArrow } from './ElArrow/ElArrow';
 
 interface ElCarouselProps {
   type: ElCarouselType;
-  isArrowShow: boolean;
-  isAutoSlide: boolean;
-  children:
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | readonly ReactElement<any, string | JSXElementConstructor<any>>[];
+  config?: ElCarouselConfigType;
+  children: ChildrenType | readonly ChildrenType[];
 }
 
 export const ElCarousel = React.memo(
-  ({ type, isAutoSlide, isArrowShow, children }: ElCarouselProps) => {
+  ({ type, config, children }: ElCarouselProps) => {
     const {
       showControl,
       selectedIndex,
       itemList,
       isPlay,
-      isSelected,
       getRefWidth,
+      getPageCount,
       onClickDot,
       onClickPlay,
       onClickArrow,
+      splitChildrenIntoChunks,
     } = useElCarousel({
       type,
-      isAutoSlide,
+      config,
       children,
     });
 
-    const childrenWithWrap = React.Children.map(children, (child, index) => (
-      <ElCarouselItem key={index} type={type} itemList={itemList}>
-        {cloneElement(child, {
-          selected: isSelected(index),
-        })}
-      </ElCarouselItem>
-    ));
+    const childrenWithWrap = () => {
+      const chunks: ChildrenType[][] = splitChildrenIntoChunks();
+      return chunks.map((arr, index) => (
+        <ElCarouselItem
+          key={index}
+          type={type}
+          itemList={itemList}
+          rowCount={config?.style?.gridRowCount}
+        >
+          {arr}
+        </ElCarouselItem>
+      ));
+    };
 
     return (
       <Styled.ElCarousel $variant={VARIANT_STYLE.ElCarousel[type]}>
@@ -51,13 +51,17 @@ export const ElCarousel = React.memo(
           ref={getRefWidth}
         >
           <Styled.ElCarouselLayer>
-            {childrenWithWrap}
-            <ElArrow isShow={isArrowShow} onClickArrow={onClickArrow} />
+            {childrenWithWrap()}
+            <ElArrow
+              childrenCount={getPageCount()}
+              isShow={config?.showArrow || false}
+              onClickArrow={onClickArrow}
+            />
           </Styled.ElCarouselLayer>
         </Styled.ElCarouselContainer>
         <Indicator
           type={type}
-          childrenCount={React.Children.count(children)}
+          childrenCount={getPageCount()}
           onClickDot={onClickDot}
           selectedIndex={selectedIndex}
           isPlay={isPlay}

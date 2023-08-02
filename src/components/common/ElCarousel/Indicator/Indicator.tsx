@@ -21,6 +21,7 @@ export const Indicator = ({
   onClickPlay,
   showControl,
 }: IndicatorProps) => {
+  if (childrenCount === 1) return null;
   return (
     <Styled.ElCarouselIndicatorList
       $variant={VARIANT_STYLE.ElCarouselIndicatorList[type]}

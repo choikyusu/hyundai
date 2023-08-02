@@ -5,12 +5,17 @@ import { Car } from './Car/Car';
 export const PCCarListStrategy = ({ isShow, subList }: CarListProps) => {
   return (
     <Styled.ElCarouselWrapper $isShow={isShow}>
-      <ElCarousel type="CarList" isAutoSlide={false} isArrowShow>
-        <Styled.CarList>
-          {subList.map((item, index) => (
-            <Car key={index} {...item} />
-          ))}
-        </Styled.CarList>
+      <ElCarousel
+        type="CarList"
+        config={{
+          showArrow: true,
+          contentCountBySlide: 6,
+          style: { gridRowCount: 3 },
+        }}
+      >
+        {subList.map((item, index) => (
+          <Car key={index} {...item} />
+        ))}
       </ElCarousel>
     </Styled.ElCarouselWrapper>
   );

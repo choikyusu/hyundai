@@ -7,7 +7,7 @@ import { Fluid } from './Fluid/Fluid';
 export const SlideMainBanner = () => {
   return (
     <Styled.KeyVisualWrapper>
-      <ElCarousel type="Main" isAutoSlide isArrowShow={false}>
+      <ElCarousel type="Main" config={{ autoSlide: true }}>
         {fluidList.map((fluid, index) => (
           <Fluid key={index} fluid={fluid} />
         ))}

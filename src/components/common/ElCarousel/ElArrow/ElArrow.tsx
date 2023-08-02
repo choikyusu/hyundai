@@ -4,11 +4,16 @@ import { styled } from 'styled-components';
 
 interface ElArrowProps {
   isShow: boolean;
+  childrenCount: number;
   onClickArrow: (direction: DirectionType) => void;
 }
 
-export const ElArrow = ({ isShow, onClickArrow }: ElArrowProps) => {
-  if (!isShow) return null;
+export const ElArrow = ({
+  isShow,
+  childrenCount,
+  onClickArrow,
+}: ElArrowProps) => {
+  if (!isShow || childrenCount === 1) return null;
   return (
     <>
       <Styled.ElArrow $isLeft onClick={() => onClickArrow('Left')}>
