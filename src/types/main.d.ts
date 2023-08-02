@@ -70,11 +70,11 @@ type LanguageType = {
 type DropdownListType = LanguageType[];
 
 type ElCarouselConfigType = {
-  contentCountBySlide?: number;
+  contentCountBySlide?: { small: number; medium: number; large: number };
   showArrow?: boolean;
   autoSlide?: boolean;
 
   style?: {
-    gridRowCount?: number;
+    gridRowCount?: { small: number; medium: number; large: number };
   };
 };

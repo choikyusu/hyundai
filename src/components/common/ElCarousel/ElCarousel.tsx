@@ -18,6 +18,7 @@ export const ElCarousel = React.memo(
       selectedIndex,
       itemList,
       isPlay,
+      getGridRowCount,
       getRefWidth,
       getPageCount,
       onClickDot,
@@ -37,7 +38,7 @@ export const ElCarousel = React.memo(
           key={index}
           type={type}
           itemList={itemList}
-          rowCount={config?.style?.gridRowCount}
+          rowCount={getGridRowCount()}
         >
           {arr}
         </ElCarouselItem>
