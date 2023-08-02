@@ -9,8 +9,8 @@ export const PCCarListStrategy = ({ isShow, subList }: CarListProps) => {
         type="CarList"
         config={{
           showArrow: true,
-          contentCountBySlide: 6,
-          style: { gridRowCount: 3 },
+          contentCountBySlide: { small: 6, medium: 6, large: 6 },
+          style: { gridRowCount: { small: 3, medium: 3, large: 3 } },
         }}
       >
         {subList.map((item, index) => (

@@ -10,6 +10,7 @@ import React, {
 } from 'react';
 import { useElCarouselEvent } from './useElCarouselEvent';
 import { useElCarouselEffect } from './useElCarouselEffect';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 interface useElCarouselProps {
   type: ElCarouselType;
@@ -37,6 +38,7 @@ export const useElCarousel = ({
     setEl(el);
   };
 
+  const { viewportSize } = useViewportSize();
   useElCarouselEffect(getUseElCarouselEffectProps());
 
   const { onClickArrow, onClickDot, onClickPlay } = useElCarouselEvent(
@@ -47,7 +49,7 @@ export const useElCarousel = ({
     const childrenArray = React.Children.toArray(children) as ChildrenType[];
 
     return childrenArray.reduce((result: ChildrenType[][], current, index) => {
-      const chunkIndex = Math.floor(index / (config?.contentCountBySlide || 1));
+      const chunkIndex = Math.floor(index / getContentCountBySilde());
 
       if (!result[chunkIndex]) {
         result[chunkIndex] = [];
@@ -64,8 +66,21 @@ export const useElCarousel = ({
 
   const getPageCount = () => {
     return Math.floor(
-      React.Children.count(children) / (config?.contentCountBySlide || 1),
+      React.Children.count(children) / getContentCountBySilde(),
     );
+  };
+
+  const getGridRowCount = () => {
+    switch (viewportSize) {
+      case 'Small':
+        return config?.style?.gridRowCount?.small || 1;
+      case 'Medium':
+        return config?.style?.gridRowCount?.medium || 1;
+      case 'Large':
+        return config?.style?.gridRowCount?.large || 1;
+      default:
+        return 1;
+    }
   };
 
   return {
@@ -73,6 +88,7 @@ export const useElCarousel = ({
     itemList,
     isPlay,
     selectedIndex,
+    getGridRowCount,
     getRefWidth,
     getPageCount,
     onClickDot,
@@ -80,6 +96,19 @@ export const useElCarousel = ({
     onClickArrow,
     splitChildrenIntoChunks,
   };
+
+  function getContentCountBySilde() {
+    switch (viewportSize) {
+      case 'Small':
+        return config?.contentCountBySlide?.small || 1;
+      case 'Medium':
+        return config?.contentCountBySlide?.medium || 1;
+      case 'Large':
+        return config?.contentCountBySlide?.large || 1;
+      default:
+        return 1;
+    }
+  }
 
   // inner function
   function getNextIndex() {
