@@ -3,12 +3,14 @@ import { CSSProp, css, styled } from 'styled-components';
 interface ElCarouselItemProps {
   type: ElCarouselType;
   itemList: HTMLDivElement[];
+  rowCount?: number;
   children: React.ReactNode;
 }
 
 export const ElCarouselItem = ({
   type,
   itemList,
+  rowCount,
   children,
 }: ElCarouselItemProps) => {
   return (
@@ -19,7 +21,10 @@ export const ElCarouselItem = ({
       <Styled.ElCarouselGroupList
         $variant={VARIANT_STYLE.ElCarouselGroupList[type]}
       >
-        <Styled.ElCarouselUnit $variant={VARIANT_STYLE.ElCarouselUnit[type]}>
+        <Styled.ElCarouselUnit
+          $variant={VARIANT_STYLE.ElCarouselUnit[type]}
+          $rowCount={rowCount}
+        >
           {children}
         </Styled.ElCarouselUnit>
       </Styled.ElCarouselGroupList>
@@ -94,8 +99,15 @@ const Styled = {
 
     ${props => props.$variant}
   `,
-  ElCarouselUnit: styled.li<{ $variant: CSSProp }>`
+  ElCarouselUnit: styled.li<{ $variant: CSSProp; $rowCount?: number }>`
     width: 100%;
+
+    ${props => props.$rowCount && 'display: grid;'}
+    ${props =>
+      props.$rowCount &&
+      `grid-template-columns: repeat(${props.$rowCount}, 1fr);`}
+    ${props => props.$rowCount && 'grid-gap: 2.55%;'}
+    ${props => props.$rowCount && 'gap: 2.55%;'}
 
     ${props => props.$variant}
   `,

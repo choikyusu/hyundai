@@ -14,7 +14,7 @@ export const EventSection = () => {
       ]}
     >
       <Styled.SectionBody>
-        <ElCarousel type="Events" isAutoSlide={false} isArrowShow>
+        <ElCarousel type="Events" config={{ showArrow: true }}>
           {eventList.map((event, index) => (
             <Event key={index} event={event} />
           ))}

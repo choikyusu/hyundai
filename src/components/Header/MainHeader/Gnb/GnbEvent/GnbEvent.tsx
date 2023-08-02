@@ -11,7 +11,10 @@ export const GnbEvent = ({ isShow }: GnbEventProps) => {
   return (
     <Styled.GnbEvent $isShow={isShow}>
       <Styled.EventContent>
-        <ElCarousel type="GnbEvent" isAutoSlide={false} isArrowShow={false}>
+        <ElCarousel
+          type="GnbEvent"
+          config={{ contentCountBySlide: 3, style: { gridRowCount: 3 } }}
+        >
           {eventList.map((event, index) => (
             <Event key={index} event={event} />
           ))}

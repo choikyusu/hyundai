@@ -60,9 +60,21 @@ type EventType = {
 
 type ViewportSizeType = 'Small' | 'Medium' | 'Large';
 
+type ChildrenType = ReactElement<any, string | JSXElementConstructor<any>>;
+
 type LanguageType = {
   name: string;
   pageUrl: string;
 };
 
 type DropdownListType = LanguageType[];
+
+type ElCarouselConfigType = {
+  contentCountBySlide?: number;
+  showArrow?: boolean;
+  autoSlide?: boolean;
+
+  style?: {
+    gridRowCount?: number;
+  };
+};

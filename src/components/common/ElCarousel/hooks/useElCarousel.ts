@@ -2,13 +2,18 @@ import {
   addCaroselAnimation,
   calcCaroselTransform,
 } from '@/src/services/carousel.service';
-import React, { JSXElementConstructor, ReactElement, useState } from 'react';
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  cloneElement,
+  useState,
+} from 'react';
 import { useElCarouselEvent } from './useElCarouselEvent';
 import { useElCarouselEffect } from './useElCarouselEffect';
 
 interface useElCarouselProps {
   type: ElCarouselType;
-  isAutoSlide: boolean;
+  config?: ElCarouselConfigType;
   children:
     | ReactElement<any, string | JSXElementConstructor<any>>
     | readonly ReactElement<any, string | JSXElementConstructor<any>>[];
@@ -16,14 +21,14 @@ interface useElCarouselProps {
 
 export const useElCarousel = ({
   type,
-  isAutoSlide,
+  config,
   children,
 }: useElCarouselProps) => {
   const showControl = type === 'Main';
 
   const [width, setWidth] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isPlay, setIsPlay] = useState(() => isAutoSlide);
+  const [isPlay, setIsPlay] = useState(() => config?.autoSlide || false);
   const [el, setEl] = useState<HTMLDivElement | null>(null);
   const itemList: HTMLDivElement[] = [];
 
@@ -38,8 +43,36 @@ export const useElCarousel = ({
     getUseElCarouselEventProps(),
   );
 
-  const isSelected = (index: number) => {
-    return index === selectedIndex;
+  const splitChildrenIntoChunks = () => {
+    const childrenArray = React.Children.toArray(children) as ChildrenType[];
+
+    return childrenArray.reduce((result: ChildrenType[][], current, index) => {
+      const chunkIndex = Math.floor(index / (config?.contentCountBySlide || 1));
+
+      if (!result[chunkIndex]) {
+        result[chunkIndex] = [];
+      }
+
+      const newElement = cloneElement(current, {
+        selected: isSelected(index),
+      });
+
+      result[chunkIndex].push(newElement);
+      return result;
+    }, []);
+  };
+
+  const getPageCount = () => {
+    console.log(
+      type,
+      config?.contentCountBySlide,
+      Math.floor(
+        React.Children.count(children) / (config?.contentCountBySlide || 1),
+      ),
+    );
+    return Math.floor(
+      React.Children.count(children) / (config?.contentCountBySlide || 1),
+    );
   };
 
   return {
@@ -48,23 +81,20 @@ export const useElCarousel = ({
     isPlay,
     selectedIndex,
     getRefWidth,
-    isSelected,
+    getPageCount,
     onClickDot,
     onClickPlay,
     onClickArrow,
+    splitChildrenIntoChunks,
   };
 
   // inner function
   function getNextIndex() {
-    return selectedIndex >= React.Children.count(children) - 1
-      ? 0
-      : selectedIndex + 1;
+    return selectedIndex >= getPageCount() - 1 ? 0 : selectedIndex + 1;
   }
 
   function getPrevIndex() {
-    return selectedIndex <= 0
-      ? React.Children.count(children) - 1
-      : selectedIndex - 1;
+    return selectedIndex <= 0 ? getPageCount() - 1 : selectedIndex - 1;
   }
 
   function autoSlide() {
@@ -94,6 +124,10 @@ export const useElCarousel = ({
     });
   }
 
+  function isSelected(index: number) {
+    return index === selectedIndex;
+  }
+
   function getUseElCarouselEventProps() {
     return {
       setSelectedIndex,
@@ -108,7 +142,7 @@ export const useElCarousel = ({
   function getUseElCarouselEffectProps() {
     return {
       isPlay,
-      isAutoSlide,
+      isAutoSlide: config?.autoSlide || false,
       onResize,
       el,
       reCalcCaroselTransform,
