@@ -1,15 +1,28 @@
+import { useMenuProvider } from '@/src/contexts/MenuContext';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useHeader = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [headerType, setHeaderType] = useState<HeaderMenuType>('None');
 
-  const onClickType = useCallback((type: HeaderMenuType) => {
-    setHeaderType(prev => {
-      if (prev === type) return 'None';
-      return type;
-    });
-  }, []);
+  const { isMobile } = useViewportSize();
+  const { setOpenMenu } = useMenuProvider();
+
+  const onClickType = useCallback(
+    (type: HeaderMenuType) => {
+      if (!isMobile()) {
+        setOpenMenu(true);
+        setHeaderType('None');
+      } else {
+        setHeaderType(prev => {
+          if (prev === type) return 'None';
+          return type;
+        });
+      }
+    },
+    [isMobile],
+  );
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);

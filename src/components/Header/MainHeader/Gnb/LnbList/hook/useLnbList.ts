@@ -38,7 +38,7 @@ export const useLnbList = ({ el }: LnbListProps) => {
   };
 
   const isLv1Selected = (index: number) => level1 === index;
-  const isLv2Selected = (index: number, type?: 'Car' | 'Menu') => {
+  const isLv2Selected = (index: number, type?: 'Car' | 'Menu' | 'CarLink') => {
     if (isMobile()) return level2 === index;
     return type === 'Menu' ? false : level2 === index;
   };

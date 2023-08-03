@@ -15,6 +15,11 @@ type Level2Type =
       type: 'Menu';
       name: string;
       level3List: MenuType[];
+    }
+  | {
+      type: 'CarLink';
+      name: string;
+      pageUrl: string;
     };
 
 type CarType = {

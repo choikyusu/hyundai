@@ -12,7 +12,9 @@ export const useViewportSize = () => {
     else setViewportSize('Large');
   };
 
-  const isMobile = () => viewportSize === 'Small';
+  const isMobile = () => {
+    return viewportSize === 'Small';
+  };
 
   useEffect(() => {
     handleResize();

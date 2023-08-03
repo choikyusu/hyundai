@@ -8,9 +8,10 @@ import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 interface MobileSearchProps {
   headerType: HeaderMenuType;
+  onClickType: (type: HeaderMenuType) => void;
 }
 
-export const Gnb = ({ headerType }: MobileSearchProps) => {
+export const Gnb = ({ headerType, onClickType }: MobileSearchProps) => {
   const [el, setEl] = useState<HTMLDivElement | null>(null);
   const { isMobile } = useViewportSize();
 
@@ -19,7 +20,7 @@ export const Gnb = ({ headerType }: MobileSearchProps) => {
       <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
         <LnbList el={el} />
-        <Login />
+        <Login onClickType={onClickType} />
         <GnbEvent isShow={isMobile()} />
         <LnbBottomList />
       </Styled.LnbMenu>
