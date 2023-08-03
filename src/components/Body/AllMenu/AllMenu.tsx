@@ -5,7 +5,7 @@ import { footerDataList } from '../../Footer/data/data';
 import { useAllMenu } from './hook/useAllMenu';
 
 export const AllMenu = () => {
-  const { keyword, filteredTreeList, onChange } = useAllMenu();
+  const { keyword, treeList, filteredTreeList, onChange } = useAllMenu();
   return (
     <Styled.AllMenu>
       <Styled.Container>
@@ -22,14 +22,11 @@ export const AllMenu = () => {
         </Styled.TitleWrap>
         <Styled.ContentWrap>
           <Styled.TabMenuList>
-            {filteredTreeList.map(menu => (
+            {treeList.map(menu => (
               <Styled.TabMenu>
                 <Styled.MenuButton>{menu.name}</Styled.MenuButton>
               </Styled.TabMenu>
             ))}
-            <Styled.TabMenu>
-              <Styled.MenuButton>회사소개</Styled.MenuButton>
-            </Styled.TabMenu>
           </Styled.TabMenuList>
           <Styled.TabContentList>
             {filteredTreeList.map(level1 => (
@@ -62,32 +59,23 @@ export const AllMenu = () => {
                                 </Styled.Depth2Item>
                               ),
                           )}
+                        {level2.type === 'Footer' &&
+                          level2.subMenuList.map(
+                            level3 =>
+                              level3.subTitle.indexOf(keyword) > -1 && (
+                                <Styled.Depth2Item>
+                                  <Styled.Depth2ItemLink href="">
+                                    {level3.subTitle}
+                                  </Styled.Depth2ItemLink>
+                                </Styled.Depth2Item>
+                              ),
+                          )}
                       </Styled.Depth2>
                     </Styled.MoreButton>
                   ))}
                 </Styled.Depth1>
               </Styled.TabContent>
             ))}
-
-            <Styled.TabContent>
-              <Styled.TabTitle>회사소개</Styled.TabTitle>
-              <Styled.Depth1>
-                {footerDataList.map(menu => (
-                  <Styled.MoreButton>
-                    <Styled.GnbTitle href="">{menu.Title}</Styled.GnbTitle>
-                    <Styled.Depth2>
-                      {menu.subMenuList.map(subMenu => (
-                        <Styled.Depth2Item>
-                          <Styled.Depth2ItemLink href="">
-                            {subMenu.subTitle}
-                          </Styled.Depth2ItemLink>
-                        </Styled.Depth2Item>
-                      ))}
-                    </Styled.Depth2>
-                  </Styled.MoreButton>
-                ))}
-              </Styled.Depth1>
-            </Styled.TabContent>
           </Styled.TabContentList>
         </Styled.ContentWrap>
       </Styled.Container>

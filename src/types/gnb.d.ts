@@ -42,3 +42,17 @@ type EventType = {
   subTitle: string;
   date: string;
 };
+
+type FooterDataType = {
+  type: 'Footer';
+  name: string;
+  subMenuList: {
+    subTitle: string;
+    pageUrl: string;
+  }[];
+};
+
+type PCMenuTreeType = {
+  name: string;
+  level2List: (Level2Type | FooterDataType)[];
+};
