@@ -9,7 +9,7 @@ import { useViewportSize } from '@/src/hooks/useViewportSize';
 interface SubListProps {
   isShow: boolean;
   subList: LnbMenuTreeType['level2List'];
-  isLv2Selected: (index: number, type?: 'Car' | 'Menu') => boolean;
+  isLv2Selected: (index: number, type?: 'Car' | 'Menu' | 'CarLink') => boolean;
   onLevel2Click: (index: number) => void;
   onClickCloseButton: () => void;
 }
@@ -36,6 +36,8 @@ export const SubList = ({
             isShow={isLv2Selected(index, item.type)}
           />
         );
+      case 'CarLink':
+        return <div>test</div>;
       default:
         return null;
     }
@@ -188,7 +190,7 @@ const Styled = {
       padding-left: 0;
     }
   `,
-  SubMenuItem: styled.li<{ $type: 'Car' | 'Menu' }>`
+  SubMenuItem: styled.li<{ $type: 'Car' | 'Menu' | 'CarLink' }>`
     @media screen and (min-width: 768px) {
       list-style: none;
 
@@ -203,7 +205,7 @@ const Styled = {
     }
 
     @media screen and (min-width: 768px) and (max-width: 1024px) {
-      width: ${props => (props.$type === 'Car' ? '165px' : '100%')};
+      width: ${props => (props.$type !== 'Menu' ? '165px' : '100%')};
     }
 
     @media screen and (max-width: 767px) {

@@ -23,7 +23,7 @@ export const MainHeader = React.memo(
         <Styled.InnerWrap>
           <TopMobileArea headerType={headerType} onClickType={onClickType} />
           <MobileSearch headerType={headerType} />
-          <Gnb headerType={headerType} />
+          <Gnb headerType={headerType} onClickType={onClickType} />
         </Styled.InnerWrap>
       </Styled.Header>
     );

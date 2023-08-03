@@ -15,6 +15,11 @@ type Level2Type =
       type: 'Menu';
       name: string;
       level3List: MenuType[];
+    }
+  | {
+      type: 'CarLink';
+      name: string;
+      pageUrl: string;
     };
 
 type CarType = {
@@ -36,4 +41,18 @@ type EventType = {
   title: string;
   subTitle: string;
   date: string;
+};
+
+type FooterDataType = {
+  type: 'Footer';
+  name: string;
+  subMenuList: {
+    subTitle: string;
+    pageUrl: string;
+  }[];
+};
+
+type PCMenuTreeType = {
+  name: string;
+  level2List: (Level2Type | FooterDataType)[];
 };

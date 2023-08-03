@@ -9,7 +9,11 @@ import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
 import { useState } from 'react';
 import { languageList } from '@/src/datas/language.data';
 
-export const Login = () => {
+interface LoginProps {
+  onClickType: (type: HeaderMenuType) => void;
+}
+
+export const Login = ({ onClickType }: LoginProps) => {
   const { isMobile } = useViewportSize();
 
   const [language, setLanguage] = useState('KR');
@@ -60,7 +64,7 @@ export const Login = () => {
               <Styled.SearchButton>
                 <RiSearchLine fill="#002c5f" />
               </Styled.SearchButton>
-              <Styled.MenuButton>
+              <Styled.MenuButton onClick={() => onClickType('Menu')}>
                 <RiMenu3Fill fill="#002c5f" />
               </Styled.MenuButton>
             </Styled.ItemUtil>

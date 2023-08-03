@@ -1,6 +1,7 @@
-export const footerDataList = [
+export const footerDataList: FooterDataType[] = [
   {
-    Title: '기업정보',
+    type: 'Footer',
+    name: '기업정보',
     subMenuList: [
       {
         subTitle: '기업이념',
@@ -25,7 +26,8 @@ export const footerDataList = [
     ],
   },
   {
-    Title: 'IR 정보',
+    type: 'Footer',
+    name: 'IR 정보',
     subMenuList: [
       {
         subTitle: '경영정보',
@@ -58,7 +60,8 @@ export const footerDataList = [
     ],
   },
   {
-    Title: '지속가능 경영',
+    type: 'Footer',
+    name: '지속가능 경영',
     subMenuList: [
       {
         subTitle: '지속가능 경영',
