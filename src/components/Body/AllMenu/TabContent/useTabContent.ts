@@ -1,7 +1,7 @@
-interface useTabContentProps {
-  level2: FooterDataType | Level2Type;
-}
+export const useTabContent = () => {
+  function hasKeyword(name: string, keyword: string) {
+    return name.includes(keyword);
+  }
 
-export const useTabContent = ({ level2 }: useTabContentProps) => {
-  return {};
+  return { hasKeyword };
 };

@@ -79,7 +79,13 @@ const VARIANT_STYLE = {
     Main: css`
       width: 100%;
       margin: 0 auto;
-      height: 162.5vw;
+      @media screen and (max-width: 767px) {
+        height: 162.5vw !important;
+      }
+
+      @media screen and (max-width: 1024px) {
+        height: 640px !important;
+      }
     `,
     GnbEvent: css``,
     ModelSection: css`
@@ -103,7 +109,13 @@ const VARIANT_STYLE = {
   ElCarouselContainer: {
     Main: css`
       overflow: visible;
-      height: 162.5vw !important;
+      @media screen and (max-width: 767px) {
+        height: 162.5vw !important;
+      }
+
+      @media screen and (max-width: 1024px) {
+        height: 640px !important;
+      }
     `,
     GnbEvent: css`
       height: calc(23.64vw + 40px) !important;
