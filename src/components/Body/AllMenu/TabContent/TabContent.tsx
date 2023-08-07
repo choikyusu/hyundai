@@ -1,13 +1,46 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { Depth2Item } from './Depth2Item/Depth2Item';
+import { useTabContent } from './useTabContent';
 
 interface TabContentProps {
   keyword: string;
   treeList: PCMenuTreeType[];
 }
 
+const { hasKeyword } = useTabContent();
+
 export const TabContent = ({ keyword, treeList }: TabContentProps) => {
+  const renderDepth3 = (level2: Level2Type | FooterDataType) => {
+    switch (level2.type) {
+      case 'Car':
+        return level2.level3List.map(
+          level3 =>
+            hasKeyword(level3.carName, keyword) && (
+              <Depth2Item name={level3.carName} />
+            ),
+        );
+      case 'Menu':
+        return level2.level3List.map(
+          level3 =>
+            hasKeyword(level3.name, keyword) && (
+              <Depth2Item name={level3.name} />
+            ),
+        );
+      case 'Footer': {
+        return level2.subMenuList.map(
+          level3 =>
+            hasKeyword(level3.subTitle, keyword) && (
+              <Depth2Item name={level3.subTitle} />
+            ),
+        );
+      }
+      default: {
+        return null;
+      }
+    }
+  };
+
   return (
     <Styled.TabContentList>
       {treeList.map(level1 => (
@@ -17,29 +50,7 @@ export const TabContent = ({ keyword, treeList }: TabContentProps) => {
             {level1.level2List.map(level2 => (
               <Styled.MoreButton>
                 <Styled.GnbTitle href="">{level2.name}</Styled.GnbTitle>
-                <Styled.Depth2>
-                  {level2.type === 'Car' &&
-                    level2.level3List.map(
-                      level3 =>
-                        level3.carName.indexOf(keyword) > -1 && (
-                          <Depth2Item name={level3.carName} />
-                        ),
-                    )}
-                  {level2.type === 'Menu' &&
-                    level2.level3List.map(
-                      level3 =>
-                        level3.name.indexOf(keyword) > -1 && (
-                          <Depth2Item name={level3.name} />
-                        ),
-                    )}
-                  {level2.type === 'Footer' &&
-                    level2.subMenuList.map(
-                      level3 =>
-                        level3.subTitle.indexOf(keyword) > -1 && (
-                          <Depth2Item name={level3.subTitle} />
-                        ),
-                    )}
-                </Styled.Depth2>
+                <Styled.Depth2>{renderDepth3(level2)}</Styled.Depth2>
               </Styled.MoreButton>
             ))}
           </Styled.Depth1>

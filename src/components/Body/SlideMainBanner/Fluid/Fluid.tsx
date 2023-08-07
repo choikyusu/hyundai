@@ -40,7 +40,11 @@ const Styled = {
     align-items: center;
     max-width: 2560px;
     margin: 0 auto;
-    background-size: cover !important;
+
+    @media screen and (max-width: 767px) {
+      background-size: cover !important;
+    }
+
     background: url(${props => props.$backgroundImage}) center top / auto 100%
       no-repeat;
   `,
@@ -55,34 +59,83 @@ const Styled = {
     margin: 0 auto;
     text-align: left;
 
-    left: 5vw;
-    top: 26vw;
-    width: auto;
+    @media screen and (max-width: 1024px) {
+      left: 5vw;
+      top: 90px;
+    }
+
+    @media screen and (max-width: 767px) {
+      top: 26vw;
+      width: auto;
+    }
   `,
   LinkText: styled(Link)`
-    display: inline-block;
-    vertical-align: middle;
+    @media screen and (max-width: 767px) {
+      text-align: center;
+    }
 
-    width: 280px;
-    height: 40px;
-    border: 0;
-    background: #002c5f;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.4px;
-    color: #fff;
-    cursor: pointer;
+    @media screen and (max-width: 767px) {
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-    width: auto;
-    height: auto;
-    background: transparent;
+    @media screen and (max-width: 767px) {
+      width: 280px;
+      height: 40px;
+      border: 0;
+      background: #002c5f;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: #fff;
+      cursor: pointer;
+    }
 
-    width: 100%;
-    text-align: left;
+    @media screen and (max-width: 9999px) {
+      width: auto;
+      height: auto;
+      background: transparent;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      text-align: left;
+    }
+
+    @media screen and (min-width: 768px) {
+      text-align: center;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 180px;
+      height: 50px;
+      border: 0;
+      background: #002c5f;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 9999px) {
+      width: auto;
+      height: auto;
+      background: transparent;
+    }
   `,
 
-  TextInner: styled.div``,
+  TextInner: styled.div`
+    display: inline-block;
+    vertical-align: middle;
+  `,
   CarName: styled.p<{ $fontColor: string }>`
     font-family: 'HyundaiSansHeadKR';
     font-size: 86px;
@@ -92,11 +145,23 @@ const Styled = {
     letter-spacing: -0.25px;
     text-align: left;
 
-    letter-spacing: -0.25px;
-    word-break: keep-all;
+    @media screen and (max-width: 1024px) {
+      line-height: 52px;
+    }
 
-    font-size: 8.35vw;
-    line-height: 1.27em;
+    @media screen and (max-width: 767px) {
+      letter-spacing: -0.25px;
+      word-break: keep-all;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 8.35vw;
+      line-height: 1.27em;
+    }
+
+    @media screen and (max-width: 1024px) {
+      font-size: 42px;
+    }
   `,
   SubText: styled.p<{ $fontColor: string }>`
     margin-top: 14px;
@@ -108,8 +173,15 @@ const Styled = {
     letter-spacing: -0.25px;
     text-align: left;
 
-    margin-top: 2.5vw;
-    font-size: 5vw;
-    letter-spacing: -0.25px;
+    @media screen and (max-width: 1024px) {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: 2.5vw;
+      font-size: 5vw;
+      letter-spacing: -0.25px;
+    }
   `,
 };
