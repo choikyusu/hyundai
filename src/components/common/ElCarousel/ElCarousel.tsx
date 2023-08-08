@@ -83,9 +83,12 @@ const VARIANT_STYLE = {
         height: 162.5vw !important;
       }
 
-      @media screen and (max-width: 1024px) {
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
         height: 640px !important;
       }
+
+      height: 950px !important;
+      overflow: visible;
     `,
     GnbEvent: css``,
     ModelSection: css`
@@ -113,9 +116,12 @@ const VARIANT_STYLE = {
         height: 162.5vw !important;
       }
 
-      @media screen and (max-width: 1024px) {
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
         height: 640px !important;
       }
+
+      height: 950px !important;
+      overflow: visible;
     `,
     GnbEvent: css`
       height: calc(23.64vw + 40px) !important;

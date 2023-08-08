@@ -51,7 +51,17 @@ export const Indicator = ({
 const VARIANT_STYLE = {
   ElCarouselIndicatorList: {
     Main: css`
-      bottom: 203px !important;
+      bottom: 180px;
+
+      @media screen and (max-width: 767px) {
+        position: absolute;
+        top: auto;
+        bottom: 203px !important;
+      }
+
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
+        bottom: 140px !important;
+      }
     `,
     GnbEvent: css`
       bottom: 4px;
@@ -90,7 +100,7 @@ const Styled = {
     transform: translateX(-50%);
     margin: 0;
     padding: 0;
-    z-index: 2;
+    z-index: 6;
 
     margin: 0;
 
