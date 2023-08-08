@@ -151,6 +151,19 @@ const Styled = {
       background-position: 0 0;
       background-size: 100%;
     }
+
+    @media screen and (min-width: 768px) {
+      &:after {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 26px;
+        height: 26px;
+        background: url(/images/w_mypage.png) no-repeat;
+        background-position: 0 0;
+        background-size: 100%;
+      }
+    }
   `,
   SearchButton: styled(CommonStyled.Button)`
     @media screen and (max-width: 767px) {
@@ -170,6 +183,14 @@ const Styled = {
         height: 20px;
       }
     }
+
+    @media screen and (min-width: 768px) {
+      svg {
+        color: #fff;
+        width: 26px;
+        height: 26px;
+      }
+    }
   `,
   MenuButton: styled(CommonStyled.Button)`
     @media screen and (max-width: 767px) {
@@ -187,6 +208,14 @@ const Styled = {
       svg {
         width: 20px;
         height: 20px;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      svg {
+        color: #fff;
+        width: 26px;
+        height: 26px;
       }
     }
   `,
