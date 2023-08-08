@@ -1,6 +1,6 @@
 type FluidType = {
-  imageUrl?: string;
-  backgroundUrl: string;
+  imageUrl?: { mobile: string; wide: string };
+  backgroundUrl: { mobile: string; wide: string };
   pageUrl: string;
   title: { text: string; color: string };
   subText: { text: string; color: string };

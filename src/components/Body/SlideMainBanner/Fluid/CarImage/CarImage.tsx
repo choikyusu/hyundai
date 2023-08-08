@@ -1,15 +1,20 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { useCarImage } from './useCarImage';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 interface CarImageProps {
   pageUrl: string;
-  imageUrl?: string;
+  imageUrl?: {
+    mobile: string;
+    wide: string;
+  };
   selected?: boolean;
 }
 
 export const CarImage = ({ pageUrl, imageUrl, selected }: CarImageProps) => {
   const { imageMoveAnimation } = useCarImage({ selected });
+  const { isMobile } = useViewportSize();
 
   if (!imageUrl) return null;
   return (
@@ -17,7 +22,7 @@ export const CarImage = ({ pageUrl, imageUrl, selected }: CarImageProps) => {
       <Styled.Span>
         <Styled.Image
           ref={imageMoveAnimation}
-          src={imageUrl}
+          src={isMobile() ? imageUrl.mobile : imageUrl.wide}
           alt="차량 이미지"
         />
       </Styled.Span>
@@ -26,39 +31,99 @@ export const CarImage = ({ pageUrl, imageUrl, selected }: CarImageProps) => {
 };
 
 const Styled = {
+  TextButton: styled(Link)`
+    @media screen and (max-width: 767px) {
+      text-align: center;
+    }
+
+    @media screen and (max-width: 767px) {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 280px;
+      height: 40px;
+      border: 0;
+      background: #002c5f;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      color: #002c5f;
+      background-color: transparent;
+    }
+
+    @media screen and (min-width: 768px) {
+      text-align: center;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 180px;
+      height: 50px;
+      border: 0;
+      background: #002c5f;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      color: #002c5f;
+      background-color: transparent;
+    }
+  `,
   Span: styled.span`
     display: inline-block;
     vertical-align: middle;
   `,
-  TextButton: styled(Link)`
-    display: inline-block;
-    vertical-align: middle;
-
-    width: 280px;
-    height: 40px;
-    border: 0;
-    background: #002c5f;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.4px;
-    color: #fff;
-    cursor: pointer;
-
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    color: #002c5f;
-    background-color: transparent;
-  `,
 
   Image: styled.img`
     position: relative;
-    width: 100%;
-    margin: 0;
-    object-fit: cover;
-    height: auto !important;
-    margin-top: -19px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 9999px) {
+      max-width: 100%;
+      height: 380px !important;
+      object-fit: cover;
+      margin-top: 6vw;
+    }
+
+    @media screen and (max-width: 767px) {
+      height: auto !important;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: -19px;
+    }
+
+    @media screen and (min-width: 767px) and (max-width: 1200px) {
+      width: 90%;
+      height: auto !important;
+    }
 
     @keyframes car_animation {
       0% {

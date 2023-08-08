@@ -33,20 +33,31 @@ export const Fluid = React.memo(({ fluid, selected }: FluidProps) => {
 });
 
 const Styled = {
-  FluidContainer: styled.div<{ $backgroundImage: string }>`
+  FluidContainer: styled.div<{
+    $backgroundImage: {
+      mobile: string;
+      wide: string;
+    };
+  }>`
     height: 100%;
     justify-content: center;
     display: flex;
     align-items: center;
     max-width: 2560px;
-    margin: 0 auto;
 
     @media screen and (max-width: 767px) {
       background-size: cover !important;
     }
 
-    background: url(${props => props.$backgroundImage}) center top / auto 100%
-      no-repeat;
+    @media screen and (max-width: 767px) {
+      background: url(${props => props.$backgroundImage.mobile}) center top /
+        auto 100% no-repeat;
+    }
+
+    @media screen and (min-width: 768px) {
+      background: url(${props => props.$backgroundImage.wide}) center top / auto
+        100% no-repeat;
+    }
   `,
   TextWrap: styled.div`
     position: absolute;
@@ -145,7 +156,7 @@ const Styled = {
     letter-spacing: -0.25px;
     text-align: left;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
       line-height: 52px;
     }
 
@@ -159,7 +170,7 @@ const Styled = {
       line-height: 1.27em;
     }
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
       font-size: 42px;
     }
   `,
