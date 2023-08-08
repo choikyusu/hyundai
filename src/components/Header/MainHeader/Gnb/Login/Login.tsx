@@ -2,12 +2,10 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { BUTTON_STYLE } from './styles/buttonStyle';
-import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
-import { TextLink } from '../../TopMobileArea/MobileController/TextLink/TextLink';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
-import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
 import { useState } from 'react';
-import { languageList } from '@/src/datas/language.data';
+import { MobileLogin } from './MobileLogin/MobileLogin';
+import { PCLogin } from './PCLogin/PCLogin';
 
 interface LoginProps {
   onClickType: (type: HeaderMenuType) => void;
@@ -26,56 +24,26 @@ export const Login = ({ onClickType }: LoginProps) => {
     <Styled.UtilWrapper>
       <Styled.Util>
         {isMobile() && (
-          <>
-            <Styled.ItemUtil>
-              <Styled.MobileLoginButton href="/kr/ko/login" title="개인 로그인">
-                개인 로그인
-              </Styled.MobileLoginButton>
-            </Styled.ItemUtil>
-            <Styled.ItemUtil>
-              <Styled.MobileLoginButton href="/kr/ko/login" title="개인 로그인">
-                법인 로그인
-              </Styled.MobileLoginButton>
-            </Styled.ItemUtil>
-            <Styled.ItemUtil>
-              <SelectButton
-                selectedItem={language}
-                list={languageList}
-                isOpen={isOpen}
-                onClick={onClickLanguage}
-              />
-            </Styled.ItemUtil>
-          </>
+          <MobileLogin
+            language={language}
+            isOpen={isOpen}
+            onClickLanguage={onClickLanguage}
+          />
         )}
         {!isMobile() && (
-          <>
-            <TextLink headerType="Web" />
-            <Styled.ItemUtil>
-              <SelectButton
-                selectedItem={language}
-                list={languageList}
-                isOpen={isOpen}
-                onClick={onClickLanguage}
-              />
-            </Styled.ItemUtil>
-            <Styled.Divide />
-            <Styled.LoginButton />
-            <Styled.ItemUtil>
-              <Styled.SearchButton>
-                <RiSearchLine fill="#002c5f" />
-              </Styled.SearchButton>
-              <Styled.MenuButton onClick={() => onClickType('Menu')}>
-                <RiMenu3Fill fill="#002c5f" />
-              </Styled.MenuButton>
-            </Styled.ItemUtil>
-          </>
+          <PCLogin
+            language={language}
+            isOpen={isOpen}
+            onClickLanguage={onClickLanguage}
+            onClickType={onClickType}
+          />
         )}
       </Styled.Util>
     </Styled.UtilWrapper>
   );
 };
 
-const Styled = {
+export const Styled = {
   UtilWrapper: styled.div`
     @media screen and (max-width: 767px) {
       order: 1;
