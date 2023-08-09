@@ -55,7 +55,7 @@ export const ElCarousel = React.memo(
             {childrenWithWrap()}
             <ElArrow
               childrenCount={getPageCount()}
-              isShow={config?.showArrow || false}
+              showArrow={config?.showArrow}
               onClickArrow={onClickArrow}
             />
           </Styled.ElCarouselLayer>

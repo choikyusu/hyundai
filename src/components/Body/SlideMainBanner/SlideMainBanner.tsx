@@ -7,7 +7,10 @@ import { QuickMenu } from './QuickMenu/QuickMenu';
 export const SlideMainBanner = () => {
   return (
     <Styled.KeyVisualWrapper>
-      <ElCarousel type="Main" config={{ autoSlide: true }}>
+      <ElCarousel
+        type="Main"
+        config={{ showArrow: { small: false, medium: true, large: true } }}
+      >
         {fluidList.map((fluid, index) => (
           <Fluid key={index} fluid={fluid} />
         ))}

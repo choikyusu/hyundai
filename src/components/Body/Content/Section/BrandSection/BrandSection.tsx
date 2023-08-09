@@ -14,7 +14,10 @@ export const BrandSection = () => {
       ]}
     >
       <Styled.SectionBody>
-        <ElCarousel type="Brand" config={{ showArrow: true }}>
+        <ElCarousel
+          type="Brand"
+          config={{ showArrow: { small: true, medium: true, large: true } }}
+        >
           {brandList.map((barnd, index) => (
             <Brand key={index} barnd={barnd} />
           ))}

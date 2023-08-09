@@ -1,19 +1,33 @@
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { styled } from 'styled-components';
 
 interface ElArrowProps {
-  isShow: boolean;
+  showArrow?: {
+    small: boolean;
+    medium: boolean;
+    large: boolean;
+  };
   childrenCount: number;
   onClickArrow: (direction: DirectionType) => void;
 }
 
 export const ElArrow = ({
-  isShow,
+  showArrow,
   childrenCount,
   onClickArrow,
 }: ElArrowProps) => {
-  if (!isShow || childrenCount === 1) return null;
+  const { viewportSize } = useViewportSize();
+
+  if (!showArrow || childrenCount === 1) return null;
+  if (
+    (viewportSize === 'Large' && !showArrow.large) ||
+    (viewportSize === 'Medium' && !showArrow.medium) ||
+    (viewportSize === 'Small' && !showArrow.small)
+  )
+    return null;
+
   return (
     <>
       <Styled.ElArrow $isLeft onClick={() => onClickArrow('Left')}>
