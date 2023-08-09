@@ -47,13 +47,15 @@ const Styled = {
       border-bottom: 1px solid #e5e5e5;
     }
 
-    position: fixed;
-    top: 0;
-    background: ${props =>
-      props.$isMovedScroll ? 'hsla(0,0%,100%,.9)' : 'transparent'};
-    border-bottom: ${props =>
-      props.$isMovedScroll ? '1px solid #e5e5e5' : 'none'};
-    ${props => props.$headerStyles}
+    @media screen and (max-width: 9999px) {
+      position: fixed;
+      top: 0;
+      background: ${props =>
+        props.$isMovedScroll ? 'hsla(0,0%,100%,.9)' : 'transparent'};
+      border-bottom: ${props =>
+        props.$isMovedScroll ? '1px solid #e5e5e5' : 'none'};
+      ${props => props.$headerStyles}
+    }
 
     @media screen and (min-width: 768px) {
       backdrop-filter: blur(5px);
