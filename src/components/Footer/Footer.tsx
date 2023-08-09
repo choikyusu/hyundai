@@ -26,9 +26,7 @@ export const Footer = () => {
               <Styled.MenuListCompany>
                 {footerDataList.map((footerData, index) => (
                   <Styled.WrapCategory key={index}>
-                    <Styled.MenuCategory>
-                      {footerData.Title}
-                    </Styled.MenuCategory>
+                    <Styled.MenuCategory>{footerData.name}</Styled.MenuCategory>
                     <Styled.WrapMenu>
                       {footerData.subMenuList.map(subMenu => (
                         <Styled.MenuCompany>

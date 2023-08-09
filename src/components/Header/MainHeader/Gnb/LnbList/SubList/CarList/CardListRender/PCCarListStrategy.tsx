@@ -8,7 +8,7 @@ export const PCCarListStrategy = ({ isShow, subList }: CarListProps) => {
       <ElCarousel
         type="CarList"
         config={{
-          showArrow: true,
+          showArrow: { small: true, medium: true, large: true },
           contentCountBySlide: { small: 6, medium: 6, large: 6 },
           style: { gridRowCount: { small: 3, medium: 3, large: 3 } },
         }}

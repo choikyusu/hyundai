@@ -28,9 +28,9 @@ export const QuickMenu = () => {
         <ElCarousel
           type="QuickMenu"
           config={{
-            showArrow: true,
+            showArrow: { small: false, medium: true, large: true },
             contentCountBySlide: { small: 1, medium: 6, large: 6 },
-            style: { gridRowCount: { small: 1, medium: 6, large: 3 } },
+            style: { gridRowCount: { small: 1, medium: 6, large: 6 } },
           }}
         >
           {quickMenuList.map(menu => (
