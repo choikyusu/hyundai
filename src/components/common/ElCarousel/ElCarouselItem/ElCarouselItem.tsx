@@ -46,6 +46,7 @@ const VARIANT_STYLE = {
     CarList: css`
       height: 100%;
     `,
+    QuickMenu: css``,
   },
   ElCarouselGroupList: {
     Main: css`
@@ -62,6 +63,9 @@ const VARIANT_STYLE = {
     CarList: css`
       height: 100%;
     `,
+    QuickMenu: css`
+      height: 100%;
+    `,
   },
   ElCarouselUnit: {
     Main: css`
@@ -76,6 +80,7 @@ const VARIANT_STYLE = {
     CarList: css`
       height: 100%;
     `,
+    QuickMenu: css``,
   },
 };
 

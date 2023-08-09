@@ -108,6 +108,23 @@ const VARIANT_STYLE = {
       margin: 0 auto;
       height: 100%;
     `,
+    QuickMenu: css`
+      @media screen and (min-width: 768px) {
+        width: 720px;
+        height: 160px;
+        background: none;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 720px;
+        height: 130px;
+        background: none;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+    `,
   },
   ElCarouselContainer: {
     Main: css`
@@ -136,6 +153,9 @@ const VARIANT_STYLE = {
       height: calc(90vw + 44px) !important;
     `,
     CarList: css`
+      height: 100%;
+    `,
+    QuickMenu: css`
       height: 100%;
     `,
   },
