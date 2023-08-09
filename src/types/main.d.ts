@@ -12,7 +12,8 @@ type ElCarouselType =
   | 'ModelSection'
   | 'Brand'
   | 'Events'
-  | 'CarList';
+  | 'CarList'
+  | 'QuickMenu';
 
 type AgeBaseModelType = {
   text: string;

@@ -1,12 +1,38 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { quickMenuList } from './data/data';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
+import { ElCarousel } from '@/src/components/common/ElCarousel/ElCarousel';
 
 export const QuickMenu = () => {
+  const { isMobile } = useViewportSize();
+
   return (
     <Styled.QuickMenu>
-      <Styled.ElCarouselItem>
-        <Styled.ItemsWrap>
+      {isMobile() ? (
+        <Styled.ElCarouselItem>
+          <Styled.ItemsWrap>
+            {quickMenuList.map(menu => (
+              <Styled.Icon>
+                <Styled.TextButton
+                  $imageUrl={menu.imageUrl}
+                  href={menu.pageUrl}
+                >
+                  <span>{menu.name}</span>
+                </Styled.TextButton>
+              </Styled.Icon>
+            ))}
+          </Styled.ItemsWrap>
+        </Styled.ElCarouselItem>
+      ) : (
+        <ElCarousel
+          type="QuickMenu"
+          config={{
+            showArrow: true,
+            contentCountBySlide: { small: 1, medium: 6, large: 6 },
+            style: { gridRowCount: { small: 1, medium: 6, large: 3 } },
+          }}
+        >
           {quickMenuList.map(menu => (
             <Styled.Icon>
               <Styled.TextButton $imageUrl={menu.imageUrl} href={menu.pageUrl}>
@@ -14,8 +40,8 @@ export const QuickMenu = () => {
               </Styled.TextButton>
             </Styled.Icon>
           ))}
-        </Styled.ItemsWrap>
-      </Styled.ElCarouselItem>
+        </ElCarousel>
+      )}
     </Styled.QuickMenu>
   );
 };
@@ -155,10 +181,12 @@ const Styled = {
       height: 50px;
       margin: 25px auto 10px;
 
-      position: static;
-      width: 28px;
-      height: 28px;
-      margin: 0 auto 10px;
+      @media screen and (max-width: 767px) {
+        position: static;
+        width: 28px;
+        height: 28px;
+        margin: 0 auto 10px;
+      }
 
       background: url(${props => props.$imageUrl}) no-repeat;
       background-size: 100%;
@@ -222,19 +250,7 @@ const Styled = {
 
     @media screen and (min-width: 768px) {
       position: relative;
-      width: calc(16.6% - 14px);
-    }
-
-    &:before {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      display: block;
-      content: '';
-      width: 50px;
-      height: 50px;
-      margin: 25px auto 10px;
+      width: 100%;
     }
   `,
 };

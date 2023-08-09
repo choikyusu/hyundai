@@ -78,6 +78,7 @@ const VARIANT_STYLE = {
     CarList: css`
       display: none;
     `,
+    QuickMenu: css``,
   },
   ElCarouselButton: {
     Main: css``,
@@ -89,6 +90,8 @@ const VARIANT_STYLE = {
     Brand: css``,
     Events: css``,
     CarList: css``,
+
+    QuickMenu: css``,
   },
 };
 
