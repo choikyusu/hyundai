@@ -23,11 +23,13 @@ export const Body = () => {
 
 const Styled = {
   ContantArea: styled.div`
-    @media screen and (min-width: 768px) .contant-area {
+    @media screen and (min-width: 768px) {
       width: 100%;
     }
 
-    position: relative;
+    @media screen and (max-width: 9999px) {
+      position: relative;
+    }
   `,
   Container: styled.div``,
 };
