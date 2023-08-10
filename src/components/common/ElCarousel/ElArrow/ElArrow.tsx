@@ -9,12 +9,14 @@ interface ElArrowProps {
     medium: boolean;
     large: boolean;
   };
+  arrowStyle?: ArrowStyleType;
   childrenCount: number;
   onClickArrow: (direction: DirectionType) => void;
 }
 
 export const ElArrow = ({
   showArrow,
+  arrowStyle,
   childrenCount,
   onClickArrow,
 }: ElArrowProps) => {
@@ -30,10 +32,18 @@ export const ElArrow = ({
 
   return (
     <>
-      <Styled.ElArrow $isLeft onClick={() => onClickArrow('Left')}>
+      <Styled.ElArrow
+        $isLeft
+        $arrowStyle={arrowStyle}
+        onClick={() => onClickArrow('Left')}
+      >
         <AiOutlineLeft />
       </Styled.ElArrow>
-      <Styled.ElArrow $isLeft={false} onClick={() => onClickArrow('Right')}>
+      <Styled.ElArrow
+        $isLeft={false}
+        $arrowStyle={arrowStyle}
+        onClick={() => onClickArrow('Right')}
+      >
         <AiOutlineRight />
       </Styled.ElArrow>
     </>
@@ -41,26 +51,27 @@ export const ElArrow = ({
 };
 
 const Styled = {
-  ElArrow: styled(CommonStyled.Button)<{ $isLeft: boolean }>`
+  ElArrow: styled(CommonStyled.Button)<{
+    $isLeft: boolean;
+    $arrowStyle?: ArrowStyleType;
+  }>`
     border: none;
     padding: 0;
     margin: 0;
-    height: 36px;
-    width: 36px;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 50%;
-    background-color: rgba(31, 45, 61, 0.11);
-    color: #fff;
+    color: ${props => props.$arrowStyle?.color || '#fff'};
     position: absolute;
     top: 50%;
     z-index: 10;
     outline: none;
 
-    width: 44px;
-    height: 44px;
+    height: ${props => props.$arrowStyle?.size || '36px'};
+    width: ${props => props.$arrowStyle?.size || '36px'};
     border-radius: 0;
-    background-color: rgba(31, 45, 61, 0.4);
+    background-color: ${props =>
+      props.$arrowStyle?.background || 'rgba(31, 45, 61, 0.11)'};
 
     display: flex;
     align-items: center;
@@ -69,8 +80,8 @@ const Styled = {
     ${props => (props.$isLeft ? 'left : 0' : 'right : 0')};
 
     svg {
-      width: 18px;
-      height: 18px;
+      width: ${props => props.$arrowStyle?.size || '18px'};
+      height: ${props => props.$arrowStyle?.size || '18px'};
     }
   `,
 };

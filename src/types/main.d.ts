@@ -68,6 +68,12 @@ type LanguageType = {
   pageUrl: string;
 };
 
+type ArrowStyleType = {
+  background: string;
+  color: string;
+  size: string;
+};
+
 type DropdownListType = LanguageType[];
 
 type ElCarouselConfigType = {
@@ -77,5 +83,6 @@ type ElCarouselConfigType = {
 
   style?: {
     gridRowCount?: { small: number; medium: number; large: number };
+    arrow?: ArrowStyleType;
   };
 };

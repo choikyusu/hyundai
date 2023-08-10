@@ -30,7 +30,14 @@ export const QuickMenu = () => {
           config={{
             showArrow: { small: false, medium: true, large: true },
             contentCountBySlide: { small: 1, medium: 6, large: 6 },
-            style: { gridRowCount: { small: 1, medium: 6, large: 6 } },
+            style: {
+              gridRowCount: { small: 1, medium: 6, large: 6 },
+              arrow: {
+                background: 'transparent',
+                size: '18px',
+                color: 'black',
+              },
+            },
           }}
         >
           {quickMenuList.map(menu => (
