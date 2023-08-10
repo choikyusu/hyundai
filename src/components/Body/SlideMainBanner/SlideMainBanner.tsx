@@ -9,7 +9,12 @@ export const SlideMainBanner = () => {
     <Styled.KeyVisualWrapper>
       <ElCarousel
         type="Main"
-        config={{ showArrow: { small: false, medium: true, large: true } }}
+        config={{
+          showArrow: { small: false, medium: true, large: true },
+          style: {
+            arrow: { background: 'transparent', color: 'black', size: '49px' },
+          },
+        }}
       >
         {fluidList.map((fluid, index) => (
           <Fluid key={index} fluid={fluid} />
