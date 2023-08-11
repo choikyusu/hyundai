@@ -29,9 +29,24 @@ export const QuickMenu = () => {
           type="QuickMenu"
           config={{
             showArrow: { small: false, medium: true, large: true },
-            contentCountBySlide: { small: 1, medium: 6, large: 6 },
+            contentCountBySlide: {
+              small: { total: 1, cols: 1 },
+              medium: { total: 6, cols: 6 },
+              large: { total: 6, cols: 6 },
+            },
             style: {
-              gridRowCount: { small: 1, medium: 6, large: 6 },
+              grid: {
+                templateColumns: {
+                  small: 'repeat(1, 1fr)',
+                  medium: 'repeat(6, 1fr)',
+                  large: 'repeat(6, 1fr)',
+                },
+                gap: {
+                  small: '2.55%',
+                  medium: '2.55%',
+                  large: '2.55%',
+                },
+              },
               arrow: {
                 background: 'transparent',
                 size: '18px',

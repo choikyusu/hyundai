@@ -73,11 +73,11 @@ export const useElCarousel = ({
   const getGridRowCount = () => {
     switch (viewportSize) {
       case 'Small':
-        return config?.style?.gridRowCount?.small || 1;
+        return config?.contentCountBySlide?.small.cols || 1;
       case 'Medium':
-        return config?.style?.gridRowCount?.medium || 1;
+        return config?.contentCountBySlide?.medium.cols || 1;
       case 'Large':
-        return config?.style?.gridRowCount?.large || 1;
+        return config?.contentCountBySlide?.large.cols || 1;
       default:
         return 1;
     }
@@ -100,11 +100,11 @@ export const useElCarousel = ({
   function getContentCountBySilde() {
     switch (viewportSize) {
       case 'Small':
-        return config?.contentCountBySlide?.small || 1;
+        return config?.contentCountBySlide?.small.total || 1;
       case 'Medium':
-        return config?.contentCountBySlide?.medium || 1;
+        return config?.contentCountBySlide?.medium.total || 1;
       case 'Large':
-        return config?.contentCountBySlide?.large || 1;
+        return config?.contentCountBySlide?.large.total || 1;
       default:
         return 1;
     }
