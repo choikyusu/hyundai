@@ -76,13 +76,23 @@ type ArrowStyleType = {
 
 type DropdownListType = LanguageType[];
 
+type GridType = {
+  templateColumns: { small: string; medium: string; large: string };
+  gap: { small: string; medium: string; large: string };
+  alignItem?: 'end' | 'start' | 'center';
+};
+
 type ElCarouselConfigType = {
-  contentCountBySlide?: { small: number; medium: number; large: number };
+  contentCountBySlide?: {
+    small: { total: number; cols: number };
+    medium: { total: number; cols: number };
+    large: { total: number; cols: number };
+  };
   showArrow?: { small: boolean; medium: boolean; large: boolean };
   autoSlide?: boolean;
 
   style?: {
-    gridRowCount?: { small: number; medium: number; large: number };
+    grid?: GridType;
     arrow?: ArrowStyleType;
   };
 };

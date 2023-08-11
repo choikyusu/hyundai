@@ -14,8 +14,25 @@ export const GnbEvent = ({ isShow }: GnbEventProps) => {
         <ElCarousel
           type="GnbEvent"
           config={{
-            contentCountBySlide: { small: 1, medium: 6, large: 6 },
-            style: { gridRowCount: { small: 1, medium: 3, large: 3 } },
+            contentCountBySlide: {
+              small: { total: 1, cols: 1 },
+              medium: { total: 6, cols: 6 },
+              large: { total: 6, cols: 6 },
+            },
+            style: {
+              grid: {
+                templateColumns: {
+                  small: 'repeat(1, 1fr)',
+                  medium: 'repeat(3, 1fr)',
+                  large: 'repeat(3, 1fr)',
+                },
+                gap: {
+                  small: '2.55%',
+                  medium: '2.55%',
+                  large: '2.55%',
+                },
+              },
+            },
           }}
         >
           {eventList.map((event, index) => (

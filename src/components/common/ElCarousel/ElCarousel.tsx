@@ -38,7 +38,7 @@ export const ElCarousel = React.memo(
           key={index}
           type={type}
           itemList={itemList}
-          rowCount={getGridRowCount()}
+          gridStyle={config?.style?.grid}
         >
           {arr}
         </ElCarouselItem>
@@ -145,7 +145,13 @@ const VARIANT_STYLE = {
       height: calc(23.64vw + 40px) !important;
     `,
     ModelSection: css`
-      height: calc(80vw + 44px) !important;
+      @media screen and (max-width: 767px) {
+        height: calc(80vw + 44px) !important;
+      }
+
+      @media screen and (min-width: 768px) {
+        height: 432px !important;
+      }
     `,
     Brand: css`
       height: calc(110vw + 44px) !important;

@@ -3,14 +3,14 @@ import { CSSProp, css, styled } from 'styled-components';
 interface ElCarouselItemProps {
   type: ElCarouselType;
   itemList: HTMLDivElement[];
-  rowCount?: number;
+  gridStyle?: GridType;
   children: React.ReactNode;
 }
 
 export const ElCarouselItem = ({
   type,
   itemList,
-  rowCount,
+  gridStyle,
   children,
 }: ElCarouselItemProps) => {
   return (
@@ -23,7 +23,7 @@ export const ElCarouselItem = ({
       >
         <Styled.ElCarouselUnit
           $variant={VARIANT_STYLE.ElCarouselUnit[type]}
-          $rowCount={rowCount}
+          $gridStyle={gridStyle}
         >
           {children}
         </Styled.ElCarouselUnit>
@@ -104,15 +104,41 @@ const Styled = {
 
     ${props => props.$variant}
   `,
-  ElCarouselUnit: styled.li<{ $variant: CSSProp; $rowCount?: number }>`
+  ElCarouselUnit: styled.li<{ $variant: CSSProp; $gridStyle?: GridType }>`
     width: 100%;
 
-    ${props => props.$rowCount && 'display: grid;'}
-    ${props =>
-      props.$rowCount &&
-      `grid-template-columns: repeat(${props.$rowCount}, 1fr);`}
-    ${props => props.$rowCount && 'grid-gap: 2.55%;'}
-    ${props => props.$rowCount && 'gap: 2.55%;'}
+    @media screen and (max-width: 767px) {
+      ${props => props.$gridStyle && 'display: grid;'}
+      ${props =>
+        props.$gridStyle &&
+        `grid-template-columns: ${props.$gridStyle.templateColumns.small}`};
+      ${props => props.$gridStyle && `gap: ${props.$gridStyle.gap.small}`};
+      ${props =>
+        props.$gridStyle?.alignItem &&
+        `align-items: ${props.$gridStyle?.alignItem}`};
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      ${props => props.$gridStyle && 'display: grid;'}
+      ${props =>
+        props.$gridStyle &&
+        `grid-template-columns: ${props.$gridStyle.templateColumns.medium}`};
+      ${props => props.$gridStyle && `gap: ${props.$gridStyle.gap.medium}`};
+      ${props =>
+        props.$gridStyle?.alignItem &&
+        `align-items: ${props.$gridStyle?.alignItem}`};
+    }
+
+    @media screen and (min-width: 1025px) {
+      ${props => props.$gridStyle && 'display: grid;'}
+      ${props =>
+        props.$gridStyle &&
+        `grid-template-columns: ${props.$gridStyle.templateColumns.large}`};
+      ${props => props.$gridStyle && `gap: ${props.$gridStyle.gap.large}`};
+      ${props =>
+        props.$gridStyle?.alignItem &&
+        `align-items: ${props.$gridStyle?.alignItem}`};
+    }
 
     ${props => props.$variant}
   `,

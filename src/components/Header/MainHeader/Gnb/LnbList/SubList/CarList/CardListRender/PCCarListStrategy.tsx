@@ -9,8 +9,25 @@ export const PCCarListStrategy = ({ isShow, subList }: CarListProps) => {
         type="CarList"
         config={{
           showArrow: { small: true, medium: true, large: true },
-          contentCountBySlide: { small: 6, medium: 6, large: 6 },
-          style: { gridRowCount: { small: 3, medium: 3, large: 3 } },
+          contentCountBySlide: {
+            small: { total: 6, cols: 3 },
+            medium: { total: 6, cols: 3 },
+            large: { total: 6, cols: 3 },
+          },
+          style: {
+            grid: {
+              templateColumns: {
+                small: 'repeat(3, 1fr)',
+                medium: 'repeat(3, 1fr)',
+                large: 'repeat(3, 1fr)',
+              },
+              gap: {
+                small: '2.55%',
+                medium: '2.55%',
+                large: '2.55%',
+              },
+            },
+          },
         }}
       >
         {subList.map((item, index) => (
