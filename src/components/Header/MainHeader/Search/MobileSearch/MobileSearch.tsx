@@ -50,7 +50,10 @@ export const MobileSearch = ({ headerType }: MobileSearchProps) => {
 
 const Styled = {
   Form: styled.form<{ $isShow: boolean }>`
-    display: ${props => (props.$isShow ? 'block' : 'none')};
+    display: none;
+    @media screen and (max-width: 767px) {
+      display: ${props => (props.$isShow ? 'block' : 'none')};
+    }
   `,
   Fieldset: styled.fieldset`
     padding: 0;
