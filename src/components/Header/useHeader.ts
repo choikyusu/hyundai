@@ -11,7 +11,12 @@ export const useHeader = () => {
 
   const onClickType = useCallback(
     (type: HeaderMenuType) => {
-      if (!isMobile()) {
+      if (isMobile()) {
+        setHeaderType(prev => {
+          if (prev === type) return 'None';
+          return type;
+        });
+      } else if (type === 'Menu') {
         setOpenMenu(true);
         setHeaderType('None');
       } else {

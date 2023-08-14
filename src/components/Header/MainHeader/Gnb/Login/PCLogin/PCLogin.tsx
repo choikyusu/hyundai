@@ -32,7 +32,7 @@ export const PCLogin = ({
       <Styled.LoginButton />
       <Styled.ItemUtil>
         <Styled.SearchButton>
-          <RiSearchLine fill="#002c5f" />
+          <RiSearchLine fill="#002c5f" onClick={() => onClickType('Search')} />
         </Styled.SearchButton>
         <Styled.MenuButton onClick={() => onClickType('Menu')}>
           <RiMenu3Fill fill="#002c5f" />

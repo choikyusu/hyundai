@@ -20,7 +20,7 @@ export const Gnb = ({ headerType, onClickType }: MobileSearchProps) => {
       <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
         <LnbList el={el} />
-        <Login onClickType={onClickType} />
+        <Login headerType={headerType} onClickType={onClickType} />
         <GnbEvent isShow={isMobile()} />
         <LnbBottomList />
       </Styled.LnbMenu>
