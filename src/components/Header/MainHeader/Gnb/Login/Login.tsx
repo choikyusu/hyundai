@@ -8,13 +8,15 @@ import { MobileLogin } from './MobileLogin/MobileLogin';
 import { PCLogin } from './PCLogin/PCLogin';
 import { UnifiedSearch } from '../../Search/MobileSearch/UnifiedSearch/UnifiedSearch';
 import { MdOutlineCancel } from 'react-icons/md';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 interface LoginProps {
   onClickType: (type: HeaderMenuType) => void;
-  headerType: HeaderMenuType;
 }
 
-export const Login = ({ headerType, onClickType }: LoginProps) => {
+export const Login = ({ onClickType }: LoginProps) => {
+  const { headerType } = useMenuProvider();
+
   const { isMobile } = useViewportSize();
 
   const [language, setLanguage] = useState('KR');

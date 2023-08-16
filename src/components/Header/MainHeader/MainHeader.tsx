@@ -4,26 +4,29 @@ import { MobileSearch } from './Search/MobileSearch/MobileSearch';
 import { TopMobileArea } from './TopMobileArea/TopMobileArea';
 import { Gnb } from './Gnb/Gnb';
 import React from 'react';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 interface MainHeaderProps {
-  headerType: HeaderMenuType;
   onClickType: (type: HeaderMenuType) => void;
   isMovedScroll: boolean;
 }
 
 export const MainHeader = React.memo(
-  ({ isMovedScroll, headerType, onClickType }: MainHeaderProps) => {
+  ({ isMovedScroll, onClickType }: MainHeaderProps) => {
+    const { headerType } = useMenuProvider();
+
     const headerStyles = HEADER_STYLE[headerType];
 
     return (
       <Styled.Header
         $headerStyles={headerStyles}
         $isMovedScroll={isMovedScroll}
+        $headerType={headerType}
       >
         <Styled.InnerWrap>
-          <TopMobileArea headerType={headerType} onClickType={onClickType} />
-          <MobileSearch headerType={headerType} />
-          <Gnb headerType={headerType} onClickType={onClickType} />
+          <TopMobileArea onClickType={onClickType} />
+          <MobileSearch />
+          <Gnb onClickType={onClickType} />
         </Styled.InnerWrap>
       </Styled.Header>
     );
@@ -34,13 +37,13 @@ const Styled = {
   Header: styled(CommonStyled.Header)<{
     $headerStyles: CSSProp;
     $isMovedScroll: boolean;
+    $headerType: HeaderMenuType;
   }>`
     @media screen and (max-width: 767px) .header {
       height: 55px;
     }
 
     @media screen and (min-width: 768px) {
-      position: relative;
       top: 0;
       width: 100%;
       padding: 0 30px;
@@ -48,7 +51,12 @@ const Styled = {
     }
 
     @media screen and (max-width: 9999px) {
-      position: fixed;
+      position: ${props => {
+        if (props.$isMovedScroll) return 'fixed';
+        if (!props.$isMovedScroll && props.$headerType === 'None')
+          return 'absolute';
+        return 'relative';
+      }};
       top: 0;
       background: ${props =>
         props.$isMovedScroll ? 'hsla(0,0%,100%,.9)' : 'transparent'};

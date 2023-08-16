@@ -4,12 +4,11 @@ import { useMobileSearch } from './useMobileSearch';
 import { MobileTabList } from './MobileTabList/MobileTabList';
 import { TabMenu } from './TabMenu/TabMenu';
 import { UnifiedSearch } from './UnifiedSearch/UnifiedSearch';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
-interface MobileSearchProps {
-  headerType: HeaderMenuType;
-}
+export const MobileSearch = () => {
+  const { headerType } = useMenuProvider();
 
-export const MobileSearch = ({ headerType }: MobileSearchProps) => {
   const {
     keywordType,
     searchKeyword,

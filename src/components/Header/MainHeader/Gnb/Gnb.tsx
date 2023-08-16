@@ -5,13 +5,15 @@ import { GnbEvent } from './GnbEvent/GnbEvent';
 import { LnbBottomList } from './LnbBottomList/LnbBottomList';
 import { useState } from 'react';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 interface MobileSearchProps {
-  headerType: HeaderMenuType;
   onClickType: (type: HeaderMenuType) => void;
 }
 
-export const Gnb = ({ headerType, onClickType }: MobileSearchProps) => {
+export const Gnb = ({ onClickType }: MobileSearchProps) => {
+  const { headerType } = useMenuProvider();
+
   const [el, setEl] = useState<HTMLDivElement | null>(null);
   const { isMobile } = useViewportSize();
 
@@ -20,7 +22,7 @@ export const Gnb = ({ headerType, onClickType }: MobileSearchProps) => {
       <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
         <LnbList el={el} />
-        <Login headerType={headerType} onClickType={onClickType} />
+        <Login onClickType={onClickType} />
         <GnbEvent isShow={isMobile()} />
         <LnbBottomList />
       </Styled.LnbMenu>

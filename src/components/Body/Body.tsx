@@ -3,13 +3,15 @@ import { ContentWrap } from './Content/ContentWrap';
 import { SlideMainBanner } from './SlideMainBanner/SlideMainBanner';
 import { AllMenu } from './AllMenu/AllMenu';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
+import { useViewportSize } from '@/src/hooks/useViewportSize';
 
 export const Body = () => {
-  const { isOpenMenu } = useMenuProvider();
+  const { headerType } = useMenuProvider();
+  const { isMobile } = useViewportSize();
 
   return (
     <Styled.ContantArea>
-      {isOpenMenu ? (
+      {headerType === 'Menu' && !isMobile() ? (
         <AllMenu />
       ) : (
         <Styled.Container>

@@ -6,14 +6,13 @@ import { MainHeader } from './MainHeader/MainHeader';
 import { styled } from 'styled-components';
 
 export const Header = () => {
-  const { scrollPercentage, headerType, onClickType } = useHeader();
+  const { scrollPercentage, onClickType } = useHeader();
 
   return (
     <TabArea>
-      <Dim isShow={headerType !== 'None'} />
+      <Dim />
       <Styled.NavigationBar $scrollPercentage={scrollPercentage} />
       <MainHeader
-        headerType={headerType}
         onClickType={onClickType}
         isMovedScroll={scrollPercentage > 0}
       />

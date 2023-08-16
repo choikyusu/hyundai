@@ -6,7 +6,7 @@ import { TabContent } from './TabContent/TabContent';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 export const AllMenu = () => {
-  const { setOpenMenu } = useMenuProvider();
+  const { setHeaderType } = useMenuProvider();
   const { keyword, treeList, filteredTreeList, onChange } = useAllMenu();
   return (
     <Styled.AllMenu>
@@ -15,7 +15,7 @@ export const AllMenu = () => {
         <Styled.ContentWrap>
           <TabMenu treeList={treeList} />
           <TabContent treeList={filteredTreeList} keyword={keyword} />
-          <Styled.CloseButton onClick={() => setOpenMenu(false)} />
+          <Styled.CloseButton onClick={() => setHeaderType('None')} />
         </Styled.ContentWrap>
       </Styled.Container>
     </Styled.AllMenu>

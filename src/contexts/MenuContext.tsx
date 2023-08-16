@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
 type MenuContextProps = {
-  isOpenMenu: boolean;
-  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  headerType: HeaderMenuType;
+  setHeaderType: React.Dispatch<React.SetStateAction<HeaderMenuType>>;
 };
 
 const MenuContext = createContext<MenuContextProps>({
-  isOpenMenu: false,
-  setOpenMenu: () => undefined,
+  headerType: 'None',
+  setHeaderType: () => undefined,
 });
 
 export default function MenuProvider({
@@ -15,14 +15,14 @@ export default function MenuProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [isOpenMenu, setOpenMenu] = useState<boolean>(false);
+  const [headerType, setHeaderType] = useState<HeaderMenuType>('None');
 
   const value = useMemo(
     () => ({
-      isOpenMenu,
-      setOpenMenu,
+      headerType,
+      setHeaderType,
     }),
-    [isOpenMenu, setOpenMenu],
+    [headerType, setHeaderType],
   );
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
