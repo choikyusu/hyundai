@@ -1,4 +1,5 @@
 import { HyundaiSvgComponent } from '@/src/components/assets/HyundaiSvgComponent';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { styled } from 'styled-components';
@@ -9,13 +10,18 @@ interface LogoProps {
 
 export const Logo = ({ isClicked }: LogoProps) => {
   const { viewportSize } = useViewportSize();
+  const { headerType } = useMenuProvider();
 
   return (
     <Styled.Logo>
       <Styled.Logobutton type="button">
         <HyundaiSvgComponent
           width={viewportSize === 'Large' ? '166px' : '126px'}
-          fill={isClicked ? '#fff' : '#002c5f'}
+          fill={
+            isClicked && viewportSize === 'Small' && headerType === 'Menu'
+              ? '#fff'
+              : '#002c5f'
+          }
         />
       </Styled.Logobutton>
     </Styled.Logo>
