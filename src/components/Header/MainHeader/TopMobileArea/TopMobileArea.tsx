@@ -1,20 +1,19 @@
 import { CSSProp, css, styled } from 'styled-components';
 import { Logo } from './Logo/Logo';
 import { MobileController } from './MobileController/MobileController';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 export interface TopMobileAreaProps {
-  headerType: HeaderMenuType;
   onClickType: (type: HeaderMenuType) => void;
 }
 
-export const TopMobileArea = ({
-  headerType,
-  onClickType,
-}: TopMobileAreaProps) => {
+export const TopMobileArea = ({ onClickType }: TopMobileAreaProps) => {
+  const { headerType } = useMenuProvider();
+
   return (
     <Styled.TopMobileArea $areaStyle={AREA_STYLE[headerType]}>
       <Logo isClicked={headerType !== 'None'} />
-      <MobileController headerType={headerType} onClickType={onClickType} />
+      <MobileController onClickType={onClickType} />
     </Styled.TopMobileArea>
   );
 };

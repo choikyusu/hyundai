@@ -4,27 +4,16 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useHeader = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
-  const [headerType, setHeaderType] = useState<HeaderMenuType>('None');
 
   const { isMobile } = useViewportSize();
-  const { setOpenMenu } = useMenuProvider();
+  const { setHeaderType } = useMenuProvider();
 
   const onClickType = useCallback(
     (type: HeaderMenuType) => {
-      if (isMobile()) {
-        setHeaderType(prev => {
-          if (prev === type) return 'None';
-          return type;
-        });
-      } else if (type === 'Menu') {
-        setOpenMenu(true);
-        setHeaderType('None');
-      } else {
-        setHeaderType(prev => {
-          if (prev === type) return 'None';
-          return type;
-        });
-      }
+      setHeaderType(prev => {
+        if (prev === type) return 'None';
+        return type;
+      });
     },
     [isMobile],
   );
@@ -37,7 +26,7 @@ export const useHeader = () => {
     };
   }, []);
 
-  return { scrollPercentage, headerType, onClickType };
+  return { scrollPercentage, onClickType };
 
   function scrollEvent() {
     const windowHeight = window.innerHeight;

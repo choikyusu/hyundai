@@ -3,11 +3,11 @@ import { styled } from 'styled-components';
 import { TopMobileAreaProps } from '../TopMobileArea';
 import { TextLink } from './TextLink/TextLink';
 import { CommonStyled } from '@/src/styles/CommonStyled';
+import { useMenuProvider } from '@/src/contexts/MenuContext';
 
-export const MobileController = ({
-  headerType,
-  onClickType,
-}: TopMobileAreaProps) => {
+export const MobileController = ({ onClickType }: TopMobileAreaProps) => {
+  const { headerType } = useMenuProvider();
+
   return (
     <Styled.MobileController>
       <TextLink headerType={headerType} />
