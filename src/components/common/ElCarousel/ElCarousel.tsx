@@ -89,7 +89,7 @@ const VARIANT_STYLE = {
       }
 
       height: 950px !important;
-      overflow: visible;
+      overflow: hidden;
     `,
     GnbEvent: css``,
     ModelSection: css`
