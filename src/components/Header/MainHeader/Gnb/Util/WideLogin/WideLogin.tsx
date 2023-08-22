@@ -2,21 +2,21 @@ import { languageList, loginList } from '@/src/datas/language.data';
 import { TextLink } from '../../../TopMobileArea/MobileController/TextLink/TextLink';
 import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
 import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
-import { Styled } from '../Login';
+import { Styled } from '../Util';
 
-interface PCLoginProps {
+interface WideLoginProps {
   language: string;
   openType: '' | PCSideMenuType;
   onClickButton: (type: PCSideMenuType) => void;
   onClickType: (type: HeaderMenuType) => void;
 }
 
-export const PCLogin = ({
+export const WideLogin = ({
   language,
   openType,
   onClickButton,
   onClickType,
-}: PCLoginProps) => {
+}: WideLoginProps) => {
   return (
     <>
       <TextLink headerType="Web" />

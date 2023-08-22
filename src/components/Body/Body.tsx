@@ -9,16 +9,20 @@ export const Body = () => {
   const { headerType } = useMenuProvider();
   const { isMobile } = useViewportSize();
 
+  if (!isMobile() && headerType === 'Menu') {
+    return (
+      <Styled.ContantArea>
+        <AllMenu />
+      </Styled.ContantArea>
+    );
+  }
+
   return (
     <Styled.ContantArea>
-      {headerType === 'Menu' && !isMobile() ? (
-        <AllMenu />
-      ) : (
-        <Styled.Container>
-          <SlideMainBanner />
-          <ContentWrap />
-        </Styled.Container>
-      )}
+      <Styled.Container>
+        <SlideMainBanner />
+        <ContentWrap />
+      </Styled.Container>
     </Styled.ContantArea>
   );
 };

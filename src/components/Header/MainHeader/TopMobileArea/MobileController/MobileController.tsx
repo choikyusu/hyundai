@@ -12,18 +12,10 @@ export const MobileController = ({ onClickType }: TopMobileAreaProps) => {
     <Styled.MobileController>
       <TextLink headerType={headerType} />
       <Styled.ButtonWrapper>
-        <Styled.SearchButton
-          data-link-area="gnb"
-          data-link-name="검색"
-          onClick={() => onClickType('Search')}
-        >
+        <Styled.SearchButton onClick={() => onClickType('Search')}>
           <RiSearchLine fill={headerType === 'Menu' ? '#fff' : '#002c5f'} />
         </Styled.SearchButton>
-        <Styled.MenuButton
-          data-link-area="gnb"
-          data-link-name="전체메뉴"
-          onClick={() => onClickType('Menu')}
-        >
+        <Styled.MenuButton onClick={() => onClickType('Menu')}>
           <RiMenu3Fill fill={headerType === 'Menu' ? '#fff' : '#002c5f'} />
         </Styled.MenuButton>
       </Styled.ButtonWrapper>

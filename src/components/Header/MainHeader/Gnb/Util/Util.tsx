@@ -2,22 +2,18 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { BUTTON_STYLE } from './styles/buttonStyle';
-import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { useState } from 'react';
-import { MobileLogin } from './MobileLogin/MobileLogin';
-import { PCLogin } from './PCLogin/PCLogin';
-import { UnifiedSearch } from '../../Search/MobileSearch/UnifiedSearch/UnifiedSearch';
+import { UnifiedSearch } from '../../../../common/UnifiedSearch/UnifiedSearch';
 import { MdOutlineCancel } from 'react-icons/md';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
+import { Login } from './Login/Login';
 
-interface LoginProps {
+interface UtilProps {
   onClickType: (type: HeaderMenuType) => void;
 }
 
-export const Login = ({ onClickType }: LoginProps) => {
+export const Util = ({ onClickType }: UtilProps) => {
   const { headerType } = useMenuProvider();
-
-  const { isMobile } = useViewportSize();
 
   const [language, setLanguage] = useState('KR');
   const [openType, setOpenType] = useState<PCSideMenuType | ''>('');
@@ -36,21 +32,12 @@ export const Login = ({ onClickType }: LoginProps) => {
   return (
     <Styled.UtilWrapper>
       <Styled.Util>
-        {isMobile() && (
-          <MobileLogin
-            language={language}
-            openType={openType}
-            onClickButton={onClickButton}
-          />
-        )}
-        {!isMobile() && (
-          <PCLogin
-            language={language}
-            openType={openType}
-            onClickButton={onClickButton}
-            onClickType={onClickType}
-          />
-        )}
+        <Login
+          openType={openType}
+          language={language}
+          onClickButton={onClickButton}
+          onClickType={onClickType}
+        />
       </Styled.Util>
       <Styled.SearchWrap $isOpen={headerType === 'Search'}>
         <Styled.SearchInnerWrap>

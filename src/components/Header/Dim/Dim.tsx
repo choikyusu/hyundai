@@ -1,19 +1,10 @@
-import { useMenuProvider } from '@/src/contexts/MenuContext';
-import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { styled } from 'styled-components';
+import { useDim } from './useDim';
 
 export const Dim = () => {
-  const { headerType } = useMenuProvider();
-  const { isMobile } = useViewportSize();
+  const { showDim } = useDim();
 
-  return (
-    <Style.Dim
-      $isShow={
-        (isMobile() && headerType !== 'None') ||
-        (!isMobile() && headerType !== 'Menu' && headerType !== 'None')
-      }
-    />
-  );
+  return <Style.Dim $isShow={showDim()} />;
 };
 
 const Style = {

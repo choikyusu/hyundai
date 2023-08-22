@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import { LnbList } from './LnbList/LnbList';
-import { Login } from './Login/Login';
+import { Util } from './Util/Util';
 import { GnbEvent } from './GnbEvent/GnbEvent';
 import { LnbBottomList } from './LnbBottomList/LnbBottomList';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ export const Gnb = ({ onClickType }: MobileSearchProps) => {
       <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
         <LnbList el={el} />
-        <Login onClickType={onClickType} />
+        <Util onClickType={onClickType} />
         <GnbEvent isShow={isMobile()} />
         <LnbBottomList />
       </Styled.LnbMenu>
