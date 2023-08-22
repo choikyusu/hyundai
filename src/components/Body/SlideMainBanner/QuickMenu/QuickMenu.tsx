@@ -7,6 +7,34 @@ import { ElCarousel } from '@/src/components/common/ElCarousel/ElCarousel';
 export const QuickMenu = () => {
   const { isMobile } = useViewportSize();
 
+  const config: ElCarouselConfigType = {
+    showArrow: { small: false, medium: true, large: true },
+    contentCountBySlide: {
+      small: { total: 1, cols: 1 },
+      medium: { total: 6, cols: 6 },
+      large: { total: 6, cols: 6 },
+    },
+    style: {
+      grid: {
+        templateColumns: {
+          small: 'repeat(1, 1fr)',
+          medium: 'repeat(6, 1fr)',
+          large: 'repeat(6, 1fr)',
+        },
+        gap: {
+          small: '2.55%',
+          medium: '2.55%',
+          large: '2.55%',
+        },
+      },
+      arrow: {
+        background: 'transparent',
+        size: '18px',
+        color: 'black',
+      },
+    },
+  };
+
   return (
     <Styled.QuickMenu>
       {isMobile() ? (
@@ -25,36 +53,7 @@ export const QuickMenu = () => {
           </Styled.ItemsWrap>
         </Styled.ElCarouselItem>
       ) : (
-        <ElCarousel
-          type="QuickMenu"
-          config={{
-            showArrow: { small: false, medium: true, large: true },
-            contentCountBySlide: {
-              small: { total: 1, cols: 1 },
-              medium: { total: 6, cols: 6 },
-              large: { total: 6, cols: 6 },
-            },
-            style: {
-              grid: {
-                templateColumns: {
-                  small: 'repeat(1, 1fr)',
-                  medium: 'repeat(6, 1fr)',
-                  large: 'repeat(6, 1fr)',
-                },
-                gap: {
-                  small: '2.55%',
-                  medium: '2.55%',
-                  large: '2.55%',
-                },
-              },
-              arrow: {
-                background: 'transparent',
-                size: '18px',
-                color: 'black',
-              },
-            },
-          }}
-        >
+        <ElCarousel type="QuickMenu" config={config}>
           {quickMenuList.map(menu => (
             <Styled.Icon>
               <Styled.TextButton $imageUrl={menu.imageUrl} href={menu.pageUrl}>

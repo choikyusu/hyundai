@@ -3,33 +3,31 @@ import { CarListProps, Styled } from '../CarList';
 import { Car } from './Car/Car';
 
 export const PCCarListStrategy = ({ isShow, subList }: CarListProps) => {
+  const config: ElCarouselConfigType = {
+    showArrow: { small: true, medium: true, large: true },
+    contentCountBySlide: {
+      small: { total: 6, cols: 3 },
+      medium: { total: 6, cols: 3 },
+      large: { total: 6, cols: 3 },
+    },
+    style: {
+      grid: {
+        templateColumns: {
+          small: 'repeat(3, 1fr)',
+          medium: 'repeat(3, 1fr)',
+          large: 'repeat(3, 1fr)',
+        },
+        gap: {
+          small: '2.55%',
+          medium: '2.55%',
+          large: '2.55%',
+        },
+      },
+    },
+  };
   return (
     <Styled.ElCarouselWrapper $isShow={isShow}>
-      <ElCarousel
-        type="CarList"
-        config={{
-          showArrow: { small: true, medium: true, large: true },
-          contentCountBySlide: {
-            small: { total: 6, cols: 3 },
-            medium: { total: 6, cols: 3 },
-            large: { total: 6, cols: 3 },
-          },
-          style: {
-            grid: {
-              templateColumns: {
-                small: 'repeat(3, 1fr)',
-                medium: 'repeat(3, 1fr)',
-                large: 'repeat(3, 1fr)',
-              },
-              gap: {
-                small: '2.55%',
-                medium: '2.55%',
-                large: '2.55%',
-              },
-            },
-          },
-        }}
-      >
+      <ElCarousel type="CarList" config={config}>
         {subList.map((item, index) => (
           <Car key={index} {...item} />
         ))}

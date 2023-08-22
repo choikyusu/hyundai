@@ -5,17 +5,16 @@ import { Fluid } from './Fluid/Fluid';
 import { QuickMenu } from './QuickMenu/QuickMenu';
 
 export const SlideMainBanner = () => {
+  const config: ElCarouselConfigType = {
+    showArrow: { small: false, medium: true, large: true },
+    style: {
+      arrow: { background: 'transparent', color: 'black', size: '49px' },
+    },
+  };
+
   return (
     <Styled.KeyVisualWrapper>
-      <ElCarousel
-        type="Main"
-        config={{
-          showArrow: { small: false, medium: true, large: true },
-          style: {
-            arrow: { background: 'transparent', color: 'black', size: '49px' },
-          },
-        }}
-      >
+      <ElCarousel type="Main" config={config}>
         {fluidList.map((fluid, index) => (
           <Fluid key={index} fluid={fluid} />
         ))}
