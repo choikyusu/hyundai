@@ -5,6 +5,10 @@ import { eventList } from './data/data';
 import { Event } from './Event/Event';
 
 export const EventSection = () => {
+  const config: ElCarouselConfigType = {
+    showArrow: { small: false, medium: true, large: true },
+  };
+
   return (
     <CommonSection
       title="Events"
@@ -14,10 +18,7 @@ export const EventSection = () => {
       ]}
     >
       <Styled.SectionBody>
-        <ElCarousel
-          type="Events"
-          config={{ showArrow: { small: false, medium: true, large: true } }}
-        >
+        <ElCarousel type="Events" config={config}>
           {eventList.map((event, index) => (
             <Event key={index} event={event} />
           ))}

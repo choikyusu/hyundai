@@ -5,6 +5,10 @@ import { brandList } from './data/data';
 import { Brand } from './Brand/Brand';
 
 export const BrandSection = () => {
+  const config: ElCarouselConfigType = {
+    showArrow: { small: true, medium: true, large: true },
+  };
+
   return (
     <CommonSection
       title="Brand"
@@ -14,10 +18,7 @@ export const BrandSection = () => {
       ]}
     >
       <Styled.SectionBody>
-        <ElCarousel
-          type="Brand"
-          config={{ showArrow: { small: true, medium: true, large: true } }}
-        >
+        <ElCarousel type="Brand" config={config}>
           {brandList.map((barnd, index) => (
             <Brand key={index} barnd={barnd} />
           ))}

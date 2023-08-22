@@ -9,6 +9,30 @@ import { CommonSection } from '../CommonSection';
 export const ModelSection = () => {
   const { onClickAge, isActive, modelList } = useModelSection();
 
+  const config: ElCarouselConfigType = {
+    showArrow: { small: true, medium: false, large: false },
+    contentCountBySlide: {
+      small: { total: 1, cols: 1 },
+      medium: { total: 1, cols: 1 },
+      large: { total: 3, cols: 3 },
+    },
+    style: {
+      grid: {
+        templateColumns: {
+          small: 'repeat(1, 1fr)',
+          medium: 'repeat(1, 1fr)',
+          large: '2fr 1fr 1fr',
+        },
+        gap: {
+          small: '2.55%',
+          medium: '2.55%',
+          large: '2.55%',
+        },
+        alignItem: 'end',
+      },
+    },
+  };
+
   return (
     <CommonSection
       title="Model"
@@ -30,32 +54,7 @@ export const ModelSection = () => {
             </Styled.IconWrapper>
           </Styled.TabMenu>
         </div>
-        <ElCarousel
-          type="ModelSection"
-          config={{
-            showArrow: { small: true, medium: false, large: false },
-            contentCountBySlide: {
-              small: { total: 1, cols: 1 },
-              medium: { total: 1, cols: 1 },
-              large: { total: 3, cols: 3 },
-            },
-            style: {
-              grid: {
-                templateColumns: {
-                  small: 'repeat(1, 1fr)',
-                  medium: 'repeat(1, 1fr)',
-                  large: '2fr 1fr 1fr',
-                },
-                gap: {
-                  small: '2.55%',
-                  medium: '2.55%',
-                  large: '2.55%',
-                },
-                alignItem: 'end',
-              },
-            },
-          }}
-        >
+        <ElCarousel type="ModelSection" config={config}>
           {modelList.map((model, index) => (
             <Model key={index} model={model} />
           ))}
