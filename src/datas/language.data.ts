@@ -11,3 +11,14 @@ export const languageList: LanguageType[] = [
   },
   { name: '상용글로벌', pageUrl: 'https://trucknbus.hyundai.com/global/en' },
 ];
+
+export const loginList: LoginType[] = [
+  {
+    name: '개인 로그인',
+    pageUrl: '/login',
+  },
+  {
+    name: '법인 로그인',
+    pageUrl: '/login',
+  },
+];

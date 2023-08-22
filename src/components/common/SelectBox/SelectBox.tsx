@@ -1,25 +1,17 @@
-import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 import { styled } from 'styled-components';
 
 interface SelectButtonProps {
-  selectedItem: string;
+  children: ReactNode;
   list: DropdownListType;
   isOpen: boolean;
-  onClick: () => void;
 }
 
-export const SelectButton = ({
-  selectedItem,
-  list,
-  isOpen,
-  onClick,
-}: SelectButtonProps) => {
+export const SelectButton = ({ children, list, isOpen }: SelectButtonProps) => {
   return (
     <>
-      <Styled.SelectButton onClick={onClick}>
-        {selectedItem}
-      </Styled.SelectButton>
+      {children}
       <Styled.ListWrap $isOpen={isOpen}>
         <Styled.DropdownList>
           {list.map((item, index) => (
@@ -34,43 +26,6 @@ export const SelectButton = ({
 };
 
 const Styled = {
-  SelectButton: styled(CommonStyled.Button)`
-    @media screen and (max-width: 767px) {
-      margin: 0 auto;
-      display: block;
-      color: #002c5f;
-      font-family: 'HyundaiSansTextKR';
-      font-size: 12px;
-      line-height: 20px;
-      letter-spacing: -0.4px;
-      letter-spacing: 0;
-      line-height: 48px;
-    }
-
-    @media screen and (max-width: 767px) {
-      width: 100%;
-    }
-
-    @media screen and (min-width: 768px) {
-      outline: none;
-      border: none;
-    }
-    @media screen and (min-width: 768px) {
-      color: #000;
-      height: 100%;
-    }
-
-    @media screen and (min-width: 768px) {
-      font-family: 'HyundaiSansHeadKRR';
-      font-size: 16px;
-      line-height: 30px;
-      letter-spacing: -0.4px;
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 1024px) {
-      font-size: 15px;
-    }
-  `,
   ListWrap: styled.div<{ $isOpen: boolean }>`
     display: ${props => (props.$isOpen ? 'block' : 'none')};
 

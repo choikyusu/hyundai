@@ -63,10 +63,14 @@ type ViewportSizeType = 'Small' | 'Medium' | 'Large';
 
 type ChildrenType = ReactElement<any, string | JSXElementConstructor<any>>;
 
+type PCSideMenuType = 'Language' | 'Login';
+
 type LanguageType = {
   name: string;
   pageUrl: string;
 };
+
+type LoginType = LanguageType;
 
 type ArrowStyleType = {
   background: string;
