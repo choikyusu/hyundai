@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { useMobileSearch } from './useMobileSearch';
 import { MobileTabList } from './MobileTabList/MobileTabList';
 import { TabMenu } from './TabMenu/TabMenu';
-import { UnifiedSearch } from './UnifiedSearch/UnifiedSearch';
+import { UnifiedSearch } from '../../../../common/UnifiedSearch/UnifiedSearch';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 
 export const MobileSearch = () => {

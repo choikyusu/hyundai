@@ -18,7 +18,6 @@ export const ElCarousel = React.memo(
       selectedIndex,
       itemList,
       isPlay,
-      getGridRowCount,
       getRefWidth,
       getPageCount,
       onClickDot,
