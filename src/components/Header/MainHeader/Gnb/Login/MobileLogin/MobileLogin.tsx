@@ -4,34 +4,33 @@ import { Styled } from '../Login';
 
 interface MobileLoginProps {
   language: string;
-  isOpen: boolean;
-  onClickLanguage: () => void;
+  openType: '' | PCSideMenuType;
+  onClickButton: (type: PCSideMenuType) => void;
 }
 
 export const MobileLogin = ({
   language,
-  isOpen,
-  onClickLanguage,
+  openType,
+  onClickButton,
 }: MobileLoginProps) => {
   return (
     <>
       <Styled.ItemUtil>
-        <Styled.MobileLoginButton href="/kr/ko/login" title="개인 로그인">
+        <Styled.MobileLoginButton href="/login" title="개인 로그인">
           개인 로그인
         </Styled.MobileLoginButton>
       </Styled.ItemUtil>
       <Styled.ItemUtil>
-        <Styled.MobileLoginButton href="/kr/ko/login" title="개인 로그인">
+        <Styled.MobileLoginButton href="/login" title="법인 로그인">
           법인 로그인
         </Styled.MobileLoginButton>
       </Styled.ItemUtil>
       <Styled.ItemUtil>
-        <SelectButton
-          selectedItem={language}
-          list={languageList}
-          isOpen={isOpen}
-          onClick={onClickLanguage}
-        />
+        <SelectButton list={languageList} isOpen={openType === 'Language'}>
+          <Styled.SelectButton onClick={() => onClickButton('Language')}>
+            {language}
+          </Styled.SelectButton>
+        </SelectButton>
       </Styled.ItemUtil>
     </>
   );

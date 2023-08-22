@@ -1,4 +1,4 @@
-import { languageList } from '@/src/datas/language.data';
+import { languageList, loginList } from '@/src/datas/language.data';
 import { TextLink } from '../../../TopMobileArea/MobileController/TextLink/TextLink';
 import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
 import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
@@ -6,30 +6,33 @@ import { Styled } from '../Login';
 
 interface PCLoginProps {
   language: string;
-  isOpen: boolean;
-  onClickLanguage: () => void;
+  openType: '' | PCSideMenuType;
+  onClickButton: (type: PCSideMenuType) => void;
   onClickType: (type: HeaderMenuType) => void;
 }
 
 export const PCLogin = ({
   language,
-  isOpen,
-  onClickLanguage,
+  openType,
+  onClickButton,
   onClickType,
 }: PCLoginProps) => {
   return (
     <>
       <TextLink headerType="Web" />
       <Styled.ItemUtil>
-        <SelectButton
-          selectedItem={language}
-          list={languageList}
-          isOpen={isOpen}
-          onClick={onClickLanguage}
-        />
+        <SelectButton list={languageList} isOpen={openType === 'Language'}>
+          <Styled.SelectButton onClick={() => onClickButton('Language')}>
+            {language}
+          </Styled.SelectButton>
+        </SelectButton>
       </Styled.ItemUtil>
       <Styled.Divide />
-      <Styled.LoginButton />
+      <Styled.ItemUtil>
+        <SelectButton list={loginList} isOpen={openType === 'Login'}>
+          <Styled.LoginButton onClick={() => onClickButton('Login')} />
+        </SelectButton>
+      </Styled.ItemUtil>
       <Styled.ItemUtil>
         <Styled.SearchButton>
           <RiSearchLine fill="#002c5f" onClick={() => onClickType('Search')} />

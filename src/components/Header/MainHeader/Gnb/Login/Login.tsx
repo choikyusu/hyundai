@@ -20,9 +20,9 @@ export const Login = ({ onClickType }: LoginProps) => {
   const { isMobile } = useViewportSize();
 
   const [language, setLanguage] = useState('KR');
-  const [isOpen, setIsOpen] = useState(false);
-  const onClickLanguage = () => {
-    setIsOpen(prev => !prev);
+  const [openType, setOpenType] = useState<PCSideMenuType | ''>('');
+  const onClickButton = (type: PCSideMenuType) => {
+    setOpenType(prev => (prev === type ? '' : type));
   };
 
   const [keyword, setKeyword] = useState('');
@@ -39,15 +39,15 @@ export const Login = ({ onClickType }: LoginProps) => {
         {isMobile() && (
           <MobileLogin
             language={language}
-            isOpen={isOpen}
-            onClickLanguage={onClickLanguage}
+            openType={openType}
+            onClickButton={onClickButton}
           />
         )}
         {!isMobile() && (
           <PCLogin
             language={language}
-            isOpen={isOpen}
-            onClickLanguage={onClickLanguage}
+            openType={openType}
+            onClickButton={onClickButton}
             onClickType={onClickType}
           />
         )}
@@ -167,6 +167,43 @@ export const Styled = {
     width: 1px;
     height: 0.9em em;
     background: #999;
+  `,
+  SelectButton: styled(CommonStyled.Button)`
+    @media screen and (max-width: 767px) {
+      margin: 0 auto;
+      display: block;
+      color: #002c5f;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: -0.4px;
+      letter-spacing: 0;
+      line-height: 48px;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      outline: none;
+      border: none;
+    }
+    @media screen and (min-width: 768px) {
+      color: #000;
+      height: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      font-family: 'HyundaiSansHeadKRR';
+      font-size: 16px;
+      line-height: 30px;
+      letter-spacing: -0.4px;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 15px;
+    }
   `,
   LoginButton: styled(CommonStyled.Button)`
     outline: none;
