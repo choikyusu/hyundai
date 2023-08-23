@@ -7,14 +7,11 @@ import { UnifiedSearch } from '../../../../common/UnifiedSearch/UnifiedSearch';
 import { MdOutlineCancel } from 'react-icons/md';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 import { Login } from './Login/Login';
+import { useHeaderMenu } from '@/src/hooks/useHeaderMenu';
 
-interface UtilProps {
-  onClickType: (type: HeaderMenuType) => void;
-}
-
-export const Util = ({ onClickType }: UtilProps) => {
+export const Util = () => {
   const { headerType } = useMenuProvider();
-
+  const { onClickType } = useHeaderMenu();
   const [language, setLanguage] = useState('KR');
   const [openType, setOpenType] = useState<PCSideMenuType | ''>('');
   const onClickButton = (type: PCSideMenuType) => {
@@ -36,7 +33,6 @@ export const Util = ({ onClickType }: UtilProps) => {
           openType={openType}
           language={language}
           onClickButton={onClickButton}
-          onClickType={onClickType}
         />
       </Styled.Util>
       <Styled.SearchWrap $isOpen={headerType === 'Search'}>

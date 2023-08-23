@@ -33,11 +33,6 @@ export const useElCarousel = ({
   const [el, setEl] = useState<HTMLDivElement | null>(null);
   const itemList: HTMLDivElement[] = [];
 
-  const getRefWidth = (el: HTMLDivElement) => {
-    setWidth(el?.offsetWidth || 0);
-    setEl(el);
-  };
-
   const { viewportSize } = useViewportSize();
   useElCarouselEffect(getUseElCarouselEffectProps());
 
@@ -45,15 +40,18 @@ export const useElCarousel = ({
     getUseElCarouselEventProps(),
   );
 
+  const getRefWidth = (el: HTMLDivElement) => {
+    setWidth(el?.offsetWidth || 0);
+    setEl(el);
+  };
+
   const splitChildrenIntoChunks = () => {
     const childrenArray = React.Children.toArray(children) as ChildrenType[];
 
     return childrenArray.reduce((result: ChildrenType[][], current, index) => {
       const chunkIndex = Math.floor(index / getContentCountBySilde());
 
-      if (!result[chunkIndex]) {
-        result[chunkIndex] = [];
-      }
+      if (!result[chunkIndex]) result[chunkIndex] = [];
 
       const newElement = cloneElement(current, {
         selected: isSelected(index),

@@ -7,11 +7,7 @@ import { useState } from 'react';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 
-interface MobileSearchProps {
-  onClickType: (type: HeaderMenuType) => void;
-}
-
-export const Gnb = ({ onClickType }: MobileSearchProps) => {
+export const Gnb = () => {
   const { headerType } = useMenuProvider();
 
   const [el, setEl] = useState<HTMLDivElement | null>(null);
@@ -22,7 +18,7 @@ export const Gnb = ({ onClickType }: MobileSearchProps) => {
       <Styled.MenuBar ref={(el: HTMLDivElement) => setEl(el)} />
       <Styled.LnbMenu>
         <LnbList el={el} />
-        <Util onClickType={onClickType} />
+        <Util />
         <GnbEvent isShow={isMobile()} />
         <LnbBottomList />
       </Styled.LnbMenu>

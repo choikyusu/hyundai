@@ -6,15 +6,9 @@ interface LoginProps {
   language: string;
   openType: '' | PCSideMenuType;
   onClickButton: (type: PCSideMenuType) => void;
-  onClickType: (type: HeaderMenuType) => void;
 }
 
-export const Login = ({
-  language,
-  openType,
-  onClickButton,
-  onClickType,
-}: LoginProps) => {
+export const Login = ({ language, openType, onClickButton }: LoginProps) => {
   const { isMobile } = useViewportSize();
 
   if (isMobile())
@@ -30,7 +24,6 @@ export const Login = ({
       language={language}
       openType={openType}
       onClickButton={onClickButton}
-      onClickType={onClickType}
     />
   );
 };
