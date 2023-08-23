@@ -5,33 +5,28 @@ import { TopMobileArea } from './TopMobileArea/TopMobileArea';
 import { Gnb } from './Gnb/Gnb';
 import React from 'react';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
+import { useScroll } from '@/src/hooks/useScroll';
 
-interface MainHeaderProps {
-  onClickType: (type: HeaderMenuType) => void;
-  isMovedScroll: boolean;
-}
+export const MainHeader = React.memo(() => {
+  const { headerType } = useMenuProvider();
+  const { isMovedScroll } = useScroll();
 
-export const MainHeader = React.memo(
-  ({ isMovedScroll, onClickType }: MainHeaderProps) => {
-    const { headerType } = useMenuProvider();
+  const headerStyles = HEADER_STYLE[headerType];
 
-    const headerStyles = HEADER_STYLE[headerType];
-
-    return (
-      <Styled.Header
-        $headerStyles={headerStyles}
-        $isMovedScroll={isMovedScroll}
-        $headerType={headerType}
-      >
-        <Styled.InnerWrap>
-          <TopMobileArea onClickType={onClickType} />
-          <MobileSearch />
-          <Gnb onClickType={onClickType} />
-        </Styled.InnerWrap>
-      </Styled.Header>
-    );
-  },
-);
+  return (
+    <Styled.Header
+      $headerStyles={headerStyles}
+      $isMovedScroll={isMovedScroll()}
+      $headerType={headerType}
+    >
+      <Styled.InnerWrap>
+        <TopMobileArea />
+        <MobileSearch />
+        <Gnb />
+      </Styled.InnerWrap>
+    </Styled.Header>
+  );
+});
 
 const Styled = {
   Header: styled(CommonStyled.Header)<{

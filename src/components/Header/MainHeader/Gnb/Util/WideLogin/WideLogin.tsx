@@ -3,20 +3,20 @@ import { TextLink } from '../../../TopMobileArea/MobileController/TextLink/TextL
 import { SelectButton } from '@/src/components/common/SelectBox/SelectBox';
 import { RiMenu3Fill, RiSearchLine } from 'react-icons/ri';
 import { Styled } from '../Util';
+import { useHeaderMenu } from '@/src/hooks/useHeaderMenu';
 
 interface WideLoginProps {
   language: string;
   openType: '' | PCSideMenuType;
   onClickButton: (type: PCSideMenuType) => void;
-  onClickType: (type: HeaderMenuType) => void;
 }
 
 export const WideLogin = ({
   language,
   openType,
   onClickButton,
-  onClickType,
 }: WideLoginProps) => {
+  const { onClickType } = useHeaderMenu();
   return (
     <>
       <TextLink headerType="Web" />

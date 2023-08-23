@@ -1,21 +1,18 @@
 import { TabArea } from './TabArea/TabArea';
 
 import { Dim } from './Dim/Dim';
-import { useHeader } from './useHeader';
 import { MainHeader } from './MainHeader/MainHeader';
 import { styled } from 'styled-components';
+import { useScroll } from '@/src/hooks/useScroll';
 
 export const Header = () => {
-  const { scrollPercentage, onClickType } = useHeader();
+  const { scrollPercentage } = useScroll();
 
   return (
     <TabArea>
       <Dim />
       <Styled.NavigationBar $scrollPercentage={scrollPercentage} />
-      <MainHeader
-        onClickType={onClickType}
-        isMovedScroll={scrollPercentage > 0}
-      />
+      <MainHeader />
     </TabArea>
   );
 };
