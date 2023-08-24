@@ -9,7 +9,12 @@ export default function Login() {
           <Styled.HeaderWrap>
             <Styled.Header>
               <h2>
-                <img src="/images/hyundai_logo.png" alt="HYUNDAI" />
+                <img
+                  width="100%"
+                  height="100%"
+                  src="/images/hyundai_logo.png"
+                  alt="HYUNDAI"
+                />
               </h2>
             </Styled.Header>
           </Styled.HeaderWrap>
