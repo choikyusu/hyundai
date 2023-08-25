@@ -127,6 +127,9 @@ const Styled = {
       ${props =>
         props.$gridStyle?.alignItem &&
         `align-items: ${props.$gridStyle?.alignItem}`};
+
+      position: relative;
+      overflow: auto;
     }
 
     @media screen and (min-width: 1025px) {
@@ -138,6 +141,9 @@ const Styled = {
       ${props =>
         props.$gridStyle?.alignItem &&
         `align-items: ${props.$gridStyle?.alignItem}`};
+
+      position: relative;
+      overflow: auto;
     }
 
     ${props => props.$variant}
