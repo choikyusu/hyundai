@@ -28,6 +28,9 @@ type CarType = {
   price: string;
   imageUrl: string;
   pageUrl: string;
+  fuelEfficiency: string;
+  passengerCount: number;
+  displacement: string;
 };
 
 type MenuType = {

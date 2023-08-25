@@ -10,6 +10,9 @@ interface CarProps {
   price: string;
   pageUrl: string;
   index: number;
+  fuelEfficiency: string;
+  passengerCount: number;
+  displacement: string;
   openedIndex: number | undefined;
   setOpenedIndex: Dispatch<SetStateAction<number | undefined>>;
 }
@@ -21,6 +24,9 @@ export const Car = ({
   price,
   index,
   pageUrl,
+  fuelEfficiency,
+  passengerCount,
+  displacement,
   openedIndex,
   setOpenedIndex,
 }: CarProps) => {
@@ -82,15 +88,15 @@ export const Car = ({
                   </Styled.SpecItem>
                   <Styled.SpecItem>
                     <Styled.SpecTitle>연비</Styled.SpecTitle>
-                    <Styled.SpecValue>~96.2 km/kg</Styled.SpecValue>
+                    <Styled.SpecValue>{fuelEfficiency}</Styled.SpecValue>
                   </Styled.SpecItem>
                   <Styled.SpecItem>
                     <Styled.SpecTitle>승차 인원</Styled.SpecTitle>
-                    <Styled.SpecValue>5명</Styled.SpecValue>
+                    <Styled.SpecValue>{passengerCount}명</Styled.SpecValue>
                   </Styled.SpecItem>
                   <Styled.SpecItem>
                     <Styled.SpecTitle>배기량</Styled.SpecTitle>
-                    <Styled.SpecValue>-</Styled.SpecValue>
+                    <Styled.SpecValue>{displacement}</Styled.SpecValue>
                   </Styled.SpecItem>
                 </Styled.SpecList>
               </Styled.DetailSpec>
