@@ -72,5 +72,11 @@ const Stlyed = {
       line-height: 39px;
       color: #666;
     }
+
+    @media screen and (min-width: 768px) {
+      &:hover {
+        color: #007fa8;
+      }
+    }
   `,
 };
