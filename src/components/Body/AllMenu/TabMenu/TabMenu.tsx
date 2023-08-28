@@ -8,8 +8,8 @@ interface TabMenuProps {
 export const TabMenu = ({ treeList }: TabMenuProps) => {
   return (
     <Styled.TabMenuList>
-      {treeList.map(menu => (
-        <Styled.TabMenu>
+      {treeList.map((menu, index) => (
+        <Styled.TabMenu key={index}>
           <Styled.MenuButton>{menu.name}</Styled.MenuButton>
         </Styled.TabMenu>
       ))}
