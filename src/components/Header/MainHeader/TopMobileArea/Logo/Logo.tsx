@@ -2,15 +2,18 @@ import { HyundaiSvgComponent } from '@/src/components/assets/HyundaiSvgComponent
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 import { useViewportSize } from '@/src/hooks/useViewportSize';
 import { CommonStyled } from '@/src/styles/CommonStyled';
+import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 
 export const Logo = () => {
   const { viewportSize } = useViewportSize();
   const { headerType } = useMenuProvider();
 
+  const router = useRouter();
+
   return (
     <Styled.Logo>
-      <Styled.Logobutton type="button">
+      <Styled.Logobutton type="button" onClick={() => router.push('/')}>
         <HyundaiSvgComponent
           width={viewportSize === 'Large' ? '166px' : '126px'}
           fill={

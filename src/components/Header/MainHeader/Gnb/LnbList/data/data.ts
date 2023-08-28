@@ -619,11 +619,11 @@ export const lnbMenuTreeList: LnbMenuTreeType[] = [
         level3List: [
           {
             name: '승용 판매/시승 네트워크',
-            pageUrl: '/kr/ko/e/vehicles/explorer',
+            pageUrl: '/customer/branch',
           },
           {
             name: '상용 판매 네트워크',
-            pageUrl: '/kr/ko/e/vehicles/explorer',
+            pageUrl: '/c/purchase-guid/sale-network',
           },
           {
             name: '시승신청',
