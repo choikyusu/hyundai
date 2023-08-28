@@ -40,8 +40,8 @@ export const QuickMenu = () => {
       {isMobile() ? (
         <Styled.ElCarouselItem>
           <Styled.ItemsWrap>
-            {quickMenuList.map(menu => (
-              <Styled.Icon>
+            {quickMenuList.map((menu, index) => (
+              <Styled.Icon key={index}>
                 <Styled.TextButton
                   $imageUrl={menu.imageUrl}
                   href={menu.pageUrl}
@@ -54,8 +54,8 @@ export const QuickMenu = () => {
         </Styled.ElCarouselItem>
       ) : (
         <ElCarousel type="QuickMenu" config={config}>
-          {quickMenuList.map(menu => (
-            <Styled.Icon>
+          {quickMenuList.map((menu, index) => (
+            <Styled.Icon key={index}>
               <Styled.TextButton $imageUrl={menu.imageUrl} href={menu.pageUrl}>
                 <span>{menu.name}</span>
               </Styled.TextButton>
@@ -260,7 +260,7 @@ const Styled = {
       justify-content: center;
     }
   `,
-  Icon: styled.li`
+  Icon: styled.div`
     position: relative;
 
     @media screen and (max-width: 767px) {

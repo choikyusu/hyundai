@@ -1,6 +1,6 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 interface CarProps {
@@ -13,8 +13,8 @@ interface CarProps {
   fuelEfficiency: string;
   passengerCount: number;
   displacement: string;
-  openedIndex: number | undefined;
-  setOpenedIndex: Dispatch<SetStateAction<number | undefined>>;
+  openedIndex?: number | undefined;
+  setOpenedIndex?: Dispatch<SetStateAction<number | undefined>>;
 }
 
 export const Car = ({
@@ -44,12 +44,15 @@ export const Car = ({
   }, [openedIndex]);
 
   return (
-    <div style={{ paddingBottom: `${openedIndex === index ? '484px' : ''}` }}>
+    <div
+      style={{ paddingBottom: `${openedIndex === index ? '484px' : '0px'}` }}
+    >
       <Styled.CarInfoWrapper
         onClick={() =>
-          openedIndex === index
+          setOpenedIndex &&
+          (openedIndex === index
             ? setOpenedIndex(undefined)
-            : setOpenedIndex(index)
+            : setOpenedIndex(index))
         }
       >
         <div>
@@ -119,7 +122,7 @@ export const Car = ({
 };
 
 const Styled = {
-  CarInfoWrapper: styled.li`
+  CarInfoWrapper: styled.div`
     @media screen and (max-width: 767px) {
       width: 50%;
       min-width: 123px;

@@ -15,8 +15,8 @@ export const MobileLogin = ({
 }: MobileLoginProps) => {
   return (
     <>
-      {loginList.map(login => (
-        <Styled.ItemUtil>
+      {loginList.map((login, index) => (
+        <Styled.ItemUtil key={index}>
           <Styled.MobileLoginButton href={login.pageUrl} title={login.name}>
             {login.name}
           </Styled.MobileLoginButton>

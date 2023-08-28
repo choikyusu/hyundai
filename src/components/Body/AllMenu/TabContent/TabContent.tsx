@@ -15,23 +15,23 @@ export const TabContent = ({ keyword, treeList }: TabContentProps) => {
     switch (level2.type) {
       case 'Car':
         return level2.level3List.map(
-          level3 =>
+          (level3, index) =>
             hasKeyword(level3.carName, keyword) && (
-              <Depth2Item name={level3.carName} />
+              <Depth2Item key={index} name={level3.carName} />
             ),
         );
       case 'Menu':
         return level2.level3List.map(
-          level3 =>
+          (level3, index) =>
             hasKeyword(level3.name, keyword) && (
-              <Depth2Item name={level3.name} />
+              <Depth2Item key={index} name={level3.name} />
             ),
         );
       case 'Footer': {
         return level2.subMenuList.map(
-          level3 =>
+          (level3, index) =>
             hasKeyword(level3.subTitle, keyword) && (
-              <Depth2Item name={level3.subTitle} />
+              <Depth2Item key={index} name={level3.subTitle} />
             ),
         );
       }
@@ -43,12 +43,12 @@ export const TabContent = ({ keyword, treeList }: TabContentProps) => {
 
   return (
     <Styled.TabContentList>
-      {treeList.map(level1 => (
-        <Styled.TabContent>
+      {treeList.map((level1, index) => (
+        <Styled.TabContent key={index}>
           <Styled.TabTitle>{level1.name}</Styled.TabTitle>
           <Styled.Depth1>
-            {level1.level2List.map(level2 => (
-              <Styled.MoreButton>
+            {level1.level2List.map((level2, index2) => (
+              <Styled.MoreButton key={index2}>
                 <Styled.GnbTitle href="">{level2.name}</Styled.GnbTitle>
                 <Styled.Depth2>{renderDepth3(level2)}</Styled.Depth2>
               </Styled.MoreButton>
