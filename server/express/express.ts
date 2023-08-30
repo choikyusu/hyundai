@@ -30,7 +30,7 @@ const createApp = () => {
   app.use(express.static(`${__dirname}/build`));
   app.use('/public', express.static(path.join(rootDir, 'src/public')));
 
-  app.use(logRequest);
+  // app.use(logRequest);
 
   app.use(router);
 

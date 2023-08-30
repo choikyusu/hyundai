@@ -5,6 +5,7 @@ import { Map } from '../map/Map';
 import { useMapProvider } from '@/src/contexts/MapContext';
 import useCoords from '@/src/hooks/useCoords';
 import { useEffect, useState } from 'react';
+import { getAgencyList } from '@/src/services/apis/agency.api.service';
 
 export const Branch = () => {
   const { kakaoMap } = useMapProvider();
@@ -25,6 +26,9 @@ export const Branch = () => {
           }
         },
       );
+      getAgencyList(10, 1, latitude, longitude, (success, acengyList) => {
+        if (success) console.log(acengyList);
+      });
     }
   }, [kakaoMap, latitude, longitude]);
 
