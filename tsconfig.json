@@ -21,6 +21,6 @@
       "@/src*": ["./src*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "src", "@types"],
+  "include": ["**/*.ts", "**/*.tsx", "src", "@types", "server/data"],
   "exclude": ["node_modules"]
 }
