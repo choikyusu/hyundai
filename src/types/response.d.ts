@@ -18,4 +18,6 @@ interface AgencyResponse {
   prePage: number;
   startRow: number;
   total: number;
+  branchCount: number;
+  agencyCount: number;
 }
