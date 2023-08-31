@@ -43,6 +43,8 @@ router.get('/', async (req, res, next) => {
   const result = {
     data: {
       total: newData.length,
+      branchCount: newData.filter(data => data.agencyTypeCode === '1').length,
+      agencyCount: newData.filter(data => data.agencyTypeCode === '2').length,
       list: newData.slice(
         (Number(pageNo) - 1) * Number(pageSize),
         Number(pageNo) * Number(pageSize),
@@ -51,19 +53,15 @@ router.get('/', async (req, res, next) => {
       pageSize: Number(pageSize),
       startRow: 1,
       endRow: 10,
-      pages: 15,
+      pages: Math.ceil(newData.length / Number(pageSize)),
       prePage: Number(pageNo) - 1,
       nextPage: Number(pageNo) + 1,
-      isFirstPage: true,
-      isLastPage: false,
-      hasPreviousPage: false,
-      hasNextPage: true,
-      navigatePages: 8,
-      navigatepageNums: [1, 2, 3, 4, 5, 6, 7, 8],
-      navigateFirstPage: 1,
-      navigateLastPage: 8,
-      firstPage: 1,
-      lastPage: 8,
+      isFirstPage: Number(pageNo) === 1,
+      isLastPage:
+        Number(pageNo) === Math.ceil(newData.length / Number(pageSize)),
+      hasPreviousPage: Number(pageNo) !== 1,
+      hasNextPage:
+        Number(pageNo) !== Math.ceil(newData.length / Number(pageSize)),
     },
   };
 

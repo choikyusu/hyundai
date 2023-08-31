@@ -1,4 +1,4 @@
-type AgencyType = {
+type AgencyDataType = {
   agencyAddress: string;
   agencyCode: string;
   agencyName: string;
