@@ -1,15 +1,15 @@
 import { useMapProvider } from '@/src/contexts/MapContext';
 import useCoords from '@/src/hooks/useCoords';
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect } from 'react';
 
 interface MapProps {
   width: string;
   height: string;
+  setMap: Dispatch<any>;
 }
 
-export function Map({ width, height }: MapProps) {
+export function Map({ width, height, setMap }: MapProps) {
   const { kakaoMap } = useMapProvider();
-  const [map, setMap] = useState<any | null>(null);
 
   const { latitude, longitude } = useCoords();
 
@@ -19,7 +19,7 @@ export function Map({ width, height }: MapProps) {
 
       const options = {
         center: new kakaoMap.LatLng(latitude, longitude),
-        level: 3,
+        level: 6,
       };
 
       setMap(new kakaoMap.Map(container, options));

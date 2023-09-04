@@ -12,13 +12,58 @@ import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
+import { MarkerTip } from '../common/MarkerTip/MarkerTip';
+import { renderToString } from 'react-dom/server';
 
 export const Branch = () => {
+  const [pageIndexList, setPageIndexList] = useState<number[]>([]);
   const { kakaoMap } = useMapProvider();
+  const [map, setMap] = useState<any | null>(null);
   const [address, setAddress] = useState('');
   const [agencyList, setAgencyList] = useState<AgencyResponse | null>(null);
+  const [pageNo, setPageNo] = useState(1);
 
   const { longitude, latitude } = useCoords();
+
+  const calcVisibleIndex = (
+    currentPageNo: number,
+    agencyList: AgencyResponse,
+  ) => {
+    let startIndex = currentPageNo - 1 - 2;
+    let lastIndex = currentPageNo + 2;
+
+    if (agencyList.pages <= 5) {
+      startIndex = 0;
+      lastIndex = agencyList.pages;
+    } else if (startIndex < 0) {
+      startIndex = 0;
+      lastIndex = 5;
+    } else if (lastIndex > agencyList.pages) {
+      startIndex = agencyList.pages - 5;
+      lastIndex = agencyList.pages;
+    }
+
+    const indexList = Array.from(
+      { length: agencyList.pages },
+      (_, index) => index + 1,
+    ).slice(startIndex, lastIndex);
+
+    setPageIndexList(indexList);
+  };
+
+  const onClickPageNo = (number: number) => {
+    setPageNo(number);
+
+    if (latitude && longitude) {
+      getAgencyList(10, number, latitude, longitude, (success, agencyList) => {
+        if (success && agencyList) {
+          calcVisibleIndex(number, agencyList);
+
+          setAgencyList(agencyList);
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     if (kakaoMap && latitude && longitude) {
@@ -33,13 +78,71 @@ export const Branch = () => {
           }
         },
       );
-      getAgencyList(10, 1, latitude, longitude, (success, agencyList) => {
+      getAgencyList(10, pageNo, latitude, longitude, (success, agencyList) => {
         if (success && agencyList) {
+          calcVisibleIndex(pageNo, agencyList);
+
           setAgencyList(agencyList);
         }
       });
     }
   }, [kakaoMap, latitude, longitude]);
+
+  useEffect(() => {
+    if (map && kakaoMap && agencyList) {
+      const list = agencyList.list.map(agency => {
+        return new kakaoMap.LatLng(agency.lattitude, agency.longitude);
+      });
+
+      const imageSrc = '/images/marker_number_blue_big.png';
+      const imageSize = new kakaoMap.Size(43, 52);
+
+      const markerList = list.map((position, index) => {
+        const imageOption = {
+          spriteSize: new kakaoMap.Size(43, 529),
+          spriteOrigin: new kakaoMap.Point(0, 52 * index + 10),
+          offset: new kakaoMap.Point(15, 37),
+        };
+        const markerImage = new kakaoMap.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption,
+        );
+
+        return new kakaoMap.Marker({ map, position, image: markerImage });
+      });
+
+      markerList.map((marker, index) => {
+        const iwContent = renderToString(
+          <MarkerTip
+            name={agencyList.list[index].agencyName}
+            detailList={[
+              `전시차량(${agencyList.list[index].displayCarCount})`,
+              `카마스터(${agencyList.list[index].carMasterCount})`,
+            ]}
+          />,
+        );
+
+        const infowindow = new kakaoMap.InfoWindow({
+          content: iwContent,
+        });
+
+        kakaoMap.event.addListener(marker, 'mouseover', function () {
+          infowindow.open(map, marker);
+        });
+
+        kakaoMap.event.addListener(marker, 'mouseout', function () {
+          infowindow.close();
+        });
+
+        return marker;
+      });
+
+      return () => markerList.forEach(marker => marker.setMap(null));
+    }
+
+    return () => undefined;
+  }, [map, kakaoMap, agencyList]);
 
   return (
     <Styled.ContentArea>
@@ -148,7 +251,7 @@ export const Branch = () => {
                             <Styled.ResultList>
                               {agencyList?.list.map((agency, index) => (
                                 <Styled.ResultItem>
-                                  <Styled.Marker>{index}</Styled.Marker>
+                                  <Styled.Marker>{index + 1}</Styled.Marker>
                                   <Styled.Link href="">
                                     {agency.agencyName}
                                     <Styled.Span>{`(${agency.distance}km)`}</Styled.Span>
@@ -170,25 +273,37 @@ export const Branch = () => {
                             <Styled.Paging>
                               <Styled.Pagination>
                                 <Styled.ButtonPreAll>
-                                  <MdKeyboardDoubleArrowLeft />
+                                  <MdKeyboardDoubleArrowLeft
+                                    onClick={() => onClickPageNo(1)}
+                                  />
                                 </Styled.ButtonPreAll>
-                                <Styled.ButtonPrev>
+                                <Styled.ButtonPrev
+                                  onClick={() => onClickPageNo(pageNo - 1)}
+                                >
                                   <MdKeyboardArrowLeft />
                                 </Styled.ButtonPrev>
                                 <Styled.ElPagination>
                                   <Styled.ElPager>
-                                    <Styled.Number>1</Styled.Number>
-                                    <Styled.Number>2</Styled.Number>
-                                    <Styled.Number>3</Styled.Number>
-                                    <Styled.Number>4</Styled.Number>
-                                    <Styled.Number>5</Styled.Number>
-                                    <Styled.Number>6</Styled.Number>
+                                    {pageIndexList.map(index => (
+                                      <Styled.Number
+                                        $isSelected={index === pageNo}
+                                        onClick={() => onClickPageNo(index)}
+                                      >
+                                        {index}
+                                      </Styled.Number>
+                                    ))}
                                   </Styled.ElPager>
                                 </Styled.ElPagination>
-                                <Styled.ButtonNext>
+                                <Styled.ButtonNext
+                                  onClick={() => onClickPageNo(pageNo + 1)}
+                                >
                                   <MdKeyboardArrowRight />
                                 </Styled.ButtonNext>
-                                <Styled.ButtonNextAll>
+                                <Styled.ButtonNextAll
+                                  onClick={() =>
+                                    onClickPageNo(agencyList?.pages || 0)
+                                  }
+                                >
                                   <MdKeyboardDoubleArrowRight />
                                 </Styled.ButtonNextAll>
                               </Styled.Pagination>
@@ -200,7 +315,7 @@ export const Branch = () => {
                   </Styled.Tab>
                 </Styled.AddressBox>
                 <Styled.MapBox>
-                  <Map width="100%" height="100%" />
+                  <Map width="100%" height="100%" setMap={setMap} />
                 </Styled.MapBox>
               </Styled.MapWrap>
             </Styled.VehicleMap>
@@ -947,7 +1062,7 @@ const Styled = {
     padding: 0;
     margin: 0;
   `,
-  Number: styled.li`
+  Number: styled.li<{ $isSelected: boolean }>`
     padding: 0 4px;
     background: #fff;
     vertical-align: top;
@@ -956,10 +1071,15 @@ const Styled = {
     min-width: 35.5px;
     height: 28px;
     line-height: 28px;
-    cursor: pointer;
+    cursor: ${props => (props.$isSelected ? 'default' : 'pointer')};
+    color: ${props => (props.$isSelected ? '#409eff' : '#303133')};
     box-sizing: border-box;
     text-align: center;
     margin: 0;
+
+    &:hover {
+      color: #409eff;
+    }
 
     @media screen and (max-width: 640px) {
       min-width: auto !important;
