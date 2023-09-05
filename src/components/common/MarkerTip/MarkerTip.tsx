@@ -4,14 +4,25 @@ import { PiDotLight } from 'react-icons/pi';
 interface MarkerTipProps {
   name: string;
   detailList: string[];
+  dotList?: string[];
 }
 
-export const MarkerTip = ({ name, detailList }: MarkerTipProps) => {
+export const MarkerTip = ({ name, detailList, dotList }: MarkerTipProps) => {
   return (
     <Styled.PopOverLocation>
       <Styled.PositionInfo>
         <Styled.Title>{name}</Styled.Title>
       </Styled.PositionInfo>
+      {dotList && (
+        <Styled.ListDot>
+          {dotList.map(item => (
+            <>
+              <PiDotLight />
+              <Styled.ItemDot>{item}</Styled.ItemDot>
+            </>
+          ))}
+        </Styled.ListDot>
+      )}
       <Styled.TestCarListWrap>
         {detailList.map(detail => (
           <>
@@ -26,8 +37,8 @@ export const MarkerTip = ({ name, detailList }: MarkerTipProps) => {
 
 const Styled = {
   PopOverLocation: styled.div`
+    position: relative;
     width: 420px;
-    height: 208px;
     display: block;
     padding: 50px 30px;
     background-color: #fff;
@@ -58,5 +69,16 @@ const Styled = {
     line-height: 1;
     padding: 0;
     text-align: center;
+  `,
+  ListDot: styled.ul`
+    margin-top: 20px;
+  `,
+  ItemDot: styled.li`
+    font-family: 'HyundaiSansHeadKRR';
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: -0.4px;
+    white-space: normal;
+    color: #666;
   `,
 };

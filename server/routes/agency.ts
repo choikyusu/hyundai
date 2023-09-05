@@ -20,21 +20,25 @@ router.get('/', async (req, res, next) => {
     findType,
   } = req.query;
 
-  const newData = dataList.map(agency => {
-    const { lattitude: agencyLat, longitude: agencyLong } = agency;
+  const newData = dataList
+    .filter(agency =>
+      agencyTypeCode ? agency.agencyTypeCode === agencyTypeCode : true,
+    )
+    .map(agency => {
+      const { lattitude: agencyLat, longitude: agencyLong } = agency;
 
-    if (typeof latitude === 'string' && typeof longitude === 'string') {
-      const distance = calculateDistance(
-        latitude,
-        longitude,
-        agencyLat,
-        agencyLong,
-      );
-      return { ...agency, distance: parseFloat(distance.toFixed(1)) };
-    }
+      if (typeof latitude === 'string' && typeof longitude === 'string') {
+        const distance = calculateDistance(
+          latitude,
+          longitude,
+          agencyLat,
+          agencyLong,
+        );
+        return { ...agency, distance: parseFloat(distance.toFixed(1)) };
+      }
 
-    return { ...agency, distance: 9999999 };
-  });
+      return { ...agency, distance: 9999999 };
+    });
 
   newData.sort((a, b) => {
     return a.distance < b.distance ? -1 : 1;
@@ -42,9 +46,9 @@ router.get('/', async (req, res, next) => {
 
   const result = {
     data: {
-      total: newData.length,
-      branchCount: newData.filter(data => data.agencyTypeCode === '1').length,
-      agencyCount: newData.filter(data => data.agencyTypeCode === '2').length,
+      total: dataList.length,
+      branchCount: dataList.filter(data => data.agencyTypeCode === '1').length,
+      agencyCount: dataList.filter(data => data.agencyTypeCode === '2').length,
       list: newData.slice(
         (Number(pageNo) - 1) * Number(pageSize),
         Number(pageNo) * Number(pageSize),
