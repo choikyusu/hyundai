@@ -22,6 +22,8 @@ export const Branch = () => {
   const [address, setAddress] = useState('');
   const [agencyList, setAgencyList] = useState<AgencyResponse | null>(null);
   const [pageNo, setPageNo] = useState(1);
+  const [agencyTypeCode, setAgencyTypeCode] = useState<number | undefined>();
+  const itemList: HTMLLIElement[] = [];
 
   const { longitude, latitude } = useCoords();
 
@@ -55,13 +57,20 @@ export const Branch = () => {
     setPageNo(number);
 
     if (latitude && longitude) {
-      getAgencyList(10, number, latitude, longitude, (success, agencyList) => {
-        if (success && agencyList) {
-          calcVisibleIndex(number, agencyList);
+      getAgencyList(
+        10,
+        number,
+        latitude,
+        longitude,
+        agencyTypeCode,
+        (success, agencyList) => {
+          if (success && agencyList) {
+            calcVisibleIndex(number, agencyList);
 
-          setAgencyList(agencyList);
-        }
-      });
+            setAgencyList(agencyList);
+          }
+        },
+      );
     }
   };
 
@@ -78,15 +87,22 @@ export const Branch = () => {
           }
         },
       );
-      getAgencyList(10, pageNo, latitude, longitude, (success, agencyList) => {
-        if (success && agencyList) {
-          calcVisibleIndex(pageNo, agencyList);
+      getAgencyList(
+        10,
+        pageNo,
+        latitude,
+        longitude,
+        agencyTypeCode,
+        (success, agencyList) => {
+          if (success && agencyList) {
+            calcVisibleIndex(pageNo, agencyList);
 
-          setAgencyList(agencyList);
-        }
-      });
+            setAgencyList(agencyList);
+          }
+        },
+      );
     }
-  }, [kakaoMap, latitude, longitude]);
+  }, [kakaoMap, latitude, longitude, agencyTypeCode]);
 
   useEffect(() => {
     if (map && kakaoMap && agencyList) {
@@ -109,11 +125,16 @@ export const Branch = () => {
           imageOption,
         );
 
-        return new kakaoMap.Marker({ map, position, image: markerImage });
+        return new kakaoMap.Marker({
+          map,
+          position,
+          image: markerImage,
+          clickable: true,
+        });
       });
 
-      markerList.map((marker, index) => {
-        const iwContent = renderToString(
+      const mapMarkerList = markerList.map((marker, index) => {
+        const iwHoverContent = renderToString(
           <MarkerTip
             name={agencyList.list[index].agencyName}
             detailList={[
@@ -123,22 +144,72 @@ export const Branch = () => {
           />,
         );
 
-        const infowindow = new kakaoMap.InfoWindow({
-          content: iwContent,
+        const iwClickContent = renderToString(
+          <MarkerTip
+            name={agencyList.list[index].agencyName}
+            detailList={[
+              `전시차량(${agencyList.list[index].displayCarCount})`,
+              `카마스터(${agencyList.list[index].carMasterCount})`,
+            ]}
+            dotList={[
+              agencyList.list[index].agencyAddress,
+              agencyList.list[index].agencyTel,
+            ]}
+          />,
+        );
+
+        const hoverInfowindow = new kakaoMap.InfoWindow({
+          content: iwHoverContent,
+          zIndex: 98,
         });
 
-        kakaoMap.event.addListener(marker, 'mouseover', function () {
-          infowindow.open(map, marker);
+        const clickInfowindow = new kakaoMap.InfoWindow({
+          content: iwClickContent,
+          removable: true,
+          zIndex: 99,
         });
 
-        kakaoMap.event.addListener(marker, 'mouseout', function () {
-          infowindow.close();
-        });
+        const openInfoWindow = () => {
+          hoverInfowindow.open(map, marker);
+        };
+        const closeInfoWindow = () => hoverInfowindow.close();
 
-        return marker;
+        const clickInfoWindow = () => {
+          clickInfowindow.open(map, marker);
+        };
+        itemList[index].addEventListener('mouseover', openInfoWindow);
+        itemList[index].addEventListener('mouseout', closeInfoWindow);
+        kakaoMap.event.addListener(marker, 'mouseover', openInfoWindow);
+        kakaoMap.event.addListener(marker, 'mouseout', closeInfoWindow);
+        kakaoMap.event.addListener(marker, 'click', clickInfoWindow);
+
+        return { marker, openInfoWindow, closeInfoWindow };
       });
 
-      return () => markerList.forEach(marker => marker.setMap(null));
+      return () => {
+        mapMarkerList.forEach((mapMarker, index) => {
+          mapMarker.marker.setMap(null);
+          kakaoMap.event.removeListener(
+            mapMarker.marker,
+            'mouseover',
+            mapMarker.openInfoWindow,
+          );
+          kakaoMap.event.removeListener(
+            mapMarker.marker,
+            'mouseout',
+            mapMarker.closeInfoWindow,
+          );
+
+          itemList[index].removeEventListener(
+            'mouseover',
+            mapMarker.openInfoWindow,
+          );
+          itemList[index].removeEventListener(
+            'mouseout',
+            mapMarker.closeInfoWindow,
+          );
+        });
+      };
     }
 
     return () => undefined;
@@ -226,21 +297,39 @@ export const Branch = () => {
                             </Styled.H3>
                             <Styled.RadioGroupWrap>
                               <Styled.RadioGroup>
-                                <Styled.RadioArea>
-                                  <Styled.Radio type="radio" />
-                                  <Styled.RadioLabel>
-                                    전체(145)
+                                <Styled.RadioArea
+                                  onClick={() => setAgencyTypeCode(undefined)}
+                                >
+                                  <Styled.Radio
+                                    type="radio"
+                                    id="all"
+                                    name="type"
+                                  />
+                                  <Styled.RadioLabel htmlFor="all">
+                                    전체({agencyList?.total})
                                   </Styled.RadioLabel>
                                 </Styled.RadioArea>
-                                <Styled.RadioArea>
-                                  <Styled.Radio type="radio" />
-                                  <Styled.RadioLabel>
+                                <Styled.RadioArea
+                                  onClick={() => setAgencyTypeCode(1)}
+                                >
+                                  <Styled.Radio
+                                    type="radio"
+                                    id="branch"
+                                    name="type"
+                                  />
+                                  <Styled.RadioLabel htmlFor="branch">
                                     지점({agencyList?.branchCount})
                                   </Styled.RadioLabel>
                                 </Styled.RadioArea>
-                                <Styled.RadioArea>
-                                  <Styled.Radio type="radio" />
-                                  <Styled.RadioLabel>
+                                <Styled.RadioArea
+                                  onClick={() => setAgencyTypeCode(2)}
+                                >
+                                  <Styled.Radio
+                                    type="radio"
+                                    id="agency"
+                                    name="type"
+                                  />
+                                  <Styled.RadioLabel htmlFor="agency">
                                     대리점({agencyList?.agencyCount})
                                   </Styled.RadioLabel>
                                 </Styled.RadioArea>
@@ -250,7 +339,11 @@ export const Branch = () => {
                           <Styled.ScrollWrap>
                             <Styled.ResultList>
                               {agencyList?.list.map((agency, index) => (
-                                <Styled.ResultItem>
+                                <Styled.ResultItem
+                                  ref={(el: HTMLLIElement) =>
+                                    el && itemList.push(el)
+                                  }
+                                >
                                   <Styled.Marker>{index + 1}</Styled.Marker>
                                   <Styled.Link href="">
                                     {agency.agencyName}
@@ -766,6 +859,12 @@ const Styled = {
 
     @media screen and (max-width: 1024px) and (min-width: 768px) {
       padding: 20px 20px 20px 44px !important;
+    }
+
+    &:hover {
+      a {
+        color: #409eff;
+      }
     }
   `,
   Marker: styled.i`

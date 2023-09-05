@@ -6,10 +6,17 @@ export const getAgencyList = async (
   pageNo: number,
   latitude: number,
   longitude: number,
+  agencyTypeCode: number | undefined,
   cb: (success: boolean, result?: AgencyResponse) => void,
 ) => {
   const callApi = async () => {
-    const result = await $getAgencyList(pageSize, pageNo, latitude, longitude);
+    const result = await $getAgencyList(
+      pageSize,
+      pageNo,
+      latitude,
+      longitude,
+      agencyTypeCode,
+    );
     if (result) cb(true, result);
     else cb(false);
   };
