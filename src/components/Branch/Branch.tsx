@@ -2,218 +2,26 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { Map } from '../map/Map';
-import { useMapProvider } from '@/src/contexts/MapContext';
-import useCoords from '@/src/hooks/useCoords';
-import { useEffect, useState } from 'react';
-import { getAgencyList } from '@/src/services/apis/agency.api.service';
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
-import { MarkerTip } from '../common/MarkerTip/MarkerTip';
-import { renderToString } from 'react-dom/server';
+import { useBranch } from './useBranch';
 
 export const Branch = () => {
-  const [pageIndexList, setPageIndexList] = useState<number[]>([]);
-  const { kakaoMap } = useMapProvider();
-  const [map, setMap] = useState<any | null>(null);
-  const [address, setAddress] = useState('');
-  const [agencyList, setAgencyList] = useState<AgencyResponse | null>(null);
-  const [pageNo, setPageNo] = useState(1);
-  const [agencyTypeCode, setAgencyTypeCode] = useState<number | undefined>();
-  const itemList: HTMLLIElement[] = [];
-
-  const { longitude, latitude } = useCoords();
-
-  const calcVisibleIndex = (
-    currentPageNo: number,
-    agencyList: AgencyResponse,
-  ) => {
-    let startIndex = currentPageNo - 1 - 2;
-    let lastIndex = currentPageNo + 2;
-
-    if (agencyList.pages <= 5) {
-      startIndex = 0;
-      lastIndex = agencyList.pages;
-    } else if (startIndex < 0) {
-      startIndex = 0;
-      lastIndex = 5;
-    } else if (lastIndex > agencyList.pages) {
-      startIndex = agencyList.pages - 5;
-      lastIndex = agencyList.pages;
-    }
-
-    const indexList = Array.from(
-      { length: agencyList.pages },
-      (_, index) => index + 1,
-    ).slice(startIndex, lastIndex);
-
-    setPageIndexList(indexList);
-  };
-
-  const onClickPageNo = (number: number) => {
-    setPageNo(number);
-
-    if (latitude && longitude) {
-      getAgencyList(
-        10,
-        number,
-        latitude,
-        longitude,
-        agencyTypeCode,
-        (success, agencyList) => {
-          if (success && agencyList) {
-            calcVisibleIndex(number, agencyList);
-
-            setAgencyList(agencyList);
-          }
-        },
-      );
-    }
-  };
-
-  useEffect(() => {
-    if (kakaoMap && latitude && longitude) {
-      const geocoder = new kakaoMap.services.Geocoder();
-
-      geocoder.coord2Address(
-        longitude,
-        latitude,
-        (result: any, status: any) => {
-          if (status === kakaoMap.services.Status.OK) {
-            setAddress(result[0].address.address_name);
-          }
-        },
-      );
-      getAgencyList(
-        10,
-        pageNo,
-        latitude,
-        longitude,
-        agencyTypeCode,
-        (success, agencyList) => {
-          if (success && agencyList) {
-            calcVisibleIndex(pageNo, agencyList);
-
-            setAgencyList(agencyList);
-          }
-        },
-      );
-    }
-  }, [kakaoMap, latitude, longitude, agencyTypeCode]);
-
-  useEffect(() => {
-    if (map && kakaoMap && agencyList) {
-      const list = agencyList.list.map(agency => {
-        return new kakaoMap.LatLng(agency.lattitude, agency.longitude);
-      });
-
-      const imageSrc = '/images/marker_number_blue_big.png';
-      const imageSize = new kakaoMap.Size(43, 52);
-
-      const markerList = list.map((position, index) => {
-        const imageOption = {
-          spriteSize: new kakaoMap.Size(43, 529),
-          spriteOrigin: new kakaoMap.Point(0, 52 * index + 10),
-          offset: new kakaoMap.Point(15, 37),
-        };
-        const markerImage = new kakaoMap.MarkerImage(
-          imageSrc,
-          imageSize,
-          imageOption,
-        );
-
-        return new kakaoMap.Marker({
-          map,
-          position,
-          image: markerImage,
-          clickable: true,
-        });
-      });
-
-      const mapMarkerList = markerList.map((marker, index) => {
-        const iwHoverContent = renderToString(
-          <MarkerTip
-            name={agencyList.list[index].agencyName}
-            detailList={[
-              `전시차량(${agencyList.list[index].displayCarCount})`,
-              `카마스터(${agencyList.list[index].carMasterCount})`,
-            ]}
-          />,
-        );
-
-        const iwClickContent = renderToString(
-          <MarkerTip
-            name={agencyList.list[index].agencyName}
-            detailList={[
-              `전시차량(${agencyList.list[index].displayCarCount})`,
-              `카마스터(${agencyList.list[index].carMasterCount})`,
-            ]}
-            dotList={[
-              agencyList.list[index].agencyAddress,
-              agencyList.list[index].agencyTel,
-            ]}
-          />,
-        );
-
-        const hoverInfowindow = new kakaoMap.InfoWindow({
-          content: iwHoverContent,
-          zIndex: 98,
-        });
-
-        const clickInfowindow = new kakaoMap.InfoWindow({
-          content: iwClickContent,
-          removable: true,
-          zIndex: 99,
-        });
-
-        const openInfoWindow = () => {
-          hoverInfowindow.open(map, marker);
-        };
-        const closeInfoWindow = () => hoverInfowindow.close();
-
-        const clickInfoWindow = () => {
-          clickInfowindow.open(map, marker);
-        };
-        itemList[index].addEventListener('mouseover', openInfoWindow);
-        itemList[index].addEventListener('mouseout', closeInfoWindow);
-        kakaoMap.event.addListener(marker, 'mouseover', openInfoWindow);
-        kakaoMap.event.addListener(marker, 'mouseout', closeInfoWindow);
-        kakaoMap.event.addListener(marker, 'click', clickInfoWindow);
-
-        return { marker, openInfoWindow, closeInfoWindow };
-      });
-
-      return () => {
-        mapMarkerList.forEach((mapMarker, index) => {
-          mapMarker.marker.setMap(null);
-          kakaoMap.event.removeListener(
-            mapMarker.marker,
-            'mouseover',
-            mapMarker.openInfoWindow,
-          );
-          kakaoMap.event.removeListener(
-            mapMarker.marker,
-            'mouseout',
-            mapMarker.closeInfoWindow,
-          );
-
-          itemList[index].removeEventListener(
-            'mouseover',
-            mapMarker.openInfoWindow,
-          );
-          itemList[index].removeEventListener(
-            'mouseout',
-            mapMarker.closeInfoWindow,
-          );
-        });
-      };
-    }
-
-    return () => undefined;
-  }, [map, kakaoMap, agencyList]);
+  const {
+    address,
+    agencyList,
+    pageIndexList,
+    itemList,
+    setAgencyTypeCode,
+    onClickPageNo,
+    setBranchMap,
+    onClickArrow,
+    isSelectedPage,
+  } = useBranch();
 
   return (
     <Styled.ContentArea>
@@ -367,11 +175,11 @@ export const Branch = () => {
                               <Styled.Pagination>
                                 <Styled.ButtonPreAll>
                                   <MdKeyboardDoubleArrowLeft
-                                    onClick={() => onClickPageNo(1)}
+                                    onClick={() => onClickArrow('First')}
                                   />
                                 </Styled.ButtonPreAll>
                                 <Styled.ButtonPrev
-                                  onClick={() => onClickPageNo(pageNo - 1)}
+                                  onClick={() => onClickArrow('Previous')}
                                 >
                                   <MdKeyboardArrowLeft />
                                 </Styled.ButtonPrev>
@@ -379,7 +187,7 @@ export const Branch = () => {
                                   <Styled.ElPager>
                                     {pageIndexList.map(index => (
                                       <Styled.Number
-                                        $isSelected={index === pageNo}
+                                        $isSelected={isSelectedPage(index)}
                                         onClick={() => onClickPageNo(index)}
                                       >
                                         {index}
@@ -388,14 +196,12 @@ export const Branch = () => {
                                   </Styled.ElPager>
                                 </Styled.ElPagination>
                                 <Styled.ButtonNext
-                                  onClick={() => onClickPageNo(pageNo + 1)}
+                                  onClick={() => onClickArrow('Next')}
                                 >
                                   <MdKeyboardArrowRight />
                                 </Styled.ButtonNext>
                                 <Styled.ButtonNextAll
-                                  onClick={() =>
-                                    onClickPageNo(agencyList?.pages || 0)
-                                  }
+                                  onClick={() => onClickArrow('Last')}
                                 >
                                   <MdKeyboardDoubleArrowRight />
                                 </Styled.ButtonNextAll>
@@ -408,7 +214,7 @@ export const Branch = () => {
                   </Styled.Tab>
                 </Styled.AddressBox>
                 <Styled.MapBox>
-                  <Map width="100%" height="100%" setMap={setMap} />
+                  <Map width="100%" height="100%" setMap={setBranchMap} />
                 </Styled.MapBox>
               </Styled.MapWrap>
             </Styled.VehicleMap>
