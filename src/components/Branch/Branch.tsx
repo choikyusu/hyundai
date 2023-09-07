@@ -9,6 +9,8 @@ import {
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
 import { useBranch } from './useBranch';
+import { BreadCrumbs } from '../common/BreadCrumbs/BreadCrumbs';
+import { VisualHead } from '../common/VisualHead/VisualHead';
 
 export const Branch = () => {
   const {
@@ -26,37 +28,22 @@ export const Branch = () => {
   return (
     <Styled.ContentArea>
       <Styled.Container>
-        <Styled.VisualWrap>
-          <Styled.TopBreadCrumb>
-            <Styled.MenuList>
-              <Styled.MenuItem>
-                <Styled.MenuLink href="">홈</Styled.MenuLink>
-              </Styled.MenuItem>
-              <Styled.MenuItem>
-                <Styled.MenuLink href="">구매/이벤트</Styled.MenuLink>
-              </Styled.MenuItem>
-              <Styled.MenuItem>
-                <Styled.MenuLink href="">판매/시승 네트워크</Styled.MenuLink>
-              </Styled.MenuItem>
-              <Styled.MenuItem>
-                <Styled.MenuLink href="">
-                  승용 판매/시승 네트워크
-                </Styled.MenuLink>
-              </Styled.MenuItem>
-            </Styled.MenuList>
-          </Styled.TopBreadCrumb>
-          <Styled.VisualHeadWrap>
-            <Styled.VisualTitle>
-              <Styled.Title>승용 판매/시승 네트워크</Styled.Title>
-              <Styled.Description>
-                지점/대리점, 전시차량, 카마스터, 출고센터 조회 및 정보 안내를
-                도와드립니다.
-                <br />※ 대형 상용차량은 상용 판매 네트워크 &gt; 에서 조회해
-                주시기 바랍니다.
-              </Styled.Description>
-            </Styled.VisualTitle>
-          </Styled.VisualHeadWrap>
-        </Styled.VisualWrap>
+        <VisualHead
+          title="승용 판매/시승 네트워크"
+          descList={[
+            '지점/대리점, 전시차량, 카마스터, 출고센터 조회 및 정보 안내를 도와드립니다.',
+            '※ 대형 상용차량은 상용 판매 네트워크 > 에서 조회해 주시기 바랍니다.',
+          ]}
+        >
+          <BreadCrumbs
+            list={[
+              '홈',
+              '구매/이벤트',
+              '판매/시승 네트워크',
+              '승용 판매/시승 네트워크',
+            ]}
+          />
+        </VisualHead>
         <Styled.ContentWrap>
           <Styled.Content>
             <Styled.VehicleMap>
@@ -234,98 +221,7 @@ const Styled = {
     }
   `,
   Container: styled.div``,
-  VisualWrap: styled.section`
-    width: 100%;
 
-    min-height: 360px;
-    padding: 0;
-    background-image: url(/images/bg/bg_visual_cloud.png);
-    background-position: 50%;
-    background-repeat: no-repeat;
-  `,
-  TopBreadCrumb: styled.div`
-    display: block;
-    width: calc(100% - 120px);
-    max-width: 1120px;
-    margin: 0 auto;
-  `,
-  MenuList: styled.ul`
-    display: flex;
-  `,
-  MenuItem: styled.li`
-    display: flex;
-
-    position: relative;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 14px;
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      a {
-        color: #007fa8;
-        font-weight: 500;
-      }
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: 42px;
-      right: 0;
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-top: 1px solid #000;
-      border-right: 1px solid #000;
-      transform: rotate(45deg);
-    }
-  `,
-  MenuLink: styled(Link)`
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 90px;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 14px;
-    letter-spacing: -0.4px;
-    color: #000;
-    line-height: 24px;
-  `,
-  VisualHeadWrap: styled.div`
-    display: block;
-    height: 270px;
-    margin: 0 60px;
-    padding-top: 80px;
-    background-color: hsla(0, 0%, 100%, 0.7);
-  `,
-  VisualTitle: styled.div`
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    opacity: 1;
-  `,
-  Title: styled.h2`
-    margin: 0;
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 58px;
-    letter-spacing: -0.4px;
-    color: #000;
-    line-height: 51px;
-    font-weight: 400;
-  `,
-  Description: styled.p`
-    margin-top: 40px;
-    font-family: 'HyundaiSansTextKR';
-    font-size: 16px;
-    letter-spacing: -0.4px;
-    color: #000;
-    line-height: normal;
-    font-weight: 500;
-  `,
   ContentWrap: styled.section``,
   Content: styled.div`
     @media screen and (min-width: 768px) {
