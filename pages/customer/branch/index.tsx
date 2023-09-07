@@ -1,4 +1,5 @@
 import { Branch } from '@/src/components/Branch/Branch';
+import { Footer } from '@/src/components/Footer/Footer';
 import { Header } from '@/src/components/Header/Header';
 import MapProvider from '@/src/contexts/MapContext';
 import MenuProvider from '@/src/contexts/MenuContext';
@@ -18,6 +19,7 @@ export default function BranchPage() {
         </div>
         <Branch />
       </MenuProvider>
+      <Footer />
     </MapProvider>
   );
 }
