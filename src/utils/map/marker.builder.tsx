@@ -19,7 +19,7 @@ export function createMarker(
 ) {
   const markerList: Marker[] = agencyList.list.map((agency, index) => {
     const position = new kakaoMap.LatLng(agency.lattitude, agency.longitude);
-    return createPocationToMarker(position, index);
+    return createPositionToMarker(position, index);
   });
 
   function setMarkerClickTip(itemList: HTMLLIElement[]) {
@@ -131,7 +131,7 @@ export function createMarker(
     return { hoverInfowindow, clickInfowindow };
   }
 
-  function createPocationToMarker(position: any, index: number) {
+  function createPositionToMarker(position: any, index: number) {
     const imageSize = new kakaoMap.Size(43, 52);
     const imageOption = {
       spriteSize: new kakaoMap.Size(43, 529),
@@ -145,7 +145,7 @@ export function createMarker(
     );
 
     return new kakaoMap.Marker({
-      branchMap,
+      map: branchMap,
       position,
       image: markerImage,
       clickable: true,
