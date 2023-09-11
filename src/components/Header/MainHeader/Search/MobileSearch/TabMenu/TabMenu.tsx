@@ -1,48 +1,60 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
-import { styled } from 'styled-components';
+import { CSSProp, css, styled } from 'styled-components';
 
 interface TabMenuProps {
-  keywordType: 'recent' | 'top';
-  onClickKeyword: (selectedKeyword: 'recent' | 'top') => void;
+  type: 'MobileSearch' | 'PurchaseConsult';
+  keywordType: number;
+  list: string[];
+  onClickKeyword: (selectedKeyword: number) => void;
 }
 
-export const TabMenu = ({ keywordType, onClickKeyword }: TabMenuProps) => {
+export const TabMenu = ({
+  type,
+  list,
+  keywordType,
+  onClickKeyword,
+}: TabMenuProps) => {
   return (
     <Styled.TabMenu>
       <Styled.TabMenuIconWrapper>
-        <Styled.TabMenuIcon>
-          <Styled.KeywordButton
-            type="button"
-            title="선택됨"
-            $isActive={keywordType === 'recent'}
-            onClick={() => onClickKeyword('recent')}
-          >
-            <span>최근 검색어</span>
-          </Styled.KeywordButton>
-        </Styled.TabMenuIcon>
-        <Styled.TabMenuIcon>
-          <Styled.KeywordButton
-            type="button"
-            title=""
-            $isActive={keywordType === 'top'}
-            onClick={() => onClickKeyword('top')}
-          >
-            <span>인기 검색어 TOP 10</span>
-          </Styled.KeywordButton>
-        </Styled.TabMenuIcon>
+        {list.map((item, index) => (
+          <Styled.TabMenuIcon>
+            <Styled.Button
+              type="button"
+              $isActive={keywordType === index}
+              $variant={VARIANT_STYLE[type]}
+              onClick={() => onClickKeyword(index)}
+            >
+              <span>{item}</span>
+            </Styled.Button>
+          </Styled.TabMenuIcon>
+        ))}
       </Styled.TabMenuIconWrapper>
     </Styled.TabMenu>
   );
 };
 
-const Styled = {
-  KeywordButton: styled(CommonStyled.LiButton)<{ $isActive: boolean }>`
+const VARIANT_STYLE = {
+  MobileSearch: css<{ $isActive: boolean }>`
     height: 32px;
     font-size: 12px;
-    background: ${props => (props.$isActive ? '#007fa8' : '#f6f3f2')};
-    color: ${props => (props.$isActive ? '#fff' : '#666')};
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
+    background: ${props => (props.$isActive ? '#007fa8' : '#f6f3f2')};
+    color: ${props => (props.$isActive ? '#fff' : '#666')};
+  `,
+  PurchaseConsult: css<{ $isActive: boolean }>`
+    background: ${props => (props.$isActive ? '#fff' : '#444')};
+    color: ${props => (props.$isActive ? '#000' : '#fff')};
+  `,
+};
+
+const Styled = {
+  Button: styled(CommonStyled.LiButton)<{
+    $variant: CSSProp;
+    $isActive: boolean;
+  }>`
+    ${props => props.$variant}
   `,
 
   TabMenu: styled.div`
