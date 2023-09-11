@@ -6,6 +6,8 @@ import { TabMenu } from './TabMenu/TabMenu';
 import { UnifiedSearch } from '../../../../common/UnifiedSearch/UnifiedSearch';
 import { useMenuProvider } from '@/src/contexts/MenuContext';
 
+export const RECENT = 1;
+
 export const MobileSearch = () => {
   const { headerType } = useMenuProvider();
 
@@ -27,14 +29,19 @@ export const MobileSearch = () => {
           onChangeKeyword={onChangeKeyword}
         />
         <div>
-          <TabMenu keywordType={keywordType} onClickKeyword={onClickKeyword} />
+          <TabMenu
+            list={['최근 검색어', '인기 검색어 TOP 10']}
+            type="MobileSearch"
+            keywordType={keywordType}
+            onClickKeyword={onClickKeyword}
+          />
           <div>
             <MobileTabList
-              list={keywordType === 'recent' ? recentList : topList}
+              list={keywordType === RECENT ? recentList : topList}
               keywordType={keywordType}
             />
             <Styled.TabFooterButton
-              $isShow={keywordType === 'recent' && !!recentList.length}
+              $isShow={keywordType === RECENT && !!recentList.length}
               type="button"
               onClick={onClickDeleteKeyword}
             >

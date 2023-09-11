@@ -110,7 +110,9 @@ export const Car = ({
               </Styled.DetailImage>
             </Styled.DetailBox>
             <Styled.DetailButtonGroup>
-              <Styled.LinkButton href="">구매 상담 신청</Styled.LinkButton>
+              <Styled.LinkButton href="/vehicles/purchase-consult">
+                구매 상담 신청
+              </Styled.LinkButton>
               <Styled.LinkButton href="">내 차 만들기</Styled.LinkButton>
               <Styled.LinkButton href="">시승 신청</Styled.LinkButton>
             </Styled.DetailButtonGroup>

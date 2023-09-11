@@ -15,10 +15,10 @@ export const useMobileSearch = () => {
     '가격표',
   ]);
 
-  const [keywordType, setKeywordType] = useState<'recent' | 'top'>('recent');
+  const [keywordType, setKeywordType] = useState<number>(1);
   const [searchKeyword, setSearchKeyword] = useState<string>('');
 
-  const onClickKeyword = (selectedKeyword: 'recent' | 'top') => {
+  const onClickKeyword = (selectedKeyword: number) => {
     setKeywordType(selectedKeyword);
   };
 
