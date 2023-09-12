@@ -579,7 +579,7 @@ export const lnbMenuTreeList: LnbMenuTreeType[] = [
           },
           {
             name: '상세모델 검색',
-            pageUrl: '/kr/ko/e/vehicles/explorer',
+            pageUrl: '/vehicles/filter',
           },
           {
             name: '자동차 사양백과',
