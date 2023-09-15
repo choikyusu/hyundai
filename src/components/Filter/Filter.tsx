@@ -4,6 +4,8 @@ import { ContentArea } from '../common/ContentArea/ContentArea';
 import { MultiRangeSlider } from '../common/MultiRangeSlider/MultiRangeSlider';
 
 export const Filter = () => {
+  const list = Array.from({ length: 15 }, (v, i) => `${(i + 3) * 500}만원`);
+
   return (
     <ContentArea
       descList={['차량 정보와 옵션으로 원하는 모델을 검색해 보세요.']}
@@ -84,7 +86,7 @@ export const Filter = () => {
                   <Styled.FilterTopHeader>
                     <strong>가격</strong>
                   </Styled.FilterTopHeader>
-                  <MultiRangeSlider />
+                  <MultiRangeSlider list={list} />
                 </Styled.FilterItem>
               </Styled.FilterList>
             </Styled.FilterTop>
