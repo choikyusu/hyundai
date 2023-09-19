@@ -6,40 +6,28 @@ import { FooterMenuList, footerDataList } from './data/data';
 import { useState } from 'react';
 
 export const Footer = () => {
-  const [isShow, setIsShow] = useState(false);
-  const onClickMenuHide = () => {
-    setIsShow(prev => !prev);
-  };
-
   return (
     <Styled.Footer>
       <Styled.FooterInner>
         <Styled.AreaMenuToggle>
           <Styled.WrapMenuToggle>
-            <Styled.Title>
-              기업정보 · IR정보 · 지속가능경영
-              <Styled.ArrowWrapper onClick={onClickMenuHide}>
-                {isShow ? <AiOutlineUp /> : <AiOutlineDown />}
-              </Styled.ArrowWrapper>
-            </Styled.Title>
-            {isShow && (
-              <Styled.MenuListCompany>
-                {footerDataList.map((footerData, index) => (
-                  <Styled.WrapCategory key={index}>
-                    <Styled.MenuCategory>{footerData.name}</Styled.MenuCategory>
-                    <Styled.WrapMenu>
-                      {footerData.subMenuList.map(subMenu => (
-                        <Styled.MenuCompany>
-                          <Styled.Link href={subMenu.pageUrl}>
-                            {subMenu.subTitle}
-                          </Styled.Link>
-                        </Styled.MenuCompany>
-                      ))}
-                    </Styled.WrapMenu>
-                  </Styled.WrapCategory>
-                ))}
-              </Styled.MenuListCompany>
-            )}
+            <Styled.Title>기업정보 · IR정보 · 지속가능경영</Styled.Title>
+            <Styled.MenuListCompany>
+              {footerDataList.map((footerData, index) => (
+                <Styled.WrapCategory key={index}>
+                  <Styled.MenuCategory>{footerData.name}</Styled.MenuCategory>
+                  <Styled.WrapMenu>
+                    {footerData.subMenuList.map(subMenu => (
+                      <Styled.MenuCompany>
+                        <Styled.Link href={subMenu.pageUrl}>
+                          {subMenu.subTitle}
+                        </Styled.Link>
+                      </Styled.MenuCompany>
+                    ))}
+                  </Styled.WrapMenu>
+                </Styled.WrapCategory>
+              ))}
+            </Styled.MenuListCompany>
           </Styled.WrapMenuToggle>
         </Styled.AreaMenuToggle>
         <Styled.BottomArea>
@@ -81,7 +69,14 @@ const Styled = {
   FooterInner: styled.div``,
   AreaMenuToggle: styled.div`
     background: #f6f3f2;
-    padding: 15px 15px 0;
+
+    @media screen and (min-width: 768px) {
+      padding: 30px 30px 0;
+    }
+
+    @media screen and (max-width: 767px) {
+      padding: 15px 15px 0;
+    }
   `,
   WrapMenuToggle: styled.h3`
     max-width: 1120px;
@@ -101,52 +96,115 @@ const Styled = {
     border-bottom: none;
     line-height: 1;
 
-    padding: 18px 15px 15px;
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: -0.4px;
+    @media screen and (max-width: 767px) {
+      padding: 18px 15px 15px;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.4px;
+    }
+
+    @media screen and (min-width: 768px) {
+      padding: 24px 50px 21px;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.4px;
+    }
   `,
   ArrowWrapper: styled.i`
     margin-left: auto;
   `,
   MenuListCompany: styled.dl`
-    padding: 0 15px 20px;
+    @media screen and (min-width: 768px) {
+      display: flex;
+      margin: 5px 0 0;
+      padding: 0 15px 30px;
+    }
+
+    @media screen and (max-width: 767px) {
+      padding: 0 15px 20px;
+    }
   `,
   WrapCategory: styled.div`
-    padding: 25px 0;
-    border-bottom: 1px solid #e5e5e5;
+    @media screen and (max-width: 767px) {
+      &:first-child {
+        padding-top: 10px;
+      }
+    }
 
-    padding-top: 10px;
+    @media screen and (max-width: 767px) {
+      padding: 25px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    @media screen and (min-width: 768px) {
+      &:not(:nth-child(3n)) {
+        border-right: 1px solid #e5e5e5;
+      }
+    }
+    @media screen and (min-width: 768px) {
+      width: 33.333%;
+      padding: 0 35px;
+    }
   `,
   MenuCategory: styled.dt`
     color: #002c5f;
 
-    margin-bottom: 10px;
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 15px;
-    line-height: 23px;
-    letter-spacing: -0.4px;
-    line-height: 1;
+    @media screen and (min-width: 768px) {
+      margin-bottom: 12px;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 16px;
+      line-height: 30px;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 10px;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 15px;
+      line-height: 23px;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
   `,
   WrapMenu: styled.div`
     display: flex;
     flex-wrap: wrap;
   `,
   MenuCompany: styled.dd`
-    width: 50%;
+    @media screen and (max-width: 767px) {
+      width: 50%;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 115px;
+    }
   `,
   Link: styled(Link)<{ $color?: string }>`
     display: block;
     color: ${props => props.$color || '#444'};
 
-    padding: 10px 0;
-    font-family: 'HyundaiSansHeadKR';
-    font-size: 14px;
-    line-height: 22px;
-    letter-spacing: -0.4px;
-    line-height: 1;
+    @media screen and (max-width: 767px) {
+      padding: 10px 0;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+
+    @media screen and (min-width: 768px) {
+      padding: 10px 0;
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 14px;
+      line-height: 30px;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
   `,
   BottomArea: styled.div`
     padding: 0;
