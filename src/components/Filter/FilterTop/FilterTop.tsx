@@ -20,7 +20,6 @@ export const FilterTop = () => {
             list={ENGINE_TYPE_LIST.list}
           />
         </FilterItem>
-
         <FilterItem type="가격">
           <MultiRangeSlider list={PRICE_LIST} />
         </FilterItem>

@@ -4,6 +4,7 @@ import { ContentArea } from '../common/ContentArea/ContentArea';
 
 import { FilterTop } from './FilterTop/FilterTop';
 import { FilterBottom } from './FilterBottom/FilterBottom';
+import { CommonStyled } from '@/src/styles/CommonStyled';
 
 export const Filter = () => {
   return (
@@ -18,8 +19,12 @@ export const Filter = () => {
             <FilterBottom />
           </div>
         </Styled.FilterWrap>
+        <Styled.FilterTag>
+          <span>
+            <Styled.DeselectAllButton>전체해제</Styled.DeselectAllButton>
+          </span>
+        </Styled.FilterTag>
       </Styled.ContentTop>
-
       <Styled.ContentBody>
         <Styled.CarList>
           <Styled.CarListHeader>검색조건을 선택해 주세요.</Styled.CarListHeader>
@@ -104,5 +109,71 @@ const Styled = {
     @media screen and (min-width: 767px) and (max-width: 1200px) {
       width: 100%;
     }
+  `,
+  FilterTag: styled.div`
+    width: 1120px;
+    margin: 0 auto;
+    padding: 35px 0 25px;
+
+    @media screen and (min-width: 767px) and (max-width: 1200px) {
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  `,
+  DeselectAllButton: styled(CommonStyled.Button)`
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 30px;
+    border-radius: 15px;
+    color: #000;
+    background-color: #fff;
+    border: 0;
+    padding: 0 13px;
+    margin: 0 6px 6px 0;
+    line-height: 24px;
+
+    @media screen and (max-width: 640px) {
+      margin-right: 10px;
+      padding: 0 10px;
+      height: 20px;
+      border-radius: 10px;
+    }
+
+    padding: 0 13px;
+    background-color: #007fa8;
+
+    @media screen and (max-width: 640px) {
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      padding: 0 10px;
+    }
+
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    font-family: 'HyundaiSansTextKR';
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: -0.4px;
+    color: #fff;
+
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+      line-height: 100%;
+    }
+
+    cursor: pointer;
   `,
 };

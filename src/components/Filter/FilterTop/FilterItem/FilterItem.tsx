@@ -23,6 +23,7 @@ const Styled = {
     position: relative;
     border-top: 1px solid #ccc;
     overflow: hidden;
+    flex: 1;
 
     padding-bottom: 30px;
     flex-direction: column;
@@ -47,18 +48,15 @@ const Styled = {
     }
 
     &:first-child {
-      width: 330px;
       padding-right: 30px;
     }
 
     &:nth-child(2) {
       padding: 0 30px;
-      width: 438px;
     }
 
     &:last-child {
       padding: 0 30px;
-      width: 350px;
       border-right: none;
     }
 
