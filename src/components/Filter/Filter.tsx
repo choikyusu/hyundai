@@ -3,6 +3,7 @@ import { ContentBottom } from '../Content/ContentFooter/ContentBottom';
 import { ContentArea } from '../common/ContentArea/ContentArea';
 
 import { FilterTop } from './FilterTop/FilterTop';
+import { FilterBottom } from './FilterBottom/FilterBottom';
 
 export const Filter = () => {
   return (
@@ -14,6 +15,7 @@ export const Filter = () => {
         <Styled.FilterWrap>
           <div>
             <FilterTop />
+            <FilterBottom />
           </div>
         </Styled.FilterWrap>
       </Styled.ContentTop>

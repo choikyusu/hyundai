@@ -85,7 +85,7 @@ const Styled = {
   Thumb: styled.input`
     pointer-events: none;
     position: absolute;
-    height: 0;
+    background: transparent;
     width: 100%;
     outline: none;
     -webkit-appearance: none;
