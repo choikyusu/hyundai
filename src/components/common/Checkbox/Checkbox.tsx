@@ -3,13 +3,19 @@ import { styled } from 'styled-components';
 interface CheckboxProps {
   name: string;
   type: string;
-  index: number;
+  checked: boolean;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Checkbox = ({ name, type, index }: CheckboxProps) => {
+export const Checkbox = ({ name, type, checked, onChange }: CheckboxProps) => {
   return (
-    <Styled.ElCheckboxLabel htmlFor={`${type}${index}`}>
-      <Styled.ElCheckbox id={`${type}${index}`} type="checkbox" />
+    <Styled.ElCheckboxLabel htmlFor={type}>
+      <Styled.ElCheckbox
+        id={type}
+        type="checkbox"
+        onChange={onChange}
+        checked={checked}
+      />
       <Styled.CheckboxText>{name}</Styled.CheckboxText>
     </Styled.ElCheckboxLabel>
   );

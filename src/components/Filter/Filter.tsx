@@ -5,8 +5,14 @@ import { ContentArea } from '../common/ContentArea/ContentArea';
 import { FilterTop } from './FilterTop/FilterTop';
 import { FilterBottom } from './FilterBottom/FilterBottom';
 import { CommonStyled } from '@/src/styles/CommonStyled';
+import { AiOutlineClose } from 'react-icons/ai';
+import { useState } from 'react';
 
 export const Filter = () => {
+  const [filterMap, setFilterMap] = useState<
+    Map<string, { checked: boolean; name: string }>
+  >(new Map());
+
   return (
     <ContentArea
       descList={['차량 정보와 옵션으로 원하는 모델을 검색해 보세요.']}
@@ -15,13 +21,27 @@ export const Filter = () => {
       <Styled.ContentTop>
         <Styled.FilterWrap>
           <div>
-            <FilterTop />
-            <FilterBottom />
+            <FilterTop filterMap={filterMap} setFilterMap={setFilterMap} />
+            <FilterBottom filterMap={filterMap} setFilterMap={setFilterMap} />
           </div>
         </Styled.FilterWrap>
         <Styled.FilterTag>
+          {Array.from(filterMap)
+            .filter(item => item[1].checked)
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(item => (
+              <Styled.Tag>
+                {item[1].name}
+                <Styled.DeleteButton>
+                  <AiOutlineClose />
+                </Styled.DeleteButton>
+              </Styled.Tag>
+            ))}
+
           <span>
-            <Styled.DeselectAllButton>전체해제</Styled.DeselectAllButton>
+            <Styled.DeselectAllButton onClick={() => setFilterMap(new Map())}>
+              전체해제
+            </Styled.DeselectAllButton>
           </span>
         </Styled.FilterTag>
       </Styled.ContentTop>
@@ -175,5 +195,49 @@ const Styled = {
     }
 
     cursor: pointer;
+  `,
+  Tag: styled.span`
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 30px;
+    border-radius: 15px;
+    color: #000;
+    background-color: #fff;
+    border: 0;
+    padding: 0 13px;
+    margin: 0 6px 6px 0;
+    line-height: 24px;
+
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    @media screen and (max-width: 640px) {
+      margin-right: 10px;
+      padding: 0 10px;
+      height: 20px;
+      border-radius: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  `,
+  DeleteButton: styled(CommonStyled.Button)`
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 -5px 0 8px;
+    vertical-align: middle;
+    width: 15px;
+    height: 15px;
+    padding: 3px 0 0 3px;
+
+    @media screen and (max-width: 640px) {
+      margin: 0 0 0 10px;
+      width: 8px;
+      height: 8px;
+    }
   `,
 };

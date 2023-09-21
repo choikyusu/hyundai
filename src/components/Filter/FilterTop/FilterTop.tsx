@@ -3,21 +3,31 @@ import { MultiRangeSlider } from '../../common/MultiRangeSlider/MultiRangeSlider
 import { FilterItem } from './FilterItem/FilterItem';
 import { FilterCheckboxList } from './FilterItem/FilterCheckboxList/FilterCheckboxList';
 import { CAR_TYPE_LIST, ENGINE_TYPE_LIST, PRICE_LIST } from './data/data';
+import { Dispatch, SetStateAction } from 'react';
 
-export const FilterTop = () => {
+interface FilterBottomProps {
+  filterMap: Map<string, { checked: boolean; name: string }>;
+  setFilterMap: Dispatch<
+    SetStateAction<Map<string, { checked: boolean; name: string }>>
+  >;
+}
+
+export const FilterTop = ({ filterMap, setFilterMap }: FilterBottomProps) => {
   return (
     <Styled.FilterTop>
       <Styled.FilterList>
-        <FilterItem type={CAR_TYPE_LIST.title}>
+        <FilterItem type="차종">
           <FilterCheckboxList
-            type={CAR_TYPE_LIST.type}
-            list={CAR_TYPE_LIST.list}
+            data={{ type: 'CarType', list: CAR_TYPE_LIST.data }}
+            filterMap={filterMap}
+            setFilterMap={setFilterMap}
           />
         </FilterItem>
-        <FilterItem type={ENGINE_TYPE_LIST.title}>
+        <FilterItem type="엔진">
           <FilterCheckboxList
-            type={ENGINE_TYPE_LIST.type}
-            list={ENGINE_TYPE_LIST.list}
+            data={{ type: 'EngineType', list: ENGINE_TYPE_LIST.data }}
+            filterMap={filterMap}
+            setFilterMap={setFilterMap}
           />
         </FilterItem>
         <FilterItem type="가격">

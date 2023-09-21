@@ -1,20 +1,77 @@
 import { Checkbox } from '@/src/components/common/Checkbox/Checkbox';
+import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
 interface FilterCheckboxListProps {
-  type: string;
-  list: {
-    name: string;
-  }[];
+  data:
+    | {
+        type: 'CarType';
+        list: {
+          carTypeCode: string;
+          carTypeName: string;
+          carTypeOrder: string;
+          carTypeCount: string;
+          carPurposes: {
+            carPurposeCode: string;
+            carPurposeName: string;
+          }[];
+        }[];
+      }
+    | {
+        type: 'EngineType';
+        list: {
+          carEnginCode: string;
+          carEnginName: string;
+          carPurposeCode: null;
+          carEnginEnableYn: null;
+          displayCarYn: null;
+          discountInventoryCaryn: null;
+        }[];
+      };
+  filterMap: Map<string, { checked: boolean; name: string }>;
+  setFilterMap: Dispatch<
+    SetStateAction<Map<string, { checked: boolean; name: string }>>
+  >;
 }
 
-export const FilterCheckboxList = ({ type, list }: FilterCheckboxListProps) => {
+export const FilterCheckboxList = ({
+  data,
+  filterMap,
+  setFilterMap,
+}: FilterCheckboxListProps) => {
   return (
     <Styled.FilterCheckboxList>
       <Styled.CheckboxGroup>
-        {list.map((carType, index) => (
-          <Checkbox type={type} index={index} name={carType.name} />
-        ))}
+        {data.type === 'CarType' &&
+          data.list.map(item => (
+            <Checkbox
+              type={item.carTypeCode}
+              name={item.carTypeName}
+              checked={!!filterMap.get(item.carTypeCode)?.checked}
+              onChange={() => {
+                filterMap.set(item.carTypeCode, {
+                  checked: !filterMap.get(item.carTypeCode)?.checked,
+                  name: item.carTypeName,
+                });
+                setFilterMap(new Map(filterMap));
+              }}
+            />
+          ))}
+        {data.type === 'EngineType' &&
+          data.list.map(item => (
+            <Checkbox
+              type={item.carEnginCode}
+              name={item.carEnginName}
+              checked={!!filterMap.get(item.carEnginCode)?.checked}
+              onChange={() => {
+                filterMap.set(item.carEnginCode, {
+                  checked: !filterMap.get(item.carEnginCode)?.checked,
+                  name: item.carEnginName,
+                });
+                setFilterMap(new Map(filterMap));
+              }}
+            />
+          ))}
       </Styled.CheckboxGroup>
     </Styled.FilterCheckboxList>
   );
