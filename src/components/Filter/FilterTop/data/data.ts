@@ -4,51 +4,163 @@ export const PRICE_LIST = Array.from(
 );
 
 export const CAR_TYPE_LIST = {
-  type: 'CarTypeList',
-  title: '차종',
-  list: [
+  data: [
     {
-      name: '수소/전기차',
+      carTypeCode: 'E',
+      carTypeName: '수소 / 전기차',
+      carTypeOrder: '4',
+      carTypeCount: '6',
+      carPurposes: [
+        {
+          carPurposeCode: '',
+          carPurposeName: '자가용',
+        },
+      ],
     },
     {
-      name: 'N',
+      carTypeCode: 'N',
+      carTypeName: 'N',
+      carTypeOrder: '5',
+      carTypeCount: '2',
+      carPurposes: [
+        {
+          carPurposeCode: '',
+          carPurposeName: '자가용',
+        },
+      ],
     },
     {
-      name: '승용',
+      carTypeCode: 'P',
+      carTypeName: '승용',
+      carTypeOrder: '1',
+      carTypeCount: '6',
+      carPurposes: [
+        {
+          carPurposeCode: 'J',
+          carPurposeName: '자가용',
+        },
+        {
+          carPurposeCode: 'R',
+          carPurposeName: '렌터카',
+        },
+        {
+          carPurposeCode: 'H',
+          carPurposeName: '장애인',
+        },
+      ],
     },
     {
-      name: 'SUV',
+      carTypeCode: 'R',
+      carTypeName: 'SUV',
+      carTypeOrder: '2',
+      carTypeCount: '8',
+      carPurposes: [
+        {
+          carPurposeCode: '',
+          carPurposeName: '자가용',
+        },
+      ],
     },
     {
-      name: 'MPV',
+      carTypeCode: 'S',
+      carTypeName: 'MPV',
+      carTypeOrder: '3',
+      carTypeCount: '6',
+      carPurposes: [
+        {
+          carPurposeCode: '',
+          carPurposeName: '자가용',
+        },
+      ],
     },
     {
-      name: '소형트럭&택시',
+      carTypeCode: 'L',
+      carTypeName: '소형트럭&택시',
+      carTypeOrder: '6',
+      carTypeCount: '4',
+      carPurposes: [
+        {
+          carPurposeCode: '',
+          carPurposeName: '자가용',
+        },
+      ],
+    },
+    {
+      carTypeCode: 'T',
+      carTypeName: '트럭',
+      carTypeOrder: '3',
+      carTypeCount: '5',
+      carPurposes: [],
+    },
+    {
+      carTypeCode: 'B',
+      carTypeName: '버스',
+      carTypeOrder: '3',
+      carTypeCount: '14',
+      carPurposes: [],
     },
   ],
+  rspStatus: {
+    rspCode: '0000',
+    rspMessage: '성공',
+    uri: 'http://ep-product-service/v1/product/car/type?carTypeFlag=&siteTypeCode=H',
+  },
 };
 
 export const ENGINE_TYPE_LIST = {
-  type: 'EngineTypeList',
-  title: '엔진',
-  list: [
+  data: [
     {
-      name: '디젤',
+      carEnginCode: 'DG',
+      carEnginName: '디젤',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
     {
-      name: '전기',
+      carEnginCode: 'EL',
+      carEnginName: '전기',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
     {
-      name: '가솔린',
+      carEnginCode: 'GS',
+      carEnginName: '가솔린',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
     {
-      name: '하이브리드',
+      carEnginCode: 'HB',
+      carEnginName: '하이브리드',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
     {
-      name: '수소',
+      carEnginCode: 'HN',
+      carEnginName: '수소',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
     {
-      name: 'LPG',
+      carEnginCode: 'LP',
+      carEnginName: 'LPG',
+      carPurposeCode: null,
+      carEnginEnableYn: null,
+      displayCarYn: null,
+      discountInventoryCaryn: null,
     },
   ],
+  rspStatus: {
+    rspCode: '0000',
+    rspMessage: '성공',
+    uri: 'http://ep-product-service/v1/product/engins?carTypeFlag=&siteTypeCode=H',
+  },
 };

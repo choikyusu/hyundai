@@ -3,8 +3,21 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import { styled } from 'styled-components';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 import { checkboxDataList } from './data/data';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-export const FilterBottom = () => {
+interface FilterBottomProps {
+  filterMap: Map<string, { checked: boolean; name: string }>;
+  setFilterMap: Dispatch<
+    SetStateAction<Map<string, { checked: boolean; name: string }>>
+  >;
+}
+
+export const FilterBottom = ({
+  filterMap,
+  setFilterMap,
+}: FilterBottomProps) => {
+  const [isOpen, setOpen] = useState<{ [key: string]: boolean }>({});
+
   return (
     <Styled.FilterBottom>
       <ul>
@@ -14,17 +27,38 @@ export const FilterBottom = () => {
               <Styled.FilterTitleStrong>{`${data.specTypeName}(${data.count})`}</Styled.FilterTitleStrong>
             </Styled.FilterTitle>
             <Styled.FilterButtonWrap>
-              <Styled.FilterButton>
-                <HiOutlineChevronDown />
+              <Styled.FilterButton
+                onClick={() =>
+                  setOpen(prev => ({
+                    ...prev,
+                    [data.specTypeCode]: !prev[data.specTypeCode],
+                  }))
+                }
+              >
+                {isOpen[data.specTypeCode] ? (
+                  <HiOutlineChevronUp />
+                ) : (
+                  <HiOutlineChevronDown />
+                )}
               </Styled.FilterButton>
             </Styled.FilterButtonWrap>
-            <Styled.CheckboxWrapper>
-              {data.specCategorys.map((category, index) => (
+            <Styled.CheckboxWrapper $isOpen={isOpen[data.specTypeCode]}>
+              {data.specCategorys.map(category => (
                 <Styled.FilterCheckbox>
                   <Checkbox
-                    index={index}
                     type={category.specCategoryCode}
                     name={category.specCategoryName}
+                    checked={
+                      !!filterMap.get(`${category.specCategoryCode}`)?.checked
+                    }
+                    onChange={() => {
+                      filterMap.set(`${category.specCategoryCode}`, {
+                        checked: !filterMap.get(`${category.specCategoryCode}`)
+                          ?.checked,
+                        name: category.specCategoryName,
+                      });
+                      setFilterMap(new Map(filterMap));
+                    }}
                   />
                 </Styled.FilterCheckbox>
               ))}
@@ -104,7 +138,7 @@ const Styled = {
     right: 0;
     top: 0;
   `,
-  CheckboxWrapper: styled.div`
+  CheckboxWrapper: styled.div<{ $isOpen: boolean }>`
     position: relative;
     width: 80%;
     display: flex;
@@ -119,13 +153,12 @@ const Styled = {
       width: 100%;
     }
 
-    height: 60px;
+    ${props => (props.$isOpen ? '' : 'height: 60px;')}
   `,
   FilterCheckbox: styled.div`
     font-weight: 500;
     font-size: 14px;
     position: relative;
-    cursor: pointer;
     display: inline-block;
     white-space: nowrap;
     user-select: none;
@@ -134,7 +167,7 @@ const Styled = {
 
     margin: 0 !important;
 
-    padding: 4px 0 20px 0;
+    min-height: 60px;
 
     width: 25%;
 
