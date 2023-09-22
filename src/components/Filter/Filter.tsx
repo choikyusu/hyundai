@@ -7,6 +7,7 @@ import { FilterBottom } from './FilterBottom/FilterBottom';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export const Filter = () => {
   const [filterMap, setFilterMap] = useState<
@@ -48,7 +49,16 @@ export const Filter = () => {
       <Styled.ContentBody>
         <Styled.CarList>
           <Styled.CarListHeader>검색조건을 선택해 주세요.</Styled.CarListHeader>
-          <Styled.CarListGroup />
+          <Styled.CarListGroup>
+            <Styled.CarListItem>
+              <Styled.CarLink href="">
+                <Styled.ElImage>
+                  <Styled.ElImagePlaceHolder />
+                  <Styled.Strong>더 뉴 아반떼</Styled.Strong>
+                </Styled.ElImage>
+              </Styled.CarLink>
+            </Styled.CarListItem>
+          </Styled.CarListGroup>
         </Styled.CarList>
       </Styled.ContentBody>
       <ContentBottom
@@ -106,6 +116,39 @@ const Styled = {
       padding-top: 0;
     }
   `,
+  CarListItem: styled.li`
+    width: 25%;
+    margin: 0 0 80px;
+    text-align: center;
+
+    @media screen and (max-width: 767px) {
+      width: 50%;
+      margin: 0 0 40px;
+    }
+  `,
+  CarLink: styled(Link)`
+    display: block;
+    padding: 0 40px;
+    color: #000;
+  `,
+  ElImage: styled.div`
+    position: relative;
+
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    overflow: hidden;
+  `,
+  ElImagePlaceHolder: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background: #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
+  `,
   ContentTop: styled.div`
     width: 100%;
     position: relative;
@@ -116,6 +159,13 @@ const Styled = {
       overflow: hidden;
       background: #f6f3f2;
     }
+  `,
+  Strong: styled.strong`
+    font-family: 'HyundaiSansHeadKR';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.4px;
   `,
   FilterWrap: styled.div`
     position: relative;
