@@ -14,7 +14,7 @@ router.get('/cars/', async (req, res, next) => {
   } = req.query;
 
   res.status(200).json({
-    data: carData,
+    data: { list: carData },
     rspStatus: {
       rspCode: '0000',
       rspMessage: '성공',

@@ -6,9 +6,23 @@ import { checkboxDataList } from './data/data';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface FilterBottomProps {
-  filterMap: Map<string, { checked: boolean; name: string }>;
+  filterMap: Map<
+    string,
+    {
+      code: string;
+      name: string;
+    }[]
+  >;
   setFilterMap: Dispatch<
-    SetStateAction<Map<string, { checked: boolean; name: string }>>
+    SetStateAction<
+      Map<
+        string,
+        {
+          code: string;
+          name: string;
+        }[]
+      >
+    >
   >;
 }
 
@@ -49,14 +63,31 @@ export const FilterBottom = ({
                     type={category.specCategoryCode}
                     name={category.specCategoryName}
                     checked={
-                      !!filterMap.get(`${category.specCategoryCode}`)?.checked
+                      !!filterMap
+                        .get(data.specTypeCode)
+                        ?.find(
+                          value => value.code === category.specCategoryCode,
+                        )
                     }
                     onChange={() => {
-                      filterMap.set(`${category.specCategoryCode}`, {
-                        checked: !filterMap.get(`${category.specCategoryCode}`)
-                          ?.checked,
-                        name: category.specCategoryName,
-                      });
+                      let list = filterMap.get(data.specTypeCode) || [];
+
+                      const index = list.findIndex(
+                        value => value.code === category.specCategoryCode,
+                      );
+
+                      if (index !== -1)
+                        list = list
+                          .slice(0, index)
+                          .concat(list.slice(index + 1));
+                      else
+                        list.push({
+                          code: category.specCategoryCode,
+                          name: category.specCategoryName,
+                        });
+
+                      filterMap.set(data.specTypeCode, list);
+
                       setFilterMap(new Map(filterMap));
                     }}
                   />

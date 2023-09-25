@@ -6,13 +6,22 @@ import { FilterTop } from './FilterTop/FilterTop';
 import { FilterBottom } from './FilterBottom/FilterBottom';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getCarList } from '@/src/services/apis/car.api.service';
 
 export const Filter = () => {
   const [filterMap, setFilterMap] = useState<
-    Map<string, { checked: boolean; name: string }>
+    Map<string, { code: string; name: string }[]>
   >(new Map());
+
+  const [data, setData] = useState<CarResponse | null>(null);
+
+  useEffect(() => {
+    getCarList((success, data) => {
+      if (success && data) setData(data);
+    });
+  }, [filterMap]);
 
   return (
     <ContentArea
@@ -28,16 +37,17 @@ export const Filter = () => {
         </Styled.FilterWrap>
         <Styled.FilterTag>
           {Array.from(filterMap)
-            .filter(item => item[1].checked)
             .sort((a, b) => a[0].localeCompare(b[0]))
-            .map(item => (
-              <Styled.Tag>
-                {item[1].name}
-                <Styled.DeleteButton>
-                  <AiOutlineClose />
-                </Styled.DeleteButton>
-              </Styled.Tag>
-            ))}
+            .map(flatMap =>
+              flatMap[1].map(item => (
+                <Styled.Tag>
+                  {item.name}
+                  <Styled.DeleteButton>
+                    <AiOutlineClose />
+                  </Styled.DeleteButton>
+                </Styled.Tag>
+              )),
+            )}
 
           <span>
             <Styled.DeselectAllButton onClick={() => setFilterMap(new Map())}>
@@ -48,16 +58,33 @@ export const Filter = () => {
       </Styled.ContentTop>
       <Styled.ContentBody>
         <Styled.CarList>
-          <Styled.CarListHeader>검색조건을 선택해 주세요.</Styled.CarListHeader>
+          {!data && (
+            <Styled.CarListHeader>
+              검색조건을 선택해 주세요.
+            </Styled.CarListHeader>
+          )}
+          {data && (
+            <Styled.CarListHeader>
+              총 <Styled.Span>{data.list.length}건</Styled.Span>이
+              검색되었습니다.
+            </Styled.CarListHeader>
+          )}
+
           <Styled.CarListGroup>
-            <Styled.CarListItem>
-              <Styled.CarLink href="">
-                <Styled.ElImage>
-                  <Styled.ElImagePlaceHolder />
-                  <Styled.Strong>더 뉴 아반떼</Styled.Strong>
-                </Styled.ElImage>
-              </Styled.CarLink>
-            </Styled.CarListItem>
+            {data &&
+              data.list.map(item => (
+                <Styled.CarListItem>
+                  <Styled.CarLink href="">
+                    <Styled.ElImage>
+                      <Styled.ElImageInner
+                        src={item.carImgPath}
+                        alt={item.carName}
+                      />
+                      <Styled.Strong>{item.carName}</Styled.Strong>
+                    </Styled.ElImage>
+                  </Styled.CarLink>
+                </Styled.CarListItem>
+              ))}
           </Styled.CarListGroup>
         </Styled.CarList>
       </Styled.ContentBody>
@@ -106,6 +133,9 @@ const Styled = {
       line-height: 100%;
     }
   `,
+  Span: styled.span`
+    color: #007fa8;
+  `,
   CarListGroup: styled.ul`
     padding-top: 60px;
     display: flex;
@@ -139,6 +169,10 @@ const Styled = {
     box-sizing: border-box;
     overflow: hidden;
   `,
+  ElImageInner: styled.img`
+    object-fit: contain;
+    width: 100%;
+  `,
   ElImagePlaceHolder: styled.div`
     display: flex;
     justify-content: center;
@@ -161,11 +195,20 @@ const Styled = {
     }
   `,
   Strong: styled.strong`
+    display: block;
     font-family: 'HyundaiSansHeadKR';
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 34px;
     letter-spacing: -0.4px;
+
+    @media screen and (max-width: 767px) {
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.4px;
+    }
   `,
   FilterWrap: styled.div`
     position: relative;

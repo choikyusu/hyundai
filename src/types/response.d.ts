@@ -21,3 +21,17 @@ interface AgencyResponse {
   branchCount: number;
   agencyCount: number;
 }
+
+interface CarResponse {
+  list: {
+    carCode: string;
+    carEngName: string;
+    carImgPath: string;
+    carName: string;
+    carPrice: number;
+    carTypeCode: string;
+    carTypeName: string;
+    mobileCarImgPath: string;
+    ranking: string;
+  }[];
+}
