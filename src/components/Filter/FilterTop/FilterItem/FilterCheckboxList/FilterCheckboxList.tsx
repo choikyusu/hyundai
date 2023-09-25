@@ -28,9 +28,23 @@ interface FilterCheckboxListProps {
           discountInventoryCaryn: null;
         }[];
       };
-  filterMap: Map<string, { checked: boolean; name: string }>;
+  filterMap: Map<
+    string,
+    {
+      code: string;
+      name: string;
+    }[]
+  >;
   setFilterMap: Dispatch<
-    SetStateAction<Map<string, { checked: boolean; name: string }>>
+    SetStateAction<
+      Map<
+        string,
+        {
+          code: string;
+          name: string;
+        }[]
+      >
+    >
   >;
 }
 
@@ -47,12 +61,25 @@ export const FilterCheckboxList = ({
             <Checkbox
               type={item.carTypeCode}
               name={item.carTypeName}
-              checked={!!filterMap.get(item.carTypeCode)?.checked}
+              checked={
+                !!filterMap
+                  .get(data.type)
+                  ?.find(value => value.code === item.carTypeCode)
+              }
               onChange={() => {
-                filterMap.set(item.carTypeCode, {
-                  checked: !filterMap.get(item.carTypeCode)?.checked,
-                  name: item.carTypeName,
-                });
+                let list = filterMap.get(data.type) || [];
+
+                const index = list.findIndex(
+                  value => value.code === item.carTypeCode,
+                );
+
+                if (index !== -1)
+                  list = list.slice(0, index).concat(list.slice(index + 1));
+                else
+                  list.push({ code: item.carTypeCode, name: item.carTypeName });
+
+                filterMap.set(data.type, list);
+
                 setFilterMap(new Map(filterMap));
               }}
             />
@@ -62,12 +89,28 @@ export const FilterCheckboxList = ({
             <Checkbox
               type={item.carEnginCode}
               name={item.carEnginName}
-              checked={!!filterMap.get(item.carEnginCode)?.checked}
+              checked={
+                !!filterMap
+                  .get(data.type)
+                  ?.find(value => value.code === item.carEnginCode)
+              }
               onChange={() => {
-                filterMap.set(item.carEnginCode, {
-                  checked: !filterMap.get(item.carEnginCode)?.checked,
-                  name: item.carEnginName,
-                });
+                let list = filterMap.get(data.type) || [];
+
+                const index = list.findIndex(
+                  value => value.code === item.carEnginCode,
+                );
+
+                if (index !== -1)
+                  list = list.slice(0, index).concat(list.slice(index + 1));
+                else
+                  list.push({
+                    code: item.carEnginCode,
+                    name: item.carEnginName,
+                  });
+
+                filterMap.set(data.type, list);
+
                 setFilterMap(new Map(filterMap));
               }}
             />

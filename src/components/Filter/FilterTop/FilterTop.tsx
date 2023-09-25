@@ -6,9 +6,23 @@ import { CAR_TYPE_LIST, ENGINE_TYPE_LIST, PRICE_LIST } from './data/data';
 import { Dispatch, SetStateAction } from 'react';
 
 interface FilterBottomProps {
-  filterMap: Map<string, { checked: boolean; name: string }>;
+  filterMap: Map<
+    string,
+    {
+      code: string;
+      name: string;
+    }[]
+  >;
   setFilterMap: Dispatch<
-    SetStateAction<Map<string, { checked: boolean; name: string }>>
+    SetStateAction<
+      Map<
+        string,
+        {
+          code: string;
+          name: string;
+        }[]
+      >
+    >
   >;
 }
 
