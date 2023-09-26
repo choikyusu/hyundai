@@ -9,8 +9,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCarList } from '@/src/services/apis/car.api.service';
+import { PRICE_LIST } from './FilterTop/data/data';
 
 export const Filter = () => {
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(PRICE_LIST.length - 1);
   const [filterMap, setFilterMap] = useState<
     Map<string, { code: string; name: string }[]>
   >(new Map());
@@ -18,10 +21,34 @@ export const Filter = () => {
   const [data, setData] = useState<CarResponse | null>(null);
 
   useEffect(() => {
-    getCarList((success, data) => {
-      if (success && data) setData(data);
-    });
-  }, [filterMap]);
+    const newFilterMap = new Map(filterMap);
+
+    const carTypeCode = newFilterMap
+      .get('CarType')
+      ?.map(type => type.code)
+      .join(',');
+    newFilterMap.delete('CarType');
+    const carEngineCode = newFilterMap
+      .get('EngineType')
+      ?.map(type => type.code)
+      .join(',');
+    newFilterMap.delete('EngineType');
+
+    console.log(newFilterMap, carTypeCode, carEngineCode);
+
+    const fromCarPrice = PRICE_LIST[minVal];
+    const toCarPrice = PRICE_LIST[maxVal];
+
+    getCarList(
+      carTypeCode,
+      carEngineCode,
+      fromCarPrice,
+      toCarPrice,
+      (success, data) => {
+        if (success && data) setData(data);
+      },
+    );
+  }, [filterMap, minVal, maxVal]);
 
   return (
     <ContentArea
@@ -31,7 +58,14 @@ export const Filter = () => {
       <Styled.ContentTop>
         <Styled.FilterWrap>
           <div>
-            <FilterTop filterMap={filterMap} setFilterMap={setFilterMap} />
+            <FilterTop
+              minVal={minVal}
+              maxVal={maxVal}
+              setMinVal={setMinVal}
+              setMaxVal={setMaxVal}
+              filterMap={filterMap}
+              setFilterMap={setFilterMap}
+            />
             <FilterBottom filterMap={filterMap} setFilterMap={setFilterMap} />
           </div>
         </Styled.FilterWrap>

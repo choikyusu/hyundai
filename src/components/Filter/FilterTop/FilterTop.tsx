@@ -6,6 +6,10 @@ import { CAR_TYPE_LIST, ENGINE_TYPE_LIST, PRICE_LIST } from './data/data';
 import { Dispatch, SetStateAction } from 'react';
 
 interface FilterBottomProps {
+  minVal: number;
+  maxVal: number;
+  setMinVal: Dispatch<SetStateAction<number>>;
+  setMaxVal: Dispatch<SetStateAction<number>>;
   filterMap: Map<
     string,
     {
@@ -26,7 +30,14 @@ interface FilterBottomProps {
   >;
 }
 
-export const FilterTop = ({ filterMap, setFilterMap }: FilterBottomProps) => {
+export const FilterTop = ({
+  minVal,
+  maxVal,
+  setMinVal,
+  setMaxVal,
+  filterMap,
+  setFilterMap,
+}: FilterBottomProps) => {
   return (
     <Styled.FilterTop>
       <Styled.FilterList>
@@ -45,7 +56,13 @@ export const FilterTop = ({ filterMap, setFilterMap }: FilterBottomProps) => {
           />
         </FilterItem>
         <FilterItem type="가격">
-          <MultiRangeSlider list={PRICE_LIST} />
+          <MultiRangeSlider
+            minVal={minVal}
+            maxVal={maxVal}
+            setMinVal={setMinVal}
+            setMaxVal={setMaxVal}
+            list={PRICE_LIST.map(price => `${price}만원`)}
+          />
         </FilterItem>
       </Styled.FilterList>
     </Styled.FilterTop>

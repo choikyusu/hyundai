@@ -1,16 +1,24 @@
-import { useCallback, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
 interface MultiRangeSliderProps {
+  minVal: number;
+  maxVal: number;
+  setMinVal: Dispatch<SetStateAction<number>>;
+  setMaxVal: Dispatch<SetStateAction<number>>;
   list: string[];
 }
 
-export const MultiRangeSlider = ({ list }: MultiRangeSliderProps) => {
+export const MultiRangeSlider = ({
+  minVal,
+  maxVal,
+  setMinVal,
+  setMaxVal,
+  list,
+}: MultiRangeSliderProps) => {
   const min = 0;
   const max = list.length - 1;
 
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
