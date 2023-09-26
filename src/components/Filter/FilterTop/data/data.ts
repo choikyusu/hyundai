@@ -1,6 +1,6 @@
 export const PRICE_LIST = Array.from(
   { length: 15 },
-  (v, i) => `${(i + 3) * 500}만원`,
+  (v, i) => `${(i + 3) * 500}`,
 );
 
 export const CAR_TYPE_LIST = {

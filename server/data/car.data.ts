@@ -1,4 +1,4 @@
-export const carData = [
+export const carList = [
   {
     carCode: 'CN12',
     carName: '더 뉴 아반떼',
@@ -9,6 +9,7 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//the-new-avante-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//the-new-avante-well-side.png',
+    carEngineCode: 'GS',
   },
   {
     carCode: 'CN13',
@@ -22,6 +23,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-new-avante-hybrid-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-new-avante-hybrid-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'DN15',
@@ -34,6 +36,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//sonata-the-edge-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//sonata-the-edge-well-side.png',
+    carEngineCode: 'GS,LP',
   },
   {
     carCode: 'DN16',
@@ -47,6 +50,7 @@ export const carData = [
       '/contents/repn-car/side-w//sonata-the-edge-hybrid-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//sonata-the-edge-hybrid-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'GN01',
@@ -59,6 +63,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//the-all-new-grandeur-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-grandeur-well-side.png',
+    carEngineCode: 'GS,LP',
   },
   {
     carCode: 'GN02',
@@ -72,6 +77,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-all-new-grandeur-hybrid-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-grandeur-hybrid-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'MX03',
@@ -84,6 +90,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//the-all-new-santafe-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-santafe-well-side.png',
+    carEngineCode: 'GS',
   },
   {
     carCode: 'MX04',
@@ -97,6 +104,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-all-new-santafe-hybrid-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-santafe-hybrid-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'QX05',
@@ -108,6 +116,7 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//venue-23my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//venue-23my-well-side.png',
+    carEngineCode: 'GS',
   },
   {
     carCode: 'SX01',
@@ -120,6 +129,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//the-all-new-kona-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-kona-well-side.png',
+    carEngineCode: 'GS',
   },
   {
     carCode: 'SX02',
@@ -133,6 +143,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-all-new-kona-hybrid-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-kona-hybrid-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'NX05',
@@ -144,6 +155,7 @@ export const carData = [
     ranking: '006',
     carImgPath: '/contents/repn-car/side-w//tucson-23my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//tucson-23my-well-side.png',
+    carEngineCode: 'DG,GS',
   },
   {
     carCode: 'NX06',
@@ -156,6 +168,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//tucson-hybrid-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//tucson-hybrid-23my-well-side.png',
+    carEngineCode: 'HB',
   },
   {
     carCode: 'LX06',
@@ -167,6 +180,7 @@ export const carData = [
     ranking: '002',
     carImgPath: '/contents/repn-car/side-w//palisade-24my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//palisade-24my-well-side.png',
+    carEngineCode: 'DG,GS',
   },
   {
     carCode: 'US10',
@@ -179,6 +193,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//staria-lounge-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//staria-lounge-23my-well-side.png',
+    carEngineCode: 'DG,LP',
   },
   {
     carCode: 'US09',
@@ -190,6 +205,7 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//staria-23my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//staria-23my-well-side.png',
+    carEngineCode: 'DG,LP',
   },
   {
     carCode: 'US13',
@@ -203,6 +219,7 @@ export const carData = [
       '/contents/repn-car/side-w//staria-lounge-limousine-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//staria-lounge-limousine-23my-well-side.png',
+    carEngineCode: 'DG',
   },
   {
     carCode: 'US12',
@@ -216,6 +233,7 @@ export const carData = [
       '/contents/repn-car/side-w//staria-lounge-camper-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//staria-lounge-camper-23my-well-side.png',
+    carEngineCode: 'DG',
   },
   {
     carCode: 'US14',
@@ -228,6 +246,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//staria-kinder-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//staria-kinder-23my-well-side.png',
+    carEngineCode: 'LP',
   },
   {
     carCode: 'M559',
@@ -240,6 +259,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//porter2-porest-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//porter2-porest-23my-well-side.png',
+    carEngineCode: 'DG',
   },
   {
     carCode: 'CE02',
@@ -251,6 +271,7 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//ioniq6-24my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//ioniq6-24my-well-side.png',
+    carEngineCode: 'EL',
   },
   {
     carCode: 'FE04',
@@ -262,6 +283,7 @@ export const carData = [
     ranking: '026',
     carImgPath: '/contents/repn-car/side-w//nexo-24my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//nexo-24my-well-side.png',
+    carEngineCode: 'HN',
   },
   {
     carCode: 'SX06',
@@ -275,6 +297,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-all-new-kona-electric-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-kona-electric-well-side.png',
+    carEngineCode: 'EL',
   },
   {
     carCode: 'NE02',
@@ -286,6 +309,7 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//ioniq5-23my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//ioniq5-23my-well-side.png',
+    carEngineCode: 'EL',
   },
   {
     carCode: 'M555',
@@ -299,6 +323,7 @@ export const carData = [
       '/contents/repn-car/side-w//porter2-electric-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//porter2-electric-23my-well-side.png',
+    carEngineCode: 'EL',
   },
   {
     carCode: 'NE03',
@@ -310,10 +335,11 @@ export const carData = [
     ranking: null,
     carImgPath: '/contents/repn-car/side-w//ioniq5-n-23lc-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//ioniq5-n-23lc-well-side.png',
+    carEngineCode: 'EL',
   },
   {
     carCode: 'CN16',
-    carName: '더 뉴 아반떼 N ',
+    carName: '더 뉴 아반떼 N',
     carEngName: 'the-new-avante-n',
     carTypeCode: 'N',
     carTypeName: 'N',
@@ -322,6 +348,7 @@ export const carData = [
     carImgPath: '/contents/repn-car/side-w//the-new-avante-n-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-new-avante-n-well-side.png',
+    carEngineCode: 'GS,LP',
   },
   {
     carCode: 'GN03',
@@ -335,6 +362,7 @@ export const carData = [
       '/contents/repn-car/side-w//the-all-new-grandeur-taxi-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//the-all-new-grandeur-taxi-well-side.png',
+    carEngineCode: 'LP',
   },
   {
     carCode: 'US11',
@@ -348,6 +376,7 @@ export const carData = [
       '/contents/repn-car/side-w//staria-lounge-mobility-23my-well-side.png',
     mobileCarImgPath:
       '/contents/repn-car/side-w//staria-lounge-mobility-23my-well-side.png',
+    carEngineCode: 'LP',
   },
   {
     carCode: 'M556',
@@ -359,5 +388,6 @@ export const carData = [
     ranking: '001',
     carImgPath: '/contents/repn-car/side-w//porter2-23my-well-side.png',
     mobileCarImgPath: '/contents/repn-car/side-w//porter2-23my-well-side.png',
+    carEngineCode: 'DG',
   },
 ];
