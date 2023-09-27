@@ -1,6 +1,7 @@
 import { Checkbox } from '@/src/components/common/Checkbox/Checkbox';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
+import { CarFilterMap } from '../../../useFilter';
 
 interface FilterCheckboxListProps {
   data:
@@ -28,24 +29,8 @@ interface FilterCheckboxListProps {
           discountInventoryCaryn: null;
         }[];
       };
-  filterMap: Map<
-    string,
-    {
-      code: string;
-      name: string;
-    }[]
-  >;
-  setFilterMap: Dispatch<
-    SetStateAction<
-      Map<
-        string,
-        {
-          code: string;
-          name: string;
-        }[]
-      >
-    >
-  >;
+  filterMap: CarFilterMap;
+  setFilterMap: Dispatch<SetStateAction<CarFilterMap>>;
 }
 
 export const FilterCheckboxList = ({

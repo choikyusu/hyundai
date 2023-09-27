@@ -1,58 +1,27 @@
-import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 import { styled } from 'styled-components';
+import { useMultiRangeSlider } from './useMultiRangeSlider';
 
 interface MultiRangeSliderProps {
-  minVal: number;
-  maxVal: number;
-  setMinVal: Dispatch<SetStateAction<number>>;
-  setMaxVal: Dispatch<SetStateAction<number>>;
+  minIndex: number;
+  maxIndex: number;
+  onChangeInputRange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: 'Min' | 'Max',
+  ) => void;
   list: string[];
 }
 
 export const MultiRangeSlider = ({
-  minVal,
-  maxVal,
-  setMinVal,
-  setMaxVal,
+  minIndex,
+  maxIndex,
+  onChangeInputRange,
   list,
 }: MultiRangeSliderProps) => {
-  const min = 0;
-  const max = list.length - 1;
-
-  const minValRef = useRef<HTMLInputElement>(null);
-  const maxValRef = useRef<HTMLInputElement>(null);
-  const range = useRef<HTMLDivElement>(null);
-
-  const getPercent = useCallback(
-    (value: number) => Math.round(((value - min) / (max - min)) * 100),
-    [min, max],
-  );
-
-  const onChangeInputRange = () => {
-    if (!minValRef.current || !maxValRef.current) return;
-
-    setMinVal(Number(minValRef.current.value));
-    setMaxVal(Number(maxValRef.current.value));
-
-    const [min, max] = [
-      Math.min(
-        Number(minValRef.current.value),
-        Number(maxValRef.current.value),
-      ),
-      Math.max(
-        Number(minValRef.current.value),
-        Number(maxValRef.current.value),
-      ),
-    ];
-
-    const minPercent = getPercent(min);
-    const maxPercent = getPercent(max);
-
-    if (!range.current) return;
-
-    range.current.style.left = `${minPercent}%`;
-    range.current.style.width = `${maxPercent - minPercent}%`;
-  };
+  const { max, min, range, onInnerChange } = useMultiRangeSlider({
+    minIndex,
+    maxIndex,
+    list,
+  });
 
   return (
     <Styled.Container>
@@ -60,18 +29,22 @@ export const MultiRangeSlider = ({
         type="range"
         min={min}
         max={max}
-        value={minVal}
-        ref={minValRef}
-        onChange={onChangeInputRange}
-        style={{ zIndex: minVal > max - 100 ? 5 : 3 }}
+        value={minIndex}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onInnerChange(e, 'Min');
+          onChangeInputRange(e, 'Min');
+        }}
+        style={{ zIndex: minIndex > max - 100 ? 5 : 3 }}
       />
       <Styled.Thumb
         type="range"
         min={min}
         max={max}
-        value={maxVal}
-        ref={maxValRef}
-        onChange={onChangeInputRange}
+        value={maxIndex}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onInnerChange(e, 'Max');
+          onChangeInputRange(e, 'Max');
+        }}
         style={{ zIndex: 4 }}
       />
 
@@ -79,10 +52,10 @@ export const MultiRangeSlider = ({
         <Styled.SliderTrack />
         <Styled.SliderRange ref={range} />
         <Styled.SliderLeftValue>
-          {list[Math.min(minVal, maxVal)]}
+          {list[Math.min(minIndex, maxIndex)]}
         </Styled.SliderLeftValue>
         <Styled.SliderRightValue>
-          {list[Math.max(minVal, maxVal)]}
+          {list[Math.max(minIndex, maxIndex)]}
         </Styled.SliderRightValue>
       </Styled.Slider>
     </Styled.Container>
