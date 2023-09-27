@@ -6,49 +6,18 @@ import { FilterTop } from './FilterTop/FilterTop';
 import { FilterBottom } from './FilterBottom/FilterBottom';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getCarList } from '@/src/services/apis/car.api.service';
-import { PRICE_LIST } from './FilterTop/data/data';
+import { useFilter } from './useFilter';
 
 export const Filter = () => {
-  const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(PRICE_LIST.length - 1);
-  const [filterMap, setFilterMap] = useState<
-    Map<string, { code: string; name: string }[]>
-  >(new Map());
-
-  const [data, setData] = useState<CarResponse | null>(null);
-
-  useEffect(() => {
-    const newFilterMap = new Map(filterMap);
-
-    const carTypeCode = newFilterMap
-      .get('CarType')
-      ?.map(type => type.code)
-      .join(',');
-    newFilterMap.delete('CarType');
-    const carEngineCode = newFilterMap
-      .get('EngineType')
-      ?.map(type => type.code)
-      .join(',');
-    newFilterMap.delete('EngineType');
-
-    console.log(newFilterMap, carTypeCode, carEngineCode);
-
-    const fromCarPrice = PRICE_LIST[minVal];
-    const toCarPrice = PRICE_LIST[maxVal];
-
-    getCarList(
-      carTypeCode,
-      carEngineCode,
-      fromCarPrice,
-      toCarPrice,
-      (success, data) => {
-        if (success && data) setData(data);
-      },
-    );
-  }, [filterMap, minVal, maxVal]);
+  const {
+    data,
+    filterMap,
+    maxIndex,
+    minIndex,
+    onChangeInputRange,
+    setFilterMap,
+  } = useFilter();
 
   return (
     <ContentArea
@@ -59,12 +28,11 @@ export const Filter = () => {
         <Styled.FilterWrap>
           <div>
             <FilterTop
-              minVal={minVal}
-              maxVal={maxVal}
-              setMinVal={setMinVal}
-              setMaxVal={setMaxVal}
+              minIndex={minIndex}
+              maxIndex={maxIndex}
               filterMap={filterMap}
               setFilterMap={setFilterMap}
+              onChangeInputRange={onChangeInputRange}
             />
             <FilterBottom filterMap={filterMap} setFilterMap={setFilterMap} />
           </div>

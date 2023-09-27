@@ -4,39 +4,25 @@ import { FilterItem } from './FilterItem/FilterItem';
 import { FilterCheckboxList } from './FilterItem/FilterCheckboxList/FilterCheckboxList';
 import { CAR_TYPE_LIST, ENGINE_TYPE_LIST, PRICE_LIST } from './data/data';
 import { Dispatch, SetStateAction } from 'react';
+import { CarFilterMap } from '../useFilter';
 
 interface FilterBottomProps {
-  minVal: number;
-  maxVal: number;
-  setMinVal: Dispatch<SetStateAction<number>>;
-  setMaxVal: Dispatch<SetStateAction<number>>;
-  filterMap: Map<
-    string,
-    {
-      code: string;
-      name: string;
-    }[]
-  >;
-  setFilterMap: Dispatch<
-    SetStateAction<
-      Map<
-        string,
-        {
-          code: string;
-          name: string;
-        }[]
-      >
-    >
-  >;
+  minIndex: number;
+  maxIndex: number;
+  filterMap: CarFilterMap;
+  setFilterMap: Dispatch<SetStateAction<CarFilterMap>>;
+  onChangeInputRange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: 'Min' | 'Max',
+  ) => void;
 }
 
 export const FilterTop = ({
-  minVal,
-  maxVal,
-  setMinVal,
-  setMaxVal,
+  minIndex,
+  maxIndex,
   filterMap,
   setFilterMap,
+  onChangeInputRange,
 }: FilterBottomProps) => {
   return (
     <Styled.FilterTop>
@@ -57,10 +43,9 @@ export const FilterTop = ({
         </FilterItem>
         <FilterItem type="가격">
           <MultiRangeSlider
-            minVal={minVal}
-            maxVal={maxVal}
-            setMinVal={setMinVal}
-            setMaxVal={setMaxVal}
+            minIndex={minIndex}
+            maxIndex={maxIndex}
+            onChangeInputRange={onChangeInputRange}
             list={PRICE_LIST.map(price => `${price}만원`)}
           />
         </FilterItem>
