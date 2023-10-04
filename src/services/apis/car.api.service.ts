@@ -4,6 +4,7 @@ import { callWrapper } from './base/base.api.service';
 export const getCarList = async (
   carTypeCode: string | undefined,
   carEngineCode: string | undefined,
+  filterOptionCodeM: string | undefined,
   fromCarPrice: string | undefined,
   toCarPrice: string | undefined,
   cb: (success: boolean, result?: CarResponse) => void,
@@ -12,6 +13,7 @@ export const getCarList = async (
     const result = await $getCarList(
       carTypeCode,
       carEngineCode,
+      filterOptionCodeM,
       fromCarPrice,
       toCarPrice,
     );

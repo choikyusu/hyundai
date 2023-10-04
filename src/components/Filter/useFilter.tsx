@@ -35,7 +35,12 @@ export const useFilter = () => {
       .join(',');
     newFilterMap.delete('EngineType');
 
-    console.log(newFilterMap, carTypeCode, carEngineCode);
+    const filterOptionCodeM: string[] = [];
+    newFilterMap.forEach((value, key) => {
+      filterOptionCodeM.push(...value.map(type => type.code));
+    });
+
+    console.log(filterOptionCodeM, carTypeCode, carEngineCode);
 
     const fromCarPrice = PRICE_LIST[minIndex];
     const toCarPrice = PRICE_LIST[maxIndex];
@@ -43,6 +48,7 @@ export const useFilter = () => {
     getCarList(
       carTypeCode,
       carEngineCode,
+      filterOptionCodeM.join(','),
       fromCarPrice,
       toCarPrice,
       (success, data) => {

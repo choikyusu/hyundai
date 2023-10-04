@@ -15,15 +15,25 @@ router.get('/cars/', async (req, res, next) => {
 
   let resultCarData = carList;
 
+  console.log(filterOptionCodeM);
+
   if (typeof carTypeCode === 'string' && carTypeCode !== '') {
     resultCarData = resultCarData.filter(data =>
-      carTypeCode.includes(data.carTypeCode),
+      data.carTypeCode.split(',').some(code => carTypeCode.includes(code)),
     );
   }
 
   if (typeof carEngineCode === 'string' && carEngineCode !== '') {
     resultCarData = resultCarData.filter(data =>
-      carEngineCode.includes(data.carEngineCode),
+      data.carEngineCode.split(',').some(code => carEngineCode.includes(code)),
+    );
+  }
+
+  if (typeof filterOptionCodeM === 'string' && filterOptionCodeM !== '') {
+    resultCarData = resultCarData.filter(data =>
+      filterOptionCodeM
+        .split(',')
+        .every(code => data.optionCodeM.includes(code)),
     );
   }
 
