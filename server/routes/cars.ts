@@ -15,8 +15,6 @@ router.get('/cars/', async (req, res, next) => {
 
   let resultCarData = carList;
 
-  console.log(filterOptionCodeM);
-
   if (typeof carTypeCode === 'string' && carTypeCode !== '') {
     resultCarData = resultCarData.filter(data =>
       data.carTypeCode.split(',').some(code => carTypeCode.includes(code)),

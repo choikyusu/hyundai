@@ -7,8 +7,9 @@ export const getCarList = async (
   filterOptionCodeM: string | undefined,
   fromCarPrice: string | undefined,
   toCarPrice: string | undefined,
-  cb: (success: boolean, result?: CarResponse) => void,
+  cb: (loading: boolean, success: boolean, result?: CarResponse) => void,
 ) => {
+  cb(true, false);
   const callApi = async () => {
     const result = await $getCarList(
       carTypeCode,
@@ -17,12 +18,12 @@ export const getCarList = async (
       fromCarPrice,
       toCarPrice,
     );
-    if (result) cb(true, result);
-    else cb(false);
+    if (result) cb(false, true, result);
+    else cb(false, false);
   };
 
   const fail = () => {
-    cb(false);
+    cb(false, false);
   };
 
   await callWrapper(callApi, fail);

@@ -4,8 +4,11 @@ import { getAgencyList } from '@/src/services/apis/agency.api.service';
 import { useEffect, useState } from 'react';
 import { useArrowList } from './usePagination';
 import { createMarker } from '@/src/utils/map/marker.builder';
+import { useLoadingProvider } from '@/src/contexts/LoadingContext';
 
 export const useBranch = () => {
+  const { setLoading } = useLoadingProvider();
+
   const { kakaoMap } = useMapProvider();
   const [branchMap, setBranchMap] = useState<any | null>(null);
   const [address, setAddress] = useState('');
@@ -65,9 +68,11 @@ export const useBranch = () => {
   };
 
   function agencyListCallback(
+    loading: boolean,
     success: boolean,
     agencyList: AgencyResponse | undefined,
   ) {
+    setLoading(loading);
     if (!success || !agencyList) return;
     setVisibleIndex(pageNo, agencyList.pages);
     setAgencyList(agencyList);
