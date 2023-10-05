@@ -4,7 +4,7 @@ import React, { createContext, useContext, useMemo, useState } from 'react';
 type MapContextProps = { kakaoMap: any; setkakaoMap: React.Dispatch<any> };
 
 const MapContext = createContext<MapContextProps>({
-  kakaoMap: null,
+  kakaoMap: undefined,
   setkakaoMap: () => undefined,
 });
 
@@ -13,7 +13,9 @@ export default function MapProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [kakaoMap, setkakaoMap] = useState<any | null>(null);
+  const [kakaoMap, setkakaoMap] = useState<any | undefined>(
+    typeof window !== 'undefined' ? window.kakao?.maps : undefined,
+  );
 
   const value = useMemo(
     () => ({
