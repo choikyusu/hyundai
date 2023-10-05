@@ -5,6 +5,7 @@ import { Map } from '../map/Map';
 import { useBranch } from './useBranch';
 import { ContentArea } from '../common/ContentArea/ContentArea';
 import { Pagination } from '../common/Pagination/Pagination';
+import { LoadingWrap } from '../common/LoadingWrap/LoadingWrap';
 
 export const Branch = () => {
   const {
@@ -20,30 +21,31 @@ export const Branch = () => {
   } = useBranch();
 
   return (
-    <ContentArea
-      descList={[
-        '지점/대리점, 전시차량, 카마스터, 출고센터 조회 및 정보 안내를 도와드립니다.',
-        '※ 대형 상용차량은 상용 판매 네트워크 > 에서 조회해 주시기 바랍니다.',
-      ]}
-      menuTreeList={[
-        '홈',
-        '구매/이벤트',
-        '판매/시승 네트워크',
-        '승용 판매/시승 네트워크',
-      ]}
-    >
-      <Styled.VehicleMap>
-        <Styled.MapWrap>
-          <Styled.AddressBox>
-            <Styled.Address>
-              <Styled.Pin>{address}</Styled.Pin>
-              <Styled.TextButton>위치 수정</Styled.TextButton>
-            </Styled.Address>
-            <Styled.Tab>
-              <Styled.TabMenu>
-                <Styled.Option>
-                  <Styled.OptionHeader>지점/대리점</Styled.OptionHeader>
-                  {/* <Styled.OptionList>
+    <LoadingWrap>
+      <ContentArea
+        descList={[
+          '지점/대리점, 전시차량, 카마스터, 출고센터 조회 및 정보 안내를 도와드립니다.',
+          '※ 대형 상용차량은 상용 판매 네트워크 > 에서 조회해 주시기 바랍니다.',
+        ]}
+        menuTreeList={[
+          '홈',
+          '구매/이벤트',
+          '판매/시승 네트워크',
+          '승용 판매/시승 네트워크',
+        ]}
+      >
+        <Styled.VehicleMap>
+          <Styled.MapWrap>
+            <Styled.AddressBox>
+              <Styled.Address>
+                <Styled.Pin>{address}</Styled.Pin>
+                <Styled.TextButton>위치 수정</Styled.TextButton>
+              </Styled.Address>
+              <Styled.Tab>
+                <Styled.TabMenu>
+                  <Styled.Option>
+                    <Styled.OptionHeader>지점/대리점</Styled.OptionHeader>
+                    {/* <Styled.OptionList>
                           <Styled.OptionItem>
                             <Styled.OptionButton>
                               지점/대리점
@@ -64,95 +66,98 @@ export const Branch = () => {
                             </Styled.OptionButton>
                           </Styled.OptionItem>
                         </Styled.OptionList> */}
-                </Styled.Option>
-              </Styled.TabMenu>
-              <Styled.TabContents>
-                <Styled.Branch>
-                  <Styled.SelectArea>asas</Styled.SelectArea>
-                  <Styled.SelectWrap>
-                    <Styled.TitleInfo>
-                      <Styled.H3>
-                        검색결과 총
-                        <Styled.H3Span>{agencyList?.total}</Styled.H3Span>건
-                      </Styled.H3>
-                      <Styled.RadioGroupWrap>
-                        <Styled.RadioGroup>
-                          <Styled.RadioArea
-                            onClick={() => setAgencyTypeCode(undefined)}
-                          >
-                            <Styled.Radio type="radio" id="all" name="type" />
-                            <Styled.RadioLabel htmlFor="all">
-                              전체({agencyList?.total})
-                            </Styled.RadioLabel>
-                          </Styled.RadioArea>
-                          <Styled.RadioArea
-                            onClick={() => setAgencyTypeCode(1)}
-                          >
-                            <Styled.Radio
-                              type="radio"
-                              id="branch"
-                              name="type"
-                            />
-                            <Styled.RadioLabel htmlFor="branch">
-                              지점({agencyList?.branchCount})
-                            </Styled.RadioLabel>
-                          </Styled.RadioArea>
-                          <Styled.RadioArea
-                            onClick={() => setAgencyTypeCode(2)}
-                          >
-                            <Styled.Radio
-                              type="radio"
-                              id="agency"
-                              name="type"
-                            />
-                            <Styled.RadioLabel htmlFor="agency">
-                              대리점({agencyList?.agencyCount})
-                            </Styled.RadioLabel>
-                          </Styled.RadioArea>
-                        </Styled.RadioGroup>
-                      </Styled.RadioGroupWrap>
-                    </Styled.TitleInfo>
-                    <Styled.ScrollWrap>
-                      <Styled.ResultList>
-                        {agencyList?.list.map((agency, index) => (
-                          <Styled.ResultItem
-                            ref={(el: HTMLLIElement) => el && itemList.push(el)}
-                          >
-                            <Styled.Marker>{index + 1}</Styled.Marker>
-                            <Styled.Link href="">
-                              {agency.agencyName}
-                              <Styled.Span>{`(${agency.distance}km)`}</Styled.Span>
-                            </Styled.Link>
-                            <Styled.LinkAdress>
-                              {agency.agencyAddress}
-                            </Styled.LinkAdress>
-                            <Styled.P>
-                              <Styled.Span>{agency.agencyTel}</Styled.Span>
-                              <Styled.BlueButton>
-                                구매 상담 신청
-                              </Styled.BlueButton>
-                            </Styled.P>
-                          </Styled.ResultItem>
-                        ))}
-                      </Styled.ResultList>
-                      <Pagination
-                        isSelectedPage={isSelectedPage}
-                        onClickArrow={onClickArrow}
-                        onClickPageNo={onClickPageNo}
-                        pageIndexList={pageIndexList}
-                      />
-                    </Styled.ScrollWrap>
-                  </Styled.SelectWrap>
-                </Styled.Branch>
-              </Styled.TabContents>
-            </Styled.Tab>
-          </Styled.AddressBox>
-          <Styled.MapBox>
-            <Map width="100%" height="100%" setMap={setBranchMap} />
-          </Styled.MapBox>
-        </Styled.MapWrap>
-      </Styled.VehicleMap>
-    </ContentArea>
+                  </Styled.Option>
+                </Styled.TabMenu>
+                <Styled.TabContents>
+                  <Styled.Branch>
+                    <Styled.SelectArea>asas</Styled.SelectArea>
+                    <Styled.SelectWrap>
+                      <Styled.TitleInfo>
+                        <Styled.H3>
+                          검색결과 총
+                          <Styled.H3Span>{agencyList?.total}</Styled.H3Span>건
+                        </Styled.H3>
+                        <Styled.RadioGroupWrap>
+                          <Styled.RadioGroup>
+                            <Styled.RadioArea
+                              onClick={() => setAgencyTypeCode(undefined)}
+                            >
+                              <Styled.Radio type="radio" id="all" name="type" />
+                              <Styled.RadioLabel htmlFor="all">
+                                전체({agencyList?.total})
+                              </Styled.RadioLabel>
+                            </Styled.RadioArea>
+                            <Styled.RadioArea
+                              onClick={() => setAgencyTypeCode(1)}
+                            >
+                              <Styled.Radio
+                                type="radio"
+                                id="branch"
+                                name="type"
+                              />
+                              <Styled.RadioLabel htmlFor="branch">
+                                지점({agencyList?.branchCount})
+                              </Styled.RadioLabel>
+                            </Styled.RadioArea>
+                            <Styled.RadioArea
+                              onClick={() => setAgencyTypeCode(2)}
+                            >
+                              <Styled.Radio
+                                type="radio"
+                                id="agency"
+                                name="type"
+                              />
+                              <Styled.RadioLabel htmlFor="agency">
+                                대리점({agencyList?.agencyCount})
+                              </Styled.RadioLabel>
+                            </Styled.RadioArea>
+                          </Styled.RadioGroup>
+                        </Styled.RadioGroupWrap>
+                      </Styled.TitleInfo>
+                      <Styled.ScrollWrap>
+                        <Styled.ResultList>
+                          {agencyList?.list.map((agency, index) => (
+                            <Styled.ResultItem
+                              ref={(el: HTMLLIElement) =>
+                                el && itemList.push(el)
+                              }
+                            >
+                              <Styled.Marker>{index + 1}</Styled.Marker>
+                              <Styled.Link href="">
+                                {agency.agencyName}
+                                <Styled.Span>{`(${agency.distance}km)`}</Styled.Span>
+                              </Styled.Link>
+                              <Styled.LinkAdress>
+                                {agency.agencyAddress}
+                              </Styled.LinkAdress>
+                              <Styled.P>
+                                <Styled.Span>{agency.agencyTel}</Styled.Span>
+                                <Styled.BlueButton>
+                                  구매 상담 신청
+                                </Styled.BlueButton>
+                              </Styled.P>
+                            </Styled.ResultItem>
+                          ))}
+                        </Styled.ResultList>
+                        <Pagination
+                          isSelectedPage={isSelectedPage}
+                          onClickArrow={onClickArrow}
+                          onClickPageNo={onClickPageNo}
+                          pageIndexList={pageIndexList}
+                        />
+                      </Styled.ScrollWrap>
+                    </Styled.SelectWrap>
+                  </Styled.Branch>
+                </Styled.TabContents>
+              </Styled.Tab>
+            </Styled.AddressBox>
+            <Styled.MapBox>
+              <Map width="100%" height="100%" setMap={setBranchMap} />
+            </Styled.MapBox>
+          </Styled.MapWrap>
+        </Styled.VehicleMap>
+      </ContentArea>
+    </LoadingWrap>
   );
 };
 

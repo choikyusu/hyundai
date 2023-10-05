@@ -8,6 +8,7 @@ import { CommonStyled } from '@/src/styles/CommonStyled';
 import { AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
 import { useFilter } from './useFilter';
+import { LoadingWrap } from '../common/LoadingWrap/LoadingWrap';
 
 export const Filter = () => {
   const {
@@ -20,81 +21,83 @@ export const Filter = () => {
   } = useFilter();
 
   return (
-    <ContentArea
-      descList={['차량 정보와 옵션으로 원하는 모델을 검색해 보세요.']}
-      menuTreeList={['홈', '구매/이벤트', '모델탐색', '상세모델검색']}
-    >
-      <Styled.ContentTop>
-        <Styled.FilterWrap>
-          <div>
-            <FilterTop
-              minIndex={minIndex}
-              maxIndex={maxIndex}
-              filterMap={filterMap}
-              setFilterMap={setFilterMap}
-              onChangeInputRange={onChangeInputRange}
-            />
-            <FilterBottom filterMap={filterMap} setFilterMap={setFilterMap} />
-          </div>
-        </Styled.FilterWrap>
-        <Styled.FilterTag>
-          {Array.from(filterMap)
-            .sort((a, b) => a[0].localeCompare(b[0]))
-            .map(flatMap =>
-              flatMap[1].map(item => (
-                <Styled.Tag>
-                  {item.name}
-                  <Styled.DeleteButton>
-                    <AiOutlineClose />
-                  </Styled.DeleteButton>
-                </Styled.Tag>
-              )),
+    <LoadingWrap>
+      <ContentArea
+        descList={['차량 정보와 옵션으로 원하는 모델을 검색해 보세요.']}
+        menuTreeList={['홈', '구매/이벤트', '모델탐색', '상세모델검색']}
+      >
+        <Styled.ContentTop>
+          <Styled.FilterWrap>
+            <div>
+              <FilterTop
+                minIndex={minIndex}
+                maxIndex={maxIndex}
+                filterMap={filterMap}
+                setFilterMap={setFilterMap}
+                onChangeInputRange={onChangeInputRange}
+              />
+              <FilterBottom filterMap={filterMap} setFilterMap={setFilterMap} />
+            </div>
+          </Styled.FilterWrap>
+          <Styled.FilterTag>
+            {Array.from(filterMap)
+              .sort((a, b) => a[0].localeCompare(b[0]))
+              .map(flatMap =>
+                flatMap[1].map(item => (
+                  <Styled.Tag>
+                    {item.name}
+                    <Styled.DeleteButton>
+                      <AiOutlineClose />
+                    </Styled.DeleteButton>
+                  </Styled.Tag>
+                )),
+              )}
+
+            <span>
+              <Styled.DeselectAllButton onClick={() => setFilterMap(new Map())}>
+                전체해제
+              </Styled.DeselectAllButton>
+            </span>
+          </Styled.FilterTag>
+        </Styled.ContentTop>
+        <Styled.ContentBody>
+          <Styled.CarList>
+            {!data && (
+              <Styled.CarListHeader>
+                검색조건을 선택해 주세요.
+              </Styled.CarListHeader>
+            )}
+            {data && (
+              <Styled.CarListHeader>
+                총 <Styled.Span>{data.list.length}건</Styled.Span>이
+                검색되었습니다.
+              </Styled.CarListHeader>
             )}
 
-          <span>
-            <Styled.DeselectAllButton onClick={() => setFilterMap(new Map())}>
-              전체해제
-            </Styled.DeselectAllButton>
-          </span>
-        </Styled.FilterTag>
-      </Styled.ContentTop>
-      <Styled.ContentBody>
-        <Styled.CarList>
-          {!data && (
-            <Styled.CarListHeader>
-              검색조건을 선택해 주세요.
-            </Styled.CarListHeader>
-          )}
-          {data && (
-            <Styled.CarListHeader>
-              총 <Styled.Span>{data.list.length}건</Styled.Span>이
-              검색되었습니다.
-            </Styled.CarListHeader>
-          )}
-
-          <Styled.CarListGroup>
-            {data &&
-              data.list.map(item => (
-                <Styled.CarListItem>
-                  <Styled.CarLink href="">
-                    <Styled.ElImage>
-                      <Styled.ElImageInner
-                        src={item.carImgPath}
-                        alt={item.carName}
-                      />
-                      <Styled.Strong>{item.carName}</Styled.Strong>
-                    </Styled.ElImage>
-                  </Styled.CarLink>
-                </Styled.CarListItem>
-              ))}
-          </Styled.CarListGroup>
-        </Styled.CarList>
-      </Styled.ContentBody>
-      <ContentBottom
-        title="유의사항"
-        description="홈페이지의 사진, 사양, 컬러, 제원은 참고용이며 실제 차량과는 상이할 수 있으니, 차량 구입 전 카마스터를 통해 확인 바랍니다."
-      />
-    </ContentArea>
+            <Styled.CarListGroup>
+              {data &&
+                data.list.map(item => (
+                  <Styled.CarListItem>
+                    <Styled.CarLink href="">
+                      <Styled.ElImage>
+                        <Styled.ElImageInner
+                          src={item.carImgPath}
+                          alt={item.carName}
+                        />
+                        <Styled.Strong>{item.carName}</Styled.Strong>
+                      </Styled.ElImage>
+                    </Styled.CarLink>
+                  </Styled.CarListItem>
+                ))}
+            </Styled.CarListGroup>
+          </Styled.CarList>
+        </Styled.ContentBody>
+        <ContentBottom
+          title="유의사항"
+          description="홈페이지의 사진, 사양, 컬러, 제원은 참고용이며 실제 차량과는 상이할 수 있으니, 차량 구입 전 카마스터를 통해 확인 바랍니다."
+        />
+      </ContentArea>
+    </LoadingWrap>
   );
 };
 

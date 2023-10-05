@@ -7,8 +7,9 @@ export const getAgencyList = async (
   latitude: number,
   longitude: number,
   agencyTypeCode: number | undefined,
-  cb: (success: boolean, result?: AgencyResponse) => void,
+  cb: (loading: boolean, success: boolean, result?: AgencyResponse) => void,
 ) => {
+  cb(true, false);
   const callApi = async () => {
     const result = await $getAgencyList(
       pageSize,
@@ -17,12 +18,12 @@ export const getAgencyList = async (
       longitude,
       agencyTypeCode,
     );
-    if (result) cb(true, result);
-    else cb(false);
+    if (result) cb(false, true, result);
+    else cb(false, false);
   };
 
   const fail = () => {
-    cb(false);
+    cb(false, false);
   };
 
   await callWrapper(callApi, fail);

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { PRICE_LIST } from './FilterTop/data/data';
 import { getCarList } from '@/src/services/apis/car.api.service';
+import { useLoadingProvider } from '@/src/contexts/LoadingContext';
 
 export type CarFilterMap = Map<string, { code: string; name: string }[]>;
 
 export const useFilter = () => {
+  const { setLoading } = useLoadingProvider();
+
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(PRICE_LIST.length - 1);
   const [data, setData] = useState<CarResponse | null>(null);
@@ -14,11 +17,8 @@ export const useFilter = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     type: 'Min' | 'Max',
   ) => {
-    if (type === 'Min') {
-      setMinIndex(Number(e.target.value));
-    } else if (type === 'Max') {
-      setMaxIndex(Number(e.target.value));
-    }
+    if (type === 'Min') setMinIndex(Number(e.target.value));
+    else if (type === 'Max') setMaxIndex(Number(e.target.value));
   };
 
   useEffect(() => {
@@ -40,8 +40,6 @@ export const useFilter = () => {
       filterOptionCodeM.push(...value.map(type => type.code));
     });
 
-    console.log(filterOptionCodeM, carTypeCode, carEngineCode);
-
     const fromCarPrice = PRICE_LIST[minIndex];
     const toCarPrice = PRICE_LIST[maxIndex];
 
@@ -51,9 +49,7 @@ export const useFilter = () => {
       filterOptionCodeM.join(','),
       fromCarPrice,
       toCarPrice,
-      (success, data) => {
-        if (success && data) setData(data);
-      },
+      carListCallback,
     );
   }, [filterMap, minIndex, maxIndex]);
 
@@ -65,4 +61,14 @@ export const useFilter = () => {
     onChangeInputRange,
     data,
   };
+
+  function carListCallback(
+    loading: boolean,
+    success: boolean,
+    carList: CarResponse | undefined,
+  ) {
+    setLoading(loading);
+    if (!success || !carList) return;
+    setData(carList);
+  }
 };
