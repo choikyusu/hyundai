@@ -105,6 +105,7 @@ const Styled = {
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-top: 20px;
   `,
   Slider: styled.div`
     position: relative;
