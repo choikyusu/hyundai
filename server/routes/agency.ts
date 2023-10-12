@@ -1,5 +1,5 @@
 import express from 'express';
-import { dataList } from '../data/data';
+import { dataList } from '../data/agency.data';
 import { calculateDistance } from '../utils/distance.util';
 
 const router = express.Router();
