@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const RANGE = 2;
+const VISIBLE_RANGE = 2;
 const ARROW_LIST_SIZE = 5;
 
 interface useArrowListProps {
@@ -44,19 +44,19 @@ export const useArrowList = ({ totalPage }: useArrowListProps) => {
       case 'First':
         return 1;
       case 'Previous':
-        return pageNo - 1;
+        return pageNo > 1 ? pageNo - 1 : 1;
       case 'Last':
         return totalPage;
       case 'Next':
-        return pageNo + 1;
+        return pageNo + 1 < totalPage ? pageNo + 1 : totalPage;
       default:
         return pageNo;
     }
   }
 
   function calcVisibleIndex(currentPageNo: number, totalPage: number) {
-    let visibledStartIndex = currentPageNo - 1 - RANGE;
-    let visibledLastIndex = currentPageNo + RANGE;
+    let visibledStartIndex = currentPageNo - 1 - VISIBLE_RANGE;
+    let visibledLastIndex = currentPageNo + VISIBLE_RANGE;
 
     if (totalPage <= ARROW_LIST_SIZE) {
       visibledStartIndex = 0;

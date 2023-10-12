@@ -1,0 +1,20 @@
+type NetworkDataType = {
+  addr: string;
+  data_id: string;
+  distance: number;
+  end_dt: string;
+  fax: string;
+  is_business: string;
+  is_xcientspace: string;
+  lastid: string;
+  lat: string;
+  lng: string;
+  name: string;
+  network_sale_sn: string;
+  page_size: string;
+  phone: string;
+  point: string;
+  search_value: string;
+  start_dt: string;
+  zip: string;
+};

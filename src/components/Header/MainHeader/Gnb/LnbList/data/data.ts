@@ -623,7 +623,7 @@ export const lnbMenuTreeList: LnbMenuTreeType[] = [
           },
           {
             name: '상용 판매 네트워크',
-            pageUrl: '/c/purchase-guid/sale-network',
+            pageUrl: '/purchase-guide/sale-network',
           },
           {
             name: '시승신청',

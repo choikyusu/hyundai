@@ -2,7 +2,7 @@ import { useMapProvider } from '@/src/contexts/MapContext';
 import useCoords from '@/src/hooks/useCoords';
 import { getAgencyList } from '@/src/services/apis/agency.api.service';
 import { useEffect, useState } from 'react';
-import { useArrowList } from './usePagination';
+import { useArrowList } from '../../hooks/useArrowList';
 import { createMarker } from '@/src/utils/map/marker.builder';
 import { useLoadingProvider } from '@/src/contexts/LoadingContext';
 

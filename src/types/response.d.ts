@@ -35,3 +35,11 @@ interface CarResponse {
     ranking: string;
   }[];
 }
+
+interface NetworkResponse {
+  pageNo: number;
+  pageSize: number;
+  rowSize: number;
+  totalCount: number;
+  list: NetworkDataType[];
+}
