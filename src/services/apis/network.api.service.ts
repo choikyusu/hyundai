@@ -6,6 +6,7 @@ export const getSaleNetworkList = async (
   latitude: number,
   longitude: number,
   point: string | undefined,
+  space: string | undefined,
   cb: (loading: boolean, success: boolean, result?: NetworkResponse) => void,
 ) => {
   cb(true, false);
@@ -15,6 +16,7 @@ export const getSaleNetworkList = async (
       latitude,
       longitude,
       point,
+      space,
     );
     if (result) cb(false, true, result);
     else cb(false, false);

@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
 import { Pagination } from '../common/Pagination/Pagination';
+import { Map } from '../map/Map';
 
 const POINT_LIST = [
   {
@@ -20,7 +21,7 @@ const POINT_LIST = [
   },
   {
     name: '스페이스',
-    point: '00003',
+    space: 'Y',
   },
 ];
 
@@ -32,6 +33,9 @@ export const SaleNetwork = () => {
     onClickPageNo,
     onClickArrow,
     isSelectedPage,
+    setBranchMap,
+    onClickTab,
+    isSelectedTab,
   } = useSaleNetwork();
 
   return (
@@ -74,8 +78,17 @@ export const SaleNetwork = () => {
                         <Styled.SortingWrap>
                           <Styled.ItemList>
                             {POINT_LIST.map(point => (
-                              <Styled.Item>
-                                <Styled.ItemButton>
+                              <Styled.Item
+                                onClick={() =>
+                                  onClickTab(point.point, point.space)
+                                }
+                              >
+                                <Styled.ItemButton
+                                  $isSelected={isSelectedTab(
+                                    point.point,
+                                    point.space,
+                                  )}
+                                >
                                   {point.name}
                                 </Styled.ItemButton>
                               </Styled.Item>
@@ -134,6 +147,9 @@ export const SaleNetwork = () => {
                     </Styled.MapInfo>
                   </div>
                 </Styled.TextWrap>
+                <Styled.MapWrap>
+                  <Map width="100%" height="100%" setMap={setBranchMap} />
+                </Styled.MapWrap>
               </Styled.NetworkInfo>
             </div>
           </Styled.ContentRow>
@@ -299,7 +315,7 @@ const Styled = {
       width: 25%;
     }
   `,
-  ItemButton: styled(CommonStyled.Button)`
+  ItemButton: styled(CommonStyled.Button)<{ $isSelected: boolean }>`
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -310,15 +326,11 @@ const Styled = {
     white-space: nowrap;
     font-size: 15px;
     letter-spacing: 0;
-    color: #fff;
+    color: ${props => (props.$isSelected ? '#000' : '#fff')};
     line-height: 60px;
     font-weight: 500;
-    background: #444;
+    background: ${props => (props.$isSelected ? '#fff' : '#444')};
     font-family: 'HyundaiSansHeadKRR';
-
-    padding: 0;
-    background: #fff;
-    color: #000;
 
     @media only screen and (max-width: 767px) {
       height: 50px;
@@ -481,6 +493,16 @@ const Styled = {
 
     @media only screen and (max-width: 767px) {
       margin: 10px 0;
+    }
+  `,
+  MapWrap: styled.div`
+    width: calc(100% - 400px);
+    height: 100%;
+    background-color: #ccc;
+    overflow: hidden;
+
+    @media only screen and (max-width: 767px) {
+      display: none;
     }
   `,
 };

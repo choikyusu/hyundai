@@ -9,6 +9,9 @@ export const useSaleNetwork = () => {
   const { setLoading } = useLoadingProvider();
 
   const { kakaoMap } = useMapProvider();
+  const [branchMap, setBranchMap] = useState<any | null>(null);
+  const [point, setPoint] = useState<string | undefined>();
+  const [space, setSpace] = useState<string | undefined>();
   const [networkList, setNetworkList] = useState<NetworkResponse | null>(null);
   const itemList: HTMLLIElement[] = [];
 
@@ -23,6 +26,18 @@ export const useSaleNetwork = () => {
 
   const isSelectedPage = (index: number) => index === pageNo;
 
+  const onClickTab = (point: string | undefined, space: string | undefined) => {
+    setPoint(point);
+    setSpace(space);
+  };
+
+  const isSelectedTab = (
+    tabPoint: string | undefined,
+    tabSpace: string | undefined,
+  ) => {
+    return tabPoint === point && tabSpace === space;
+  };
+
   useEffect(() => {
     if (!kakaoMap || !latitude || !longitude) return;
 
@@ -30,10 +45,11 @@ export const useSaleNetwork = () => {
       pageNo,
       latitude,
       longitude,
-      undefined,
+      point,
+      space,
       saleNetworkListCallback,
     );
-  }, [kakaoMap, latitude, longitude, pageNo]);
+  }, [kakaoMap, latitude, longitude, pageNo, point, space]);
 
   return {
     networkList,
@@ -42,6 +58,9 @@ export const useSaleNetwork = () => {
     onClickPageNo,
     onClickArrow,
     isSelectedPage,
+    setBranchMap,
+    onClickTab,
+    isSelectedTab,
   };
 
   function saleNetworkListCallback(
