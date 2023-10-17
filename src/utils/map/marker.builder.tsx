@@ -1,30 +1,22 @@
 import { MarkerTip } from '@/src/components/common/MarkerTip/MarkerTip';
 import { renderToString } from 'react-dom/server';
 
-const IMAGE_SRC = '/images/marker_number_blue_big.png';
-
-type Marker = {
-  openInfoWindow?: () => void;
-  closeInfoWindow?: () => void;
-  clickInfoWindow?: () => void;
-  hasMarkerClickTip: () => Marker[];
-  hasMarkerHoverTip: () => Marker[];
-  [key: string]: any;
-};
+const AGENCY_IMAGE_SRC = '/images/marker_number_blue_big.png';
+const NETWORK_IMAGE_SRC = '/images/purchase/map_marker.png';
 
 export function createMarker(
-  agencyList: AgencyResponse,
+  inputList: InputMarkerData[],
   kakaoMap: any,
   branchMap: any,
 ) {
-  const markerList: Marker[] = agencyList.list.map((agency, index) => {
+  const markerList: Marker[] = inputList.map((agency, index) => {
     const position = new kakaoMap.LatLng(agency.lattitude, agency.longitude);
-    return createPositionToMarker(position, index);
+    return createPositionToMarker(agency.type, position, index);
   });
 
   function setMarkerClickTip(itemList: HTMLLIElement[]) {
     markerList.forEach((marker, index) => {
-      const { clickInfowindow } = createTipComponent(agencyList, index);
+      const { clickInfowindow } = createTipComponent(inputList, index);
 
       marker.clickInfoWindow = () => {
         clickInfowindow.open(branchMap, marker);
@@ -44,7 +36,7 @@ export function createMarker(
 
   function setMarkerHoverTip(itemList: HTMLLIElement[]) {
     markerList.forEach((marker, index) => {
-      const { hoverInfowindow } = createTipComponent(agencyList, index);
+      const { hoverInfowindow } = createTipComponent(inputList, index);
       marker.openInfoWindow = () => {
         hoverInfowindow.open(branchMap, marker);
       };
@@ -113,9 +105,9 @@ export function createMarker(
     removeClickTipEvent,
   };
 
-  function createTipComponent(agencyList: AgencyResponse, index: number) {
-    const iwHoverContent = createHoverTipComponent(agencyList, index);
-    const iwClickContent = createClickTipComponent(agencyList, index);
+  function createTipComponent(inputList: InputMarkerData[], index: number) {
+    const iwHoverContent = createHoverTipComponent(inputList, index);
+    const iwClickContent = createClickTipComponent(inputList, index);
 
     const hoverInfowindow = new kakaoMap.InfoWindow({
       content: iwHoverContent,
@@ -131,15 +123,15 @@ export function createMarker(
     return { hoverInfowindow, clickInfowindow };
   }
 
-  function createPositionToMarker(position: any, index: number) {
-    const imageSize = new kakaoMap.Size(43, 52);
-    const imageOption = {
-      spriteSize: new kakaoMap.Size(43, 529),
-      spriteOrigin: new kakaoMap.Point(0, 52 * index + 10),
-      offset: new kakaoMap.Point(15, 37),
-    };
+  function createPositionToMarker(
+    type: 'Network' | 'Agency',
+    position: any,
+    index: number,
+  ) {
+    const imageSize = getImageSize(type, kakaoMap);
+    const imageOption = getImageOption(type, index, kakaoMap);
     const markerImage = new kakaoMap.MarkerImage(
-      IMAGE_SRC,
+      getImageResource(type),
       imageSize,
       imageOption,
     );
@@ -152,31 +144,75 @@ export function createMarker(
     });
   }
 
-  function createHoverTipComponent(agencyList: AgencyResponse, index: number) {
+  function createHoverTipComponent(
+    inputList: InputMarkerData[],
+    index: number,
+  ) {
     return renderToString(
       <MarkerTip
-        name={agencyList.list[index].agencyName}
+        name={inputList[index].name}
         detailList={[
-          `전시차량(${agencyList.list[index].displayCarCount})`,
-          `카마스터(${agencyList.list[index].carMasterCount})`,
+          `전시차량(${inputList[index].displayCarCount})`,
+          `카마스터(${inputList[index].carMasterCount})`,
         ]}
       />,
     );
   }
 
-  function createClickTipComponent(agencyList: AgencyResponse, index: number) {
+  function createClickTipComponent(
+    inputList: InputMarkerData[],
+    index: number,
+  ) {
     return renderToString(
       <MarkerTip
-        name={agencyList.list[index].agencyName}
+        name={inputList[index].name}
         detailList={[
-          `전시차량(${agencyList.list[index].displayCarCount})`,
-          `카마스터(${agencyList.list[index].carMasterCount})`,
+          `전시차량(${inputList[index].displayCarCount})`,
+          `카마스터(${inputList[index].carMasterCount})`,
         ]}
-        dotList={[
-          agencyList.list[index].agencyAddress,
-          agencyList.list[index].agencyTel,
-        ]}
+        dotList={[inputList[index].agencyAddress, inputList[index].agencyTel]}
       />,
     );
+  }
+}
+
+function getImageResource(type: 'Network' | 'Agency') {
+  switch (type) {
+    case 'Agency':
+      return AGENCY_IMAGE_SRC;
+    case 'Network':
+      return NETWORK_IMAGE_SRC;
+    default:
+      return '';
+  }
+}
+
+function getImageOption(
+  type: 'Network' | 'Agency',
+  index: number,
+  kakaoMap: any,
+) {
+  switch (type) {
+    case 'Agency':
+      return {
+        spriteSize: new kakaoMap.Size(43, 529),
+        spriteOrigin: new kakaoMap.Point(0, 52 * index + 10),
+        offset: new kakaoMap.Point(15, 37),
+      };
+    case 'Network':
+      return {};
+    default:
+      return '';
+  }
+}
+
+function getImageSize(type: 'Network' | 'Agency', kakaoMap: any) {
+  switch (type) {
+    case 'Agency':
+      return new kakaoMap.Size(43, 52);
+    case 'Network':
+      return new kakaoMap.Size(44, 57);
+    default:
+      return '';
   }
 }

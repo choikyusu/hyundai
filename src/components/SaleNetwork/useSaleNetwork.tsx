@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useLoadingProvider } from '@/src/contexts/LoadingContext';
 import { getSaleNetworkList } from '@/src/services/apis/network.api.service';
 import { useArrowList } from '../../hooks/useArrowList';
+import { createMarker } from '@/src/utils/map/marker.builder';
+import { convertInputMarkerFromResponse } from '@/src/utils/map/converter';
 
 const POINT_LIST = [
   {
@@ -74,6 +76,19 @@ export const useSaleNetwork = () => {
       saleNetworkListCallback,
     );
   }, [kakaoMap, latitude, longitude, pageNo, point, space]);
+
+  useEffect(() => {
+    if (!branchMap || !kakaoMap || !networkList) return () => undefined;
+    const list = createMarker(
+      convertInputMarkerFromResponse(networkList),
+      kakaoMap,
+      branchMap,
+    );
+
+    return () => {
+      list.markerList.forEach(mapMarker => mapMarker.setMap(null));
+    };
+  }, [branchMap, kakaoMap, networkList]);
 
   return {
     POINT_LIST,
