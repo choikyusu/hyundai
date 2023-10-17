@@ -7,29 +7,15 @@ import Link from 'next/link';
 import { Pagination } from '../common/Pagination/Pagination';
 import { Map } from '../map/Map';
 
-const POINT_LIST = [
-  {
-    name: '전체',
-  },
-  {
-    name: '트럭',
-    point: '00001',
-  },
-  {
-    name: '버스',
-    point: '00002',
-  },
-  {
-    name: '스페이스',
-    space: 'Y',
-  },
-];
-
 export const SaleNetwork = () => {
   const {
+    POINT_LIST,
     networkList,
     pageIndexList,
     itemList,
+    openList,
+    setOpenList,
+    selectedTabName,
     onClickPageNo,
     onClickArrow,
     isSelectedPage,
@@ -76,12 +62,18 @@ export const SaleNetwork = () => {
                     <Styled.SearchArea>
                       <Styled.SelectArea>
                         <Styled.SortingWrap>
-                          <Styled.ItemList>
+                          <Styled.OpenButton
+                            onClick={() => setOpenList(prev => !prev)}
+                          >
+                            {selectedTabName()}
+                          </Styled.OpenButton>
+                          <Styled.ItemList $openList={openList}>
                             {POINT_LIST.map(point => (
                               <Styled.Item
-                                onClick={() =>
-                                  onClickTab(point.point, point.space)
-                                }
+                                onClick={() => {
+                                  setOpenList(false);
+                                  onClickTab(point.point, point.space);
+                                }}
                               >
                                 <Styled.ItemButton
                                   $isSelected={isSelectedTab(
@@ -289,13 +281,28 @@ const Styled = {
   SortingWrap: styled.div`
     position: relative;
   `,
-  ItemList: styled.ul`
+  OpenButton: styled(CommonStyled.Button)`
+    display: none;
+
+    @media only screen and (max-width: 767px) {
+      display: block;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      background: #fff;
+      text-align: left;
+      padding: 0 15px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 15px;
+    }
+  `,
+  ItemList: styled.ul<{ $openList: boolean }>`
     display: flex;
     flex-wrap: wrap;
     list-style: none;
 
     @media only screen and (max-width: 767px) {
-      display: none;
+      display: ${props => (props.$openList ? 'block' : 'none')};
       position: absolute;
       z-index: 1;
       top: 50px;
