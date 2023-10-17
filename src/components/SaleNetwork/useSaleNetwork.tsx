@@ -5,6 +5,24 @@ import { useLoadingProvider } from '@/src/contexts/LoadingContext';
 import { getSaleNetworkList } from '@/src/services/apis/network.api.service';
 import { useArrowList } from '../../hooks/useArrowList';
 
+const POINT_LIST = [
+  {
+    name: '전체',
+  },
+  {
+    name: '트럭',
+    point: '00001',
+  },
+  {
+    name: '버스',
+    point: '00002',
+  },
+  {
+    name: '스페이스',
+    space: 'Y',
+  },
+];
+
 export const useSaleNetwork = () => {
   const { setLoading } = useLoadingProvider();
 
@@ -13,6 +31,7 @@ export const useSaleNetwork = () => {
   const [point, setPoint] = useState<string | undefined>();
   const [space, setSpace] = useState<string | undefined>();
   const [networkList, setNetworkList] = useState<NetworkResponse | null>(null);
+  const [openList, setOpenList] = useState(false);
   const itemList: HTMLLIElement[] = [];
 
   const { longitude, latitude } = useCoords();
@@ -26,16 +45,21 @@ export const useSaleNetwork = () => {
 
   const isSelectedPage = (index: number) => index === pageNo;
 
-  const onClickTab = (point: string | undefined, space: string | undefined) => {
-    setPoint(point);
-    setSpace(space);
-  };
-
   const isSelectedTab = (
     tabPoint: string | undefined,
     tabSpace: string | undefined,
   ) => {
     return tabPoint === point && tabSpace === space;
+  };
+
+  const selectedTabName = () => {
+    return POINT_LIST.find(item => item.point === point && item.space === space)
+      ?.name;
+  };
+
+  const onClickTab = (point: string | undefined, space: string | undefined) => {
+    setPoint(point);
+    setSpace(space);
   };
 
   useEffect(() => {
@@ -52,15 +76,19 @@ export const useSaleNetwork = () => {
   }, [kakaoMap, latitude, longitude, pageNo, point, space]);
 
   return {
+    POINT_LIST,
     networkList,
     pageIndexList,
     itemList,
+    selectedTabName,
     onClickPageNo,
     onClickArrow,
     isSelectedPage,
     setBranchMap,
     onClickTab,
     isSelectedTab,
+    openList,
+    setOpenList,
   };
 
   function saleNetworkListCallback(
