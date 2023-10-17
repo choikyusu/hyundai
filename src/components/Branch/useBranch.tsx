@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useArrowList } from '../../hooks/useArrowList';
 import { createMarker } from '@/src/utils/map/marker.builder';
 import { useLoadingProvider } from '@/src/contexts/LoadingContext';
+import { convertInputMarkerFromResponse } from '@/src/utils/map/converter';
 
 export const useBranch = () => {
   const { setLoading } = useLoadingProvider();
@@ -44,7 +45,11 @@ export const useBranch = () => {
 
   useEffect(() => {
     if (!branchMap || !kakaoMap || !agencyList) return () => undefined;
-    const list = createMarker(agencyList, kakaoMap, branchMap)
+    const list = createMarker(
+      convertInputMarkerFromResponse(agencyList),
+      kakaoMap,
+      branchMap,
+    )
       .setMarkerHoverTip(itemList)
       .setMarkerHoverTip(itemList);
 

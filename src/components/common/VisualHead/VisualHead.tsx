@@ -59,6 +59,13 @@ const Styled = {
     color: #000;
     line-height: 51px;
     font-weight: 400;
+
+    @media screen and (max-width: 767px) {
+      font-family: 'HyundaiSansHeadKR';
+      font-size: 28px;
+      line-height: 34px;
+      letter-spacing: -0.4px;
+    }
   `,
   Description: styled.p`
     margin-top: 40px;
@@ -68,5 +75,14 @@ const Styled = {
     color: #000;
     line-height: normal;
     font-weight: 500;
+
+    @media screen and (max-width: 767px) {
+      margin: 15px auto 0;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: -0.4px;
+      word-break: keep-all;
+    }
   `,
 };
