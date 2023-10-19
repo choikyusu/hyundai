@@ -34,7 +34,7 @@ export const LnbBottomList = () => {
         <Styled.Item>
           <p>
             <Styled.Link
-              href="/kr/ko/e/vehicles/purchase-consult?from=gnb"
+              href="/vehicles/purchase-consult"
               title="구매상담신청"
               $backgroundImage={BACKGROUND_IMAGE_STYLE.Purchase}
             >
