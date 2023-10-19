@@ -571,7 +571,7 @@ export const lnbMenuTreeList: LnbMenuTreeType[] = [
         level3List: [
           {
             name: '내 차 추천받기',
-            pageUrl: '/kr/ko/e/vehicles/explorer',
+            pageUrl: '/vehicles/explorer',
           },
           {
             name: '모델 비교',
@@ -597,7 +597,7 @@ export const lnbMenuTreeList: LnbMenuTreeType[] = [
           },
           {
             name: '구매상담신청',
-            pageUrl: '/kr/ko/e/vehicles/explorer',
+            pageUrl: '/vehicles/purchase-consult',
           },
           {
             name: '카탈로그/가격표',
