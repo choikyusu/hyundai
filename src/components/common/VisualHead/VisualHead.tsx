@@ -1,3 +1,4 @@
+import React from 'react';
 import { styled } from 'styled-components';
 
 interface VisualHeadProps {
@@ -15,10 +16,10 @@ export const VisualHead = ({ title, descList, children }: VisualHeadProps) => {
           <Styled.Title>{title}</Styled.Title>
           <Styled.Description>
             {descList.map((desc, index) => (
-              <>
+              <React.Fragment key={index}>
                 {index !== 0 && <br />}
                 {desc}
-              </>
+              </React.Fragment>
             ))}
           </Styled.Description>
         </Styled.VisualTitle>

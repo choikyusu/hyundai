@@ -25,8 +25,8 @@ export const PurchaseConsult = () => {
         />
         <Styled.ContentStep>
           <Styled.List>
-            {data.map(item => (
-              <Styled.Item>
+            {data.map((item, index) => (
+              <Styled.Item key={index}>
                 <Styled.IconWrap>
                   <Styled.Icon />
                   <Styled.IconDescription>{item.text}</Styled.IconDescription>

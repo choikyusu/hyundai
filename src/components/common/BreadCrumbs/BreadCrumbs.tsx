@@ -8,8 +8,8 @@ export const BreadCrumbs = ({ list }: BreadCrumbsProps) => {
   return (
     <Styled.TopBreadCrumb>
       <Styled.MenuList>
-        {list.map(item => (
-          <Styled.MenuItem>
+        {list.map((item, index) => (
+          <Styled.MenuItem key={index}>
             <Styled.MenuLink href="">{item}</Styled.MenuLink>
           </Styled.MenuItem>
         ))}

@@ -25,6 +25,7 @@ export const ScrollWrap = ({
       <Styled.ResultList>
         {agencyList?.list.map((agency, index) => (
           <Styled.ResultItem
+            key={index}
             ref={(el: HTMLLIElement) => el && itemList.push(el)}
           >
             <Styled.Marker>{index + 1}</Styled.Marker>

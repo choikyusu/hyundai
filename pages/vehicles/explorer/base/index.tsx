@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import React from 'react';
 import { styled } from 'styled-components';
 
 const LIST = [
@@ -51,8 +52,8 @@ export default function ExplorerBasePage() {
           </Styled.P>
           <Styled.ItemWrap>
             <Styled.ItemList>
-              {LIST.map(item => (
-                <Styled.Item>
+              {LIST.map((item, index) => (
+                <Styled.Item key={index}>
                   <Styled.Link href={item.link}>
                     <Styled.FindCarIcon
                       $backgroundColor={item.backgroundColor}
@@ -66,10 +67,10 @@ export default function ExplorerBasePage() {
                       {item.title}
                       <Styled.InfoDec>
                         {item.descList.map((desc, index) => (
-                          <>
+                          <React.Fragment key={index}>
                             {index !== 0 && <br />}
                             {desc}
-                          </>
+                          </React.Fragment>
                         ))}
                       </Styled.InfoDec>
                     </Styled.B>

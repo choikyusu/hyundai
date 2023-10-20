@@ -18,7 +18,7 @@ export const TabMenu = ({
     <Styled.TabMenu>
       <Styled.TabMenuIconWrapper>
         {list.map((item, index) => (
-          <Styled.TabMenuIcon>
+          <Styled.TabMenuIcon key={index}>
             <Styled.Button
               type="button"
               $isActive={keywordType === index}

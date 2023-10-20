@@ -43,8 +43,8 @@ export const Filter = () => {
             {Array.from(filterMap)
               .sort((a, b) => a[0].localeCompare(b[0]))
               .map(flatMap =>
-                flatMap[1].map(item => (
-                  <Styled.Tag>
+                flatMap[1].map((item, index) => (
+                  <Styled.Tag key={index}>
                     {item.name}
                     <Styled.DeleteButton>
                       <AiOutlineClose />
@@ -76,8 +76,8 @@ export const Filter = () => {
 
             <Styled.CarListGroup>
               {data &&
-                data.list.map(item => (
-                  <Styled.CarListItem>
+                data.list.map((item, index) => (
+                  <Styled.CarListItem key={index}>
                     <Styled.CarLink href="">
                       <Styled.ElImage>
                         <Styled.ElImageInner
