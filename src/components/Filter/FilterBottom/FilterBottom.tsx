@@ -35,8 +35,8 @@ export const FilterBottom = ({
   return (
     <Styled.FilterBottom>
       <ul>
-        {checkboxDataList.data.map(data => (
-          <Styled.FilterItem>
+        {checkboxDataList.data.map((data, index) => (
+          <Styled.FilterItem key={index}>
             <Styled.FilterTitle>
               <Styled.FilterTitleStrong>{`${data.specTypeName}(${data.count})`}</Styled.FilterTitleStrong>
             </Styled.FilterTitle>
@@ -57,8 +57,8 @@ export const FilterBottom = ({
               </Styled.FilterButton>
             </Styled.FilterButtonWrap>
             <Styled.CheckboxWrapper $isOpen={isOpen[data.specTypeCode]}>
-              {data.specCategorys.map(category => (
-                <Styled.FilterCheckbox>
+              {data.specCategorys.map((category, index) => (
+                <Styled.FilterCheckbox key={index}>
                   <Checkbox
                     type={category.specCategoryCode}
                     name={category.specCategoryName}

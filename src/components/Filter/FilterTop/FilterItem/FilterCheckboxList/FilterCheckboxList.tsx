@@ -42,8 +42,9 @@ export const FilterCheckboxList = ({
     <Styled.FilterCheckboxList>
       <Styled.CheckboxGroup>
         {data.type === 'CarType' &&
-          data.list.map(item => (
+          data.list.map((item, index) => (
             <Checkbox
+              key={index}
               type={item.carTypeCode}
               name={item.carTypeName}
               checked={
@@ -70,8 +71,9 @@ export const FilterCheckboxList = ({
             />
           ))}
         {data.type === 'EngineType' &&
-          data.list.map(item => (
+          data.list.map((item, index) => (
             <Checkbox
+              key={index}
               type={item.carEnginCode}
               name={item.carEnginName}
               checked={

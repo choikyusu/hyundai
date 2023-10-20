@@ -17,8 +17,8 @@ export const Footer = () => {
                 <Styled.WrapCategory key={index}>
                   <Styled.MenuCategory>{footerData.name}</Styled.MenuCategory>
                   <Styled.WrapMenu>
-                    {footerData.subMenuList.map(subMenu => (
-                      <Styled.MenuCompany>
+                    {footerData.subMenuList.map((subMenu, index) => (
+                      <Styled.MenuCompany key={index}>
                         <Styled.Link href={subMenu.pageUrl}>
                           {subMenu.subTitle}
                         </Styled.Link>

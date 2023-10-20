@@ -31,12 +31,13 @@ export const Pagination = ({
         </Styled.ButtonPrev>
         <Styled.ElPagination>
           <Styled.ElPager>
-            {pageIndexList.map(index => (
+            {pageIndexList.map((pageIndex, index) => (
               <Styled.Number
-                $isSelected={isSelectedPage(index)}
-                onClick={() => onClickPageNo(index)}
+                key={index}
+                $isSelected={isSelectedPage(pageIndex)}
+                onClick={() => onClickPageNo(pageIndex)}
               >
-                {index}
+                {pageIndex}
               </Styled.Number>
             ))}
           </Styled.ElPager>

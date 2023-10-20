@@ -68,8 +68,9 @@ export const SaleNetwork = () => {
                             {selectedTabName()}
                           </Styled.OpenButton>
                           <Styled.ItemList $openList={openList}>
-                            {POINT_LIST.map(point => (
+                            {POINT_LIST.map((point, index) => (
                               <Styled.Item
+                                key={index}
                                 onClick={() => {
                                   setOpenList(false);
                                   onClickTab(point.point, point.space);
@@ -98,8 +99,8 @@ export const SaleNetwork = () => {
                     </Styled.ResultNum>
                     <Styled.MapInfo>
                       <Styled.UiList>
-                        {networkList?.list.map(item => (
-                          <Styled.BasicNetwork>
+                        {networkList?.list.map((item, index) => (
+                          <Styled.BasicNetwork key={index}>
                             <Styled.ViewBranch>
                               <Styled.BranchButton />
                             </Styled.ViewBranch>
