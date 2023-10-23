@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { styled } from 'styled-components';
+import { FUEL_TYPE_LIST } from './fuel_type';
 
 const LIST = [
   {
+    type: 'fuelType',
     title: '연료타입',
     descList: ['고객님이 원하시는', '연료타입을 선택해주세요.'],
     backgroundPosition: '48.6607% 6.7059%',
@@ -11,6 +14,7 @@ const LIST = [
     link: '/vehicles/explorer/base/fuel_type',
   },
   {
+    type: 'bodyType',
     title: '바디타입',
     descList: ['고객님이 선호하는', '바디타입을 선택해주세요.'],
     backgroundPosition: '4.59643% 7.7059%',
@@ -18,6 +22,7 @@ const LIST = [
     link: '/vehicles/explorer/base/body_type',
   },
   {
+    type: 'budgetRange',
     title: '예산범위',
     descList: ['고객님이 생각하는', '예산범위를 선택해주세요.'],
     backgroundPosition: '69.9429% 7.7059%',
@@ -25,6 +30,7 @@ const LIST = [
     link: '/vehicles/explorer/base/budget_range',
   },
   {
+    type: 'passenger',
     title: '인원수',
     descList: ['고객님이 함께 차를', '이용하실 인원수를', '선택해주세요.'],
     backgroundPosition: '92.625% 7.7059%',
@@ -32,6 +38,7 @@ const LIST = [
     link: '/vehicles/explorer/base/passenger',
   },
   {
+    type: 'luggage',
     title: '공간활용',
     descList: ['고객님이 주로 실어다니는', '짐을 알려주세요.'],
     backgroundPosition: '4.29643% 54.902%',
@@ -41,6 +48,12 @@ const LIST = [
 ];
 
 export default function ExplorerBasePage() {
+  const CONSTANT_TYPE = {
+    fuelType: FUEL_TYPE_LIST,
+  };
+
+  const router = useRouter();
+
   return (
     <Styled.Container>
       <Styled.FindCarWrap>
@@ -54,10 +67,16 @@ export default function ExplorerBasePage() {
             <Styled.ItemList>
               {LIST.map((item, index) => (
                 <Styled.Item key={index}>
-                  <Styled.Link href={item.link}>
+                  <Styled.Link
+                    href={{
+                      pathname: item.link,
+                      query: router.query,
+                    }}
+                  >
                     <Styled.FindCarIcon
                       $backgroundColor={item.backgroundColor}
                       $backgroundPosition={item.backgroundPosition}
+                      $isShowCheck={!!router.query[item.type]}
                     >
                       {item.title}
                     </Styled.FindCarIcon>
@@ -65,14 +84,35 @@ export default function ExplorerBasePage() {
                   <Styled.InfoSelect>
                     <Styled.B>
                       {item.title}
-                      <Styled.InfoDec>
-                        {item.descList.map((desc, index) => (
-                          <React.Fragment key={index}>
-                            {index !== 0 && <br />}
-                            {desc}
-                          </React.Fragment>
-                        ))}
-                      </Styled.InfoDec>
+                      {!router.query[item.type] && (
+                        <Styled.InfoDec>
+                          {item.descList.map((desc, index) => (
+                            <React.Fragment key={index}>
+                              {index !== 0 && <br />}
+                              {desc}
+                            </React.Fragment>
+                          ))}
+                        </Styled.InfoDec>
+                      )}
+                      {(() => {
+                        const typeList = router.query[item.type];
+
+                        if (!typeList || Array.isArray(typeList)) return '';
+
+                        return (
+                          <Styled.InfoSelectItem>
+                            {typeList.split(',').map(item => (
+                              <Styled.InfoSelectDec>
+                                {
+                                  CONSTANT_TYPE.fuelType.find(
+                                    fuelType => fuelType.id === item,
+                                  )?.name
+                                }
+                              </Styled.InfoSelectDec>
+                            ))}
+                          </Styled.InfoSelectItem>
+                        );
+                      })()}
                     </Styled.B>
                   </Styled.InfoSelect>
                 </Styled.Item>
@@ -254,6 +294,7 @@ const Styled = {
   FindCarIcon: styled.i<{
     $backgroundPosition: string;
     $backgroundColor: string;
+    $isShowCheck: boolean;
   }>`
     @media screen and (min-width: 768px) {
       display: inline-block;
@@ -265,6 +306,51 @@ const Styled = {
     background-position: ${props => props.$backgroundPosition};
     background-size: 600%;
     background-color: ${props => props.$backgroundColor};
+
+    &:after {
+      display: ${props => (props.$isShowCheck ? 'block' : 'none')} !important;
+      @media screen and (max-width: 767px) {
+        content: '';
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        overflow: hidden;
+        width: 85px;
+        height: 85px;
+        border-radius: 85px;
+        background-repeat: no-repeat;
+        background-image: url(/images/findcar_ico_sprite.png);
+        background-position: 26.7786% 7.4059%;
+        background-size: 600%;
+      }
+
+      @media screen and (max-width: 767px) {
+        background-color: rgba(98, 121, 150, 0.8);
+      }
+
+      @media screen and (min-width: 768px) {
+        content: '';
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        overflow: hidden;
+        margin-bottom: 30px;
+        width: 170px;
+        height: 170px;
+        border-radius: 85px;
+        background-repeat: no-repeat;
+        background-image: url(/images/findcar_ico_sprite.png);
+        background-position: 26.7786% 7.4059%;
+        background-size: 600%;
+      }
+      @media screen and (min-width: 768px) {
+        background-color: rgba(98, 121, 150, 0.8);
+      }
+    }
 
     @media screen and (min-width: 768px) {
       position: relative;
@@ -305,6 +391,40 @@ const Styled = {
       font-weight: 400;
     }
   `,
+  InfoSelectDec: styled.div`
+    @media screen and (min-width: 768px) {
+      display: inline-block;
+      min-width: 84px;
+      height: 28px;
+      padding: 4px 8px;
+      margin: 3px 2px;
+      border-radius: 20px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 16px;
+      letter-spacing: -0.4px;
+      color: #fff;
+      line-height: 20px;
+      font-weight: 500;
+      background: #414445;
+    }
+
+    @media screen and (max-width: 767px) {
+      display: inline-block;
+      min-width: 50px;
+      height: 20px;
+      padding: 0 12px;
+      margin: 3px 2px;
+      border-radius: 10px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 11px;
+      letter-spacing: -0.4px;
+      color: #fff;
+      line-height: 20px;
+      font-weight: 500;
+      background: #414445;
+    }
+  `,
+  InfoSelectItem: styled.li``,
   InfoDec: styled.div`
     @media screen and (max-width: 767px) {
       font-size: 13px;

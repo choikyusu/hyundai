@@ -205,6 +205,11 @@ const Styled = {
       line-height: 1;
       font-weight: 400;
     }
+
+    &:hover {
+      background: #fff;
+      color: #000;
+    }
   `,
   ModelChoiceLink: styled(Link)`
     @media screen and (min-width: 768px) {

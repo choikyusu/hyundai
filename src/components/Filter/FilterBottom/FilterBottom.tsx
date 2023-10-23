@@ -60,8 +60,9 @@ export const FilterBottom = ({
               {data.specCategorys.map((category, index) => (
                 <Styled.FilterCheckbox key={index}>
                   <Checkbox
-                    type={category.specCategoryCode}
+                    id={category.specCategoryCode}
                     name={category.specCategoryName}
+                    type="small"
                     checked={
                       !!filterMap
                         .get(data.specTypeCode)
@@ -187,10 +188,10 @@ const Styled = {
     ${props => (props.$isOpen ? '' : 'height: 60px;')}
   `,
   FilterCheckbox: styled.div`
+    display: flex;
     font-weight: 500;
     font-size: 14px;
     position: relative;
-    display: inline-block;
     white-space: nowrap;
     user-select: none;
     margin-right: 30px;

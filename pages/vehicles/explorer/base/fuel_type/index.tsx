@@ -1,8 +1,39 @@
 import { Checkbox } from '@/src/components/common/Checkbox/Checkbox';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
+export const FUEL_TYPE_LIST = [
+  { id: '2110000000', name: '가솔린', type: 'medium' },
+  { id: '2120000000', name: '디젤', type: 'medium' },
+  { id: '2130000000', name: '친환경', type: 'medium' },
+  { id: '2140000000', name: 'LPG', type: 'medium' },
+];
+
 export default function FuelTypePage() {
+  const router = useRouter();
+
+  const { fuelType, budgetRange, bodyType } = router.query as {
+    fuelType: string | undefined;
+    budgetRange: string | undefined;
+    bodyType: string | undefined;
+  };
+
+  const [list, setList] = useState<string[]>(
+    fuelType ? fuelType?.split(',') : [],
+  );
+
+  const onChange = (value: string) => {
+    if (list.includes(value)) {
+      const updatedList = list.filter(item => item !== value);
+      setList(updatedList);
+    } else {
+      const updatedList = [...list, value];
+      setList(updatedList);
+    }
+  };
+
   return (
     <Styled.Container>
       <Styled.FindCarWrap>
@@ -23,51 +54,29 @@ export default function FuelTypePage() {
             </Styled.QuestionBox>
             <Styled.AnswerBox>
               <Styled.OptionCheckList>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      name="가솔린"
-                      type="2110000000"
-                      checked
-                      onChange={() => undefined}
-                    />
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      name="디젤"
-                      type="2120000000"
-                      checked
-                      onChange={() => undefined}
-                    />
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      name="친환경"
-                      type="2130000000"
-                      checked
-                      onChange={() => undefined}
-                    />
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      name="LPG"
-                      type="2140000000"
-                      checked
-                      onChange={() => undefined}
-                    />
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
+                {FUEL_TYPE_LIST.map(item => (
+                  <Styled.Item>
+                    <Styled.CheckboxWrap>
+                      <Checkbox
+                        id={item.id}
+                        name={item.name}
+                        type={item.type as 'medium'}
+                        checked={list.includes(item.id)}
+                        onChange={() => onChange(item.id)}
+                      />
+                    </Styled.CheckboxWrap>
+                  </Styled.Item>
+                ))}
               </Styled.OptionCheckList>
               <Styled.P>각 항목에 대해 복수 선택 가능합니다.</Styled.P>
             </Styled.AnswerBox>
           </Styled.DetailBox>
-          <Styled.PrevBaseLink href="/vehicles/explorer/base">
+          <Styled.PrevBaseLink
+            href={{
+              pathname: '/vehicles/explorer/base',
+              query: { fuelType: list.join(','), budgetRange, bodyType },
+            }}
+          >
             <Styled.ArrowLineLeft>계속하기</Styled.ArrowLineLeft>
           </Styled.PrevBaseLink>
         </Styled.DetailWrap>
@@ -296,6 +305,7 @@ const Styled = {
     }
   `,
   CheckboxWrap: styled.div`
+    display: flex;
     width: 100%;
     height: 100%;
     margin-right: 16px;
@@ -363,6 +373,12 @@ const Styled = {
       position: static;
       margin: 60px auto 0;
       transform: none;
+    }
+
+    &:hover {
+      background: #000;
+      color: #fff;
+      opacity: 1;
     }
   `,
   ArrowLineLeft: styled.span`
