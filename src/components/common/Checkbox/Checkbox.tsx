@@ -1,24 +1,63 @@
-import { styled } from 'styled-components';
+import { CSSProp, css, styled } from 'styled-components';
 
 interface CheckboxProps {
   name: string;
-  type: string;
+  id: string;
   checked: boolean;
+  type: 'small' | 'medium';
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Checkbox = ({ name, type, checked, onChange }: CheckboxProps) => {
+export const Checkbox = ({
+  name,
+  id,
+  checked,
+  onChange,
+  type,
+}: CheckboxProps) => {
   return (
-    <Styled.ElCheckboxLabel htmlFor={type}>
+    <Styled.ElCheckboxLabel htmlFor={id}>
       <Styled.ElCheckbox
-        id={type}
+        id={id}
         type="checkbox"
         onChange={onChange}
         checked={checked}
+        $size={SIZE[type]}
       />
-      <Styled.CheckboxText>{name}</Styled.CheckboxText>
+      <Styled.CheckboxText $fontSize={FONT_SIZE[type]}>
+        {name}
+      </Styled.CheckboxText>
     </Styled.ElCheckboxLabel>
   );
+};
+
+const SIZE = {
+  small: css`
+    width: 20px;
+    height: 20px;
+  `,
+  medium: css`
+    width: 24px;
+    height: 24px;
+
+    @media screen and (max-width: 767px) {
+      width: 15px;
+      height: 15px;
+    }
+  `,
+};
+
+const FONT_SIZE = {
+  small: css`
+    font-size: 14px;
+  `,
+  medium: css`
+    font-size: 24px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
+  `,
 };
 
 const Styled = {
@@ -36,14 +75,12 @@ const Styled = {
     display: flex;
     flex-direction: row;
 
-    margin-top: 16px;
     align-items: center;
     width: 33.33%;
     font-size: 0;
     white-space: nowrap;
 
     @media screen and (max-width: 767px) {
-      margin-top: 20px;
       margin-right: 0;
     }
 
@@ -51,23 +88,21 @@ const Styled = {
       width: 100%;
     }
   `,
-  ElCheckbox: styled.input`
-    width: 20px;
-    height: 20px;
-    border: 2px solid #767676;
+  ElCheckbox: styled.input<{ $size: CSSProp }>`
+    border: 3px solid #c5d1dd;
+    ${props => props.$size}
   `,
-  CheckboxText: styled.span`
+  CheckboxText: styled.span<{ $fontSize: CSSProp }>`
+    ${props => props.$fontSize}
     display: inline-block;
     padding-left: 10px;
     line-height: 19px;
-    font-size: 16px;
 
     padding-left: 8px;
     position: relative;
     vertical-align: top;
     white-space: nowrap;
     font-family: 'HyundaiSansTextKR';
-    font-size: 12px;
     letter-spacing: -0.4px;
     color: inherit;
     line-height: 18px;
@@ -78,7 +113,6 @@ const Styled = {
 
     @media screen and (max-width: 767px) {
       font-family: 'HyundaiSansTextKR';
-      font-size: 14px;
       letter-spacing: -0.4px;
       color: inherit;
       line-height: 1.3;

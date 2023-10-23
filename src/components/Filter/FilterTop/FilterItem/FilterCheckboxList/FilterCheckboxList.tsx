@@ -45,8 +45,9 @@ export const FilterCheckboxList = ({
           data.list.map((item, index) => (
             <Checkbox
               key={index}
-              type={item.carTypeCode}
+              id={item.carTypeCode}
               name={item.carTypeName}
+              type="small"
               checked={
                 !!filterMap
                   .get(data.type)
@@ -74,8 +75,9 @@ export const FilterCheckboxList = ({
           data.list.map((item, index) => (
             <Checkbox
               key={index}
-              type={item.carEnginCode}
+              id={item.carEnginCode}
               name={item.carEnginName}
+              type="small"
               checked={
                 !!filterMap
                   .get(data.type)
@@ -127,5 +129,6 @@ const Styled = {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    row-gap: 16px;
   `,
 };
