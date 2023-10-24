@@ -7,17 +7,17 @@ export default function FuelTypePage() {
     <Styled.Container>
       <Styled.FindCarWrap>
         <Styled.DetailWrap>
-          <Styled.H1>바디타입</Styled.H1>
+          <Styled.H1>예산범위</Styled.H1>
           <Styled.DetailBox>
             <Styled.QuestionBox>
               <Styled.H2>
                 <Styled.Anipic>
-                  <Styled.Image src="/images/ani_detail_body.gif" />
+                  <Styled.Image src="/images/ani_detail_fuel.gif" />
                 </Styled.Anipic>
                 <Styled.Question>
-                  당신이 선호하는
+                  당신이 선호하는 연료는
                   <br />
-                  바디타입은?
+                  어떤 종류인가요?
                 </Styled.Question>
               </Styled.H2>
             </Styled.QuestionBox>
@@ -50,6 +50,17 @@ export default function FuelTypePage() {
                     <Checkbox
                       id="2130000000"
                       name="친환경"
+                      type="medium"
+                      checked
+                      onChange={() => undefined}
+                    />
+                  </Styled.CheckboxWrap>
+                </Styled.Item>
+                <Styled.Item>
+                  <Styled.CheckboxWrap>
+                    <Checkbox
+                      id="2140000000"
+                      name="LPG"
                       type="medium"
                       checked
                       onChange={() => undefined}
@@ -244,7 +255,7 @@ const Styled = {
     }
 
     position: relative;
-    background: #528898;
+    background: #738ba9;
 
     @media screen and (max-width: 767px) {
       height: 290px;
@@ -272,28 +283,30 @@ const Styled = {
   `,
   Item: styled.li`
     position: relative;
-    display: inline-block;
-    width: 150px;
-    height: 239px;
-    margin: 0 6px;
-    padding: 50px 0 40px;
+    display: flex;
+    align-items: center;
+    width: 440px;
+    height: 70px;
+    margin-bottom: 20px;
+    padding: 0 0 0 30px;
     border-radius: 4px;
-    background-color: #5faaba;
+    background-color: #8aa2ba;
 
     @media screen and (max-width: 767px) {
-      width: 100%;
-      height: 56px;
-      margin: 0 0 7.5px;
-      padding: 0 0 0 15px;
+      width: auto;
+      height: 40px;
+      margin-bottom: 7.5px;
+      padding-left: 15px;
     }
   `,
   CheckboxWrap: styled.div`
-    position: relative;
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-right: 16px;
+    white-space: nowrap;
 
     @media screen and (max-width: 767px) {
-      display: block;
+      position: relative;
       width: 100%;
       height: 100%;
     }
