@@ -27,33 +27,39 @@ export default function FuelTypePage() {
                   <Styled.CheckboxWrap>
                     <Checkbox
                       id="2110000000"
-                      name="가솔린"
+                      name=""
                       type="medium"
                       checked
                       onChange={() => undefined}
                     />
+                    <Styled.FindCarType />
+                    승용
                   </Styled.CheckboxWrap>
                 </Styled.Item>
                 <Styled.Item>
                   <Styled.CheckboxWrap>
                     <Checkbox
                       id="2120000000"
-                      name="디젤"
+                      name=""
                       type="medium"
                       checked
                       onChange={() => undefined}
                     />
+                    <Styled.FindCarType />
+                    SUV
                   </Styled.CheckboxWrap>
                 </Styled.Item>
                 <Styled.Item>
                   <Styled.CheckboxWrap>
                     <Checkbox
                       id="2130000000"
-                      name="친환경"
+                      name=""
                       type="medium"
                       checked
                       onChange={() => undefined}
                     />
+                    <Styled.FindCarType />
+                    MPV
                   </Styled.CheckboxWrap>
                 </Styled.Item>
               </Styled.OptionCheckList>
@@ -256,8 +262,10 @@ const Styled = {
     }
   `,
   OptionCheckList: styled.ul`
-    max-width: 440px;
-    margin: 100px auto 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 170px auto 70px;
 
     @media screen and (min-width: 767px) and (max-width: 1200px) {
       padding-top: 70px;
@@ -289,13 +297,34 @@ const Styled = {
   `,
   CheckboxWrap: styled.div`
     position: relative;
-    display: flex;
     justify-content: center;
 
     @media screen and (max-width: 767px) {
       display: block;
       width: 100%;
       height: 100%;
+    }
+  `,
+  FindCarType: styled.i`
+    display: block;
+    width: 130px;
+    height: 54px;
+    margin: 55px 0 15px;
+    text-indent: -9999em;
+
+    background-image: url(/images/findcar-type-sedan.png);
+    background-size: auto;
+    background-position: 4px;
+
+    @media screen and (max-width: 767px) {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      width: 65px;
+      height: auto;
+      margin: 0;
+      background-size: contain !important;
+      transform: translateY(-50%);
     }
   `,
   P: styled.p`
