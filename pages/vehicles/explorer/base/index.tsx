@@ -1,5 +1,5 @@
+import Base from '@/src/components/Explorer/Base/Base';
 import React from 'react';
-import Base from '@/src/components/common/Explorer/Base/Base';
 
 export default function ExplorerBasePage() {
   return <Base />;

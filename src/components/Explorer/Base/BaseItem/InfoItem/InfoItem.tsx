@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import { FUEL_TYPE_LIST } from '../../../../../../../pages/vehicles/explorer/base/fuel_type';
+import { FUEL_TYPE_LIST } from '../../../FuelType/data/fuelType.data';
 
 const CONSTANT_TYPE = {
   fuelType: FUEL_TYPE_LIST,
