@@ -3,8 +3,8 @@ import { FUEL_TYPE_LIST } from './data/fuelType.data';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 import { useFuelType } from './useFuelType';
 import { RoundLinkButton } from '../../common/RoundLinkButton/RoundLinkButton';
-import { DetailBox } from '../DetailBox/DetailBox';
-import { MovePageLink } from '../MovePageLink/MovePageLink';
+import { DetailBox } from '../common/DetailBox/DetailBox';
+import { MovePageLink } from '../common/MovePageLink/MovePageLink';
 
 export const FuelType = () => {
   const { onChange, bodyType, budgetRange, list } = useFuelType();
