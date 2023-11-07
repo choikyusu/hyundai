@@ -4,10 +4,13 @@ import { Checkbox } from '../../common/Checkbox/Checkbox';
 import { RoundLinkButton } from '../../common/RoundLinkButton/RoundLinkButton';
 import { MovePageLink } from '../common/MovePageLink/MovePageLink';
 import { DetailBox } from '../common/DetailBox/DetailBox';
-import { useFuelType } from '../FuelType/useFuelType';
+import { useType } from '../hooks/useType';
+import { BODY_TYPE_LIST } from '../data/fuelType.data';
 
 export const BodyType = () => {
-  const { onChange, bodyType, budgetRange, list } = useFuelType();
+  const { onChange, bodyType, budgetRange, list } = useType({
+    type: 'bodyType',
+  });
   return (
     <Styled.Container>
       <Styled.FindCarWrap>
@@ -19,45 +22,21 @@ export const BodyType = () => {
           >
             <Styled.AnswerBox>
               <Styled.OptionCheckList>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      id="2110000000"
-                      name=""
-                      type="medium"
-                      checked
-                      onChange={() => undefined}
-                    />
-                    <Styled.FindCarType />
-                    승용
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      id="2120000000"
-                      name=""
-                      type="medium"
-                      checked
-                      onChange={() => undefined}
-                    />
-                    <Styled.FindCarType />
-                    SUV
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
-                <Styled.Item>
-                  <Styled.CheckboxWrap>
-                    <Checkbox
-                      id="2130000000"
-                      name=""
-                      type="medium"
-                      checked
-                      onChange={() => undefined}
-                    />
-                    <Styled.FindCarType />
-                    MPV
-                  </Styled.CheckboxWrap>
-                </Styled.Item>
+                {BODY_TYPE_LIST.map(type => (
+                  <Styled.Item>
+                    <Styled.CheckboxWrap>
+                      <Checkbox
+                        id={type.id}
+                        name=""
+                        type={type.type}
+                        checked={list.includes(type.id)}
+                        onChange={() => onChange(type.id)}
+                      />
+                      <Styled.FindCarType />
+                      {type.name}
+                    </Styled.CheckboxWrap>
+                  </Styled.Item>
+                ))}
               </Styled.OptionCheckList>
               <Styled.P>각 항목에 대해 복수 선택 가능합니다.</Styled.P>
             </Styled.AnswerBox>

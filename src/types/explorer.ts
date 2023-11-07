@@ -9,5 +9,5 @@ type ExplorerBaseType = {
 type BaseSubItemType = {
   id: string;
   name: string;
-  type: string;
+  type: 'small' | 'medium';
 };

@@ -1,18 +1,20 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export const useFuelType = () => {
+interface useFuelTypeProps {
+  type: 'bodyType' | 'fuelType' | 'budgetRange';
+}
+
+export const useType = ({ type }: useFuelTypeProps) => {
   const router = useRouter();
 
-  const { fuelType, budgetRange, bodyType } = router.query as {
+  const query = router.query as {
     fuelType: string | undefined;
     budgetRange: string | undefined;
     bodyType: string | undefined;
   };
 
-  const [list, setList] = useState<string[]>(
-    fuelType ? fuelType?.split(',') : [],
-  );
+  const [list, setList] = useState<string[]>(query[type]?.split(',') || []);
 
   const onChange = (value: string) => {
     if (list.includes(value)) {
@@ -24,5 +26,10 @@ export const useFuelType = () => {
     }
   };
 
-  return { onChange, budgetRange, bodyType, list };
+  return {
+    onChange,
+    budgetRange: query.budgetRange,
+    bodyType: query.bodyType,
+    list,
+  };
 };
