@@ -1,9 +1,7 @@
 import { CommonStyled } from '@/src/styles/CommonStyled';
 import Link from 'next/link';
-import { AiOutlineUp, AiOutlineDown } from 'react-icons/ai';
 import { styled } from 'styled-components';
 import { FooterMenuList, footerDataList } from './data/data';
-import { useState } from 'react';
 
 export const Footer = () => {
   return (
