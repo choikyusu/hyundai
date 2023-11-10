@@ -8,7 +8,7 @@ import { useType } from '../hooks/useType';
 import { BODY_TYPE_LIST } from '../data/fuelType.data';
 
 export const BodyType = () => {
-  const { onChange, bodyType, budgetRange, list } = useType({
+  const { onChange, budgetRange, fuelType, list } = useType({
     type: 'bodyType',
   });
   return (
@@ -42,7 +42,7 @@ export const BodyType = () => {
             </Styled.AnswerBox>
           </DetailBox>
           <RoundLinkButton
-            query={{ fuelType: list.join(','), budgetRange, bodyType }}
+            query={{ fuelType, budgetRange, bodyType: list.join(',') }}
             url="/vehicles/explorer/base"
             text="계속하기"
           />

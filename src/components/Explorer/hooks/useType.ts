@@ -14,7 +14,9 @@ export const useType = ({ type }: useFuelTypeProps) => {
     bodyType: string | undefined;
   };
 
-  const [list, setList] = useState<string[]>(query[type]?.split(',') || []);
+  const [list, setList] = useState<string[]>(
+    (!!query[type] && query[type]?.split(',')) || [],
+  );
 
   const onChange = (value: string) => {
     if (list.includes(value)) {
@@ -28,8 +30,9 @@ export const useType = ({ type }: useFuelTypeProps) => {
 
   return {
     onChange,
-    budgetRange: query.budgetRange,
-    bodyType: query.bodyType,
+    budgetRange: query.budgetRange || '',
+    bodyType: query.bodyType || '',
+    fuelType: query.fuelType || '',
     list,
   };
 };
