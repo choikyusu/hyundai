@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
-import { Checkbox } from '../../common/Checkbox/Checkbox';
-import { RoundLinkButton } from '../../common/RoundLinkButton/RoundLinkButton';
-import { MovePageLink } from '../common/MovePageLink/MovePageLink';
-import { DetailBox } from '../common/DetailBox/DetailBox';
-import { useType } from '../hooks/useType';
-import { BODY_TYPE_LIST } from '../data/fuelType.data';
+import { Checkbox } from '../../../common/Checkbox/Checkbox';
+import { RoundLinkButton } from '../../../common/RoundLinkButton/RoundLinkButton';
+import { MovePageLink } from '../../common/MovePageLink/MovePageLink';
+import { DetailBox } from '../../common/DetailBox/DetailBox';
+import { useType } from '../../hooks/useType';
+import { BODY_TYPE_LIST } from '../../data/fuelType.data';
 
 export const BodyType = () => {
   const { onChange, budgetRange, fuelType, list } = useType({
