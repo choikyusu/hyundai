@@ -15,6 +15,12 @@ export const BudgetRange = () => {
             <Styled.AnswerBox>
               <Styled.FunctionWrap>
                 <Styled.H3>금액 설정</Styled.H3>
+                <Styled.PriceWrap>
+                  <Styled.Section>
+                    <Styled.P>최소 설정 금액</Styled.P>
+                    <Styled.Div>1500 만원</Styled.Div>
+                  </Styled.Section>
+                </Styled.PriceWrap>
               </Styled.FunctionWrap>
             </Styled.AnswerBox>
           </DetailBox>
@@ -180,6 +186,90 @@ const Styled = {
 
     @media screen and (max-width: 767px) {
       margin-top: 30px;
+    }
+  `,
+  Section: styled.section`
+    position: relative;
+    width: 40%;
+    white-space: nowrap;
+    font-family: 'HyundaiSansTextKR';
+    font-size: 24px;
+    letter-spacing: -0.4px;
+    color: #fff;
+    line-height: 1;
+
+    @media screen and (max-width: 767px) {
+      width: auto;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 12px;
+      letter-spacing: 0.32px;
+      color: #fff;
+      line-height: normal;
+    }
+  `,
+  P: styled.p`
+    margin-bottom: 20px;
+    font-family: 'HyundaiSansTextKR';
+    font-size: 20px;
+    letter-spacing: -0.4px;
+    color: #fff;
+    line-height: 1;
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 15px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 10px;
+      letter-spacing: -0.4px;
+      color: #fff;
+      line-height: normal;
+    }
+  `,
+  Div: styled.div`
+    height: 40px;
+    padding: 0 20px;
+    border: 1px solid #e4dcd3;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 0;
+    font-family: 'HyundaiSansTextKR';
+    font-size: 14px;
+    letter-spacing: -0.4px;
+    color: #000;
+    line-height: 100%;
+
+    @media screen and (max-width: 640px) {
+      padding: 0 15px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 16px;
+      letter-spacing: -0.4px;
+      color: #000;
+      line-height: 100%;
+    }
+
+    background: transparent;
+    border: 0;
+    width: 106px;
+    font-family: 'HyundaiSansHeadKR';
+    font-size: 44px;
+    letter-spacing: -0.32px;
+    color: #f9fc1f;
+    line-height: 1;
+    font-weight: 500;
+    padding: 0;
+    vertical-align: middle;
+
+    @media screen and (max-width: 767px) {
+      background: transparent;
+      border: 0;
+      width: 50px;
+      font-family: 'HyundaiSansTextKR';
+      font-size: 20px;
+      letter-spacing: 0.32px;
+      color: #f9fc1f;
+      line-height: normal;
+      font-weight: 500;
+      padding: 0;
+      vertical-align: middle;
     }
   `,
   PrevBaseLink: styled(Link)`
