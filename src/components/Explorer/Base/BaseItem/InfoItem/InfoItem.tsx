@@ -1,10 +1,14 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import { BODY_TYPE_LIST, FUEL_TYPE_LIST } from '../../../data/fuelType.data';
+import {
+  BODY_TYPE_LIST,
+  BUDGET_RANGE_LIST,
+  FUEL_TYPE_LIST,
+} from '../../../data/fuelType.data';
 
 const CONSTANT_TYPE = {
   fuelType: FUEL_TYPE_LIST,
-  budgetRange: FUEL_TYPE_LIST,
+  budgetRange: BUDGET_RANGE_LIST,
   bodyType: BODY_TYPE_LIST,
   passenger: FUEL_TYPE_LIST,
   luggage: FUEL_TYPE_LIST,

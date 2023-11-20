@@ -19,7 +19,7 @@ export const RoundLinkButton = ({ text, url, query }: RoundLinkButtonProps) => {
         search: queryString,
       }}
     >
-      <Styled.ArrowLineLeft>계속하기</Styled.ArrowLineLeft>
+      <Styled.ArrowLineLeft>{text}</Styled.ArrowLineLeft>
     </Styled.PrevBaseLink>
   );
 };

@@ -1,8 +1,30 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { DetailBox } from '../../common/DetailBox/DetailBox';
+import { MultiRangeSlider } from '@/src/components/common/MultiRangeSlider/MultiRangeSlider';
+import { PRICE_LIST } from './data/data';
+import { useState } from 'react';
+import { RoundLinkButton } from '@/src/components/common/RoundLinkButton/RoundLinkButton';
+import { MovePageLink } from '../../common/MovePageLink/MovePageLink';
+import { useType } from '../../hooks/useType';
 
 export const BudgetRange = () => {
+  const { fuelType, bodyType, list } = useType({
+    type: 'budgetRange',
+  });
+  const [minIndex, setMinIndex] = useState(Number(list?.[0]) || 0);
+  const [maxIndex, setMaxIndex] = useState(
+    Number(list?.[1]) || PRICE_LIST.length - 1,
+  );
+
+  const onChangeInputRange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: 'Min' | 'Max',
+  ) => {
+    if (type === 'Min') setMinIndex(Number(e.target.value));
+    else if (type === 'Max') setMaxIndex(Number(e.target.value));
+  };
+
   return (
     <Styled.Container>
       <Styled.FindCarWrap>
@@ -18,20 +40,46 @@ export const BudgetRange = () => {
                 <Styled.PriceWrap>
                   <Styled.Section>
                     <Styled.P>최소 설정 금액</Styled.P>
-                    <Styled.Div>1500 만원</Styled.Div>
+                    <Styled.Div>
+                      {PRICE_LIST[minIndex]} <Styled.P>만원</Styled.P>
+                    </Styled.Div>
+                  </Styled.Section>
+                  <Styled.Section>
+                    <Styled.P>최대 설정 금액</Styled.P>
+                    <Styled.Div>
+                      {PRICE_LIST[maxIndex]} <Styled.P>만원</Styled.P>
+                    </Styled.Div>
                   </Styled.Section>
                 </Styled.PriceWrap>
+                <Styled.RangeContainer>
+                  <MultiRangeSlider
+                    minIndex={minIndex}
+                    maxIndex={maxIndex}
+                    onChangeInputRange={onChangeInputRange}
+                    list={PRICE_LIST.map(price => `${price}`)}
+                  />
+                </Styled.RangeContainer>
               </Styled.FunctionWrap>
+              <Styled.P style={{ textAlign: 'center' }}>
+                1,500 ~ 9,999 만원까지 설정 가능합니다.
+              </Styled.P>
             </Styled.AnswerBox>
           </DetailBox>
-          <Styled.PrevBaseLink href="/vehicles/explorer/base">
-            <Styled.ArrowLineLeft>계속하기</Styled.ArrowLineLeft>
-          </Styled.PrevBaseLink>
+          <RoundLinkButton
+            query={{
+              fuelType,
+              budgetRange: `${minIndex},${maxIndex}`,
+              bodyType,
+            }}
+            url="/vehicles/explorer/base"
+            text="계속하기"
+          />
         </Styled.DetailWrap>
         <Styled.MovePageRight>
-          <Styled.MovePageLink href="/vehicles/explorer/base/body_type">
-            <Styled.MovePageSpan>바디타입</Styled.MovePageSpan>
-          </Styled.MovePageLink>
+          <MovePageLink
+            url="/vehicles/explorer/base/body_type"
+            text="바디타입"
+          />
         </Styled.MovePageRight>
       </Styled.FindCarWrap>
     </Styled.Container>
@@ -46,7 +94,7 @@ const Styled = {
     min-height: 880px;
     overflow: hidden;
 
-    background: #c1cddb;
+    background: #dacec2;
 
     @media screen and (min-width: 767px) and (max-width: 1200px) {
       height: 100%;
@@ -100,7 +148,7 @@ const Styled = {
     font-family: 'HyundaiSansHeadKR';
     font-size: 24px;
     letter-spacing: -0.4px;
-    color: #365e93;
+    color: #a05c2b;
     line-height: 1;
     font-weight: 500;
 
@@ -112,7 +160,7 @@ const Styled = {
       font-family: 'HyundaiSansTextKR';
       font-size: 16px;
       letter-spacing: -0.4px;
-      color: #365e93;
+      color: #a05c2b;
       line-height: 22px;
       margin: 0;
     }
@@ -131,7 +179,7 @@ const Styled = {
     }
 
     position: relative;
-    background: #738ba9;
+    background: #a67d5f;
 
     @media screen and (max-width: 767px) {
       height: 290px;
@@ -225,6 +273,7 @@ const Styled = {
     }
   `,
   Div: styled.div`
+    display: flex;
     height: 40px;
     padding: 0 20px;
     border: 1px solid #e4dcd3;
@@ -270,6 +319,14 @@ const Styled = {
       font-weight: 500;
       padding: 0;
       vertical-align: middle;
+    }
+  `,
+  RangeContainer: styled.div`
+    width: 95%;
+    margin: 60px auto 70px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 30px;
     }
   `,
   PrevBaseLink: styled(Link)`
