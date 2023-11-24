@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 interface useFuelTypeProps {
-  type: 'bodyType' | 'fuelType' | 'budgetRange';
+  type: 'bodyType' | 'fuelType' | 'budgetRange' | 'passenger' | 'luggage';
 }
 
 export const useType = ({ type }: useFuelTypeProps) => {
@@ -12,6 +12,8 @@ export const useType = ({ type }: useFuelTypeProps) => {
     fuelType: string | undefined;
     budgetRange: string | undefined;
     bodyType: string | undefined;
+    passenger: string | undefined;
+    luggage: string | undefined;
   };
 
   const [list, setList] = useState<string[]>(
@@ -33,6 +35,7 @@ export const useType = ({ type }: useFuelTypeProps) => {
     budgetRange: query.budgetRange || '',
     bodyType: query.bodyType || '',
     fuelType: query.fuelType || '',
+    passenger: query.passenger || '',
     list,
   };
 };
