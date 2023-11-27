@@ -25,12 +25,14 @@ interface InfoItemProps {
     link: string;
   };
   subQueryItemList: string[];
+  isMerge: boolean;
 }
 
 export const InfoItem = ({
   isQueryExist,
   item,
   subQueryItemList,
+  isMerge,
 }: InfoItemProps) => {
   return !isQueryExist ? (
     <Styled.InfoDec>
@@ -43,11 +45,24 @@ export const InfoItem = ({
     </Styled.InfoDec>
   ) : (
     <Styled.InfoSelectItem>
-      {subQueryItemList.map(selectItem => (
+      {isMerge ? (
         <Styled.InfoSelectDec>
-          {CONSTANT_TYPE[item.type].find(type => type.id === selectItem)?.name}
+          {subQueryItemList.map(
+            (selectItem, index) =>
+              `${CONSTANT_TYPE[item.type].find(type => type.id === selectItem)
+                ?.name}${index === 0 ? ' ~ ' : ''}`,
+          )}
         </Styled.InfoSelectDec>
-      ))}
+      ) : (
+        subQueryItemList.map(selectItem => (
+          <Styled.InfoSelectDec>
+            {
+              CONSTANT_TYPE[item.type].find(type => type.id === selectItem)
+                ?.name
+            }
+          </Styled.InfoSelectDec>
+        ))
+      )}
     </Styled.InfoSelectItem>
   );
 };

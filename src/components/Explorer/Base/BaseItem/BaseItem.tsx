@@ -36,6 +36,7 @@ export const BaseItem = ({ item, query }: BaseItemProps) => {
         <Styled.B>
           {item.title}
           <InfoItem
+            isMerge={item.type === 'budgetRange'}
             isQueryExist={!!query[item.type]}
             item={item}
             subQueryItemList={query[item.type]?.split(',') || []}

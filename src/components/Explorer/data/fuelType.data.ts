@@ -16,3 +16,9 @@ export const BODY_TYPE_LIST: BaseSubItemType[] = [
   { id: '2220000000', name: 'SUV', type: 'medium' },
   { id: '2230000000', name: 'MPV', type: 'medium' },
 ];
+
+export const PASSENGER_LIST: BaseSubItemType[] = [
+  { id: '2310000000', name: '성인', type: 'medium' },
+  { id: '2320000000', name: '어린이', type: 'medium' },
+  { id: '2330000000', name: '아기', type: 'medium' },
+];
