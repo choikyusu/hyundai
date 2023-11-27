@@ -21,22 +21,32 @@ export const Passenger = () => {
             questionList={['당신은 누구와 함께', '차를 이용하시나요?']}
           >
             <Styled.AnswerBox>
-              <Styled.OptionCheckList>
-                {FUEL_TYPE_LIST.map(item => (
-                  <Styled.Item>
-                    <Styled.CheckboxWrap>
-                      <Checkbox
-                        id={item.id}
-                        name={item.name}
-                        type={item.type as 'medium'}
-                        checked={list.includes(item.id)}
-                        onChange={() => onChange(item.id)}
-                      />
-                    </Styled.CheckboxWrap>
-                  </Styled.Item>
-                ))}
-              </Styled.OptionCheckList>
-              <Styled.P>각 항목에 대해 복수 선택 가능합니다.</Styled.P>
+              <Styled.FunctionWrap>
+                <Styled.PersionWrap>
+                  <Styled.Section>
+                    <Styled.CircleButton />
+                    <Styled.AnswerText>성인</Styled.AnswerText>
+                    <Styled.Span>X</Styled.Span>
+                    <Styled.AnswerText>1</Styled.AnswerText>
+                    <Styled.CircleButton />
+                  </Styled.Section>
+                  <Styled.Section>
+                    <Styled.CircleButton />
+                    <Styled.AnswerText>어린이</Styled.AnswerText>
+                    <Styled.Span>X</Styled.Span>
+                    <Styled.AnswerText>1</Styled.AnswerText>
+                    <Styled.CircleButton />
+                  </Styled.Section>
+                  <Styled.Section>
+                    <Styled.CircleButton />
+                    <Styled.AnswerText>아기</Styled.AnswerText>
+                    <Styled.Span>X</Styled.Span>
+                    <Styled.AnswerText>1</Styled.AnswerText>
+                    <Styled.CircleButton />
+                  </Styled.Section>
+                </Styled.PersionWrap>
+              </Styled.FunctionWrap>
+              <Styled.P>최대 12명까지 설정 가능합니다.</Styled.P>
             </Styled.AnswerBox>
           </DetailBox>
           <RoundLinkButton
@@ -160,50 +170,84 @@ const Styled = {
       height: 500px;
     }
   `,
-  OptionCheckList: styled.ul`
-    max-width: 440px;
-    margin: 100px auto 50px;
-
-    @media screen and (min-width: 767px) and (max-width: 1200px) {
-      padding-top: 70px;
-      margin: 0 auto 30px;
-    }
+  FunctionWrap: styled.div`
+    width: 80%;
+    margin: 110px auto 0;
 
     @media screen and (max-width: 767px) {
-      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
-      padding: 40px 30px 0;
+      padding: 20px 30px 0;
     }
   `,
-  Item: styled.li`
+  PersionWrap: styled.article`
+    margin: 30px 0 60px;
+
+    @media screen and (max-width: 767px) {
+      margin: 0;
+    }
+  `,
+  Section: styled.section`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.35);
+    color: #fff;
+
+    @media screen and (max-width: 767px) {
+      padding: 20px 0;
+    }
+  `,
+  CircleButton: styled.button`
     position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: 440px;
-    height: 70px;
-    margin-bottom: 20px;
-    padding: 0 0 0 30px;
-    border-radius: 4px;
-    background-color: #8aa2ba;
+    width: 40px;
+    height: 40px;
+    min-height: 20px;
+    border: 0;
+    border-radius: 20px;
+    background: #fff;
 
     @media screen and (max-width: 767px) {
-      width: auto;
-      height: 40px;
-      margin-bottom: 7.5px;
-      padding-left: 15px;
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      min-height: 30px;
     }
   `,
-  CheckboxWrap: styled.div`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    margin-right: 16px;
+
+  AnswerText: styled.p`
+    width: 110px;
+    text-align: center;
+    font-family: 'HyundaiSansHeadKR';
+    font-size: 30px;
+    letter-spacing: -0.4px;
+    color: #fff;
+    line-height: 1;
+    font-weight: 500;
+
+    @media screen and (max-width: 767px) {
+      width: 60px;
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 80px;
+    }
+  `,
+  Span: styled.span`
+    font-size: 1.1rem;
     white-space: nowrap;
 
     @media screen and (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      width: 50px;
+      font-size: 14px;
+      text-align: center;
     }
   `,
   P: styled.p`
