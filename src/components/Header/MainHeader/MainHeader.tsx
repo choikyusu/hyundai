@@ -34,7 +34,7 @@ const Styled = {
     $isMovedScroll: boolean;
     $headerType: HeaderMenuType;
   }>`
-    @media screen and (max-width: 767px) .header {
+    @media screen and (max-width: 767px) {
       height: 55px;
     }
 
