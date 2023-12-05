@@ -6,6 +6,7 @@ import {
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
 import { styled } from 'styled-components';
+import { usePagination } from './usePagination';
 
 interface PaginationProps {
   onClickArrow: (arrowType: ArrowType) => void;
@@ -20,13 +21,22 @@ export const Pagination = ({
   isSelectedPage,
   onClickPageNo,
 }: PaginationProps) => {
+  const {
+    onClickFirstPage,
+    onClickPreviousPage,
+    onClickNextPage,
+    onClickLastPage,
+  } = usePagination({
+    onClickArrow,
+  });
+
   return (
     <Styled.Paging>
       <Styled.Pagination>
         <Styled.ButtonPreAll>
-          <MdKeyboardDoubleArrowLeft onClick={() => onClickArrow('First')} />
+          <MdKeyboardDoubleArrowLeft onClick={onClickFirstPage} />
         </Styled.ButtonPreAll>
-        <Styled.ButtonPrev onClick={() => onClickArrow('Previous')}>
+        <Styled.ButtonPrev onClick={onClickPreviousPage}>
           <MdKeyboardArrowLeft />
         </Styled.ButtonPrev>
         <Styled.ElPagination>
@@ -42,10 +52,10 @@ export const Pagination = ({
             ))}
           </Styled.ElPager>
         </Styled.ElPagination>
-        <Styled.ButtonNext onClick={() => onClickArrow('Next')}>
+        <Styled.ButtonNext onClick={onClickNextPage}>
           <MdKeyboardArrowRight />
         </Styled.ButtonNext>
-        <Styled.ButtonNextAll onClick={() => onClickArrow('Last')}>
+        <Styled.ButtonNextAll onClick={onClickLastPage}>
           <MdKeyboardDoubleArrowRight />
         </Styled.ButtonNextAll>
       </Styled.Pagination>
