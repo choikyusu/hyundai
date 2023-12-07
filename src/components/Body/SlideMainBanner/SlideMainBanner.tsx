@@ -10,6 +10,7 @@ export const SlideMainBanner = () => {
     style: {
       arrow: { background: 'transparent', color: 'black', size: '49px' },
     },
+    autoSlide: true,
   };
 
   return (
