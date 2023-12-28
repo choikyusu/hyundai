@@ -12,7 +12,7 @@ export const $getAgencyList = async (
 ) => {
   try {
     const messageResponse: ApiResponse<AgencyResponse> = await axios.get(
-      `${API_HOST}/v1/agencies?latitude=${latitude}&longitude=${longitude}&pageNo=${pageNo}&pageSize=${pageSize}&agencyTypeCode=${treatUndefinedAsEmpty(
+      `/api/v1/agencies?latitude=${latitude}&longitude=${longitude}&pageNo=${pageNo}&pageSize=${pageSize}&agencyTypeCode=${treatUndefinedAsEmpty(
         agencyTypeCode,
       )}`,
     );
