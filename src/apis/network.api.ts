@@ -12,7 +12,7 @@ export const $getSaleNetworkList = async (
 ) => {
   try {
     const messageResponse: ApiResponse<NetworkResponse> = await axios.get(
-      `${API_HOST}/v1/network?latitude=${latitude}&longitude=${longitude}&pageNo=${pageNo}&point=${treatUndefinedAsEmpty(
+      `/api/v1/network?latitude=${latitude}&longitude=${longitude}&pageNo=${pageNo}&point=${treatUndefinedAsEmpty(
         point,
       )}&is_xcientspace=${treatUndefinedAsEmpty(space)}`,
     );

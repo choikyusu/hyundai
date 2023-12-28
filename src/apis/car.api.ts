@@ -12,7 +12,7 @@ export const $getCarList = async (
 ) => {
   try {
     const messageResponse: ApiResponse<CarResponse> = await axios.get(
-      `${API_HOST}/v1/product/cars?carTypeCode=${treatUndefinedAsEmpty(
+      `/api/v1/product/cars?carTypeCode=${treatUndefinedAsEmpty(
         carTypeCode,
       )}&carEngineCode=${treatUndefinedAsEmpty(
         carEngineCode,
