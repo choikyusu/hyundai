@@ -2,7 +2,8 @@
 
 ## repository : https://github.com/choikyusu/hyundai
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/edaf3b5f-309f-4350-b825-c1b44a2e965e/136635e9-8da1-4884-a17b-d1363e3b117a/Untitled.png)
+![image](https://github.com/choikyusu/hyundai/assets/93509152/644eee4d-b3a2-4242-92ef-99bf69eb134c)
+
 
 # 본문에 앞서…
 
